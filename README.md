@@ -5,7 +5,7 @@ Citizen Services Capstone Project Team B (Wayfinder)
 ## Project Information
 [![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)](<Redirect-URL>)
 ## Project Description
-The "Wayfinder" application is a 
+The "Wayfinder" application is an attempted solution to third-party applications directing citizens to government services, while also directing employees to local government offices. While the parties involved (google, openmapstracker, etc) take due care to ensure accuracy, they can never attain the same level of verification as the government. Thus, for maximum trust, the end user should use a govermentally certified application to direct
 
 
 
