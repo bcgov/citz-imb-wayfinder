@@ -1,9 +1,7 @@
 import express, { Application } from 'express';
-import healthRouter from './routes/health-routes';
 import morgan from 'morgan';
 import swaggerUi from 'swagger-ui-express';
-import TestController, {ping} from './controllers/test-controller';
-
+import { RegisterRoutes } from './routes/routes';
 const app: Application = express();
 
 //Express middleware
@@ -20,9 +18,7 @@ app.use(
     })
 )
 
-app.use('/api', healthRouter);
-app.get('/ping', ping);
 app.use(morgan("tiny"));
 app.use(express.static("public"));
-
+RegisterRoutes(app);
 export default app;
