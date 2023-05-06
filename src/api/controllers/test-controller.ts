@@ -1,23 +1,34 @@
-import { Post, Get, Route} from 'tsoa';
-import { Request, Response } from 'express';
-interface TestResponse {
-    message: string;
+import {
+    Body,
+    Controller,
+    Get,
+    Path,
+    Post,
+    Query,
+    Route,
+    SuccessResponse,
+  } from "tsoa";
+
+//Sample Interface for data expected in the BodyRequest
+interface RequestBodyInterface {
+    name: string,
+    id: number,
+    favourite?: string
 }
 
-export const ping = async (req:Request, res: Response) => {
-    res.status(200).send(JSON.stringify({message: "message body"}))
-}
-
-@Route("Marco")
-export default class TestController {
-    @Get("/")
-    public async getMessage(): Promise<TestResponse> {
-        return {message: "getMessage"}
-        
-    }
+@Route("SampleRoute")
+export class SampleTestController {
+    @SuccessResponse(200, "OK")
     @Post("/")
-    public async sendMessage() {
-        return {message: "sendMessage"}
+    public async victoryLap(@Body() body: RequestBodyInterface){
+        try {
+            return {
+                name: body.name || "Gerald Ford",
+                id: body.id || 12345,
+                favourite: body.favourite || "Ford Model T" 
+            }
+        } catch(error) {
+            console.log("Bad Request occured", typeof(error))
+        }
     }
-    
 }
