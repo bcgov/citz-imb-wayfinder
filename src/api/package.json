@@ -6,11 +6,12 @@
   "scripts": {
     "build": "npx tsc",
     "predev": "npm run swagger",
-    "prebuild": "npm run swagger",
+    "prebuild": "npm run routes && npm run swagger",
     "start": "node ./dist/server.js",
     "dev": "concurrently \"tsoa routes\" \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "swagger": "tsoa spec"
+    "swagger": "tsoa spec",
+    "routes": "tsoa routes"
   },
   "author": "",
   "license": "ISC",
