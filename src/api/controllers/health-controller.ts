@@ -21,3 +21,4 @@ import { Get, Route, SuccessResponse, Tags, Example } from "tsoa";
       return "Project Waypoint API Online" 
     }
   }
+  
