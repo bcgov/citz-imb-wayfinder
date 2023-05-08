@@ -21,4 +21,3 @@ import { Controller, Example, Get, Route, SuccessResponse, Tags } from "tsoa";
       return "Project Waypoint API is healthy and ready"
     }
   }
-  
