@@ -1,4 +1,4 @@
-export const SWAGGER_CONFIG = {
+export const swaggerConfig = {
     swaggerOptions: {
         url: "/swagger.json"
     }
