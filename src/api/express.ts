@@ -1,8 +1,8 @@
-import express, { Application, Response as ExResponse, Request as ExRequest, NextFunction } from 'express';
+import express, { Application } from 'express';
 import morgan from 'morgan';
+import utilities from './utilities/index';
 import swaggerUi from 'swagger-ui-express';
 import { RegisterRoutes } from './routes/routes';
-import { ValidateError } from "tsoa";
 
 const app: Application = express();
 
@@ -25,25 +25,6 @@ app.use(
 RegisterRoutes(app);
 
 //Adding Global Error handler 
-app.use( function errorHandler(
-    err: unknown,
-    req: ExRequest,
-    res: ExResponse,
-    next: NextFunction
-    ): ExResponse | void {
-        if (err instanceof ValidateError) {
-            console.warn(`Caught Validation Error for ${req.path}:`, err.fields);
-            return res.status(422).json({
-                message: "Validation Failed",
-                details: err?.fields,
-            });
-        }
-        if (err instanceof Error) {
-            return res.status(500).json({
-                message: "Internal Server Error",
-            })
-        }
-        next();
-    });
+app.use(utilities.globalError.globalErrorHandler);
 
 export default app;

@@ -1,7 +1,7 @@
 /**
  * PURPOSE: Health Endpoint Controller for Project Wayfinder
  */
-import { Get, Route, SuccessResponse, Tags, Example } from "tsoa";
+import { Controller, Example, Get, Route, SuccessResponse, Tags } from "tsoa";
 
   interface HealthPointInterface {
     response: string
@@ -9,7 +9,7 @@ import { Get, Route, SuccessResponse, Tags, Example } from "tsoa";
   
   @Route("health")
   @Tags("Health")
-  export class HealthClassController {
+  export class HealthClassController extends Controller{
     /**
      * Project Waypoint's health handler to confirm API container is healthy and ready
      * @summary Health endpoint for OpenShift
