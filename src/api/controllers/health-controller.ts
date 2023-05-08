@@ -18,7 +18,7 @@ import { Controller, Example, Get, Route, SuccessResponse, Tags } from "tsoa";
     @SuccessResponse(200, "OK")
     @Get()
     public async healthCheck() { 
-      return "Project Waypoint API Online" 
+      return "Project Waypoint API is healthy and ready"
     }
   }
   
