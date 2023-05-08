@@ -13,7 +13,7 @@ app.use(express.static("public"));
 
 //Routing information
 app.use(
-    "/docs",
+    "/api/api-docs",
     swaggerUi.serve,
     swaggerUi.setup(undefined, {
         swaggerOptions: {
