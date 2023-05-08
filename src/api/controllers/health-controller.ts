@@ -11,7 +11,7 @@ import { Get, Route, SuccessResponse, Tags, Example } from "tsoa";
   @Tags("Health")
   export class HealthClassController {
     /**
-     * Project Waypoint's health handler to confirm API is online with Openshift
+     * Project Waypoint's health handler to confirm API container is healthy and ready
      * @summary Health endpoint for OpenShift
      */
     @Example<string>("Project Waypoint API Online")
