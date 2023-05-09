@@ -1,12 +1,27 @@
-import express from 'express';
-import healthRouter from './routes/health-routes';
-const app = express();
+import express, { Application } from 'express';
+import morgan from 'morgan';
+import utilities from './utilities/index';
+import swaggerUi from 'swagger-ui-express';
+import { RegisterRoutes } from './routes/routes';
+import { swaggerConfig } from './config';
+
+const app: Application = express();
 
 //Express middleware
+app.use(morgan("tiny"));
+app.use(express.json());
+app.use(express.static("public"));
 
 //Routing information
+app.use(
+    "/api/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(undefined, swaggerConfig)
+)
+//Sets routes generated from TSOA to be applied to API
+RegisterRoutes(app);
 
-app.use('/api', healthRouter);
-
+//Adding Global Error handler 
+app.use(utilities.globalError.globalErrorHandler);
 
 export default app;
