@@ -1,7 +1,7 @@
-FROM node
+FROM node:18.16.0
 
 # Create api directory
-WORKDIR /usr/src/api
+WORKDIR /api
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -12,13 +12,8 @@ RUN npm install
 # If you are building your code for production
 # RUN npm ci --omit=dev
 
-RUN npm i typescript@5.0.4
-
-
 # Bundle app source
 COPY . .
 
-RUN npm run build
-
-EXPOSE 8080
-CMD [ "node", "dist/server.js" ]
+EXPOSE 3004
+CMD ["npm", "run", "dev" ]
