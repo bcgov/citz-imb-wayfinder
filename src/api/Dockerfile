@@ -8,8 +8,6 @@ WORKDIR /api
 COPY . .
 
 RUN npm install
-# If you are building your code for production
-# RUN npm ci --omit=dev
 
 EXPOSE 3004
 CMD ["npm", "run", "dev" ]
