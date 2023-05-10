@@ -1,9 +1,8 @@
 import express, { Application } from 'express';
 import morgan from 'morgan';
-import utilities from './utilities/index';
 import swaggerUi from 'swagger-ui-express';
-import { RegisterRoutes } from './routes/routes';
-import { swaggerConfig } from './config';
+import * as config from './config';
+import * as routers from './routes';
 
 const app: Application = express();
 
@@ -16,12 +15,11 @@ app.use(express.static("public"));
 app.use(
     "/api/api-docs",
     swaggerUi.serve,
-    swaggerUi.setup(undefined, swaggerConfig)
+    swaggerUi.setup(
+        undefined, 
+        config.swaggerConfig
+    )
 )
-//Sets routes generated from TSOA to be applied to API
-RegisterRoutes(app);
-
-//Adding Global Error handler 
-app.use(utilities.globalError.globalErrorHandler);
+app.use('/api', routers.healthRouter);
 
 export default app;
