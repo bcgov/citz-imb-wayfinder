@@ -12,3 +12,7 @@ services:
       - wf-network
     ports:
       - "3004:3004"
+
+networks:
+  wf-network:
+    driver: "bridge"
