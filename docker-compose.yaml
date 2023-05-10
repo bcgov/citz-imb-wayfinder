@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  #############################################################################################
+  ###                                         API                                           ###
+  #############################################################################################
+  wf-api:
+    container_name: wf-api 
+    build:
+      context: ./src/api
+      dockerfile: Dockerfile
+    networks:
+      - wf-network
+    ports:
+      - "3000:3000"
+
+networks:
+  wf-network:
+    driver: "bridge"
