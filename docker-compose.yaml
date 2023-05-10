@@ -11,7 +11,7 @@ services:
     networks:
       - wf-network
     ports:
-      - "3004:3004"
+      - "3000:3000"
 
 networks:
   wf-network:
