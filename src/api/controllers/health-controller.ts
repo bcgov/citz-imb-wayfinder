@@ -1,23 +1,8 @@
 /**
  * PURPOSE: Health Endpoint Controller for Project Wayfinder
  */
-import { Controller, Example, Get, Route, SuccessResponse, Tags } from "tsoa";
+import { Request, Response } from 'express';
 
-  interface HealthPointInterface {
-    response: string
-  }
-  
-  @Route("health")
-  @Tags("Health")
-  export class HealthClassController extends Controller{
-    /**
-     * Project Waypoint's health handler to confirm API container is healthy and ready
-     * @summary Health endpoint for OpenShift
-     */
-    @Example<string>("Project Waypoint API Online")
-    @SuccessResponse(200, "OK")
-    @Get()
-    public async healthCheck() { 
-      return "Project Waypoint API is healthy and ready"
-    }
-  }
+export const getHealth = async (req: Request, res: Response) => {
+  return res.status(200).send('Project Waypoint API is healthy and ready')
+}
