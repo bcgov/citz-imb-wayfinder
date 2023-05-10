@@ -13,6 +13,19 @@ services:
     ports:
       - "3000:3000"
 
+  #############################################################################################
+  ###                                       Frontend                                        ###
+  #############################################################################################
+  wf-app:
+    container_name: wf-app
+    build:
+      context: ./src/frontend-pwa
+      dockerfile: Dockerfile
+    networks:
+      - wf-network
+    ports: 
+      - "5173:5173"
+
 networks:
   wf-network:
     driver: "bridge"
