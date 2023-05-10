@@ -1,5 +1,7 @@
-export const swaggerConfig = {
+const swaggerConfig = {
     swaggerOptions: {
-        url: "/swagger.json"
+        url: "/swagger.yaml"
     }
 }
+
+export default swaggerConfig;

@@ -1,5 +1,1 @@
-import * as swaggerConfig from "./swaggerConfig";
-
-export const config = {
-    swaggerConfig,
-}
+export { default as swaggerConfig } from './swaggerConfig'

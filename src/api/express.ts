@@ -1,7 +1,7 @@
 import express, { Application } from 'express';
 import morgan from 'morgan';
 import swaggerUi from 'swagger-ui-express';
-import { config } from './config/index';
+import * as config from './config';
 import * as routers from './routes';
 
 const app: Application = express();
@@ -17,7 +17,7 @@ app.use(
     swaggerUi.serve,
     swaggerUi.setup(
         undefined, 
-        config.swaggerConfig.swaggerConfig
+        config.swaggerConfig
     )
 )
 app.use('/api', routers.healthRouter);
