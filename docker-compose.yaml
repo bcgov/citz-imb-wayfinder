@@ -16,4 +16,3 @@ services:
 networks:
   wf-network:
     driver: "bridge"
-    
