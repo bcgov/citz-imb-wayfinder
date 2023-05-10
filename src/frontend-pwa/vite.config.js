@@ -11,4 +11,12 @@ export default defineConfig({
       registerType: 'autoUpdate'
     })
   ],
+  server: {
+    watch: {
+      usePolling: true,
+    },
+    host: true,
+    strictPort: true,
+    port: 5173,
+  }
 })
