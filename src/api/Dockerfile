@@ -1,4 +1,6 @@
-FROM node:18.16.0
+FROM node:18.16.0-alpine
+
+RUN apk --update --no-cache add curl
 
 # Create api directory
 WORKDIR /api
@@ -9,7 +11,5 @@ COPY . .
 
 RUN npm install
 
-RUN apk --update --no-cache add curl
-
-EXPOSE 3004
+EXPOSE 3000
 CMD ["npm", "run", "dev" ]
