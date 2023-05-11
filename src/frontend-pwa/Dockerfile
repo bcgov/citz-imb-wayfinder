@@ -1,4 +1,6 @@
-FROM node:18.16.0
+FROM node:18.16.0-alpine
+
+RUN apk --update --no-cache add curl
 
 # Create app directory
 WORKDIR /frontend-pwa
