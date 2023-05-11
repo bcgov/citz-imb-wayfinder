@@ -6,7 +6,7 @@ import { Request, Response } from 'express';
 import { SingleLocation } from '../models';
 
 /**
- * Sample Object based on Data available in ina CSV of Service Canada Locations
+ * Sample Object based on Data available in ina CSV of Service BC Locations
  *      -Subject to change in future development 
  */
 const sampleData: SingleLocation = {
