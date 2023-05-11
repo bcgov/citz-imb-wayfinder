@@ -18,4 +18,5 @@ Create a `.env` in the /api directory. Populate the document with each keys spec
 
 | KEY | EXAMPLE | DESCRIPTION
 | --- | ------- | ----------- |
-| PORT | 8080 | Designated port for API listener  | 
+| API_PORT | 3000 | Designated port for API listener  | 
+| API_HOSTNAME | http://... | Designated Host for API 
