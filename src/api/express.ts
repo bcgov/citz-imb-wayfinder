@@ -20,6 +20,9 @@ app.use(
         config.swaggerConfig
     )
 )
-app.use('/api', routers.healthRouter);
+app.use('/api', [
+    routers.healthRouter, 
+    routers.locationRouter
+]);
 
 export default app;
