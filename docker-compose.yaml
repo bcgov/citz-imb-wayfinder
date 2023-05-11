@@ -21,6 +21,9 @@ services:
       timeout: 30s
       retries: 5
       start_period: 20s
+    depends_on:
+      mongo:
+        condition: service_healthy
 
   #############################################################################################
   ###                                       Frontend                                        ###
@@ -57,7 +60,7 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
       - MONGO_DATABASE_NAME=${MONGO_DATABASE:-wf-db}
     volumes:
-      - ./mongoSeed/init:/docker-entrypoint-initdb.d
+      - ./src/mongoSeed/init:/docker-entrypoint-initdb.d
       - ./mongo/init/data:/tmp/data 
       - ./mongo/data:/data/db 
     ports:
