@@ -1,0 +1,1 @@
+export { default as SingleLocation } from './location-model';
