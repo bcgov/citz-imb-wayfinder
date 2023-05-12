@@ -2,7 +2,7 @@ const supertest = require('supertest');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const testPoint = `http://${process.env.HOST}:${process.env.PORT}/api`;
+const testPoint = `http://${process.env.API_HOSTNAME}:${process.env.API_PORT}/api`;
 const request = supertest(testPoint);
 
 /**

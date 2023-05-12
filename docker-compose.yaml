@@ -9,8 +9,8 @@ services:
       context: ./src/api
       dockerfile: Dockerfile
     environment:
-      - PORT=${PORT:-3000}
-      - HOSTNAME=${HOSTNAME:-localhost}
+      - API_PORT=${PORT:-3000}
+      - API_HOSTNAME=${HOSTNAME:-localhost}
     networks:
       - wf-network
     ports:

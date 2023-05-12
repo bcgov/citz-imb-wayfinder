@@ -1,1 +1,2 @@
-export { default as healthRouter } from './health-route';
+export { default as healthRouter } from './health-router';
+export { default as locationRouter } from './location-router';
