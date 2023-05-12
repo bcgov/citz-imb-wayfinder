@@ -1,4 +1,4 @@
-# citz-imb-2023-capstone-b
+# CITZ IMB Wayfinder
 Citizen Services Capstone Project Team B (Wayfinder)
 
 # Executive Summary
