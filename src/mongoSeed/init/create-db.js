@@ -6,4 +6,4 @@ db.createUser({
     roles: [{role: 'readWrite', db: 'wf-db'}],
 });
 
-db.createCollection("requests", {capped: false});
+db.createCollection("Tests", {capped: false});
