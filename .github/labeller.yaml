@@ -26,4 +26,3 @@
 # Any change to the Swagger documents
 'Swagger':
   - src/api/docs/*.yaml
-  
