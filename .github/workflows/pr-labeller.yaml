@@ -13,3 +13,4 @@ jobs:
       with:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
         configuration-path: .github/labeller.yaml
+
