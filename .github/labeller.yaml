@@ -1,0 +1,29 @@
+# Auto Label Git Action Config
+# 'label_name'
+#   - path_of_diff/where/code_lives/to_base_label_upon
+
+# Any change to any file in .github/workflows
+'GitHub Actions':
+  - .github/workflows/*
+
+# Any change to the docker-compose file or any dockerfile in the repo
+'Docker':
+  - '**/Dockerfile'
+  - docker-compose.yaml
+  
+# Any changes to file or subfolders in /api
+'Backend':
+  - src/api/**/*
+  
+# Any changes to file or subfolders in /app
+'Frontend':
+  - src/frontend-pwa/**/*
+  
+# Any change to any file in any directory with a .env in name
+'Environment Variables':
+  - '**/*.env*'
+
+# Any change to the Swagger documents
+'Swagger':
+  - src/api/docs/*.yaml
+
