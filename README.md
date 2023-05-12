@@ -29,3 +29,12 @@ Project is currently under development via the Capstone team.
 * Typescript
 * Node
 * Swagger
+
+### Mongo Dev Key Examples
+
+| KEY | EXAMPLE | DESCRIPTION |
+| --- | ------- | ----------- |
+| MONGO_PORT | 27017 | Designated port for mongo |
+| MONGO_USERNAME | wf-admin | Username for mongo user |
+| MONGO_PASSWORD | wf-admin | Password for mongo user |
+| MONGO_DATABASE | wf-db | Name for mongo database |
