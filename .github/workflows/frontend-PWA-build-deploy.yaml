@@ -59,15 +59,15 @@ jobs:
           openshift_token: ${{ secrets.OPENSHIFT_PASSWORD }}
           namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
 
-      - name: Deploy from DeploymentConfig
-        env:
-          OPENSHIFT_NAMESPACE: ${{ secrets.OPENSHIFT_NAMESPACE }}
-          APPLICATION_NAME: wf-app
-          DEPLOYMENT_CONFIG: wf-app-dc-template.yaml
-          IMAGE_REPOSITORY: ${{ secrets.IMAGE_REPOSITORY }}
-          ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
-        run: |
-          ./.github/helpers/deploy.sh
+      # - name: Deploy from DeploymentConfig
+      #   env:
+      #     OPENSHIFT_NAMESPACE: ${{ secrets.OPENSHIFT_NAMESPACE }}
+      #     APPLICATION_NAME: wf-app
+      #     DEPLOYMENT_CONFIG: wf-app-dc-template.yaml
+      #     IMAGE_REPOSITORY: ${{ secrets.IMAGE_REPOSITORY }}
+      #     ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
+      #   run: |
+      #     ./.github/helpers/deploy.sh
 
   healthcheck:
     name: Determine Rollout Success
