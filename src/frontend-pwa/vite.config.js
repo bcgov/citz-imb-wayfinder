@@ -12,6 +12,7 @@ export default defineConfig({
         description: "Writing a sample description!",
         theme_color: "#ffffff",
         start_url: "/",
+      
         icons: [
           {
             src: "pwa-192x192.png",

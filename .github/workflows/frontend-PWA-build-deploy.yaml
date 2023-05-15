@@ -1,0 +1,43 @@
+name: Build and Deploy Frontend
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "src/frontend-pwa/**"
+  workflow_dispatch:
+
+jobs:
+  build-tag-push:
+    name: Build, Tag, Push to Artifactory
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Log In to Docker
+        run: |
+          docker login ${{ secrets.ARTIFACTORY_URL }} -u ${{ secrets.ARTIFACTORY_USERNAME }} -p ${{ secrets.ARTIFACTORY_PASSWORD }}
+
+      - name: Copy env.template
+        run: |
+          cp .env.template .env
+      
+      - name: Build Frontend Image
+        run: |
+          docker-compose build wf-app
+
+      - name: List Docker Images
+        run: |
+          docker images
+        
+      - name: Tag Image
+        run: |
+          docker tag citz-imb-wayfinder_wf-app ${{ secrets.ARTIFACTORY_URL }}/${{ secrets.IMAGE_REPOSITORY }}/wf-app:latest
+      
+      - name: Push Image
+        run: |
+          docker push ${{ secrets.ARTIFACTORY_URL }}/${{ secrets.IMAGE_REPOSITORY }}/wf-app:latest
+
