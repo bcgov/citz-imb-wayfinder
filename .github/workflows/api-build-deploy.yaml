@@ -68,4 +68,3 @@ jobs:
           ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
         run: |
           ./.github/helpers/deploy.sh
-          
