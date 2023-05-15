@@ -88,6 +88,8 @@ objects:
         terminationGracePeriodSeconds: 30
         dnsPolicy: ClusterFirst
         securityContext: {}
+        imagePullSecrets:
+          - name: artifactory-pull
         schedulerName: default-scheduler
 parameters:
   - description: OpenShift Namespace
