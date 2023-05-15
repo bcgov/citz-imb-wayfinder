@@ -1,15 +1,37 @@
-FROM node:18.16.0-alpine
+FROM node:18.15.0-alpine AS base
 
-RUN apk --update --no-cache add curl
+# Directory used in container
+WORKDIR /usr/api/
 
-# Create api directory
-WORKDIR /api
-
-# Install app dependencies
-# where available (npm@5+)
+# Copy everything
 COPY . .
 
-RUN npm install
+# Install TypeScript. Needed for build process.
+RUN npm i -D typescript@5.0.4
 
-EXPOSE 3000
-CMD ["npm", "run", "dev" ]
+# Compile to JavaScript build 
+RUN npm run build
+
+
+##################
+### PROD IMAGE ###
+##################
+FROM node:18.15.0-alpine as prod
+ENV NODE_ENV=production
+
+# Add curl for health check
+RUN apk --update --no-cache add curl
+
+# Directory used in container
+WORKDIR /usr/api/
+
+# Install packages. Needed even for compiled build.
+COPY package.json .
+RUN npm i
+
+# Copy compiled build from base
+COPY --from=base /usr/api/dist .
+# Copy swagger over too
+#COPY --from=base /usr/api/docs ./docs
+
+CMD [ "node", "server.js" ]
