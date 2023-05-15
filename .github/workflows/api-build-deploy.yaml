@@ -40,3 +40,4 @@ jobs:
       - name: Push Image
         run: |
           docker push ${{ secrets.ARTIFACTORY_URL }}/${{ secrets.IMAGE_REPOSITORY }}/wf-api:latest
+
