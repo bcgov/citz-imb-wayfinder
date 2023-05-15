@@ -40,4 +40,31 @@ jobs:
       - name: Push Image
         run: |
           docker push ${{ secrets.ARTIFACTORY_URL }}/${{ secrets.IMAGE_REPOSITORY }}/wf-api:latest
+    
+  deploy:
+    name: Deploy to OpenShift
+    runs-on: ubuntu-latest
+    needs: [ build-tag-push ]
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
 
+      - name: Login to Openshift
+        uses: redhat-actions/oc-login@v1
+        env:
+          OPENSHIFT_USER: github-actions
+          OPENSHIFT_NAMESPACE: ${{ secrets.OPENSHIFT_NAMESPACE }}
+        with: 
+          openshift_server_url: ${{ secrets.OPENSHIFT_SERVER_URL }}
+          openshift_token: ${{ secrets.OPENSHIFT_PASSWORD }}
+          namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
+
+      - name: Deploy from DeploymentConfig
+        env:
+          OPENSHIFT_NAMESPACE: ${{ secrets.OPENSHIFT_NAMESPACE }}
+          APPLICATION_NAME: wf-api
+          DEPLOYMENT_CONFIG: wf-api-dc-template.yaml
+          IMAGE_REPOSITORY: ${{ secrets.IMAGE_REPOSITORY }}
+          ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
+        run: |
+          ./.github/helpers/deploy.sh
