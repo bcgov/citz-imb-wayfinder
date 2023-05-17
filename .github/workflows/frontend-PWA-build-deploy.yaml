@@ -41,73 +41,73 @@ jobs:
         run: |
           docker push ${{ secrets.ARTIFACTORY_URL }}/${{ secrets.IMAGE_REPOSITORY }}/wf-app:latest
 
-  # deploy:
-  #   name: Deploy to OpenShift
-  #   runs-on: ubuntu-latest
-  #   needs: [ build-tag-push ]
-  #   steps:
-  #     - name: Checkout Repo
-  #       uses: actions/checkout@v3
+  deploy:
+    name: Deploy to OpenShift
+    runs-on: ubuntu-latest
+    needs: [ build-tag-push ]
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
 
-  #     - name: Login to Openshift
-  #       uses: redhat-actions/oc-login@v1
-  #       env:
-  #         OPENSHIFT_USER: github-actions
-  #         OPENSHIFT_NAMESPACE: ${{ secrets.OPENSHIFT_NAMESPACE }}
-  #       with: 
-  #         openshift_server_url: ${{ secrets.OPENSHIFT_SERVER_URL }}
-  #         openshift_token: ${{ secrets.OPENSHIFT_PASSWORD }}
-  #         namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
+      - name: Login to Openshift
+        uses: redhat-actions/oc-login@v1
+        env:
+          OPENSHIFT_USER: github-actions
+          OPENSHIFT_NAMESPACE: ${{ secrets.OPENSHIFT_NAMESPACE }}
+        with: 
+          openshift_server_url: ${{ secrets.OPENSHIFT_SERVER_URL }}
+          openshift_token: ${{ secrets.OPENSHIFT_PASSWORD }}
+          namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
 
-      # - name: Deploy from DeploymentConfig
-      #   env:
-      #     OPENSHIFT_NAMESPACE: ${{ secrets.OPENSHIFT_NAMESPACE }}
-      #     APPLICATION_NAME: wf-app
-      #     DEPLOYMENT_CONFIG: wf-app-dc-template.yaml
-      #     IMAGE_REPOSITORY: ${{ secrets.IMAGE_REPOSITORY }}
-      #     ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
-      #   run: |
-      #     ./.github/helpers/deploy.sh
+      - name: Deploy from DeploymentConfig
+        env:
+          OPENSHIFT_NAMESPACE: ${{ secrets.OPENSHIFT_NAMESPACE }}
+          APPLICATION_NAME: wf-app
+          DEPLOYMENT_CONFIG: wf-app-dc-template.yaml
+          IMAGE_REPOSITORY: ${{ secrets.IMAGE_REPOSITORY }}
+          ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
+        run: |
+          ./.github/helpers/deploy.sh
 
-  # healthcheck:
-  #   name: Determine Rollout Success
-  #   runs-on: ubuntu-latest
-  #   needs: [ deploy ]
-  #   steps:
-  #     - name: Login to Openshift
-  #       uses: redhat-actions/oc-login@v1
-  #       env:
-  #         OPENSHIFT_USER: github-actions
-  #         OPENSHIFT_PROJECT: ${{ secrets.OPENSHIFT_NAMESPACE }}
-  #       with: 
-  #         openshift_server_url: ${{ secrets.OPENSHIFT_SERVER_URL }}
-  #         openshift_token: ${{ secrets.OPENSHIFT_PASSWORD }}
-  #         namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
+  healthcheck:
+    name: Determine Rollout Success
+    runs-on: ubuntu-latest
+    needs: [ deploy ]
+    steps:
+      - name: Login to Openshift
+        uses: redhat-actions/oc-login@v1
+        env:
+          OPENSHIFT_USER: github-actions
+          OPENSHIFT_PROJECT: ${{ secrets.OPENSHIFT_NAMESPACE }}
+        with: 
+          openshift_server_url: ${{ secrets.OPENSHIFT_SERVER_URL }}
+          openshift_token: ${{ secrets.OPENSHIFT_PASSWORD }}
+          namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
       
-  #     - name: Check Status of Rollout
-  #       run: |
-  #         oc rollout status -n ${{ secrets.OPENSHIFT_NAMESPACE }} dc/wf-app --watch
+      - name: Check Status of Rollout
+        run: |
+          oc rollout status -n ${{ secrets.OPENSHIFT_NAMESPACE }} dc/wf-app --watch
 
 
-  # cleanup:
-  #   name: Clean Up Old Objects (namely pods and replication controllers)
-  #   runs-on: ubuntu-latest
-  #   needs: [ healthcheck ]
-  #   steps:
-  #     - name: Login to Openshift
-  #       uses: redhat-actions/oc-login@v1
-  #       env:
-  #         OPENSHIFT_USER: github-actions
-  #         OPENSHIFT_PROJECT: ${{ secrets.OPENSHIFT_NAMESPACE }}
-  #       with: 
-  #         openshift_server_url: ${{ secrets.OPENSHIFT_SERVER_URL }}
-  #         openshift_token: ${{ secrets.OPENSHIFT_PASSWORD }}
-  #         namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
+  cleanup:
+    name: Clean Up Old Objects (namely pods and replication controllers)
+    runs-on: ubuntu-latest
+    needs: [ healthcheck ]
+    steps:
+      - name: Login to Openshift
+        uses: redhat-actions/oc-login@v1
+        env:
+          OPENSHIFT_USER: github-actions
+          OPENSHIFT_PROJECT: ${{ secrets.OPENSHIFT_NAMESPACE }}
+        with: 
+          openshift_server_url: ${{ secrets.OPENSHIFT_SERVER_URL }}
+          openshift_token: ${{ secrets.OPENSHIFT_PASSWORD }}
+          namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
 
-  #     - name: Remove old pod objects
-  #       run: |
-  #         oc delete pod --namespace=${{ secrets.OPENSHIFT_NAMESPACE }} --field-selector status.phase=Succeeded
+      - name: Remove old pod objects
+        run: |
+          oc delete pod --namespace=${{ secrets.OPENSHIFT_NAMESPACE }} --field-selector status.phase=Succeeded
 
-  #     - name: Remove old replication controllers
-  #       run: |
-  #         oc delete rc --namespace=${{ secrets.OPENSHIFT_NAMESPACE }} --field-selector status.replicas=0
+      - name: Remove old replication controllers
+        run: |
+          oc delete rc --namespace=${{ secrets.OPENSHIFT_NAMESPACE }} --field-selector status.replicas=0
