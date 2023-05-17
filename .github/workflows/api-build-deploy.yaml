@@ -112,3 +112,36 @@ jobs:
       - name: Remove old replication controllers
         run: |
           oc delete rc --namespace=${{ secrets.OPENSHIFT_NAMESPACE }} --field-selector status.replicas=0
+  
+  Success-Notify:
+    runs-on: ubuntu-latest
+    needs: [ cleanup ]
+    steps: 
+      - name: Message Teams Channel on Success
+        run: |
+          curl --location --request POST ${{ secrets.TEAMS_SUCCESS_URL }} \
+          --header 'Content-Type: text/plain' \
+          --data-raw '{
+            "@context": "https://schema.org/extensions",
+            "@type": "MessageCard",
+            "themeColor": "0072C6",
+            "title": "SUCCESS! API Deployment to WF DEV Environment has finished.",
+            "text": "The WF API has been built and deployed to the DEV environment. \n\n The logs for the successful deployment can be found [here](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})\n\n",
+          }'
+
+  Failure-Notify:
+    runs-on: ubuntu-latest
+    if: failure()
+    steps:
+      - name: Message Teams Channel on Failure
+        run: |
+          curl --location --request POST ${{ secrets.TEAMS_FAILURE_URL }} \
+          --header 'Content-Type: text/plain' \
+          --data-raw '{
+            "@context": "https://schema.org/extensions",
+            "@type": "MessageCard",
+            "themeColor": "0072C6",
+            "title": "FAILURE! API Deployment to the WF DEV Environment has failed.",
+            "text": "The WF API has NOT been built and deployed to the ${{ secrets.LICENSE_PLATE }} ${{ secrets.ENVIRONMENT }} environment.\n\n Please review the Github Action for this deployment (here)[${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}].",
+          }'
+
