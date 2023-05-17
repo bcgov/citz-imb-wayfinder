@@ -86,7 +86,7 @@ objects:
             ports:
               - containerPort: 3000
                 protocol: TCP
-            imagePullPolicy: IfNotPresent
+            imagePullPolicy: Always
             terminationMessagePolicy: File
             image: >-
               ${ARTIFACTORY_URL}/${IMAGE_REPOSITORY}/${APPLICATION_NAME}:latest
