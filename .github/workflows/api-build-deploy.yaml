@@ -142,6 +142,5 @@ jobs:
             "@type": "MessageCard",
             "themeColor": "0072C6",
             "title": "FAILURE! API Deployment to the WF DEV Environment has failed.",
-            "text": "The WF API has NOT been built and deployed to the ${{ secrets.LICENSE_PLATE }} ${{ secrets.ENVIRONMENT }} environment.\n\n Please review the Github Action for this deployment (here)[${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}].",
+            "text": "The WF API has NOT been built and deployed to the ${{ secrets.LICENSE_PLATE }} DEV environment.\n\n Please review the Github Action for this deployment (here)[${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}].",
           }'
-
