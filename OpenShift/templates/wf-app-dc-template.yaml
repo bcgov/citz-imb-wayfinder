@@ -9,8 +9,7 @@ objects:
   apiVersion: apps.openshift.io/v1
   metadata:
     annotations:
-    app.openshift.io/connects-to: >-
-        [{"apiVersion":"apps.openshift.io/v1","kind":"DeploymentConfig","name":"wf-app-1-gn5nq"}]
+      app.openshift.io/route-disabled: 'false'
       openshift.io/generated-by: OpenShiftWebConsole
     name: ${APPLICATION_NAME}
     namespace: ${OPENSHIFT_NAMESPACE}
@@ -20,7 +19,7 @@ objects:
       app.kubernetes.io/instance: ${APPLICATION_NAME}
       app.kubernetes.io/name: ${APPLICATION_NAME}
       app.kubernetes.io/part-of: wayfinder
-      app.openshift.io/runtime: js
+      app.openshift.io/runtime: nodejs
       app.openshift.io/runtime-namespace: ${OPENSHIFT_NAMESPACE}
   spec:
     strategy:
@@ -73,6 +72,7 @@ objects:
         dnsPolicy: ClusterFirst
         imagePullSecrets:
           - name: artifactory-pull
+        schedulerName: default-scheduler
 parameters:
   - description: OpenShift Namespace
     displayName: OpenShift Namespace
