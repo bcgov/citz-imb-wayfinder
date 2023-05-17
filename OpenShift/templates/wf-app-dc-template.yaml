@@ -12,12 +12,13 @@ objects:
     app.openshift.io/connects-to: >-
         [{"apiVersion":"apps.openshift.io/v1","kind":"DeploymentConfig","name":"wf-app-1-gn5nq"}]
       openshift.io/generated-by: OpenShiftWebConsole
-    name: wf-app-1-gn5nq
-    namespace: ec1236-dev
+    name: ${APPLICATION_NAME}
+    namespace: ${OPENSHIFT_NAMESPACE}
     labels:
-      app: wf-app
-      deployment: wf-app-1
-      deploymentconfig: wf-app
+      app: ${APPLICATION_NAME}
+      app.kubernetes.io/part-of: wayfinder
+      app.openshift.io/runtime: nodejs
+      app.openshift.io/runtime-namespace: ${OPENSHIFT_NAMESPACE}
   spec:
     strategy:
       type: Rolling
@@ -55,24 +56,34 @@ objects:
                 cpu: 50m
                 memory: 256Mi
             terminationMessagePath: /dev/termination-log
-            name: wf-app
-            securityContext:
-              capabilities:
-                drop:
-                  - ALL
-              runAsUser: 1013750000
-              runAsNonRoot: true
-              allowPrivilegeEscalation: false
+            name: ${APPLICATION_NAME}
+            securityContext: {}
             ports:
-              - containerPort: 80
+              - containerPort: 5173
                 protocol: TCP
-            imagePullPolicy: IfNotPresent
-            volumeMounts:
-              - name: kube-api-access-zvm2r
-                readOnly: true
-                mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+            imagePullPolicy: Always
             terminationMessagePolicy: File
             image: >-
-              image-registry.openshift-image-registry.svc:5000/ec1236-dev/wf-app@sha256:4c5958ae0f91bf3fa906358eaad0ea760f2b2431a8aab483b48dc4ec5338231b
-        serviceAccount: default
+              ${ARTIFACTORY_URL}/${IMAGE_REPOSITORY}/${APPLICATION_NAME}:latest
         dnsPolicy: ClusterFirst
+        imagePullSecrets:
+          - name: artifactory-pull
+parameters:
+  - description: OpenShift Namespace
+    displayName: OpenShift Namespace
+    name: OPENSHIFT_NAMESPACE
+    value: ec1236-dev
+    required: true
+  - description: Application Name
+    displayName: Application Name
+    name: APPLICATION_NAME
+    value: wf-api
+    required: true
+  - description: Image Repository
+    displayName: Image Repository
+    name: IMAGE_REPOSITORY
+    required: true
+  - description: Artifactory URL
+    displayName: Artifactory URL
+    name: ARTIFACTORY_URL
+    required: true
