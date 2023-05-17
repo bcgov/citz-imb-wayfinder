@@ -16,8 +16,11 @@ objects:
     namespace: ${OPENSHIFT_NAMESPACE}
     labels:
       app: ${APPLICATION_NAME}
+      app.kubernetes.io/component: ${APPLICATION_NAME}
+      app.kubernetes.io/instance: ${APPLICATION_NAME}
+      app.kubernetes.io/name: ${APPLICATION_NAME}
       app.kubernetes.io/part-of: wayfinder
-      app.openshift.io/runtime: nodejs
+      app.openshift.io/runtime: js
       app.openshift.io/runtime-namespace: ${OPENSHIFT_NAMESPACE}
   spec:
     strategy:
@@ -50,11 +53,11 @@ objects:
         containers:
           - resources:
               limits:
-                cpu: 250m
-                memory: 1Gi
+                cpu: 100m
+                memory: 150Mi
               requests:
                 cpu: 50m
-                memory: 256Mi
+                memory: 100Mi
             terminationMessagePath: /dev/termination-log
             name: ${APPLICATION_NAME}
             securityContext: {}
@@ -65,6 +68,8 @@ objects:
             terminationMessagePolicy: File
             image: >-
               ${ARTIFACTORY_URL}/${IMAGE_REPOSITORY}/${APPLICATION_NAME}:latest
+        restartPolicy: Always
+        terminationGracePeriodSeconds: 30
         dnsPolicy: ClusterFirst
         imagePullSecrets:
           - name: artifactory-pull
