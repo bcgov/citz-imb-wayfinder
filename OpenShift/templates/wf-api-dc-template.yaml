@@ -51,7 +51,13 @@ objects:
           openshift.io/generated-by: OpenShiftWebConsole
       spec:
         containers:
-          - resources: {}
+          - resources:
+            limits:
+              cpu: 100m
+              memory: 150Mi
+            requests:
+              cpu: 50m
+              memory: 100Mi
             readinessProbe:
               httpGet:
                 path: /api/health
