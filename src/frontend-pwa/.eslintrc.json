@@ -20,6 +20,12 @@
       "rules": {
         "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }]
       }
+    },
+    {
+      "files": ["*.ts", "*.js", "*.svg"],
+      "rules": {
+        "no-unresolved-imports": "off"
+      }
     }
   ],
   "parserOptions": {
@@ -39,14 +45,15 @@
         "js": "never",
         "jsx": "never",
         "ts": "never",
-        "tsx": "never"
+        "tsx": "never",
+        "svg": "always"
       }
     ]
   },
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ".svg"]
       }
     }
   }
