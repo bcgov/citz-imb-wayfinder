@@ -6,23 +6,23 @@ import * as routers from './routes';
 
 const app: Application = express();
 
-//Express middleware
-app.use(morgan("tiny"));
+// Express middleware
+app.use(morgan('tiny'));
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static('public'));
 
-//Routing information
+// Routing information
 app.use(
-    "/api/api-docs",
-    swaggerUi.serve,
-    swaggerUi.setup(
-        undefined, 
-        config.swaggerConfig
-    )
-)
+  '/api/api-docs',
+  swaggerUi.serve,
+  swaggerUi.setup(
+    undefined,
+    config.swaggerConfig,
+  ),
+);
 app.use('/api', [
-    routers.healthRouter, 
-    routers.locationRouter
+  routers.healthRouter,
+  routers.locationRouter,
 ]);
 
 export default app;

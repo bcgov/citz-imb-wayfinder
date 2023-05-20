@@ -1,7 +1,7 @@
 const swaggerConfig = {
-    swaggerOptions: {
-        url: "/swagger.yaml"
-    }
-}
+  swaggerOptions: {
+    url: '/swagger.yaml',
+  },
+};
 
 export default swaggerConfig;
