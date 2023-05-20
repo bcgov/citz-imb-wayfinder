@@ -1,9 +1,9 @@
 import express from 'express';
-import { getAllLocations } from '../controllers/location-controller';
+import getAllLocations from '../controllers/location-controller';
 
 const router = express.Router();
 
 router.route('/locations')
-    .get(getAllLocations);
+  .get(getAllLocations);
 
 export default router;

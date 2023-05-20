@@ -1,4 +1,4 @@
-interface SingleLocation {
+type SingleLocation = {
         External_Site: string;
         Address: string;
         Locality: string;
@@ -6,9 +6,9 @@ interface SingleLocation {
         Site_Fax_no: string;
         Website_URL: string;
         Site_Email: string;
-        Latitude: number
-        Longitude: number
-        Office_Code: string
+        Latitude: number;
+        Longitude: number;
+        Office_Code: string;
 }
 
 export default SingleLocation;
