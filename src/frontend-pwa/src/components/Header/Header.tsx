@@ -1,3 +1,5 @@
+import logo from '../../../public/logo-banner.svg';
+
 import {
   HeaderWrapper,
   Heading,
@@ -9,7 +11,7 @@ export default function Header() {
     <HeaderWrapper>
       <Banner>
         <a href="https://gov.bc.ca">
-          <img src="../../assets/images/logo-banner.svg" alt="Go to the Government of British Columbia website" />
+          <img src={logo} alt="Go to the Government of British Columbia website" />
         </a>
         <Heading>Wayfinder</Heading>
       </Banner>
