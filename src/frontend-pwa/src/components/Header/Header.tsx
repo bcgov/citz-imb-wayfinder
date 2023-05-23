@@ -1,4 +1,10 @@
+import React from 'react';
 
-export const Header = ({}) => (
-    <></>
-);
+export default function Header() {
+  return (
+    <input
+      type="button"
+      value="Hello"
+    />
+  );
+}
