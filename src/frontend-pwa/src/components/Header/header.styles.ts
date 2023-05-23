@@ -27,3 +27,10 @@ export const Banner = styled.div`
     align-items: center;
     margin: 0 10px 0 0;
 `;
+
+export const Image = styled.a`
+    width: 175px;
+    position: relative;
+    top: 10px;
+    height: 100%;
+`;
