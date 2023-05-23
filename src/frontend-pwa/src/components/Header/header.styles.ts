@@ -16,7 +16,7 @@ export const HeaderWrapper = styled.header`
 `;
 
 export const Heading = styled.h1`
-    font-family: 'BCSans', 'Noto Sans', Verdana, Arial, sans-serif;
+    font-family: 'BCSans', 'Noto Sans';
     font-weight: normal;
     margin: 5px 5px 0 18px;
 `;
