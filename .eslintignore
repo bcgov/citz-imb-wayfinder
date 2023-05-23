@@ -1,2 +1,3 @@
 # Ignore all testing files
 **/*.test.js
+**/vite.config.js
