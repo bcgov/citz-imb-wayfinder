@@ -10,7 +10,8 @@
     "lint": "eslint",
     "start": "node ./dist/server.js",
     "dev": "nodemon server.ts",
-    "test": "jest"
+    "test": "jest",
+    "swagger": "swagger-cli validate ./public/swagger.yaml"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "jest": "29.5.0",
     "morgan": "1.10.0",
     "supertest": "6.3.3",
+    "swagger-cli": "4.0.4",
     "swagger-ui-express": "4.6.3"
   },
   "devDependencies": {
