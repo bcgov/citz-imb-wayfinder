@@ -1,1 +1,1 @@
-export { default as SingleLocation } from './singleLocation-model';
+export * as SingleLocation from './singleLocation-model';
