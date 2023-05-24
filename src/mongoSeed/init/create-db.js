@@ -68,4 +68,4 @@ db.locations.insertMany([
         Longitude: 13.43,
         Office_Code: "00073"
     },
-])
+]);
