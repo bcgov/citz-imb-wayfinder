@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import typography from '../../typography';
 
 export const HeaderWrapper = styled.header`
     background-color: #036;
@@ -15,10 +16,12 @@ export const HeaderWrapper = styled.header`
     left: 0;
 `;
 
-export const Heading = styled.h1`
-    font-family: 'BCSans', 'Noto Sans';
-    font-weight: normal;
-    margin: 5px 5px 0 18px;
+export const Heading = styled.h2`
+    ${typography.toString()}
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+    min-width: 150px;
+    display: contents;
 `;
 
 export const Banner = styled.div`
@@ -30,7 +33,8 @@ export const Banner = styled.div`
 
 export const Image = styled.a`
     width: 175px;
-    position: relative;
     top: 10px;
+    position: relative;
     height: 100%;
+    padding-right: 10px;
 `;
