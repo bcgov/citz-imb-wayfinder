@@ -16,7 +16,7 @@ export const HeaderWrapper = styled.header`
 `;
 
 export const Heading = styled.h1`
-    font-family: 'BCSans', 'Noto Sans';
+    font-family: ['BCSans', 'Noto Sans', 'Verdana', 'Arial', 'sans-serif'];
     font-weight: normal;
     margin: 5px 5px 0 18px;
 `;
@@ -31,6 +31,5 @@ export const Banner = styled.div`
 export const Image = styled.a`
     width: 175px;
     position: relative;
-    top: 10px;
     height: 100%;
 `;
