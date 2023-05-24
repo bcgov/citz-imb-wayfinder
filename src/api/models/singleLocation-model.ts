@@ -1,5 +1,8 @@
 import mongoose from 'mongoose';
 
+/**
+ * @desc Schema for a single location used in the Wayfinder App for Mongoose integration
+ */
 const SingleLocationSchema = new mongoose.Schema({
   External_Site: { type: String },
   Address: { type: String },
@@ -13,6 +16,7 @@ const SingleLocationSchema = new mongoose.Schema({
   Office_Code: { type: String },
 });
 
+// Clean up the return values to remove __v tag
 SingleLocationSchema.set('toJSON', {
   versionKey: false,
   virtuals: true,
