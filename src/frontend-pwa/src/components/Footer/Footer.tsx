@@ -1,16 +1,23 @@
+import {
+  FooterWrapper,
+  Container,
+  List,
+  ListItemLink,
+} from './footer.styles';
+
 export default function Footer() {
   return (
-    <footer className="footer">
-      <div className="container">
-        <ul>
-          <li><a href=".">Home</a></li>
-          <li><a href=".">Disclaimer</a></li>
-          <li><a href=".">Privacy</a></li>
-          <li><a href=".">Accessibility</a></li>
-          <li><a href=".">Copyright</a></li>
-          <li><a href=".">Contact Us</a></li>
-        </ul>
-      </div>
-    </footer>
+    <FooterWrapper>
+      <Container>
+        <List>
+          <li><ListItemLink href=".">Home</ListItemLink></li>
+          <li><ListItemLink href="https://www2.gov.bc.ca/gov/content/home/disclaimer">Disclaimer</ListItemLink></li>
+          <li><ListItemLink href="https://www2.gov.bc.ca/gov/content/home/privacy">Privacy</ListItemLink></li>
+          <li><ListItemLink href="https://www2.gov.bc.ca/gov/content/home/accessibility">Accessibility</ListItemLink></li>
+          <li><ListItemLink href="https://www2.gov.bc.ca/gov/content/home/copyright">Copyright</ListItemLink></li>
+          <li><ListItemLink href="https://github.com/bcgov/citz-imb-wayfinder/issues">Contact Us</ListItemLink></li>
+        </List>
+      </Container>
+    </FooterWrapper>
   );
 }
