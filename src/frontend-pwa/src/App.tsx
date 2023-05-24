@@ -4,10 +4,10 @@ import Footer from './components/Footer/Footer';
 
 function App() {
   return (
-    <body style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+    <div>
       <Header />
       <Footer />
-    </body>
+    </div>
   );
 }
 
