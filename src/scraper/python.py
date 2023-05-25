@@ -1,24 +1,23 @@
 import requests
 from bs4 import BeautifulSoup
 
-URL = "https://realpython.github.io/fake-jobs/"
-page = requests.get(URL)
+BASE_URL = "https://www2.gov.bc.ca"
+START_POINT = '/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc'
+FILTER = "/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc/service-bc-location-"
 
-soup = BeautifulSoup(page.content, "html.parser")
+headers = {"User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:108.0) Gecko/20100101 Firefox/108.0"}
 
-results = soup.find(id="ResultsContainer")
+response = requests.get(url=BASE_URL+START_POINT, headers=headers)
 
-job_elements = results.find_all("div", class_="card-content")
-resultsDiff = results.find_all(
-  "h2", string=lambda text: "python" in text.lower()
+soup = BeautifulSoup(response.content, "html.parser")
+
+resultsDiff = soup.find_all(
+  "a", href=lambda href: href is not None and FILTER in href
 )
 
-for job_element in job_elements:
-  title_element = job_element.find("h2", class_="title")
-  company_element = job_element.find("h3", class_="company")
-  print(title_element.text)
-  print(company_element.text)
-  print()
-
-for job_element in resultsDiff:
-  print(job_element.text)
+for url in resultsDiff:
+  if BASE_URL in url['href']:
+    print(url['href'])
+  else:
+    print(BASE_URL+url['href'])
+print()
