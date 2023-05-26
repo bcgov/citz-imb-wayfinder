@@ -2,10 +2,13 @@ import {
   Link,
 } from 'react-router-dom';
 
+import {
+  Wrapper,
+} from './home.styles';
+
 export default function Home() {
   return (
-    <div>
-      <h1>Wayfinder</h1>
+    <Wrapper>
       <Link to="/location">
         <button type="button">Locate a Service</button>
       </Link>
@@ -15,6 +18,6 @@ export default function Home() {
       <Link to="/report">
         <button type="button">Report an Event</button>
       </Link>
-    </div>
+    </Wrapper>
   );
 }
