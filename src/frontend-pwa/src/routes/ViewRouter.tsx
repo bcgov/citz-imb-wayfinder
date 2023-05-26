@@ -4,6 +4,7 @@ import {
 
 import Home from '../views/Home/Home';
 import Location from '../views/Location/Location';
+import BCServices from '../views/BCServices/BCServices';
 
 export default function ViewRouter() {
   return (
@@ -11,6 +12,7 @@ export default function ViewRouter() {
       <Routes>
         <Route path="/" Component={Home} />
         <Route path="/location" Component={Location} />
+        <Route path="/services" Component={BCServices} />
       </Routes>
     </Router>
   );
