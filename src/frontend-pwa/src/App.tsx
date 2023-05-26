@@ -1,24 +1,13 @@
 import './App.css';
-
-import {
-  BrowserRouter as Router, Routes, Route,
-} from 'react-router-dom';
-
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import Home from './views/Home/Home';
-import ServiceLocation from './views/ServiceLocation/ServiceLocation';
+import ViewRouter from './routes/ViewRouter';
 
 function App() {
   return (
     <div>
       <Header />
-      <Router>
-        <Routes>
-          <Route path="/" Component={Home} />
-          <Route path="/location" Component={ServiceLocation} />
-        </Routes>
-      </Router>
+      <ViewRouter />
       <Footer />
     </div>
   );

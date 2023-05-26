@@ -1,4 +1,4 @@
-export default function ServiceLocation() {
+export default function Location() {
   return (
     <h2>
       Locate a Service
