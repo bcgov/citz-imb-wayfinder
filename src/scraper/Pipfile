@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 requests = "*"
 pyuser-agent = "*"
+python-dotenv = "*"
+tqdm = "*"
 
 [dev-packages]
 
