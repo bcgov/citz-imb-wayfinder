@@ -15,12 +15,21 @@ import concurrent.futures
 #
 # USE:     Using the Script is simple, run pipenv install and pipenv shell in terminal
 #          to have all extra libraries imported and running
+#
+# Note:    If you see the error "Error occurred while scraping URL: 'NoneType' object 
+#          has no attribute 'find'" printing in the console, reduce the number of 
+#          MAX_WORKERS until error no longer occurs.
+#          MAX_WORKERS is based on system capability and is not standardized
+#
 #############################################################################
+
+MAX_WORKERS = 6 # Adjust the value based on the system capabilities
 CONFIG = dotenv_values(".env")
 BASE_URL = "https://www2.gov.bc.ca"
 START_POINT = '/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc'
 FILTER = "/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc/service-bc-location-"
 OUTPUT_FILE = "results.json"
+GOOGLE = "https://www.google.com/search?q="
 
 #############################################################################
 # @desc : Given a URL, requests the data and returns the soup object
@@ -65,18 +74,36 @@ def get_supplementary_api_data(locationString, localeString):
     return response.json()
 
 #############################################################################
-# @desc: Parse the address string to acquire the postal code
+# @desc: Parse the address string to acquire the postal code, if there is no
+#        address present, scrapes google for the address + postal code
 # @returns: Dictionary Object of broken down string
 #############################################################################
+# Precompile the regular expression pattern for improved performance
+POSTAL_REGEX = re.compile(r'[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d')
+
 def scrape_postal_code(mailingStr):
-    POSTAL_REGEX = r'[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d'
-    street_address = {}
-    postal_code_match = re.search(POSTAL_REGEX, mailingStr)
+    street_address = {
+        "province": "BC"
+    }
+    postal_code_match = POSTAL_REGEX.search(mailingStr)
 
     if postal_code_match:
-        sub_string = postal_code_match.group()
-        street_address["postal_code"] = sub_string
-    street_address["province"] = "BC"
+        street_address["postal_code"] = postal_code_match.group()
+    else:
+        try:
+            googleSearch = soupifyDocument(GOOGLE + urllib.parse.quote_plus(mailingStr + ", Canada, BC"))
+            new_mailer = googleSearch.find(class_="fMYBhe")
+            google_address = googleSearch.find(class_="aiAXrc")
+            if google_address:
+              street_address["street"] = google_address.text
+            if new_mailer:
+                postal_code_match = POSTAL_REGEX.search(new_mailer.text)
+                if postal_code_match:
+                    street_address["postal_code"] = postal_code_match.group()
+        except Exception as e:
+            # Handle any exceptions that might occur during the Google search
+            print(f"An error occurred during the Google search: {str(e)}")
+
     return street_address
 
 #############################################################################
@@ -161,18 +188,26 @@ def scrape_url(url):
 
     contacts = soup.find('div', class_='contacts')
     fax = contacts.find('div', itemprop="faxNumber")
-    streetsCollection = contacts.find_all('pre', itemprop="streetAddress")
+    streetsCollection = contacts.find_all('div', class_="contactRow")
+    street_address = None  # Variable to store the street address
+
+    for streets in streetsCollection:
+        h3 = streets.find('h3')
+        if h3 and h3.text.strip() == "Street:":
+            street_address = streets.find('pre').text  # Store the street address
+            break
+
     phone = contacts.find('div', itemprop="telephone")
 
     # Verify data was extracted in scrape
     locationData["contact"]["fax"] = fax.text.strip() if fax else ""
     locationData["contact"]["phone"] = phone.text.strip() if phone else ""
 
-    if streetsCollection:
-        locationData["address"] = scrape_postal_code(streetsCollection[STREET].text) or {}
+    if street_address:
+        locationData["address"] = scrape_postal_code(street_address) or {}
 
     # Use scraped data to gather meta data
-    supplement_data = get_supplementary_api_data(streetsCollection[STREET].text, locationData["locale"])
+    supplement_data = get_supplementary_api_data(street_address, locationData["locale"]) if street_address else {}
 
     # Verify the API returned valid data, then take what's important
     if supplement_data.get('data'):
@@ -202,9 +237,8 @@ try:
             return scrape_url(url)
 
         # Set the maximum number of concurrent workers
-        max_workers = 5 # Adjust the value based on the system capabilities
 
-        with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
             # Submit the scraping tasks to the executor and track the progress
             futures = [executor.submit(scrape_single_url, link) for link in links]
             with tqdm(total=len(futures), ncols=100, colour="#669966", desc="Progress: ") as pbar:
