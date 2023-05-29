@@ -1,14 +1,21 @@
 type SingleLocation = {
-  External_Site: string;
-  Address: string;
-  Locality: string;
-  Site_Phone_No: string;
-  Site_Fax_no: string;
-  Website_URL: string;
-  Site_Email: string;
-  Latitude: number;
-  Longitude: number;
-  Office_Code: string;
+  contact?: {
+    fax?: String;
+    phone?: String;
+  };
+  services: [String];
+  address: {
+    province: String;
+    street?: String;
+    region?: String;
+    county?: String;
+    locality?: String;
+    label?: String;
+  };
+  locale: String;
+  website: String;
+  latitude: Number;
+  longitude: number;
 };
 
 export default SingleLocation;
