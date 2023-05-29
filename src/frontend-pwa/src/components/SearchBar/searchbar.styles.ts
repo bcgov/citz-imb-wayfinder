@@ -11,7 +11,7 @@ export const WrapperDiv = styled.div`
 export const StyledInput = styled.input`
   ${typography.toString()}
   max-width: 800px;
-  width:80%;
+  width:100%;
   padding:10px;
   border-radius: 14px;
   font-size: 20px;
@@ -24,7 +24,8 @@ export const StyledInput = styled.input`
 export const StyledIconButton = styled.button`
   position: absolute;
   right: 2px;
-  top: 5px;
+  top: 10px;
   padding: 0px;
   font-size: 20px;
+  opacity: 0.1;
 `;
