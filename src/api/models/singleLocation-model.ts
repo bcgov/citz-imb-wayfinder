@@ -4,16 +4,31 @@ import mongoose from 'mongoose';
  * @desc Schema for a single location used in the Wayfinder App for Mongoose integration
  */
 const SingleLocationSchema = new mongoose.Schema({
-  External_Site: { type: String },
-  Address: { type: String },
-  Locality: { type: String },
-  Site_Phone_No: { type: String },
-  Site_Fax_no: { type: String },
-  Website_URL: { type: String },
-  Site_Email: { type: String },
-  Latitude: { type: Number },
-  Longitude: { type: Number },
-  Office_Code: { type: String },
+  contact: {
+    fax: { type: String },
+    phone: { type: String },
+  },
+  services: { type: [] },
+  address: {
+    province: { type: String },
+    street: { type: String },
+    postal_code: { type: String },
+    region: { type: String },
+    county: { type: String },
+    locality: { type: String },
+    label: { type: String },
+  },
+  locale: { type: String },
+  website: { type: String },
+  latitude: {
+    type: Number,
+    required: true,
+  },
+  longitude: {
+    type: Number,
+    required: true,
+  },
+
 });
 
 // Clean up the return values to remove __v tag
