@@ -1,12 +1,18 @@
+/* eslint-disable no-nested-ternary */
 import styled from '@emotion/styled';
 import typography from '../../typography';
 
 type ButtonProps = {
-  onClick: any;
   variant: string,
   size: string,
   disabled: boolean,
 }
+
+// function variantType(props:ButtonProps) {
+//   if (props.variant === 'primary') {
+//     background-color: ${(props) => (props.variant === 'primary' ? '#003366'
+//   }
+// }
 
 const StyledButton = styled.button<ButtonProps>`
   ${typography.toString()}
@@ -22,7 +28,8 @@ const StyledButton = styled.button<ButtonProps>`
   font-weight: 500;
   letter-spacing: 1px;
   cursor: pointer;
-  color: ${(props) => (props.variant === 'primary' ? '#003366' : 'hotpink')};
+  background-color: ${(props) => (props.variant === 'primary' ? '#003366' : props.variant === 'secondary' ? '#FFFFFF' : '#000000')};
+  
 `;
 
 export default StyledButton;
