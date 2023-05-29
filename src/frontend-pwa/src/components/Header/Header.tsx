@@ -1,4 +1,4 @@
-import logo from '../../../public/logo-banner.svg';
+import logo from '/logo-banner.svg';
 
 import {
   HeaderWrapper,

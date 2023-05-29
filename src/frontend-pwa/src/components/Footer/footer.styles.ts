@@ -24,27 +24,3 @@ export const Container = styled.div`
   text-align: center;
   height: 46px;
 `;
-
-export const List = styled.ul`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin: 0;
-  color: #fff;
-  list-style: none;
-  align-items: center;
-  height: 100%;
-`;
-
-export const ListItemLink = styled.a`
-  font-size: 0.813em;
-  font-weight: normal;  /* 400 */
-  color: #fff;
-  border-right: 1px solid #4b5e7e;
-  padding-left: 5px;
-  padding-right: 5px;
-  &:hover {
-    color: #fff;
-    text-decoration: underline;
-  }
-`;

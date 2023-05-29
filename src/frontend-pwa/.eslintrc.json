@@ -13,13 +13,15 @@
   "parser": "@typescript-eslint/parser",
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx"],
+      "files": ["*.ts", "*.tsx", "*.svg"],
       "parserOptions": {
         "project": ["./src/frontend-pwa/tsconfig.json"]
       },
       "rules": {
         "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }],
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
+        "import/no-unresolved": "off",
+        "import/no-absolute-path": "off"
       }
     },
     {
