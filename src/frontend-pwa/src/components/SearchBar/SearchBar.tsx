@@ -1,19 +1,11 @@
 import { useState } from 'react';
+import searchicon from '/searchicon.svg';
 
 import {
   WrapperDiv,
   StyledInput,
   StyledIconButton,
 } from './searchbar.styles';
-
-// import useState from 'react';
-
-// export type ButtonProps = {
-//   handleClick: () => void;
-//   variant: 'default' | 'primary' | 'secondary', // dictates coloring
-//   size: 'sm' | 'md' | 'lg', // breakpoints will go here
-//   disabled: boolean;
-// }
 
 export default function SearchBar() {
   const [query, setQuery] = useState('');
@@ -25,15 +17,17 @@ export default function SearchBar() {
 
   return (
     <WrapperDiv className="searchInput">
-      <form>
+      <div className="inputDiv">
         <StyledInput
           type="text"
           placeholder="Enter something here..."
           onChange={inputHandler}
           value={query}
         />
-        <StyledIconButton className="icon">🔍</StyledIconButton>
-      </form>
+      </div>
+      <StyledIconButton className="icon" type="submit">
+        <img src={searchicon} alt="submit!" />
+      </StyledIconButton>
     </WrapperDiv>
   );
 }
