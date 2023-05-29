@@ -23,7 +23,7 @@ import concurrent.futures
 #
 #############################################################################
 
-MAX_WORKERS = 6 # Adjust the value based on the system capabilities
+MAX_WORKERS = 5 # Adjust the value based on the system capabilities
 CONFIG = dotenv_values(".env")
 BASE_URL = "https://www2.gov.bc.ca"
 START_POINT = '/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc'
@@ -68,9 +68,7 @@ def scrape_initial_urls(soup):
 #############################################################################
 def get_supplementary_api_data(locationString, localeString):
     queryString = f"{locationString}, {localeString}, ca"
-    response = requests.get(
-        CONFIG['API_URL'] + urllib.parse.quote_plus(queryString))
-
+    response = requests.get(CONFIG['API_URL'] + urllib.parse.quote_plus(queryString))
     return response.json()
 
 #############################################################################
@@ -167,7 +165,6 @@ def scrape_limited_services(soup):
 #         to help standardize the data available
 #############################################################################
 def scrape_url(url):
-    STREET = 0
     locationData = {
         "contact": {},
         "services": [],
@@ -193,9 +190,15 @@ def scrape_url(url):
 
     for streets in streetsCollection:
         h3 = streets.find('h3')
-        if h3 and h3.text.strip() == "Street:":
+        if h3 and h3.text.strip() == "Street:" or h3.text.strip() == "Address:":
             street_address = streets.find('pre').text  # Store the street address
             break
+        
+    if not street_address:
+        for streets in streetsCollection:
+            h3 = streets.find('h3')
+            if h3 and h3.text.strip() == "Mailing:":
+                street_address = streets.find('pre').text
 
     phone = contacts.find('div', itemprop="telephone")
 
