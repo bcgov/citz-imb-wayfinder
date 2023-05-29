@@ -8,6 +8,13 @@ import {
 
 // import useState from 'react';
 
+// export type ButtonProps = {
+//   handleClick: () => void;
+//   variant: 'default' | 'primary' | 'secondary', // dictates coloring
+//   size: 'sm' | 'md' | 'lg', // breakpoints will go here
+//   disabled: boolean;
+// }
+
 export default function SearchBar() {
   const [query, setQuery] = useState('');
 
