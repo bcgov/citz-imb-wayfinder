@@ -1,4 +1,4 @@
-export default function Location() {
+export default function Report() {
   return (
     <h2>
       Report an Event
