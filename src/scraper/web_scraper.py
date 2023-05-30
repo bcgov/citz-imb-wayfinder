@@ -1,5 +1,5 @@
 import requests
-from bs4 import BeautifulSoup  # Web Scraper Library
+from bs4 import BeautifulSoup, NavigableString, Tag  # Web Scraper Library
 import json
 import re
 from dotenv import dotenv_values
@@ -23,7 +23,7 @@ import concurrent.futures
 #
 #############################################################################
 
-MAX_WORKERS = 5 # Adjust the value based on the system capabilities
+MAX_WORKERS = 4 # Adjust the value based on the system capabilities
 CONFIG = dotenv_values(".env")
 BASE_URL = "https://www2.gov.bc.ca"
 START_POINT = '/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc'
@@ -119,22 +119,22 @@ def scrape_locale(soup):
 #############################################################################
 def scrape_services(soup):
     services = []
+    demo_list = []
+    allow_list = ["BC", "Exam"]
     service_divs = soup.find_all("div", class_="panel-text")
-
     for service_div in service_divs:
-        header_two = service_div.find('h2', class_="bc_h2")
+        header_two = service_div.find('h2', class_='bc_h2')
         if header_two is not None and "Services Available at this Location:" in header_two.text:
-            ul = service_div.find_all("ul")
+            ul = service_div.find("ul")
             for li in ul:
-                service_list_items = li.find_all("li")
-                for service_list_item in service_list_items:
-                    if service_list_item is not None:
-                        split_service = service_list_item.text.split("\n")
-                        for splits in split_service:
-                            if splits and splits != "\t":
-                                split_service = splits.split("\u2013")
-                                services.extend([split.strip() for split in split_service if split.strip()])
-
+                if li.find('ul'):
+                    sli = li.text.split("\n")
+                    for ssli in sli:
+                        if (substring in allow_list for substring in ssli): # Change to make work
+                            services.append(ssli)
+                        # print(li.text.strip())
+                else:
+                    services.append(li.text)
     return list(set(services))
 
 #############################################################################
@@ -159,6 +159,8 @@ def scrape_limited_services(soup):
 
     return list(set(results))
 
+def tidyServiceItem(serviceItem):
+    print(serviceItem)
 #############################################################################
 # @desc - extract data from the URL's and parse them for location data
 #         using an auxiliary API, gathers more information from whats gathered
@@ -243,7 +245,8 @@ try:
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
             # Submit the scraping tasks to the executor and track the progress
-            futures = [executor.submit(scrape_single_url, link) for link in links]
+            # futures = [executor.submit(scrape_single_url, link) for link in links]
+            futures = [executor.submit(scrape_single_url, links[i]) for i in range(5)]
             with tqdm(total=len(futures), ncols=100, colour="#669966", desc="Progress: ") as pbar:
                 # Iterate through the completed futures and retrieve the results
                 for future in concurrent.futures.as_completed(futures):
