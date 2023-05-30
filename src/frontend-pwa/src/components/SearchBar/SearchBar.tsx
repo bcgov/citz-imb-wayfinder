@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import searchicon from '/searchicon.svg';
+import clearicon from '/clearicon.svg';
 
 import {
   WrapperDiv,
   StyledInput,
-  StyledIconButton,
+  StyledSearchButton,
+  StyledClearButton,
 } from './searchbar.styles';
 
 export default function SearchBar() {
@@ -17,19 +19,18 @@ export default function SearchBar() {
 
   return (
     <WrapperDiv className="searchInput">
-      <div className="inputDiv">
-        <StyledInput
-          type="text"
-          placeholder="Enter something here..."
-          onChange={inputHandler}
-          value={query}
-        />
-      </div>
-      <StyledIconButton className="icon" type="submit">
+      <StyledInput
+        type="text"
+        placeholder="Enter something here..."
+        onChange={inputHandler}
+        value={query}
+      />
+      <StyledSearchButton className="icon" type="submit">
         <img src={searchicon} alt="submit!" />
-      </StyledIconButton>
+      </StyledSearchButton>
+      <StyledClearButton className="icon" type="reset" onClick={() => setQuery('')}>
+        <img src={clearicon} alt="clear!" />
+      </StyledClearButton>
     </WrapperDiv>
   );
 }
-
-// <StyledIconButton className="icon" onClick={setQuery('')}>🔍</StyledIconButton>
