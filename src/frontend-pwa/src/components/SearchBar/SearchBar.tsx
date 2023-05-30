@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import searchicon from '/searchicon.svg';
 import clearicon from '/clearicon.svg';
 
@@ -9,28 +9,40 @@ import {
   StyledClearButton,
 } from './searchbar.styles';
 
-export default function SearchBar() {
-  const [query, setQuery] = useState('');
+export type SearchBarProps = {
+  handleChange: () => void;
+  handleSearch: () => void;
+  handleClear: () => void;
+  query: string;
+}
 
-  const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const wordEntered = event.target.value;
-    setQuery(wordEntered);
-  };
-
+export default function SearchBar({
+  handleChange,
+  handleSearch,
+  handleClear,
+  query,
+}: SearchBarProps) {
   return (
     <WrapperDiv className="searchInput">
       <StyledInput
         type="text"
         placeholder="Enter something here..."
-        onChange={inputHandler}
+        onChange={handleChange}
         value={query}
       />
-      <StyledSearchButton className="icon" type="submit">
+      <StyledSearchButton className="icon" type="submit" onClick={() => handleSearch()}>
         <img src={searchicon} alt="submit!" />
       </StyledSearchButton>
-      <StyledClearButton className="icon" type="reset" onClick={() => setQuery('')}>
+      <StyledClearButton className="icon" type="reset" onClick={() => handleClear()}>
         <img src={clearicon} alt="clear!" />
       </StyledClearButton>
     </WrapperDiv>
   );
 }
+
+// const [query, setQuery] = useState('');
+
+// const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+//   const wordEntered = event.target.value;
+//   setQuery(wordEntered);
+// };
