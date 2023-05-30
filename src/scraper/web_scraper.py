@@ -1,5 +1,6 @@
+# coding=utf8
 import requests
-from bs4 import BeautifulSoup, NavigableString, Tag  # Web Scraper Library
+from bs4 import BeautifulSoup  # Web Scraper Library
 import json
 import re
 from dotenv import dotenv_values
@@ -110,61 +111,84 @@ def scrape_postal_code(mailingStr):
 #############################################################################
 def scrape_locale(soup):
     location = soup.find('h1', string=lambda text: text is not None)
-    return location.text.removeprefix("Service BC Location: ")
+    return location.text.removeprefix("Service BC Location: ").strip()
 
 #############################################################################
 # @desc: Parses the Web pages for available services offered by each
-#        Service BC Location
+#        Service BC Location. Sublist items are filtered if they do not
+#        include an item from the allow_list
 # @returns: [String] Services list
 #############################################################################
 def scrape_services(soup):
     services = []
-    demo_list = []
     allow_list = ["BC", "Exam"]
     service_divs = soup.find_all("div", class_="panel-text")
     for service_div in service_divs:
         header_two = service_div.find('h2', class_='bc_h2')
         if header_two is not None and "Services Available at this Location:" in header_two.text:
             ul = service_div.find("ul")
-            for li in ul:
-                if li.find('ul'):
-                    sli = li.text.split("\n")
-                    for ssli in sli:
-                        if (substring in allow_list for substring in ssli): # Change to make work
-                            services.append(ssli)
-                        # print(li.text.strip())
+            for list_item in ul:
+                if list_item.find('ul'):
+                    sublist_items = list_item.text.split("\n")
+                    for sublist_item in sublist_items:
+                        if (substring in allow_list for substring in sublist_item): # Change to make work
+                            services.append(tidyServiceItem(sublist_item))
                 else:
-                    services.append(li.text)
-    return list(set(services))
+                    services.append(tidyServiceItem(list_item.text))
+    return list(set((x for x in services if x != ''))) # Remove any empty entries
 
 #############################################################################
 # @desc: Parses the Web pages for available services offered by each
-#        Service BC Location when they offer limited service
+#        Service BC Location when they offer limited service. Sublist items
+#        are filtered if they don't include an item in the allow_list
 # @returns: [String] Services list
 #############################################################################
 def scrape_limited_services(soup):
     results = []
+    allow_list = ["BC", "Exam"]
     service_div = soup.find("div", class_="callout")
     services_list = service_div.find('ul')
-    services = services_list.find_all('li')
+    for list_item in services_list:
+        if list_item.find('ul'):
+            sublist_items = list_item.text.split("\n")
+            for sublist_item in sublist_items:
+                if(substring in allow_list for substring in sublist_item):
+                    results.append(tidyServiceItem(sublist_item))
+        else:
+            results.append(tidyServiceItem(list_item.text))
+    return list(set((x for x in results if x != ''))) # Remove any empty entries
 
-    for service in services:
-        split_service = service.text.split("\n")
-        for splits in split_service:
-            splits = splits.strip()
-            if splits and splits != "\t" and splits != "":
-                if "\u2013" in splits:
-                    splits = splits.split("\u2013")[0].strip()
-                results.append(splits)
 
-    return list(set(results))
-
+#############################################################################
+# @desc: Iterate through a string removing commonly appearing characters and expressions
+#        that aren't needed in the end result. Joins the filters into a single regex pattern,
+#        passes through them all in a single take, and removes 'Online' Suffixs
+# @return: String - tidied version of the argument
+#############################################################################
 def tidyServiceItem(serviceItem):
-    print(serviceItem)
+    filters = ["Pay\u00a0Online","\u2013", " - ", "\u00a0", "\t", "\u00a0", "Pay Online"]
+    removeOnline = r'Online$'
+
+    # Combine all filters into a single regular expression pattern
+    pattern = re.compile("|".join(map(re.escape, filters)))
+
+    # Apply the pattern substitution in a single pass
+    serviceItem = pattern.sub("", serviceItem)
+
+    # Remove trailing "Online" using regex substitution
+    serviceItem = re.sub(removeOnline, "", serviceItem)
+    
+    # Replace multiple spaces with a single space
+    serviceItem = " ".join(serviceItem.split())
+
+    return serviceItem.strip()
+
 #############################################################################
 # @desc - extract data from the URL's and parse them for location data
 #         using an auxiliary API, gathers more information from whats gathered
 #         to help standardize the data available
+#         Many containers being scraped use the same classes or do not exist
+#         so many checks are in place to confirm there are values
 #############################################################################
 def scrape_url(url):
     locationData = {
@@ -172,15 +196,16 @@ def scrape_url(url):
         "services": [],
         "address": {}
     }
-
     soup = soupifyDocument(url)
 
     # Extract desired data
     localeString = scrape_locale(soup)
     if "services ONLY" in localeString:
-        locationData["services"] = scrape_limited_services(soup)
+        locationData["services"] = sorted(scrape_limited_services(soup))
+        if "*" in localeString:
+          localeString = localeString[:localeString.index('*')].strip()
     else:
-        locationData["services"] = scrape_services(soup)
+        locationData["services"] = sorted(scrape_services(soup))
 
     locationData["locale"] = localeString
     locationData["website"] = url
@@ -234,7 +259,6 @@ try:
     # Create or overwrite output file
     with open(OUTPUT_FILE, "w+") as jsonDoc:
         links = list(set(scrape_initial_urls(soupifyDocument(BASE_URL + START_POINT))))
-
         results = []  # List to store the scraping results
 
         # Define a function to scrape a single URL
@@ -242,11 +266,10 @@ try:
             return scrape_url(url)
 
         # Set the maximum number of concurrent workers
-
         with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
             # Submit the scraping tasks to the executor and track the progress
-            # futures = [executor.submit(scrape_single_url, link) for link in links]
-            futures = [executor.submit(scrape_single_url, links[i]) for i in range(5)]
+            futures = [executor.submit(scrape_single_url, link) for link in links]
+            # futures = [executor.submit(scrape_single_url, links[i]) for i in range(5)]
             with tqdm(total=len(futures), ncols=100, colour="#669966", desc="Progress: ") as pbar:
                 # Iterate through the completed futures and retrieve the results
                 for future in concurrent.futures.as_completed(futures):
@@ -258,7 +281,7 @@ try:
                     pbar.update(1)  # Update the progress bar
 
         # Format Data into JSON, Pretty print, and write to Output file
-        jsonDoc.write(json.dumps(results, indent=2))
+        jsonDoc.write(json.dumps(sorted(results, key=lambda k: k['locale']), indent=2))
     print(f"\033[1;32m Scraping successfully completed, view results in {OUTPUT_FILE}")
 
 except Exception as err:
