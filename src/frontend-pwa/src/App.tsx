@@ -21,7 +21,7 @@ function App() {
     getData();
     setTimeout(() => {
       setIsLoading(false);
-    }, 0);
+    }, 2500);
   }, []);
 
   return (
