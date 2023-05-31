@@ -20,12 +20,18 @@ export default function Slider({
   };
 
   return (
-    <input
-      type="range"
-      min={min}
-      max={max}
-      value={value}
-      onChange={handleChange}
-    />
+    <div>
+      <input
+        type="range"
+        min={min}
+        max={max}
+        value={value}
+        onChange={handleChange}
+      />
+      <p>
+        {value}
+        Km
+      </p>
+    </div>
   );
 }
