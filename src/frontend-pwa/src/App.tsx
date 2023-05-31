@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-import './App.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from './components/Header/Header';
@@ -22,7 +21,7 @@ function App() {
     getData();
     setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 2500);
   }, []);
 
   return (
