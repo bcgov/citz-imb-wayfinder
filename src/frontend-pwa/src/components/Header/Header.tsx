@@ -1,4 +1,5 @@
 import logo from '/logo-banner.svg';
+import gear from '/gear-svgrepo-com.svg';
 import {
   Link,
 } from 'react-router-dom';
@@ -8,6 +9,8 @@ import {
   Heading,
   Banner,
   Image,
+  StyledSettingsButton,
+  StyledIcon,
 } from './header.styles';
 
 export default function Header() {
@@ -20,7 +23,12 @@ export default function Header() {
         <Heading>Wayfinder</Heading>
       </Banner>
       <Link to="/settings">
-        <button type="button">Settings</button>
+        <StyledSettingsButton
+          type="button"
+          aria-label="Settins button"
+        >
+          <StyledIcon src={gear} alt="Settings" />
+        </StyledSettingsButton>
       </Link>
     </HeaderWrapper>
   );
