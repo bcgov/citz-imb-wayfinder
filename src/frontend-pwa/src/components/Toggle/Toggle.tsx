@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
 export type ToggleProps = {
-  accessibility: string;
+  ariaLabel: string;
   onChange: (checked: boolean) => void;
   defaultChecked: boolean;
 }
 
 export default function Toggle({
-  accessibility,
+  ariaLabel,
   onChange,
   defaultChecked = false,
 }: ToggleProps) {
@@ -22,7 +22,7 @@ export default function Toggle({
   return (
     <div>
       <input
-        aria-label={accessibility}
+        aria-label={ariaLabel}
         type="checkbox"
         checked={checked}
         onChange={handleChange}

@@ -20,7 +20,7 @@ export default function Settings() {
           Location Range (KM)
         </h2>
         <Slider
-          accessibility="Location Range"
+          ariaLabel="Location Range"
           min={1}
           max={100}
           onChange={handleSliderChange}
@@ -31,7 +31,7 @@ export default function Settings() {
           Darkmode
         </h2>
         <Toggle
-          accessibility="Darkmode Toggle"
+          ariaLabel="Darkmode Toggle"
           onChange={handleToggleChange}
           defaultChecked
         />
@@ -41,7 +41,7 @@ export default function Settings() {
           Analytics
         </h2>
         <Toggle
-          accessibility="Analytics Toggle"
+          ariaLabel="Analytics Toggle"
           onChange={handleToggleChange}
           defaultChecked
         />

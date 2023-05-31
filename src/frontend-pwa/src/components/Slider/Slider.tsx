@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
 export type SliderProps = {
-  accessibility: string;
+  ariaLabel: string;
   min: number;
   max:number;
   onChange: (value: number) => void;
 }
 
 export default function Slider({
-  accessibility,
+  ariaLabel,
   min,
   max,
   onChange,
@@ -24,7 +24,7 @@ export default function Slider({
   return (
     <div>
       <input
-        aria-label={accessibility}
+        aria-label={ariaLabel}
         type="range"
         min={min}
         max={max}
