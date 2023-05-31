@@ -3,19 +3,21 @@ import { keyframes } from '@emotion/react';
 
 export const spin = keyframes`
   0% {
-    transform: rotate(0deg);
+    transform: translate3d(-50%, -50%, 0) rotate(0deg);
   }
-  
   100% {
-    transform: rotate(360deg);
-  }
+    transform: translate3d(-50%, -50%, 0) rotate(360deg);
 `;
 
 export const SpinnerWrapper = styled.div`
-  width: 40px;
+  animation: 1.5s linear infinite ${spin};
+  animation-play-state: inherit;
+  border: solid 5px #cfd0d1;
+  border-bottom-color: #1c87c9;
+  border-radius: 50%;
   height: 40px;
-  margin: 100px auto;
-  background-color: #333;
-  border-radius: 100%;
-  animation: ${spin} 1s infinite linear;
+  width: 40px;
+  transform: translate3d(-50%, -50%, 0);
+  will-change: transform;
+  &::before
 `;
