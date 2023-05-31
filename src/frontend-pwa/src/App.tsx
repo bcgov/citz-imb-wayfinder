@@ -4,8 +4,9 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import ViewRouter from './routes/ViewRouter';
+// import ViewRouter from './routes/ViewRouter';
 import SplashScreen from './components/SplashScreen/SplashScreen';
+import Eula from './views/Eula/Eula';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -32,7 +33,7 @@ function App() {
       ) : (
         <>
           <Header />
-          <ViewRouter />
+          <Eula />
           <Footer />
         </>
       )}
