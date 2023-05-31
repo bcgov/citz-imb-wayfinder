@@ -51,6 +51,3 @@ components:
         longitude:
           type: number
           example: -121.297732
-
-
-
