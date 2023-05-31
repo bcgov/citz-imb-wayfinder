@@ -40,7 +40,7 @@ services:
       context: ./src/frontend-pwa
       dockerfile: Dockerfile
     environment:
-      - VITE_API_HOSTNAME=${VITE_API_HOSTNAME:-localhost:3000}
+      - VITE_API_HOSTNAME=${VITE_API_HOSTNAME:-http://localhost:3000}
     networks:
       - wf-network
     ports: 

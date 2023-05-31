@@ -13,7 +13,7 @@ function App() {
     //  TODO:This will be removed once we actually use isLoading during API calls, Loading media etc
     const getData = async () => {
       try {
-        const { data } = await axios.get(`http://${import.meta.env.VITE_API_HOSTNAME}/api/locations`);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_HOSTNAME}/api/locations`);
         console.log(data);
       } catch (error) {
         console.error(error);
