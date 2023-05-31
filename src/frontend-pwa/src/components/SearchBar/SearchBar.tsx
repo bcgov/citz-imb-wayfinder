@@ -1,4 +1,3 @@
-// import { useState } from 'react';
 import searchicon from '/searchicon.svg';
 import clearicon from '/clearicon.svg';
 
