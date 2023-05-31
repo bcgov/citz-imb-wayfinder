@@ -2,16 +2,17 @@
 import ListItem from '../ListItem/ListItem';
 
 export type ListItemsProps = {
-  data: Array<object>;
+  items: Array<object>;
 }
 
 export default function ListItems({
-  data,
+  items,
 }: ListItemsProps) {
+  console.log('Here: ', items[0]);
   return (
     <table>
       <tbody>
-        {data.map((item, index) => <ListItem data={item} key={index} />)}
+        {items.map((data, index) => <ListItem address="Test" key={index} />)}
       </tbody>
     </table>
   );

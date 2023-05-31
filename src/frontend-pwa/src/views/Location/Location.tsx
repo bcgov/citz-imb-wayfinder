@@ -12,7 +12,7 @@ export default function Location({
       <h2>
         Locate a Service
       </h2>
-      <ListItems data={locations} />
+      <ListItems items={locations} />
     </div>
   );
 }

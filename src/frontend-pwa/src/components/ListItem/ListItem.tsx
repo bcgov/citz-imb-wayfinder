@@ -1,14 +1,14 @@
 export type ListItemProps = {
-  data: object;
+ address: string;
 }
 
 export default function ListItem({
-  data,
+  address,
 }: ListItemProps) {
-  console.log('Item: ', data);
+  console.log('Item: ', address);
   return (
     <tr>
-      <td>{}</td>
+      <td>{address}</td>
     </tr>
   );
 }
