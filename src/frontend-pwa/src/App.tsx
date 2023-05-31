@@ -1,5 +1,8 @@
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import './App.css';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import ViewRouter from './routes/ViewRouter';
@@ -7,9 +10,16 @@ import SplashScreen from './components/SplashScreen/SplashScreen';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
-    //  This will be removed once we actually use isLoading during API calls, Loading media etc.
+    //  TODO:This will be removed once we actually use isLoading during API calls, Loading media etc
+    const getData = async () => {
+      try {
+        const { data } = await axios.get(`http://${import.meta.env.VITE_API_HOSTNAME}/api/locations`);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getData();
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
