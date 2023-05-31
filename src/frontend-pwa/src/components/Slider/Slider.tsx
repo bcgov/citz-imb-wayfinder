@@ -30,7 +30,6 @@ export default function Slider({
       />
       <p>
         {value}
-        Km
       </p>
     </div>
   );
