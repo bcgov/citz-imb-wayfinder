@@ -7,7 +7,7 @@ export const HeaderWrapper = styled.header`
     padding: 0 65px;
     color: #fff;
     display: flex;
-    justify-content: left;
+    justify-content: space-between;
     align-items: center;
     height: 65px;
     top: 0;
@@ -26,7 +26,6 @@ export const Heading = styled.h2`
 
 export const Banner = styled.div`
     display: flex;
-    justify-content: flex-start;
     align-items: center;
     margin: 0 10px 0 0;
 `;
@@ -37,4 +36,27 @@ export const Image = styled.a`
     position: relative;
     height: 100%;
     padding-right: 10px;
+`;
+
+export const StyledSettingsButton = styled.button`
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    right: 0;
+    &:focus {
+        outline: none;
+    }
+`;
+
+export const StyledIcon = styled.img`
+    width: 30px;
+    height: 30px;
 `;
