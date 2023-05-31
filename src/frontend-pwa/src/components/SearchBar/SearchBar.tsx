@@ -11,14 +11,14 @@ import {
 
 export type SearchBarProps = {
   handleChange: () => void;
-  handleSearch: () => void;
+  handleSubmit: () => void;
   handleClear: () => void;
   query: string;
 }
 
 export default function SearchBar({
   handleChange,
-  handleSearch,
+  handleSubmit,
   handleClear,
   query,
 }: SearchBarProps) {
@@ -26,23 +26,27 @@ export default function SearchBar({
     <WrapperDiv className="searchInput">
       <StyledInput
         type="text"
+        aria-label="search input field"
         placeholder="Enter something here..."
-        onChange={handleChange}
+        onChange={() => handleChange()}
         value={query}
       />
-      <StyledSearchButton className="icon" type="submit" onClick={() => handleSearch()}>
+      <StyledSearchButton
+        className="icon"
+        type="submit"
+        aria-label="submit button"
+        onClick={() => handleSubmit()}
+      >
         <img src={searchicon} alt="submit!" />
       </StyledSearchButton>
-      <StyledClearButton className="icon" type="reset" onClick={() => handleClear()}>
+      <StyledClearButton
+        className="icon"
+        type="reset"
+        aria-label="clear text field button"
+        onClick={() => handleClear()}
+      >
         <img src={clearicon} alt="clear!" />
       </StyledClearButton>
     </WrapperDiv>
   );
 }
-
-// const [query, setQuery] = useState('');
-
-// const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-//   const wordEntered = event.target.value;
-//   setQuery(wordEntered);
-// };
