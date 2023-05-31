@@ -11,10 +11,9 @@ paths:
           content:
             application/json:
               schema:
-                locations:
-                  type: object
-                  properties:
-                    locations:
-                      type: array
-                      items:
-                        $ref: '#/components/schemas/SingleLocation'
+                type: object
+                properties:
+                  locations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SingleLocation'
