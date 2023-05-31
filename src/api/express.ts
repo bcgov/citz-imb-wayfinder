@@ -1,6 +1,7 @@
 import './db';
 import express, { Application } from 'express';
 import morgan from 'morgan';
+import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import * as config from './config';
@@ -12,6 +13,7 @@ const app: Application = express();
 app.use(morgan('tiny'));
 app.use(express.json());
 app.use(express.static('public'));
+app.use(cors(config.corsConfig));
 
 // Routing information
 app.use(
