@@ -1,0 +1,56 @@
+components:
+  schemas:
+    SingleLocation:
+      type: object
+      description: A BC Services location
+      properties:
+        contact:
+          type: object
+          properties:
+            fax:
+              type: string
+              example: 250 555-5555
+            phone:
+              type: string
+              example: 250 555-5555
+        services:
+          type: array
+          items:
+            type: string
+            example: Rural Property Tax Services
+        address:
+          type: object
+          properties:
+            province:
+              type: string
+              example: "BC"
+            street:
+              type: string
+              example: 300 BC-97
+            region:
+              type: string
+              example: "British Columbia"
+            county:
+              type: string
+              example: "Cariboo"
+            locality:
+              type: string
+              example: "100 Mile House"
+            label:
+              type: string
+              example: "300 South Highway 97, 100 Mile House, BC, Canada"
+        locale:
+          type: string
+          example: Burnaby
+        website:
+          type: string
+          example: https://www2.gov.bc.ca/gov/content/home
+        latitude:
+          type: number
+          example: 51.644532
+        longitude:
+          type: number
+          example: -121.297732
+
+
+

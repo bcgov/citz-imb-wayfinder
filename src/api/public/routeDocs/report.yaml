@@ -1,0 +1,21 @@
+paths:
+  /report:
+    post:
+      tags:
+        - Report
+      summary: Report a sighting
+      description: Report a sighting of a wildfire, animal, etc
+      requestBody:
+        description: Users report
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Report'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'

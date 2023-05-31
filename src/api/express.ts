@@ -2,6 +2,7 @@ import './db';
 import express, { Application } from 'express';
 import morgan from 'morgan';
 import swaggerUi from 'swagger-ui-express';
+import swaggerJSDoc from 'swagger-jsdoc';
 import * as config from './config';
 import * as routers from './routes';
 
@@ -17,8 +18,7 @@ app.use(
   '/api/api-docs',
   swaggerUi.serve,
   swaggerUi.setup(
-    undefined,
-    config.swaggerConfig,
+    swaggerJSDoc(config.swaggerConfig),
   ),
 );
 app.use('/api', [
