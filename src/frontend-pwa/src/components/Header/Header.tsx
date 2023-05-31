@@ -1,5 +1,5 @@
 import logo from '/logo-banner.svg';
-import gear from '/gear-svgrepo-com.svg';
+import gear from '/gear-icon.svg';
 import {
   Link,
 } from 'react-router-dom';
