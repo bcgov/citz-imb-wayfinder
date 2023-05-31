@@ -25,7 +25,7 @@ export default function Header() {
       <Link to="/settings">
         <StyledSettingsButton
           type="button"
-          aria-label="Settins button"
+          aria-label="Settings button"
         >
           <StyledIcon src={gear} alt="Settings" />
         </StyledSettingsButton>
