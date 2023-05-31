@@ -9,6 +9,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    //  This will be removed once we actually use isLoading during API calls, Loading media etc.
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
