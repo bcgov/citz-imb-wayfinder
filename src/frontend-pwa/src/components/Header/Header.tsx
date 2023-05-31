@@ -1,4 +1,7 @@
 import logo from '/logo-banner.svg';
+import {
+  Link,
+} from 'react-router-dom';
 
 import {
   HeaderWrapper,
@@ -16,6 +19,9 @@ export default function Header() {
         </Image>
         <Heading>Wayfinder</Heading>
       </Banner>
+      <Link to="/settings">
+        <button type="button">Settings</button>
+      </Link>
     </HeaderWrapper>
   );
 }
