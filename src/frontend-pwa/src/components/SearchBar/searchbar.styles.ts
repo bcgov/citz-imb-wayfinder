@@ -12,7 +12,7 @@ export const WrapperDiv = styled.div`
 
 export const StyledInput = styled.input`
   ${typography.toString()}
-  max-width: 800px;
+  max-width: 50em;
   width: 80%;
   padding: 0.125em 3.125em 0.125em 0.3125em;
   border-radius: 0.5em;
