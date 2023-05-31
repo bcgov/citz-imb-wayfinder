@@ -8,14 +8,20 @@ import BCServices from '../views/BCServices/BCServices';
 import Report from '../views/Report/Report';
 import Settings from '../views/Settings/Settings';
 
-export default function ViewRouter() {
+export type ViewRouterProps = {
+  locationData: Array<object>;
+}
+
+export default function ViewRouter({
+  locationData,
+}: ViewRouterProps) {
   return (
     <Routes>
       <Route path="/" Component={Home} />
-      <Route path="/location" Component={Location} />
-      <Route path="/services" Component={BCServices} />
-      <Route path="/report" Component={Report} />
-      <Route path="/settings" Component={Settings} />
+      <Route path="/location" element={<Location locations={locationData} />} />
+      <Route path="/services" element={<BCServices />} />
+      <Route path="/report" element={<Report />} />
+      <Route path="/settings" element={<Settings />} />
     </Routes>
   );
 }

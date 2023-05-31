@@ -8,20 +8,22 @@ import SplashScreen from './components/SplashScreen/SplashScreen';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [locationData, setLocationData] = useState([]);
   useEffect(() => {
-    //  TODO:This will be removed once we actually use isLoading during API calls, Loading media etc
     const getData = async () => {
       try {
         const { data } = await axios.get(`${import.meta.env.VITE_API_HOSTNAME}/api/locations`);
         console.log(data);
+        setLocationData(data.locations);
       } catch (error) {
         console.error(error);
       }
     };
     getData();
+    //  TODO:This will be removed once we actually use isLoading during API calls, Loading media etc
     setTimeout(() => {
       setIsLoading(false);
-    }, 2500);
+    }, 5000);
   }, []);
 
   return (
@@ -31,7 +33,7 @@ function App() {
       ) : (
         <>
           <Header />
-          <ViewRouter />
+          <ViewRouter locationData={locationData} />
           <Footer />
         </>
       )}
