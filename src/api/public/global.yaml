@@ -1,0 +1,9 @@
+components:
+  responses:
+    400BadRequest:
+      description: Bad request response.
+      content:
+        text/plain:
+          schema:
+            type: string
+            example: 'Response could not be processed.'

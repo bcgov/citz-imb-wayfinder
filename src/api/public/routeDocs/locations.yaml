@@ -1,0 +1,19 @@
+paths:
+  /locations:
+    get:
+      tags:
+        - Locations
+      summary: Get all BC Service offices
+      description: Returns information for every logged BC Services locations
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  locations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SingleLocation'

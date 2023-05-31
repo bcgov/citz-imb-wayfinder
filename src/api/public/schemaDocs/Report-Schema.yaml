@@ -1,0 +1,18 @@
+components:
+  schemas:
+    Report:
+      type: object
+      description: A user report (Placeholder Information)
+      properties:
+        latitude:
+          type: number
+          example: 51.644532
+        longitude:
+          type: number
+          example: -121.297732
+        reportItem:
+          type: string
+          example: Animal Sighting
+        comment:
+          type: string
+          example: Bison spotted at location
