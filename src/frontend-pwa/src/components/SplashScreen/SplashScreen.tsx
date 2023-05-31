@@ -1,13 +1,18 @@
 import logo from '/logo-banner.svg';
+import Spinner from '../Spinner/Spinner';
+import {
+  SplashScreenWrapper,
+  Text,
+} from './splashscreen.styles';
 
 export default function SplashScreen() {
   return (
-    <div>
+    <SplashScreenWrapper>
       <img src={logo} alt="BC Gov logo" />
-      <div />
-      <p>
+      <Spinner />
+      <Text>
         Loading
-      </p>
-    </div>
+      </Text>
+    </SplashScreenWrapper>
   );
 }
