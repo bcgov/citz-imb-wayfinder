@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import './App.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -8,26 +9,17 @@ import SplashScreen from './components/SplashScreen/SplashScreen';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  // the following two lines will be removed during later refinement
   const REACT_APP_API_HOSTNAME = 'localhost';
   const REACT_APP_API_PORT = 3000;
   useEffect(() => {
-    //  This will be removed once we actually use isLoading during API calls, Loading media etc.
-    // const test = async () => axios.get(`http://${process.env.API_HOSTNAME}:${process.env.API_PORT}/api`)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   }, (error) => {
-    //     console.log(error);
-    //   });
+    //  TODO:This will be removed once we actually use isLoading during API calls, Loading media etc
     const getData = async () => {
       try {
-        // const NODE_ENV = process.env.NODE_ENV;
-        // const response = await axios.get(`http://${NODE_ENV.API_HOSTNAME}:${NODE_ENV.API_PORT}/api`);
-
+        // TODO: remove hard-coded values, dallas will refine this in a later ticket
         const { data } = await axios.get(`http://${REACT_APP_API_HOSTNAME}:${REACT_APP_API_PORT}/api/locations`);
-
-        console.log('Response: ', data);
       } catch (error) {
-        console.log('Error: ', error);
+        console.error(error);
       }
     };
     getData();
