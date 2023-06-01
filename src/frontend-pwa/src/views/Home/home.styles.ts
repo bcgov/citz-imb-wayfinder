@@ -3,10 +3,10 @@ import styled from '@emotion/styled';
 export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    height: 20vh;
-    justify-content: space-evenly;
+    height: 100vh;
+    justify-content: center;
 `;
 
-export const Buttons = styled.button`
-
+export const ButtonWrapper = styled.div`
+    padding: 5px;
 `;
