@@ -1,6 +1,11 @@
 import ListItems from '../../components/ListItems/ListItems';
 import SingleLocation from '../../Type/SingleLocation';
 
+import {
+  LocationViewWrapper,
+  TextHeader,
+} from './location.styles';
+
 export type LocationProps = {
   locations: Array<SingleLocation>;
 }
@@ -9,11 +14,11 @@ export default function Location({
   locations,
 }: LocationProps) {
   return (
-    <div>
-      <h2>
+    <LocationViewWrapper>
+      <TextHeader>
         Locate a Service
-      </h2>
+      </TextHeader>
       <ListItems items={locations} />
-    </div>
+    </LocationViewWrapper>
   );
 }
