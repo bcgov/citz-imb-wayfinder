@@ -5,10 +5,11 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import ViewRouter from './routes/ViewRouter';
 import SplashScreen from './components/SplashScreen/SplashScreen';
+import MultipleLocations from './Type/MultipleLocations';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
-  const [locationData, setLocationData] = useState([]);
+  const [locationData, setLocationData] = useState<MultipleLocations>([]);
   useEffect(() => {
     const getData = async () => {
       try {
