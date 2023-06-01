@@ -10,8 +10,8 @@ export const spin = keyframes`
 `;
 
 export const SpinnerWrapper = styled.div`
-  position: fixed
-  top: 50%;
+  position: fixed;
+  top: 80%;
   left: 50%;
   animation: 1.5s linear infinite ${spin};
   animation-play-state: inherit;
