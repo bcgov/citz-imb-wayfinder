@@ -1,7 +1,7 @@
 import StyledButton from './button.styles';
 
 export type ButtonProps = {
-  handleClick: () => void;
+  handleClick?: () => void;
   variant: 'default' | 'primary' | 'secondary', // dictates coloring
   size: 'sm' | 'md' | 'lg', // breakpoints will go here
   disabled: boolean;
@@ -23,3 +23,7 @@ export function Button({
     />
   );
 }
+
+Button.defaultProps = {
+  handleClick: () => {}, // Provide a default empty function
+};

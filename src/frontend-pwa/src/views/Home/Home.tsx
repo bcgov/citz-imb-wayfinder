@@ -1,6 +1,7 @@
 import {
   Link,
 } from 'react-router-dom';
+import { Button } from '../../components/Button/Button';
 
 import {
   Wrapper,
@@ -10,7 +11,11 @@ export default function Home() {
   return (
     <Wrapper>
       <Link to="/location">
-        <button type="button">Locate a Service</button>
+        <Button
+          variant="primary"
+          size="lg"
+          disabled={false}
+        />
       </Link>
       <Link to="/services">
         <button type="button">Find BC Services</button>
