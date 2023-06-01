@@ -14,8 +14,8 @@ export type ButtonProps = {
 export function Button({
   handleClick,
   variant,
-  size,
-  disabled,
+  size = 'md',
+  disabled = false,
   text,
 }: ButtonProps) {
   return (
