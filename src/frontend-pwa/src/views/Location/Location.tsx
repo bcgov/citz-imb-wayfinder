@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import ListItems from '../../components/ListItems/ListItems';
 import SingleLocation from '../../Type/SingleLocation';
-import CurrentLocation from '../../Type/CurrentLocation';
 
 import {
   LocationViewWrapper,
