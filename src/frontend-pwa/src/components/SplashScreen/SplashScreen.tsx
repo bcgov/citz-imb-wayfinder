@@ -1,4 +1,4 @@
-import logo from '/logo-banner.svg';
+import logo from '/bc-logo-vertical.svg';
 import Spinner from '../Spinner/Spinner';
 import {
   SplashScreenWrapper,

@@ -1,17 +1,22 @@
 import StyledButton from './button.styles';
 
+export type ButtonVariants = 'default' | 'primary' | 'secondary';
+export type ButtonSizes = 'sm' | 'md' | 'lg';
+
 export type ButtonProps = {
-  handleClick: () => void;
-  variant: 'default' | 'primary' | 'secondary', // dictates coloring
-  size: 'sm' | 'md' | 'lg', // breakpoints will go here
+  handleClick?: () => void;
+  variant: ButtonVariants, // dictates coloring
+  size: ButtonSizes, // breakpoints will go here
   disabled: boolean;
+  text: string;
 }
 
 export function Button({
   handleClick,
   variant,
-  size,
-  disabled,
+  size = 'md',
+  disabled = false,
+  text,
 }: ButtonProps) {
   return (
     <StyledButton
@@ -20,6 +25,12 @@ export function Button({
       size={size}
       disabled={disabled}
       value="update"
-    />
+    >
+      {text}
+    </StyledButton>
   );
 }
+
+Button.defaultProps = {
+  handleClick: () => {}, // Provide a default empty function
+};

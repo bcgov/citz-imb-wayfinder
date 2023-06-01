@@ -1,51 +1,51 @@
 import Slider from '../../components/Slider/Slider';
 import Toggle from '../../components/Toggle/Toggle';
 
+import {
+  SettingsContainer,
+  Section,
+  Title,
+} from './settings.styles';
+
 export default function Settings() {
   const handleSliderChange = () => {
-
+    //  TODO Slider logic goes here
   };
 
   const handleToggleChange = () => {
-
+    //  TODO Toggle logic goes here
   };
 
   return (
-    <div>
-      <div>
-        <h1>
-          Settings
-        </h1>
-        <h2>
-          Location Range (KM)
-        </h2>
+    <SettingsContainer>
+      <Section>
+        <h1>Settings</h1>
+      </Section>
+      <Section>
+        <Title>Location Range (KM)</Title>
         <Slider
           ariaLabel="Location Range"
           min={1}
           max={100}
           onChange={handleSliderChange}
         />
-      </div>
-      <div>
-        <h2>
-          Darkmode
-        </h2>
+      </Section>
+      <Section>
+        <Title>Darkmode</Title>
         <Toggle
           ariaLabel="Darkmode Toggle"
           onChange={handleToggleChange}
           defaultChecked
         />
-      </div>
-      <div>
-        <h2>
-          Analytics
-        </h2>
+      </Section>
+      <Section>
+        <Title>Analytics</Title>
         <Toggle
           ariaLabel="Analytics Toggle"
           onChange={handleToggleChange}
           defaultChecked
         />
-      </div>
-    </div>
+      </Section>
+    </SettingsContainer>
   );
 }

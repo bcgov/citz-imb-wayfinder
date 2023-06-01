@@ -15,7 +15,7 @@ export const SplashScreenWrapper = styled.div`
 `;
 
 export const Image = styled.img`
-  height: 100px;
+  height: 200px;
 `;
 
 export const Text = styled.p`
