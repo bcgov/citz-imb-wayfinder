@@ -1,14 +1,15 @@
+import SingleLocation from '../../Type/SingleLocation';
+
 export type ListItemProps = {
- address: string;
+ itemData: SingleLocation;
 }
 
 export default function ListItem({
-  address,
+  itemData,
 }: ListItemProps) {
-  console.log('Item: ', address);
   return (
     <tr>
-      <td>{address}</td>
+      <td>{itemData.locale}</td>
     </tr>
   );
 }
