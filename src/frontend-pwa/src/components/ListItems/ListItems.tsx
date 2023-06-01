@@ -1,6 +1,8 @@
+/* eslint-disable max-len */
 /* eslint-disable react/no-array-index-key */
 import ListItem from '../ListItem/ListItem';
 import SingleLocation from '../../Type/SingleLocation';
+import CurrentLocation from '../../Type/CurrentLocation';
 
 import {
   Container,
@@ -12,10 +14,12 @@ import {
 
 export type ListItemsProps = {
   items: Array<SingleLocation>;
+  currentLocation: CurrentLocation;
 }
 
 export default function ListItems({
   items,
+  currentLocation,
 }: ListItemsProps) {
   return (
     <Container>
@@ -31,7 +35,7 @@ export default function ListItems({
           </TableRow>
         </thead>
         <tbody>
-          {items.map((data, index) => <ListItem itemData={data} key={index} />)}
+          {items.map((data, index) => <ListItem itemData={data} key={index} currentLocation={currentLocation} />)}
         </tbody>
       </Table>
     </Container>
