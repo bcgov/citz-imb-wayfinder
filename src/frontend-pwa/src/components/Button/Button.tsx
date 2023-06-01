@@ -5,6 +5,7 @@ export type ButtonProps = {
   variant: 'default' | 'primary' | 'secondary', // dictates coloring
   size: 'sm' | 'md' | 'lg', // breakpoints will go here
   disabled: boolean;
+  text: string;
 }
 
 export function Button({
@@ -12,6 +13,7 @@ export function Button({
   variant,
   size,
   disabled,
+  text,
 }: ButtonProps) {
   return (
     <StyledButton
@@ -20,7 +22,9 @@ export function Button({
       size={size}
       disabled={disabled}
       value="update"
-    />
+    >
+      {text}
+    </StyledButton>
   );
 }
 

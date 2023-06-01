@@ -62,6 +62,9 @@ export const StyledSettingsButton = styled.button`
     &:focus {
         outline: none;
     }
+    &:hover {
+        transform: scale(0.9);
+    }
 `;
 
 export const StyledIcon = styled.img`

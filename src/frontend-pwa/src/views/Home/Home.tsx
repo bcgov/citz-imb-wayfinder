@@ -5,24 +5,42 @@ import { Button } from '../../components/Button/Button';
 
 import {
   Wrapper,
+  ButtonWrapper,
 } from './home.styles';
 
 export default function Home() {
   return (
     <Wrapper>
-      <Link to="/location">
-        <Button
-          variant="primary"
-          size="lg"
-          disabled={false}
-        />
-      </Link>
-      <Link to="/services">
-        <button type="button">Find BC Services</button>
-      </Link>
-      <Link to="/report">
-        <button type="button">Report an Event</button>
-      </Link>
+      <ButtonWrapper>
+        <Link to="/location">
+          <Button
+            variant="primary"
+            size="lg"
+            disabled={false}
+            text="Locate a Service"
+          />
+        </Link>
+      </ButtonWrapper>
+      <ButtonWrapper>
+        <Link to="/services">
+          <Button
+            variant="primary"
+            size="lg"
+            disabled={false}
+            text="Find BC Services"
+          />
+        </Link>
+      </ButtonWrapper>
+      <ButtonWrapper>
+        <Link to="/report">
+          <Button
+            variant="primary"
+            size="lg"
+            disabled={false}
+            text="Report an Event"
+          />
+        </Link>
+      </ButtonWrapper>
     </Wrapper>
   );
 }
