@@ -14,6 +14,10 @@ export const HeaderWrapper = styled.header`
     position: fixed;
     width: 100%;
     left: 0;
+    @media (max-width: 768px) {
+        justify-content: space-evenly;
+        padding: 0px;
+    }
 `;
 
 export const Heading = styled.h2`
@@ -36,6 +40,10 @@ export const Image = styled.a`
     position: relative;
     height: 100%;
     padding-right: 10px;
+    @media (max-width: 768px) {
+        width: 100px;
+        padding-right: 5px;
+    }
 `;
 
 export const StyledSettingsButton = styled.button`
