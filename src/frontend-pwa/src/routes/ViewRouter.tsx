@@ -7,9 +7,10 @@ import Location from '../views/Location/Location';
 import BCServices from '../views/BCServices/BCServices';
 import Report from '../views/Report/Report';
 import Settings from '../views/Settings/Settings';
+import SingleLocation from '../Type/SingleLocation';
 
 export type ViewRouterProps = {
-  locationData: Array<object>;
+  locationData: Array<SingleLocation>;
 }
 
 export default function ViewRouter({

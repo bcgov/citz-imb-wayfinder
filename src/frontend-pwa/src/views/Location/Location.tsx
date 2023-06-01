@@ -1,7 +1,8 @@
 import ListItems from '../../components/ListItems/ListItems';
+import SingleLocation from '../../Type/SingleLocation';
 
 export type LocationProps = {
-  locations: Array<object>;
+  locations: Array<SingleLocation>;
 }
 
 export default function Location({
