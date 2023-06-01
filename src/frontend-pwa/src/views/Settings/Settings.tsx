@@ -22,7 +22,7 @@ export default function Settings() {
         <h1>Settings</h1>
       </Section>
       <Section>
-        <Title>Location Range</Title>
+        <Title>Location Range (KM)</Title>
         <Slider
           ariaLabel="Location Range"
           min={1}
