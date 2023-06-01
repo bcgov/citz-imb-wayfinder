@@ -8,12 +8,6 @@ type ButtonProps = {
   disabled: boolean,
 }
 
-// function variantType(props:ButtonProps) {
-//   if (props.variant === 'primary') {
-//     background-color: ${(props) => (props.variant === 'primary' ? '#003366'
-//   }
-// }
-
 const StyledButton = styled.button<ButtonProps>`
   ${typography.toString()}
   width: ${(props) => (props.size === 'sm' ? '100px' : props.size === 'md' ? '200px' : '300px')};
