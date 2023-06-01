@@ -13,7 +13,6 @@ function App() {
     const getData = async () => {
       try {
         const { data } = await axios.get(`${import.meta.env.VITE_API_HOSTNAME}/api/locations`);
-        console.log(data);
         setLocationData(data.locations);
       } catch (error) {
         console.error(error);
