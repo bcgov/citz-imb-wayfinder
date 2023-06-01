@@ -1,9 +1,12 @@
 import StyledButton from './button.styles';
 
+export type ButtonVariants = 'default' | 'primary' | 'secondary';
+export type ButtonSizes = 'sm' | 'md' | 'lg';
+
 export type ButtonProps = {
   handleClick?: () => void;
-  variant: 'default' | 'primary' | 'secondary', // dictates coloring
-  size: 'sm' | 'md' | 'lg', // breakpoints will go here
+  variant: ButtonVariants, // dictates coloring
+  size: ButtonSizes, // breakpoints will go here
   disabled: boolean;
   text: string;
 }
