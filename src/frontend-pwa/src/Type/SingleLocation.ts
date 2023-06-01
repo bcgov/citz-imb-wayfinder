@@ -14,7 +14,7 @@ type SingleLocation = {
   };
   locale: String;
   website: String;
-  latitude: Number;
+  latitude: number;
   longitude: number;
 };
 
