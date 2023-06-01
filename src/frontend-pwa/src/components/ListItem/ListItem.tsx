@@ -1,3 +1,4 @@
+/* eslint-disable prefer-template */
 /* eslint-disable max-len */
 import SingleLocation from '../../Type/SingleLocation';
 import CurrentLocation from '../../Type/CurrentLocation';
@@ -28,7 +29,7 @@ export default function ListItem({
           {CalcDistance({
             itemData,
             currentLocation,
-          })}
+          }) + ' KM'}
         </TableDataWrapper>
       </TableData>
     </TableRow>
