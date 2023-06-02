@@ -26,10 +26,10 @@ export default function ListItem({
       </TableData>
       <TableData>
         <TableDataWrapper>
-          {CalcDistance({
+          {(Object.keys(currentLocation).length > 0) && (CalcDistance({
             itemData,
             currentLocation,
-          }) + ' KM'}
+          }) + ' KM')}
         </TableDataWrapper>
       </TableData>
     </TableRow>
