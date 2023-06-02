@@ -14,10 +14,8 @@ RUN apk add curl
 
 COPY package*.json ./
 
+# Install package dependencies
 RUN npm install
-
-# Needed for sass to be available within the container
-# RUN npm install -D sass
 
 # copy all app contents to the container
 COPY . .
