@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer';
 import ViewRouter from './routes/ViewRouter';
 import SplashScreen from './components/SplashScreen/SplashScreen';
 import LocationsArray from './Type/LocationsArray';
+import constants from './constants/Constants';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,7 +14,7 @@ function App() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await axios.get(`${import.meta.env.VITE_API_HOSTNAME}/api/locations`);
+        const { data } = await axios.get(`${constants.BACKEND_URL}/api/locations`);
         setLocationData(data.locations);
       } catch (error) {
         console.error(error);
