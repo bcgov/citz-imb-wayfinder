@@ -1,15 +1,23 @@
 /* eslint-disable max-len */
-// import { Button } from '../../components/Button/Button';
 import { useState } from 'react';
-
+import { Button } from '../../components/Button/Button';
 import { StyledContainer, StyledOuterDiv, StyledFieldSetDiv } from './eula.styles';
 
-export default function Eula() {
+export type EulaProps = {
+    eula: boolean,
+    onEulaChange: (value:boolean) => void;
+}
+
+export default function Eula({
+  eula,
+  onEulaChange,
+}: EulaProps) {
   const [isEulaConsentChecked, setIsEulaConsentChecked] = useState(false);
 
-  const handleChange = (event: { target: { checked: any; }; }) => {
+  const handleEulaCheckboxChange = (event: { target: { checked: true; }; }) => {
     setIsEulaConsentChecked(event.target.checked);
   };
+
   return (
     <StyledOuterDiv>
       <StyledContainer>
@@ -26,14 +34,16 @@ export default function Eula() {
                 type="checkbox"
                 id="eulaAgree"
                 name="eulaAgreeCheckbox"
-                onChange={handleChange}
+                onChange={() => handleEulaCheckboxChange}
+                checked={eula}
               />
-              <button
-                type="submit"
+              <Button
+                handleClick={() => onEulaChange(true)}
+                variant="primary"
+                size="md"
                 disabled={!isEulaConsentChecked}
-              >
-                Submit
-              </button>
+                text="Submit"
+              />
             </center>
           </StyledFieldSetDiv>
         </fieldset>

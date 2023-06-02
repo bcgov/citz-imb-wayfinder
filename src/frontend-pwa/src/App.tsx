@@ -22,21 +22,27 @@ function App() {
     getData();
     setTimeout(() => {
       setIsLoading(false);
-    }, 2500);
+    }, 250);
   }, []);
-
+  // comment divider, following is for eula---------------------------------------------------
+  const [eula, setEula] = useState(false);
+  const handleEulaChange = () => {
+    setEula(!eula);
+  };
+  // ------------------------------eula------------------------------
   return (
-    <div>
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    <>
       {isLoading ? (
         <SplashScreen />
       ) : (
         <>
           <Header />
-          <Eula />
+          <Eula eula={eula} onEulaChange={() => handleEulaChange()} />
           <Footer />
         </>
       )}
-    </div>
+    </>
   );
 }
 export default App;

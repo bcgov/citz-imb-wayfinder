@@ -24,7 +24,7 @@ export function Button({
       variant={variant}
       size={size}
       disabled={disabled}
-      value="update"
+      value=""
     >
       {text}
     </StyledButton>
