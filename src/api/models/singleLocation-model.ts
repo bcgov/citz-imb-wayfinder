@@ -1,8 +1,9 @@
+/**
+ * PURPOSE: Defining and creating the Schema model of a Single ServiceBC Office for
+ *          Mongoose for inputting and gathering LocationData
+ */
 import mongoose from 'mongoose';
 
-/**
- * @desc Schema for a single location used in the Wayfinder App for Mongoose integration
- */
 const SingleLocationSchema = new mongoose.Schema({
   contact: {
     fax: { type: String },

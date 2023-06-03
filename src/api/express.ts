@@ -7,6 +7,9 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import * as config from './config';
 import * as routers from './routes';
 
+/**
+ * PURPOSE: - Middleware and configuration setup for Wayfinder Express API
+ */
 const app: Application = express();
 
 // Express middleware
