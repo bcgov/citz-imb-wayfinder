@@ -1,3 +1,6 @@
+/**
+ * PURPOSE: Server listener Wayfinders Express API
+ */
 import dotenv from 'dotenv';
 import app from './express';
 
