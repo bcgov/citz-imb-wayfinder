@@ -1,3 +1,13 @@
+/**
+ * @summary Function to calculate the distance in KM from the
+ * device's current location to a service location
+ * @param itemData - is the data passed in to be displayed in each list item
+ * @param currentLocation - is the current location of the user's device
+ * @returns {string} - is the calculated distance in KM as a string
+ * @type {(itemData : SingleLocation, currentLocation : CurrentLocation) => string}
+ * @author Dallas Richmond
+ */
+
 /* eslint-disable max-len */
 import SingleLocation from '../Type/SingleLocation';
 import CurrentLocation from '../Type/CurrentLocation';
