@@ -1,3 +1,7 @@
+/**
+ * @summary A reusable that creates a splash screen for the app
+ * @author Dallas Richmond
+ */
 import logo from '/bc-logo-vertical.svg';
 import Spinner from '../Spinner/Spinner';
 import {
