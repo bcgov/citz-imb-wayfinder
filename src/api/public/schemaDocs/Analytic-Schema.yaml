@@ -1,0 +1,33 @@
+components:
+  schemas:
+    Analytic:
+      type: object
+      required:
+        - latitude
+        - date
+        - longitude
+        - usage
+        - date
+      description: Base model for the purpose of collecting anonymous analytics from a user
+      properties:
+        latitude:
+          type: number
+          example: 51.644532
+        longitude: 
+          type: number
+          example: -121.297732
+        usage:
+          type: object
+          required:
+            - search
+            - function
+          properties:
+            search:
+              type: string
+              example: "Kamloops"
+            function:
+              type: string
+              example: "find location"
+        date:
+          type: number
+          example: 1685987761167
