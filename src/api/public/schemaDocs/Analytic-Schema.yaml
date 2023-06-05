@@ -2,6 +2,12 @@ components:
   schemas:
     Analytic:
       type: object
+      required:
+        - latitude
+        - date
+        - longitude
+        - usage
+        - date
       description: Base model for the purpose of collecting anonymous analytics from a user
       properties:
         latitude:
@@ -12,6 +18,9 @@ components:
           example: -121.297732
         usage:
           type: object
+          required:
+            - search
+            - function
           properties:
             search:
               type: string
