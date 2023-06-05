@@ -30,6 +30,7 @@ app.use('/api', [
   routers.healthRouter,
   routers.locationRouter,
   routers.reportRouter,
+  routers.analyticRouter,
 ]);
 
 export default app;
