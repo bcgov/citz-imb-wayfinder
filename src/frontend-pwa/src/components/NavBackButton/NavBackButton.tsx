@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /**
  * @summary Reusable back button navigation component
  * @author Dallas Richmond
@@ -14,7 +15,7 @@ export default function NavBackButton() {
 
   if (location.pathname !== '/') {
     return (
-      <button type="button" onClick={goBack}>Back</button>
+      <button aria-label="Back Button" type="button" onClick={goBack} />
     );
   }
 
