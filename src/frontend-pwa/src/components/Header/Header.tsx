@@ -17,7 +17,7 @@ export default function Header() {
   return (
     <HeaderWrapper>
       <Banner>
-        <Image href="https://gov.bc.ca">
+        <Image>
           <img src={logo} alt="Go to the Government of British Columbia website" />
         </Image>
         <Heading>Wayfinder</Heading>
