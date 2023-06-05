@@ -4,7 +4,7 @@
  */
 import logo from '/logo-banner.svg';
 import gear from '/gear-icon.svg';
-import NavBackButton from '../NavBackButton/NavBackButton';
+import BackNavButton from '../BackNavButton/BackNavButton';
 import {
   Link,
 } from 'react-router-dom';
@@ -34,7 +34,7 @@ export default function Header() {
         >
           <StyledIcon src={gear} alt="Settings" />
         </StyledSettingsButton>
-        <NavBackButton />
+        <BackNavButton />
       </Link>
     </HeaderWrapper>
   );
