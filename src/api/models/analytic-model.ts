@@ -1,7 +1,6 @@
 /**
- * PURPOSE: Base model for the purpose of collecting Analytics from a user.
- *          No personal data is collected from a user.
- *
+ * @summary Base model for the purpose of collecting Analytics from a user.
+ *          No personal data is collected.
  * @author: LocalNewsTV
  */
 import mongoose from 'mongoose';
@@ -18,21 +17,23 @@ const AnalyticSchema = new mongoose.Schema({
   functionalityUsed: {
     search: {
       type: String,
-      required: true,
+      required: false,
       minLength: 4,
       maxLength: 62,
+      trim: true,
     },
     function: {
       type: String,
       required: true,
       minLength: 4,
       maxLength: 15,
+      trim: true,
+      match: /^(find service|find location|report)$/i,
     },
   },
   date: {
     type: Date,
-    required: false,
-    default: new Date(),
+    default: Date.now,
   },
 });
 
