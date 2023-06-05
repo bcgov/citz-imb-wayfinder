@@ -6,21 +6,24 @@ import Footer from './components/Footer/Footer';
 import SplashScreen from './components/SplashScreen/SplashScreen';
 import Eula from './views/Eula/Eula';
 import ViewRouter from './routes/ViewRouter';
+import LocationsArray from './Type/LocationsArray';
+import constants from './constants/Constants';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [eula, setEula] = useState(false);
+  const [locationData, setLocationData] = useState<LocationsArray>([]);
   useEffect(() => {
-    //  TODO:This will be removed once we actually use isLoading during API calls, Loading media etc
     const getData = async () => {
       try {
-        const { data } = await axios.get(`${import.meta.env.VITE_API_HOSTNAME}/api/locations`);
-        console.log(data);
+        const { data } = await axios.get(`${constants.BACKEND_URL}/api/locations`);
+        setLocationData(data.locations);
       } catch (error) {
         console.error(error);
       }
     };
     getData();
+    //  TODO:This will be removed once we actually use isLoading during API calls, Loading media etc
     setTimeout(() => {
       setIsLoading(false);
     }, 5000);
@@ -35,7 +38,7 @@ function App() {
           <Header />
           {!eula
             ? <Eula setEula={setEula} />
-            : <ViewRouter />}
+            : <ViewRouter locationData={locationData} />}
           <Footer />
         </>
       )}
