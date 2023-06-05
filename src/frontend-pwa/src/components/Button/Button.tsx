@@ -1,3 +1,9 @@
+/**
+ * Purpose: This is the controller for the Wayfinder API's Reporting function
+ *          this service is designed to take in reports from users, lint them
+ *          and post them to a database
+ */
+
 import StyledButton from './button.styles';
 
 export type ButtonVariants = 'default' | 'primary' | 'secondary';
@@ -20,7 +26,7 @@ export function Button({
 }: ButtonProps) {
   return (
     <StyledButton
-      onClick={() => handleClick}
+      onClick={handleClick}
       variant={variant}
       size={size}
       disabled={disabled}

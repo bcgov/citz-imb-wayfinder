@@ -3,12 +3,13 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-// import ViewRouter from './routes/ViewRouter';
 import SplashScreen from './components/SplashScreen/SplashScreen';
 import Eula from './views/Eula/Eula';
+import ViewRouter from './routes/ViewRouter';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [eula, setEula] = useState(false);
   useEffect(() => {
     //  TODO:This will be removed once we actually use isLoading during API calls, Loading media etc
     const getData = async () => {
@@ -22,14 +23,8 @@ function App() {
     getData();
     setTimeout(() => {
       setIsLoading(false);
-    }, 250);
+    }, 5000);
   }, []);
-  // comment divider, following is for eula---------------------------------------------------
-  const [eula, setEula] = useState(false);
-  const handleEulaChange = () => {
-    setEula(!eula);
-  };
-  // ------------------------------eula------------------------------
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
@@ -38,7 +33,9 @@ function App() {
       ) : (
         <>
           <Header />
-          <Eula eula={eula} onEulaChange={() => handleEulaChange()} />
+          {!eula
+            ? <Eula setEula={setEula} />
+            : <ViewRouter />}
           <Footer />
         </>
       )}
