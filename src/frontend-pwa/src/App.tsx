@@ -3,13 +3,15 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import ViewRouter from './routes/ViewRouter';
 import SplashScreen from './components/SplashScreen/SplashScreen';
+import Eula from './views/Eula/Eula';
+import ViewRouter from './routes/ViewRouter';
 import LocationsArray from './Type/LocationsArray';
 import constants from './constants/Constants';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [eulaAccepted, setEulaAccepted] = useState(false);
   const [locationData, setLocationData] = useState<LocationsArray>([]);
   useEffect(() => {
     const getData = async () => {
@@ -26,19 +28,21 @@ function App() {
       setIsLoading(false);
     }, 5000);
   }, []);
-
   return (
-    <div>
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    <>
       {isLoading ? (
         <SplashScreen />
       ) : (
         <>
           <Header />
-          <ViewRouter locationData={locationData} />
+          {!eulaAccepted
+            ? <Eula setEulaAccepted={setEulaAccepted} />
+            : <ViewRouter locationData={locationData} />}
           <Footer />
         </>
       )}
-    </div>
+    </>
   );
 }
 export default App;
