@@ -1,3 +1,7 @@
+/**
+ * @summary Reusable BC Gov Header Component
+ * @author Dallas Richmond
+ */
 import logo from '/logo-banner.svg';
 import gear from '/gear-icon.svg';
 import {
