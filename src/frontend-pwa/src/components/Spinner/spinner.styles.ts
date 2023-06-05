@@ -1,3 +1,7 @@
+/**
+ * @summary Styles for Spinner component
+ * @author Dallas Richmond
+ */
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
 
