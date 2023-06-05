@@ -14,7 +14,7 @@ const AnalyticSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  functionalityUsed: {
+  usage: {
     search: {
       type: String,
       required: false,

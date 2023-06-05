@@ -6,7 +6,7 @@
 type Analytic = {
   latitude: Number;
   longitude: Number;
-  functionalityUsed: {
+  usage: {
     search?: String;
     function: String;
   };
