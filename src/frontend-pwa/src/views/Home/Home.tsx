@@ -1,3 +1,7 @@
+/**
+ * @summary The main view for the application
+ * @author Dallas Richmond
+ */
 import {
   Link,
 } from 'react-router-dom';
