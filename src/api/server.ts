@@ -1,3 +1,7 @@
+/**
+ * @summary Server listener Wayfinders Express API
+ * @author LocalNewsTV
+ */
 import dotenv from 'dotenv';
 import app from './express';
 

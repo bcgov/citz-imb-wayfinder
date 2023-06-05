@@ -1,8 +1,9 @@
+/**
+ * @summary Definition of the Schema model representing a Single ServiceBC Office.
+ * @author  LocalNewsTV
+ */
 import mongoose from 'mongoose';
 
-/**
- * @desc Schema for a single location used in the Wayfinder App for Mongoose integration
- */
 const SingleLocationSchema = new mongoose.Schema({
   contact: {
     fax: { type: String },

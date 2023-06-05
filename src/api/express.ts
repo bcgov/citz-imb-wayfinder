@@ -1,3 +1,7 @@
+/**
+ * @summary Middleware and configuration setup for Wayfinder Express API
+ * @author  LocalNewsTV
+ */
 import './db';
 import express, { Application } from 'express';
 import morgan from 'morgan';

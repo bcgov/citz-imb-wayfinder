@@ -1,3 +1,8 @@
+/**
+ * @summary -Swagger configuration for Express API
+ *          -Gathers all *.yaml files in public folder
+ * @author  LocalNewsTV
+ */
 const swaggerConfig = {
   definition: {
     openapi: '3.0.0',
