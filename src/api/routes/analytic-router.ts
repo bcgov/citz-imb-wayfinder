@@ -1,3 +1,8 @@
+/**
+ * @summary Analytic Endpoint for Project Wayfinder, collects usage information
+ *          from opt-in users.
+ * @author LocalNewsTV
+ */
 import express from 'express';
 import takeAnalytic from '../controllers/analytic-controller';
 
