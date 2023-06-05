@@ -1,5 +1,5 @@
 /**
- * @summary Styles for reusable Header component
+ * @summary Styles for reusable SettingsNavButton component
  * @author Dallas Richmond
  */
 import styled from '@emotion/styled';
