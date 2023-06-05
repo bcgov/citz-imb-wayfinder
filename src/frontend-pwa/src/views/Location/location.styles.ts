@@ -1,3 +1,7 @@
+/**
+ * @summary Styling for Location view
+ * @author Dallas Richmond
+ */
 import styled from '@emotion/styled';
 import typography from '../../typography';
 
