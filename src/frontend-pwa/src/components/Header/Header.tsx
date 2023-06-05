@@ -6,7 +6,7 @@ import logo from '/logo-banner.svg';
 import BackNavButton from '../BackNavButton/BackNavButton';
 import SettingsNavButton from '../SettingsNavButton/SettingsNavButton';
 import {
-  Link, useNavigate,
+  Link,
 } from 'react-router-dom';
 
 import {
@@ -17,10 +17,6 @@ import {
 } from './header.styles';
 
 export default function Header() {
-  const navigate = useNavigate();
-  const goBack = () => {
-    navigate(-1);
-  };
   return (
     <HeaderWrapper>
       <Banner>
