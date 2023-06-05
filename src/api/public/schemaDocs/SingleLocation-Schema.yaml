@@ -2,6 +2,13 @@ components:
   schemas:
     SingleLocation:
       type: object
+      required:
+        - services
+        - address
+        - locale
+        - website
+        - latitude
+        - longitude
       description: A BC Services location
       properties:
         contact:
@@ -20,6 +27,8 @@ components:
             example: Rural Property Tax Services
         address:
           type: object
+          required:
+            - province
           properties:
             province:
               type: string
