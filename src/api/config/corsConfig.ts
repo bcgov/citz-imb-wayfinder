@@ -3,7 +3,9 @@
  * @author  LocalNewsTV
  */
 const corsConfig = {
-  origin: '*',
+  origin: [
+    'https://wayfinder.apps.silver.devops.gov.bc.ca/',
+  ],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   preflightContinue: false,
   optionsSuccessStatus: 204,
