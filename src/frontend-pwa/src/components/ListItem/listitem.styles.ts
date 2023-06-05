@@ -1,3 +1,7 @@
+/**
+ * @summary Styles for ListItem component
+ * @author Dallas Richmond
+ */
 import styled from '@emotion/styled';
 import typography from '../../typography';
 

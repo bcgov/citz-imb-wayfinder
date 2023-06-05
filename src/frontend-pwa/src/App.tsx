@@ -1,3 +1,8 @@
+/**
+ * @summary The root component of the application
+ * @author Dallas Richmond
+ * @author Tyler Maloney
+ */
 /* eslint-disable no-console */
 import { useState, useEffect } from 'react';
 import axios from 'axios';

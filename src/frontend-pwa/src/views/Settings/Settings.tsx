@@ -1,3 +1,7 @@
+/**
+ * @summary Settings view for the application
+ * @author Dallas Richmond
+ */
 import Slider from '../../components/Slider/Slider';
 import Toggle from '../../components/Toggle/Toggle';
 

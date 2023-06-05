@@ -1,3 +1,10 @@
+/**
+ * @summary A reusable component that creates a basic toggle component
+ * @param ariaLabel - an accessibility label for the input
+ * @param onChange - is a function that is called when the slider value changes
+ * @type {(ariaLabel : string, onChange: (value: boolean) => void)}
+ * @author Dallas Richmond
+ */
 import { useState } from 'react';
 
 export type ToggleProps = {
