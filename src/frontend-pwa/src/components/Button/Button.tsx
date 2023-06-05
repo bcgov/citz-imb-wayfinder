@@ -1,3 +1,8 @@
+/**
+ * @summary This is a common button component for use in our application.
+ * @author Tyler Maloney
+ */
+
 import StyledButton from './button.styles';
 
 export type ButtonVariants = 'default' | 'primary' | 'secondary';
@@ -20,11 +25,11 @@ export function Button({
 }: ButtonProps) {
   return (
     <StyledButton
-      onClick={() => handleClick}
+      onClick={handleClick}
       variant={variant}
       size={size}
       disabled={disabled}
-      value="update"
+      value=""
     >
       {text}
     </StyledButton>

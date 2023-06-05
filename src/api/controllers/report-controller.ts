@@ -1,3 +1,8 @@
+/**
+ * @summary Controller for Project Wayfinders report mechanism.
+ *          designed to take user reports from the application and store in database
+ * @author  LocalNewsTV
+ */
 import { Request, Response } from 'express';
 
 /**

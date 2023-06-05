@@ -1,3 +1,9 @@
+/**
+ * @summary setup for mongoose connection to MongoDB. Determines if running in live deployment
+ *          to determine correct connection. Communicates in console whether connection is
+ *          successful.
+ * @author LocalNewsTV
+ */
 /* eslint-disable no-console */
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';

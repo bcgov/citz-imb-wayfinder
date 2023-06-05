@@ -1,6 +1,6 @@
 /**
- * PURPOSE: Defining and creating the Schema model of a Single ServiceBC Office for
- *          Mongoose for inputting and gathering LocationData
+ * @summary Definition of the Schema model representing a Single ServiceBC Office.
+ * @author  LocalNewsTV
  */
 import mongoose from 'mongoose';
 
