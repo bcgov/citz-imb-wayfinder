@@ -114,9 +114,9 @@ export default function Eula({
               />
               <Button
                 handleClick={() => setEula(true)}
-                text="testing!"
+                text="Submit"
                 variant="primary"
-                size="sm"
+                size="md"
                 disabled={!consent}
               />
             </center>
