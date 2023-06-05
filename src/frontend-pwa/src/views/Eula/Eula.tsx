@@ -1,8 +1,10 @@
-/* eslint-disable max-len */
 /**
- * Author: Tyler Maloney
- * Purpose: This is the EULA page, set to display when it is detected that the user has not given their consent.
+ * @summary This is the EULA page, set to display when it is detected
+ *          that the user has not given their consent.
+ * @author Tyler Maloney
  */
+/* eslint-disable max-len */
+
 import { useState } from 'react';
 import { Button } from '../../components/Button/Button';
 import { StyledContainer, StyledOuterDiv, StyledFieldSetDiv } from './eula.styles';
@@ -117,6 +119,7 @@ export default function Eula({
                 text="Submit"
                 variant="primary"
                 size="md"
+                aria-label="submit button"
                 disabled={!consent}
               />
             </center>

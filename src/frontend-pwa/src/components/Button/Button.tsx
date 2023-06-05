@@ -1,7 +1,6 @@
 /**
- * Purpose: This is the controller for the Wayfinder API's Reporting function
- *          this service is designed to take in reports from users, lint them
- *          and post them to a database
+ * @summary This is a common button component for use in our application.
+ * @author Tyler Maloney
  */
 
 import StyledButton from './button.styles';
