@@ -5,7 +5,7 @@
  */
 import { useNavigate, useLocation } from 'react-router-dom';
 
-export default function NavBackButton() {
+export default function BackNavButton() {
   const navigate = useNavigate();
   const location = useLocation();
 
