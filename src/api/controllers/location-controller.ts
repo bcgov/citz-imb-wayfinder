@@ -1,6 +1,7 @@
 /**
- * PURPOSE: Location Endpoint will send all locations
- * (Offline functionality requires having locations cached)
+ * @summary Location Endpoint will send all locations
+ *          (Offline functionality requires having locations cached)
+ * @author  LocalNewsTV
  */
 import mongoose from 'mongoose';
 import { Request, Response } from 'express';

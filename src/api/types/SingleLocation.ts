@@ -1,3 +1,7 @@
+/**
+ * @summary Model type for SingleLocation of BC Service Office
+ * @author  LocalNewsTV
+ */
 type SingleLocation = {
   contact?: {
     fax?: String;

@@ -1,5 +1,6 @@
 /**
- * Purpose: CORS Configuration for Express API
+ * @summary CORS Configuration for Express API
+ * @author  LocalNewsTV
  */
 const corsConfig = {
   origin: '*',

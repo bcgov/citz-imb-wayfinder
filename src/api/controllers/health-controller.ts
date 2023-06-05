@@ -1,5 +1,6 @@
 /**
- * PURPOSE: Health Endpoint Controller for Project Wayfinder
+ * @summary Health Endpoint Controller for Project Wayfinder
+ * @author  LocalNewsTV
  */
 import { Request, Response } from 'express';
 
