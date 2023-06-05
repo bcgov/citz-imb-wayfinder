@@ -26,6 +26,10 @@ const StyledButton = styled.button<ButtonProps>`
   &:hover {
     transform: scale(0.98);
   }
+  &:disabled {
+    transform:scale(1);
+    background-color: #A0A0A0;
+  }
 `;
 
 export default StyledButton;

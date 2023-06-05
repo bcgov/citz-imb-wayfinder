@@ -11,15 +11,15 @@ import { StyledContainer, StyledOuterDiv, StyledFieldSetDiv } from './eula.style
 import Toggle from '../../components/Toggle/Toggle';
 
 export type EulaProps = {
-    setEula: (eula: boolean) => void;
+    setEulaAccepted: (eulaAccepted: boolean) => void;
 }
 
 export default function Eula({
-  setEula,
+  setEulaAccepted,
 }: EulaProps) {
-  const [consent, setConsent] = useState(false);
+  const [termAgreement, setTermAgreement] = useState(false);
   const handleConsentChange = () => {
-    setConsent(!consent);
+    setTermAgreement(!termAgreement);
   };
   return (
     <StyledOuterDiv>
@@ -112,15 +112,15 @@ export default function Eula({
               <Toggle
                 ariaLabel="Eula check"
                 onChange={handleConsentChange}
-                defaultChecked={consent}
+                defaultChecked={termAgreement}
               />
               <Button
-                handleClick={() => setEula(true)}
+                handleClick={() => setEulaAccepted(true)}
                 text="Submit"
                 variant="primary"
                 size="md"
                 aria-label="submit button"
-                disabled={!consent}
+                disabled={!termAgreement}
               />
             </center>
           </StyledFieldSetDiv>

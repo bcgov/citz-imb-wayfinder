@@ -11,7 +11,7 @@ import constants from './constants/Constants';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
-  const [eula, setEula] = useState(false);
+  const [eulaAccepted, setEulaAccepted] = useState(false);
   const [locationData, setLocationData] = useState<LocationsArray>([]);
   useEffect(() => {
     const getData = async () => {
@@ -36,8 +36,8 @@ function App() {
       ) : (
         <>
           <Header />
-          {!eula
-            ? <Eula setEula={setEula} />
+          {!eulaAccepted
+            ? <Eula setEulaAccepted={setEulaAccepted} />
             : <ViewRouter locationData={locationData} />}
           <Footer />
         </>
