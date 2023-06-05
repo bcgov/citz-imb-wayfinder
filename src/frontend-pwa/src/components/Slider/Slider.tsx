@@ -1,9 +1,19 @@
+/**
+ * @summary A reusable component that creates a basic slider component
+ * @param ariaLabel - an accessibility label for the input
+ * @param min - is the minimum value of the slider
+ * @param max - is the maximum value of the slider
+ * @param onChange - is a function that is called when the slider value changes
+ * @type {(ariaLabel : string, min : number, max: number, onChange: (value: number) => void)}
+ * @author Dallas Richmond
+ */
+
 import { useState } from 'react';
 
 export type SliderProps = {
   ariaLabel: string;
   min: number;
-  max:number;
+  max: number;
   onChange: (value: number) => void;
 }
 
