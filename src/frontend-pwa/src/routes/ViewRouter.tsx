@@ -1,3 +1,9 @@
+/**
+ * @summary Router to different views
+ * @param locationData - is an array of locations to be passed to the Location view
+ * @type {(locaionData : Array<SingleLocation>)}
+ * @author Dallas Richmond
+ */
 import {
   Routes, Route,
 } from 'react-router-dom';
