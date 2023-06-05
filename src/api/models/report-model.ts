@@ -44,4 +44,4 @@ ReportSchema.set('toJSON', {
   transform: (doc, ret) => { delete ret._id; },
 });
 
-export default ReportSchema;
+export default mongoose.model('report', ReportSchema);
