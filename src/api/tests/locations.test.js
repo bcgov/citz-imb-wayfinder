@@ -2,11 +2,12 @@ const supertest = require('supertest');
 const dotenv = require('dotenv');
 
 /**
- * Testing the get method of the locations endpoint
- * Verifying:
- *       -The API Returns an OK
- *       -The API Returns a 200
- *       -The API is returning an Array under the locations key
+ * @summary Testing the get method of the locations endpoint
+ * @desc    Verifying:
+ *            -The API Returns an OK
+ *            -The API Returns a 200
+ *            -The API is returning an Array under the locations key
+ * @author  LocalNewsTV
  */
 
 dotenv.config();

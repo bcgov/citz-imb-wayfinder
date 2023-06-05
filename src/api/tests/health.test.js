@@ -1,13 +1,13 @@
+/**
+ * @summary Initial Test to show API is working as expected
+ * @desc    Verifying:
+ *            -The API Returns an OK
+ *            -The API Returns a 200
+ *            -The API is returning an Array under the locations key
+ * @author  LocalNewsTV
+ */
 const supertest = require('supertest');
 const dotenv = require('dotenv');
-
-/**
- * Purpose: Initial Test to show API is working as expected
- * Verifying:
- *      -The API Returns an OK
- *      -The API Returns a 200
- *      -The API is returning an Array under the locations key
- */
 
 dotenv.config();
 
