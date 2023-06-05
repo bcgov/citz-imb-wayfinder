@@ -4,8 +4,9 @@
  */
 import logo from '/logo-banner.svg';
 import gear from '/gear-icon.svg';
+import NavBackButton from '../NavBackButton/NavBackButton';
 import {
-  Link, useNavigate,
+  Link,
 } from 'react-router-dom';
 
 import {
@@ -18,10 +19,6 @@ import {
 } from './header.styles';
 
 export default function Header() {
-  const navigate = useNavigate();
-  const goBack = () => {
-    navigate(-1);
-  };
   return (
     <HeaderWrapper>
       <Banner>
@@ -37,7 +34,7 @@ export default function Header() {
         >
           <StyledIcon src={gear} alt="Settings" />
         </StyledSettingsButton>
-        <button type="button" onClick={goBack}>Back</button>
+        <NavBackButton />
       </Link>
     </HeaderWrapper>
   );
