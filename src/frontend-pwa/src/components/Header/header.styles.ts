@@ -38,7 +38,7 @@ export const Banner = styled.div`
     margin: 0 10px 0 0;
 `;
 
-export const Image = styled.a`
+export const Image = styled.img`
     width: 175px;
     top: 10px;
     position: relative;
