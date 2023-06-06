@@ -4,6 +4,7 @@ import { VitePWA } from "vite-plugin-pwa";
 export default defineConfig({
   plugins: [
     VitePWA({
+<<<<<<< HEAD
       registerType: "autoUpdate",
       injectRegister: 'auto',
       includeAssets: ["**/*"],
@@ -13,6 +14,10 @@ export default defineConfig({
         clientsClaim: true,
         sourcemap: true,
       },
+=======
+      registerType: "prompt",
+      includeAssets: ["favicon.ico", "apple-touch-icon.png", "android-chrome-192x192.png", "android-chrome-512x512.png", "logo-banner.svg", "gear-icon.svg", "bc-logo-vertical.svg", "back-button.svg"],
+>>>>>>> b51fbbf721a0d6e2417566da2417e9ba01335d4b
       manifest: {
         name: "Wayfinder",
         short_name: "Wayfinder",
