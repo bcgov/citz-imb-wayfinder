@@ -25,10 +25,12 @@ export default function Header() {
         </a>
         <Heading>Wayfinder</Heading>
       </Banner>
-      <Link to="/settings">
-        <SettingsNavButton />
+      <div>
+        <Link to="/settings">
+          <SettingsNavButton />
+        </Link>
         <BackNavButton />
-      </Link>
+      </div>
     </HeaderWrapper>
   );
 }
