@@ -4,12 +4,19 @@ import { VitePWA } from "vite-plugin-pwa";
 export default defineConfig({
   plugins: [
     VitePWA({
-      registerType: "prompt",
-      includeAssets: ["favicon.ico", "apple-touch-icon.png", "android-chrome-192x192.png", "android-chrome-512x512.png", "logo-banner.svg", "gear-icon.svg", "bc-logo-vertical.svg"],
+      registerType: "autoUpdate",
+      injectRegister: 'auto',
+      includeAssets: ["**/*"],
+      workbox: {
+        globPatterns: ["**/*"],
+        cleanupOutdatedCaches: true,
+        clientsClaim: true,
+        sourcemap: true,
+      },
       manifest: {
         name: "Wayfinder",
         short_name: "Wayfinder",
-        description: "This will be filled with something that sounds very official from the BC government",
+        description: "A service and location finder for the BC Government",
         theme_color: "#003366",
         start_url: "/",
       
