@@ -9,7 +9,7 @@ import {
   StyledIcon,
 } from './settingsNavButton.styles';
 
-export default function BackNavButton() {
+export default function SettingsNavButton() {
   const location = useLocation();
   if (location.pathname === '/') {
     return (
