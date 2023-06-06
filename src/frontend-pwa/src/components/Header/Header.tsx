@@ -20,9 +20,9 @@ export default function Header() {
   return (
     <HeaderWrapper>
       <Banner>
-        <Image href="/">
-          <img src={logo} alt="Go to the Government of British Columbia website" />
-        </Image>
+        <a href="/">
+          <Image src={logo} alt="Go to the Home page" />
+        </a>
         <Heading>Wayfinder</Heading>
       </Banner>
       <Link to="/settings">
