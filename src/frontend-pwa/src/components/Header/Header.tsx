@@ -20,9 +20,9 @@ export default function Header() {
   return (
     <HeaderWrapper>
       <Banner>
-        <a href="/">
+        <Link to="/">
           <Image src={logo} alt="Go to the Home page" />
-        </a>
+        </Link>
         <Heading>Wayfinder</Heading>
       </Banner>
       <div>
