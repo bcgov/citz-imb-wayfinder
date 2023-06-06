@@ -10,7 +10,6 @@ export default defineConfig({
       workbox: {
         globPatterns: ["**/*"],
         cleanupOutdatedCaches: true,
-        clientsClaim: true,
         sourcemap: true,
       },
       manifest: {
