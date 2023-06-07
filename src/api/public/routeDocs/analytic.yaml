@@ -1,0 +1,23 @@
+paths:
+  /analytic:
+    post:
+      tags:
+        - Analytic
+      summary: Take Anonymous Usage Data
+      description: Collects and stores anonymous usage data from Wayfinder Application
+      consumes:
+        - application/json
+      requestBody:
+        content:
+          application/json:
+            name: User analytic
+            description: Anonymous usage data from a user
+            schema:
+              $ref: '#/components/schemas/Analytic'
+      responses:
+        '201':
+          $ref: '#/components/responses/201Created'
+        '429':
+          $ref: '#/components/responses/429TooManyRequests'
+        '400':
+          $ref: '#/components/responses/400BadRequest'

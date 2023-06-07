@@ -1,0 +1,30 @@
+components:
+  responses:
+    400BadRequest:
+      description: Bad request.
+      content:
+        text/plain:
+          schema:
+            type: string
+            example: 'Bad Request'
+    429TooManyRequests:
+      description: Rate limiter reached. Too many requests.
+      content:
+        text/plain:
+          schema:
+            type: string
+            example: Too many requests.
+    200OK:
+      description: OK
+      content:
+        text/plain:
+          schema:
+            type: string
+            example: OK
+    201Created:
+      description: Created
+      content:
+        text/plain:
+          schema:
+            type: string
+            example: Created
