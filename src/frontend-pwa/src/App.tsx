@@ -16,7 +16,8 @@ import constants from './constants/Constants';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
-  const [eulaAccepted, setEulaAccepted] = useState(false);
+  // you have set the following value to true for testing
+  const [eulaAccepted, setEulaAccepted] = useState(true);
   const [locationData, setLocationData] = useState<LocationsArray>([]);
   useEffect(() => {
     const getData = async () => {
@@ -31,7 +32,7 @@ function App() {
     //  TODO:This will be removed once we actually use isLoading during API calls, Loading media etc
     setTimeout(() => {
       setIsLoading(false);
-    }, 5000);
+    }, 1);
   }, []);
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
