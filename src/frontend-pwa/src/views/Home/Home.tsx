@@ -2,10 +2,8 @@
  * @summary The main view for the application
  * @author Dallas Richmond
  */
-import {
-  Link,
-} from 'react-router-dom';
 import { Button } from '../../components/Button/Button';
+import RoutingLink from '../../components/RoutingLink/RoutingLink';
 
 import {
   Wrapper,
@@ -16,34 +14,49 @@ export default function Home() {
   return (
     <Wrapper>
       <ButtonWrapper>
-        <Link to="/location">
-          <Button
-            variant="primary"
-            size="lg"
-            disabled={false}
-            text="Locate a Service"
-          />
-        </Link>
+        <RoutingLink
+          content={
+            (
+              <Button
+                variant="primary"
+                size="lg"
+                disabled={false}
+                text="Locate a Service"
+              />
+            )
+          }
+          path="/location"
+        />
       </ButtonWrapper>
       <ButtonWrapper>
-        <Link to="/services">
-          <Button
-            variant="primary"
-            size="lg"
-            disabled={false}
-            text="Find BC Services"
-          />
-        </Link>
+        <RoutingLink
+          content={
+            (
+              <Button
+                variant="primary"
+                size="lg"
+                disabled={false}
+                text="Find BC Services"
+              />
+            )
+          }
+          path="/services"
+        />
       </ButtonWrapper>
       <ButtonWrapper>
-        <Link to="/report">
-          <Button
-            variant="primary"
-            size="lg"
-            disabled={false}
-            text="Report an Event"
-          />
-        </Link>
+        <RoutingLink
+          content={
+            (
+              <Button
+                variant="primary"
+                size="lg"
+                disabled={false}
+                text="Report an Event"
+              />
+            )
+          }
+          path="/report"
+        />
       </ButtonWrapper>
     </Wrapper>
   );
