@@ -7,7 +7,7 @@
 
 import { useState } from 'react';
 import { Button } from '../../components/Button/Button';
-import { StyledContainer, StyledOuterDiv, StyledFieldSetDiv, StyledToggle } from './eula.styles';
+import { StyledContainer, StyledOuterDiv, StyledFieldSetDiv } from './eula.styles';
 import Toggle from '../../components/Toggle/Toggle';
 
 export type EulaProps = {

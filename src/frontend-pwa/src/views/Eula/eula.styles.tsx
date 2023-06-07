@@ -1,8 +1,6 @@
 import styled from '@emotion/styled';
 import typography from '../../typography';
 
-// changed below "max-height" from "min-height"
-
 export const StyledOuterDiv = styled.div`
     width: 100%;
     min-height: 100vh;
