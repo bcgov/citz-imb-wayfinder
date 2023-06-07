@@ -1,3 +1,7 @@
+/**
+ * @summary Styles for reusable Header component
+ * @author Dallas Richmond
+ */
 import styled from '@emotion/styled';
 import typography from '../../typography';
 
@@ -34,7 +38,7 @@ export const Banner = styled.div`
     margin: 0 10px 0 0;
 `;
 
-export const Image = styled.a`
+export const Image = styled.img`
     width: 175px;
     top: 10px;
     position: relative;
@@ -44,30 +48,4 @@ export const Image = styled.a`
         width: 100px;
         padding-right: 5px;
     }
-`;
-
-export const StyledSettingsButton = styled.button`
-    background-color: transparent;
-    border: none;
-    outline: none;
-    padding: 0px;
-    cursor: pointer;
-    font-size: 1rem;
-    color: #333;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    right: 0;
-    &:focus {
-        outline: none;
-    }
-    &:hover {
-        transform: scale(0.9);
-    }
-`;
-
-export const StyledIcon = styled.img`
-    width: 30px;
-    height: 30px;
 `;
