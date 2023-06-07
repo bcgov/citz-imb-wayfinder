@@ -60,33 +60,32 @@ export default function Eula({ setEulaAccepted }: EulaProps) {
           License for any reason, in its sole discretion. In the event of termination of this
           License you must: (a) immediately stop using the Licensed Application; and (b) delete or
           destroy all copies of the Licensed Application in your possession or under your control.
-          <p>
-            You must not take any action in connection with your use of the Licensed Application
-            that would jeopardize the security, integrity and/or availability of the Licensed
-            Application, including, without limitation:
-          </p>
-          <ol type="I">
-            <li>(a) using the Licensed Application for any unlawful or inappropriate purpose;</li>
-            <li>(b) tampering with any portion of the Licensed Application;</li>
-            <li>
-              (c) using the Licensed Application to transmit any virus or other harmful or
-              destructive computer code, files or programs or to conduct hacking and/or intrusion
-              activities;
-            </li>
-            <li>
-              (d) attempting to circumvent or subvert any security measure associated with the
-              Licensed Application;
-            </li>
-            <li>
-              (e) taking any action that might reasonably be construed as likely to adversely affect
-              other users of the Licensed Application; or
-            </li>
-            <li>
-              (f) removing or altering any proprietary symbol or notice, including any copyright
-              notice, trademark or logo, displayed in connection with the Licensed Application.
-            </li>
-          </ol>
         </p>
+        <p>
+          You must not take any action in connection with your use of the Licensed Application that
+          would jeopardize the security, integrity and/or availability of the Licensed Application,
+          including, without limitation:
+        </p>
+        <ol type="I">
+          <li>(a) using the Licensed Application for any unlawful or inappropriate purpose;</li>
+          <li>(b) tampering with any portion of the Licensed Application;</li>
+          <li>
+            (c) using the Licensed Application to transmit any virus or other harmful or destructive
+            computer code, files or programs or to conduct hacking and/or intrusion activities;
+          </li>
+          <li>
+            (d) attempting to circumvent or subvert any security measure associated with the
+            Licensed Application;
+          </li>
+          <li>
+            (e) taking any action that might reasonably be construed as likely to adversely affect
+            other users of the Licensed Application; or
+          </li>
+          <li>
+            (f) removing or altering any proprietary symbol or notice, including any copyright
+            notice, trademark or logo, displayed in connection with the Licensed Application.
+          </li>
+        </ol>
         <p>
           This EULA and, as applicable, the additional terms referenced in these Terms, are the
           entire agreement between you and the Province with respect to the subject matter of this
