@@ -2,10 +2,7 @@
  * @summary The main view for the application
  * @author Dallas Richmond
  */
-import {
-  Link,
-} from 'react-router-dom';
-import { Button } from '../../components/Button/Button';
+import NavButton from '../../components/NavButton/NavButton';
 
 import {
   Wrapper,
@@ -16,34 +13,22 @@ export default function Home() {
   return (
     <Wrapper>
       <ButtonWrapper>
-        <Link to="/location">
-          <Button
-            variant="primary"
-            size="lg"
-            disabled={false}
-            text="Locate a Service"
-          />
-        </Link>
+        <NavButton
+          path="/location"
+          text="Locate a Service"
+        />
       </ButtonWrapper>
       <ButtonWrapper>
-        <Link to="/services">
-          <Button
-            variant="primary"
-            size="lg"
-            disabled={false}
-            text="Find BC Services"
-          />
-        </Link>
+        <NavButton
+          path="/services"
+          text="Find BC Services"
+        />
       </ButtonWrapper>
       <ButtonWrapper>
-        <Link to="/report">
-          <Button
-            variant="primary"
-            size="lg"
-            disabled={false}
-            text="Report an Event"
-          />
-        </Link>
+        <NavButton
+          path="/report"
+          text="Report an Event"
+        />
       </ButtonWrapper>
     </Wrapper>
   );
