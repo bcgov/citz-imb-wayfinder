@@ -13,7 +13,10 @@ export const StyledContainer = styled.div`
     overflow-y: scroll;
     overflow-x: hidden;
     display: inline-block;
-    padding: 5em 10em;
+    padding: 5em 7.5pt;
+    @media (max-width: 768px) {
+        padding: 20px;
+    }
 
 `;
 // changed below "max-height" from "min-height"
@@ -37,13 +40,12 @@ export const StyledFieldSetDiv = styled.div`
 ${typography.toString()}
     width: 100%;
     height: 100%;
-    flex: auto;
+    display: flex;
     flex-direction: row;
     background-color: white;
     align-items: center;
-    justify-content: center;
-    display: inline-block;
-    padding: 1em 11em;
+    justify-content: space-evenly;
+    padding: 2em 1em;
 `;
 
 export const p = styled.p`

@@ -17,7 +17,7 @@ import constants from './constants/Constants';
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   // you have set the following value to true for testing
-  const [eulaAccepted, setEulaAccepted] = useState(true);
+  const [eulaAccepted, setEulaAccepted] = useState(false);
   const [locationData, setLocationData] = useState<LocationsArray>([]);
   useEffect(() => {
     const getData = async () => {
