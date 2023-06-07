@@ -17,3 +17,8 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/SingleLocation'
+                  services:
+                    type: array
+                    items:
+                      type: string
+                    example: ["Address Change BC", "Affordable Child Care Benefit", "Water Rental Payments"]
