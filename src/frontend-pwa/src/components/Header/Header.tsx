@@ -5,9 +5,7 @@
 import logo from '/logo-banner.svg';
 import BackNavButton from '../BackNavButton/BackNavButton';
 import SettingsNavButton from '../SettingsNavButton/SettingsNavButton';
-import {
-  Link,
-} from 'react-router-dom';
+import RoutingLink from '../RoutingLink/RoutingLink';
 
 import {
   HeaderWrapper,
@@ -20,15 +18,17 @@ export default function Header() {
   return (
     <HeaderWrapper>
       <Banner>
-        <Link to="/">
-          <Image src={logo} alt="Go to the Home page" />
-        </Link>
+        <RoutingLink
+          content={<Image src={logo} alt="Go to the Home page" />}
+          path="/"
+        />
         <Heading>Wayfinder</Heading>
       </Banner>
       <div>
-        <Link to="/settings">
-          <SettingsNavButton />
-        </Link>
+        <RoutingLink
+          content={<SettingsNavButton />}
+          path="/settings"
+        />
         <BackNavButton />
       </div>
     </HeaderWrapper>
