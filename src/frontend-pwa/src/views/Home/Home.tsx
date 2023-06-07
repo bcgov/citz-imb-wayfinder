@@ -2,8 +2,7 @@
  * @summary The main view for the application
  * @author Dallas Richmond
  */
-import { Button } from '../../components/Button/Button';
-import RoutingLink from '../../components/RoutingLink/RoutingLink';
+import NavButton from '../../components/NavButton/NavButton';
 
 import {
   Wrapper,
@@ -14,48 +13,21 @@ export default function Home() {
   return (
     <Wrapper>
       <ButtonWrapper>
-        <RoutingLink
-          content={
-            (
-              <Button
-                variant="primary"
-                size="lg"
-                disabled={false}
-                text="Locate a Service"
-              />
-            )
-          }
+        <NavButton
           path="/location"
+          text="Locate a Service"
         />
       </ButtonWrapper>
       <ButtonWrapper>
-        <RoutingLink
-          content={
-            (
-              <Button
-                variant="primary"
-                size="lg"
-                disabled={false}
-                text="Find BC Services"
-              />
-            )
-          }
+        <NavButton
           path="/services"
+          text="Find BC Services"
         />
       </ButtonWrapper>
       <ButtonWrapper>
-        <RoutingLink
-          content={
-            (
-              <Button
-                variant="primary"
-                size="lg"
-                disabled={false}
-                text="Report an Event"
-              />
-            )
-          }
+        <NavButton
           path="/report"
+          text="Report an Event"
         />
       </ButtonWrapper>
     </Wrapper>

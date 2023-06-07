@@ -5,27 +5,28 @@
  * @type {(content: React.ReactNode, path: string)}
  * @author Dallas Richmond
  */
-import React from 'react';
 import {
   Link,
 } from 'react-router-dom';
+import { Button } from '../Button/Button';
 
 export type RoutingLinkProps = {
-  content?: React.ReactNode;
   path: string;
+  text: string;
 }
 
-export default function RoutingLink({
-  content,
+export default function NavButton({
   path,
+  text,
 }: RoutingLinkProps) {
   return (
     <Link to={path}>
-      {content}
+      <Button
+        variant="primary"
+        size="lg"
+        disabled={false}
+        text={text}
+      />
     </Link>
   );
 }
-
-RoutingLink.defaultProps = {
-  content: <div />,
-};
