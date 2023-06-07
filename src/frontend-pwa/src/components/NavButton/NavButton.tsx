@@ -1,8 +1,8 @@
 /**
- * @summary A reusable component used for routing to different pages
- * @param content - is the content that will render between the routing Link
+ * @summary A reusable nav button component used for routing to different pages
  * @param path - is the path the Link will route to
- * @type {(content: React.ReactNode, path: string)}
+ * @param text - is the text displayed on the button
+ * @type {(path: string, text: string)}
  * @author Dallas Richmond
  */
 import {
