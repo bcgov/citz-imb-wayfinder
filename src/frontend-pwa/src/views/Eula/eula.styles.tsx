@@ -8,7 +8,7 @@ import typography from '../../typography';
 
 export const StyledOuterDiv = styled.div`
     width: 100%;
-    min-height: 100vh;
+    min-height: 100svh;
     position: absolute;
     left:0;
     top:0;
