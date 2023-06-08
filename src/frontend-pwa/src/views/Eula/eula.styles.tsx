@@ -50,6 +50,3 @@ ${typography.toString()}
         width: 288pt;
     }
 `;
-
-export const p = styled.p`
-`;
