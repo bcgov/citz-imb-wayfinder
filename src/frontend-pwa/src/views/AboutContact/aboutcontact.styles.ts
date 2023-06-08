@@ -19,7 +19,7 @@ export const AboutContainer = styled.div`
 export const ContentContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   flex-direction: column;
   height: auto;
   padding: 10pt;
@@ -30,6 +30,8 @@ export const ContentContainer = styled.div`
 export const StyledP = styled.p`
   ${typography.toString()}
   text-align: left;
+  width: 100%;
+  font-size: 13pt;
 `;
 
 export const StyledHeaderTwo = styled.h2`
@@ -44,8 +46,21 @@ export const StyledAddress = styled.address`
   margin-top: 2em;
 `;
 export const Link = styled.a`
+  ${typography.toString()}
   text-decoration: none;
   &:hover {
     cursor: pointer;
   }
+`;
+export const StyledUl = styled.ul`
+  ${typography.toString()}
+  width: 100%;
+  margin: 0;
+  padding-left: 3em;
+  margin-bottom: 3em;
+`;
+export const StyledLi = styled.li`
+  padding: 0;
+  margin: 0;
+  font-size: 12pt;
 `;
