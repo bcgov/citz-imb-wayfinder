@@ -23,5 +23,12 @@ export default function Toggle({ ariaLabel, onChange, defaultChecked = false }: 
     onChange(newChecked);
   };
 
-  return <StyledToggle aria-label={ariaLabel} type="checkbox" checked={checked} onChange={handleChange} />;
+  return (
+    <StyledToggle
+      aria-label={ariaLabel}
+      type="checkbox"
+      checked={checked}
+      onChange={handleChange}
+    />
+  );
 }

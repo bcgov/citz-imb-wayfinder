@@ -1,3 +1,8 @@
+/**
+ * @summary Styling for EULA view.
+ * @author Tyler Maloney
+ * */
+
 import styled from '@emotion/styled';
 import typography from '../../typography';
 
@@ -33,7 +38,7 @@ export const StyledContainer = styled.div`
 
 export const StyledFieldSetDiv = styled.div`
 ${typography.toString()}
-    width: 288pt;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -41,8 +46,8 @@ ${typography.toString()}
     align-items: center;
     justify-content: space-evenly;
     padding: 2em 1em;
-    @media (max-width: 768px){
-        width: 100%;
+    @media (min-width: 768px){
+        width: 288pt;
     }
 `;
 
