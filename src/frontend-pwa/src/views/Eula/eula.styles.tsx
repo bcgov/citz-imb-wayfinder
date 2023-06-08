@@ -1,5 +1,5 @@
 /**
- * @summary Styling for EULA view.
+ * @summary This is the styling page for the EULA view screen.
  * @author Tyler Maloney
  * */
 

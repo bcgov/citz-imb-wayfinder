@@ -1,3 +1,13 @@
+/**
+ * @summary This is a common SearchBar component for use in our application.
+ *          Functionality is left undefined aside from stub functions to foster modularity
+ * @param handleChange - stub function to allow for variable response to input change.
+ * @param handleSubmit - stub function to allow for variable response in regard to query submission.
+ * @param handleClear - stub function to allow for variable response in clearing the text field.
+ * @param query - the query to be searched for.
+ * @type {( handleChange: () => void, handleSubmit: () => void, handleClear: () => void )}
+ * @author Tyler Maloney
+ */
 import searchicon from '/searchicon.svg';
 import clearicon from '/clearicon.svg';
 

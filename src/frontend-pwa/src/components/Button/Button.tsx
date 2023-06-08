@@ -1,5 +1,10 @@
 /**
- * @summary This is a common button component for use in our application.
+ * @summary This is a universal button component for use in our application.
+ * @param handleClick - stub function to designate what occurs if button is clicked.
+ * @param variant - dictates button coloring.
+ * @param size - dictates button size for general design or mobile reponsiveness.
+ * @param disabled - determines whether button is clickable.
+ * @param text - the text that will display within the button.
  * @author Tyler Maloney
  */
 
@@ -10,8 +15,8 @@ export type ButtonSizes = 'sm' | 'md' | 'lg';
 
 export type ButtonProps = {
   handleClick?: () => void;
-  variant: ButtonVariants, // dictates coloring
-  size: ButtonSizes, // breakpoints will go here
+  variant: ButtonVariants,
+  size: ButtonSizes,
   disabled: boolean;
   text: string;
 }
