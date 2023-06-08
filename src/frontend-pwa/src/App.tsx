@@ -28,10 +28,9 @@ function App() {
       }
     };
     getData();
-    //  TODO:This will be removed once we actually use isLoading during API calls, Loading media etc
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
+    // TODO: Load in initial data in useEffect, will handle setIsLoading as well.
+    // will be handled in ticket this sprint, specifically [WAYF-101]
+    setIsLoading(false);
   }, []);
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
