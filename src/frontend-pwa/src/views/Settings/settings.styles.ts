@@ -20,11 +20,12 @@ export const SettingsContainer = styled.div`
 export const Section = styled.div`
   margin-bottom: 20px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 `;
 
 export const Title = styled.h2`
   ${typography.toString()}
   font-size: 18px;
-  margin-bottom: 10px;
+  margin: 0;
 `;
