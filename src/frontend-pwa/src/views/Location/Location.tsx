@@ -50,7 +50,7 @@ export default function Location({
         Locate a Service
       </TextHeader>
       <ListItems
-        headers={["Locations", "Distance"]}
+        headers={['Locations', 'Distance']}
       >
         {locations.map((data, index) => (
           // eslint-disable-next-line react/no-array-index-key
