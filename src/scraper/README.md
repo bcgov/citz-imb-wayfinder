@@ -28,4 +28,5 @@ This tool uses the following `environment variables` for operation
 
 | KEY | EXAMPLE | DESCRIPTION |
 | --- | ------- | ----------- |
-| API_URL | http://api.positionstack.com/v1/forward?access_key={KEY}&country=ca&query= | URL with Key and setup to keep in one place
+| API_URL | `http://api.positionstack.com/v1/forward?access_key={KEY}&country=ca&query=` | URL with Key and setup to keep in one place
+| GEO_API_KEY | 4fg1sw3e265g1 | API Key for `https://www.geoapify.com/geocoding-api` |
