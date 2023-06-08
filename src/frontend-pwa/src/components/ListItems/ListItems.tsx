@@ -1,17 +1,14 @@
 /**
  * @summary A reusable component that creates a list of ListItem components
- * @param items - is an array of Single locations and their data
- * @param currentLocation - is the current location of the user's device
- * @type {(items : Attay<SingleLocation>, currentLocation : CurrentLocation)}
+ * @param headers - List of headers to display at top of list
+ * @param children - All items to render into the List
+ * @type {(items : Array<SingleLocation>, currentLocation : CurrentLocation)}
  * @author Dallas Richmond
  */
 
 /* eslint-disable max-len */
 /* eslint-disable react/no-array-index-key */
-import ListItem from '../ListItem/ListItem';
-import SingleLocation from '../../Type/SingleLocation';
-import CurrentLocation from '../../Type/CurrentLocation';
-
+import { ReactNode } from 'react';
 import {
   Container,
   Table,
@@ -21,29 +18,28 @@ import {
 } from './listitems.style';
 
 export type ListItemsProps = {
-  items: Array<SingleLocation>;
-  currentLocation: CurrentLocation;
+  headers: Array<string>;
+  children: ReactNode;
 }
 
 export default function ListItems({
-  items,
-  currentLocation,
+  headers,
+  children,
 }: ListItemsProps) {
   return (
     <Container>
       <Table>
         <thead>
           <TableRow>
-            <TableHeader>
-              <TableHeaderWrapper>Location</TableHeaderWrapper>
-            </TableHeader>
-            <TableHeader>
-              <TableHeaderWrapper>Distance</TableHeaderWrapper>
-            </TableHeader>
+            {headers.map((header, index) => (
+              <TableHeader key={index}>
+                <TableHeaderWrapper>{header}</TableHeaderWrapper>
+              </TableHeader>
+            ))}
           </TableRow>
         </thead>
         <tbody>
-          {items.map((data, index) => <ListItem itemData={data} key={index} currentLocation={currentLocation} />)}
+          {children}
         </tbody>
       </Table>
     </Container>

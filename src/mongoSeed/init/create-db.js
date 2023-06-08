@@ -466,9 +466,15 @@ db.locations.insertMany([
     ],
     "address": {
       "province": "BC",
-      "postal_code": "V2R 3Z8"
+      "postal_code": "V2R 3Z8",
+      "region": "British Columbia",
+      "county": "Fraser Valley",
+      "locality": "Chilliwack",
+      "label": "45466 Yale Road, Chilliwack, BC V2R 3Z8, Canada"
     },
     "locale": "Chilliwack",
-    "website": "https://www2.gov.bc.ca/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc/service-bc-location-chilliwack"
+    "website": "https://www2.gov.bc.ca/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc/service-bc-location-chilliwack",
+    "latitude": 49.147241,
+    "longitude": -121.964378
   },
 ]);

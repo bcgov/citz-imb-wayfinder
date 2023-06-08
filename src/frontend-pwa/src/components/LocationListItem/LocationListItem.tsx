@@ -16,7 +16,7 @@ import {
   TableData,
   TableRow,
   TableDataWrapper,
-} from './listitem.styles';
+} from './locationlistitem.styles';
 
 export type ListItemProps = {
   itemData: SingleLocation;
