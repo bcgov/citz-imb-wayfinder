@@ -5,9 +5,7 @@
 import logo from '/logo-banner.svg';
 import BackNavButton from '../BackNavButton/BackNavButton';
 import SettingsNavButton from '../SettingsNavButton/SettingsNavButton';
-import {
-  Link,
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import {
   HeaderWrapper,
