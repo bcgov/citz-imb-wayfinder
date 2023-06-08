@@ -12,7 +12,7 @@ import {
   LocationViewWrapper,
   TextHeader,
 } from './location.styles';
-import ListItem from '../../components/ListItem/ListItem';
+import LocationListItem from '../../components/LocationListItem/LocationListItem';
 
 export type LocationProps = {
   locations: Array<SingleLocation>;
@@ -50,12 +50,11 @@ export default function Location({
         Locate a Service
       </TextHeader>
       <ListItems
-        headerOne="Locations"
-        headerTwo="Distance"
+        headers={["Locations", "Distance"]}
       >
         {locations.map((data, index) => (
           // eslint-disable-next-line react/no-array-index-key
-          <ListItem itemData={data} key={index} currentLocation={currentLocation} />
+          <LocationListItem itemData={data} key={index} currentLocation={currentLocation} />
         ))}
       </ListItems>
     </LocationViewWrapper>

@@ -1,7 +1,7 @@
 /**
  * @summary A reusable component that creates a list of ListItem components
- * @param items - is an array of Single locations and their data
- * @param currentLocation - is the current location of the user's device
+ * @param headers - List of headers to display at top of list
+ * @param children - All items to render into the List
  * @type {(items : Array<SingleLocation>, currentLocation : CurrentLocation)}
  * @author Dallas Richmond
  */
@@ -18,14 +18,12 @@ import {
 } from './listitems.style';
 
 export type ListItemsProps = {
-  headerOne: string;
-  headerTwo: string;
+  headers: Array<string>;
   children: ReactNode;
 }
 
 export default function ListItems({
-  headerOne = '',
-  headerTwo = '',
+  headers,
   children,
 }: ListItemsProps) {
   return (
@@ -33,12 +31,11 @@ export default function ListItems({
       <Table>
         <thead>
           <TableRow>
-            <TableHeader>
-              <TableHeaderWrapper>{headerOne}</TableHeaderWrapper>
-            </TableHeader>
-            <TableHeader>
-              <TableHeaderWrapper>{headerTwo}</TableHeaderWrapper>
-            </TableHeader>
+            {headers.map((header, index) => (
+              <TableHeader key={index}>
+                <TableHeaderWrapper>{header}</TableHeaderWrapper>
+              </TableHeader>
+            ))}
           </TableRow>
         </thead>
         <tbody>
