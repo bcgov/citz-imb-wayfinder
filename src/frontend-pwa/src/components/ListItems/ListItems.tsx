@@ -8,10 +8,7 @@
 
 /* eslint-disable max-len */
 /* eslint-disable react/no-array-index-key */
-import ListItem from '../ListItem/ListItem';
-import SingleLocation from '../../Type/SingleLocation';
-import CurrentLocation from '../../Type/CurrentLocation';
-
+import { ReactNode } from 'react';
 import {
   Container,
   Table,
@@ -21,13 +18,15 @@ import {
 } from './listitems.style';
 
 export type ListItemsProps = {
-  items: Array<SingleLocation>;
-  currentLocation: CurrentLocation;
+  headerOne: string;
+  headerTwo: string;
+  children: ReactNode;
 }
 
 export default function ListItems({
-  items,
-  currentLocation,
+  headerOne = '',
+  headerTwo = '',
+  children,
 }: ListItemsProps) {
   return (
     <Container>
@@ -35,15 +34,15 @@ export default function ListItems({
         <thead>
           <TableRow>
             <TableHeader>
-              <TableHeaderWrapper>Location</TableHeaderWrapper>
+              <TableHeaderWrapper>{headerOne}</TableHeaderWrapper>
             </TableHeader>
             <TableHeader>
-              <TableHeaderWrapper>Distance</TableHeaderWrapper>
+              <TableHeaderWrapper>{headerTwo}</TableHeaderWrapper>
             </TableHeader>
           </TableRow>
         </thead>
         <tbody>
-          {items.map((data, index) => <ListItem itemData={data} key={index} currentLocation={currentLocation} />)}
+          {children}
         </tbody>
       </Table>
     </Container>
