@@ -30,7 +30,7 @@ export default function ViewRouter({
       <Route path="/services" element={<BCServices />} />
       <Route path="/report" element={<Report />} />
       <Route path="/settings" element={<Settings />} />
-      <Route path="/about" element={<AboutContact />} />
+      <Route path="/settings/about" element={<AboutContact />} />
     </Routes>
   );
 }
