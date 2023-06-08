@@ -25,20 +25,19 @@ export const ContentContainer = styled.div`
   padding: 10pt;
   width: 100%;
   max-width: 600pt;
-  overflow: contain;
 `;
 export const StyledP = styled.p`
   ${typography.toString()}
   text-align: left;
   width: 100%;
-  font-size: 13pt;
+  font-size: 12pt;
 `;
 
 export const StyledHeaderTwo = styled.h2`
   ${typography.toString()}
   width: 100%;
   text-align: left;
-  margin: 0.5em;
+  margin: 0.25em;
 `;
 
 export const StyledAddress = styled.address`

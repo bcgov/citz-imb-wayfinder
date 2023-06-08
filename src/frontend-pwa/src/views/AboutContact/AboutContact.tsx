@@ -28,11 +28,11 @@ export default function AboutContact() {
   const info = {
     aboutTeam: 'This application was created by a team of three Information and Computer System students from Camosun College in summer of 2023. The team consists of',
     teamList: [
-      'Frontend Developers: Tyler M & Dallas R',
-      'Backend Developer: Matthew L',
-      'UI/UX: Jesse H',
-      'Product Owner: Robert K',
-      'Technical Owner: Adam K',
+      'Frontend Developers: Tyler\u00A0M & Dallas\u00A0R',
+      'Backend Developer: Matthew\u00A0L',
+      'UI/UX: Jesse\u00A0H',
+      'Product Owner: Robert\u00A0K',
+      'Technical Owner: Adam\u00A0K',
     ],
     about: 'The "Wayfinder" application is a mobile application that directs citizens and employees to government services. The Wayfinder proof of concept provides an extensible platform that allows new services and locations to be added as they become available. Another use case for the Wayfinder app is the ability to process application generated analytics data allowing the product team to analyze valuable usage data that will inform the creation of new services that can be delivered using the Wayfinder app.',
     contact: 'Please don\'t hesitate to reach out to us using the provided contact information above. We welcome any inquiries, feedback, or opportunities for further discussion. We will make every effort to respond to your message in a timely manner. Thank you for considering us, and we look forward to hearing from you soon.',

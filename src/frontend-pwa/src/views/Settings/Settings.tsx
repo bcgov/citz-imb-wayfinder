@@ -4,7 +4,7 @@
  */
 import Slider from '../../components/Slider/Slider';
 import Toggle from '../../components/Toggle/Toggle';
-
+import NavButton from '../../components/NavButton/NavButton';
 import {
   SettingsContainer,
   Section,
@@ -48,6 +48,18 @@ export default function Settings() {
           ariaLabel="Analytics Toggle"
           onChange={handleToggleChange}
           defaultChecked
+        />
+      </Section>
+      <Section>
+        <NavButton
+          path="/settings/about"
+          text="About/Contact"
+          size="md"
+        />
+        <NavButton
+          path="/settings/eula"
+          text="Terms of Use"
+          size="md"
         />
       </Section>
     </SettingsContainer>
