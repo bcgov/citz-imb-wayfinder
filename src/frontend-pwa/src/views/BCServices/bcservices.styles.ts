@@ -1,8 +1,6 @@
 /**
  * @summary Styling for BCServices view
  * @author LocalNewsTV
- * @summary Styling for BCServices view
- * @author LocalNewsTV
  */
 import styled from '@emotion/styled';
 
