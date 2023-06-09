@@ -4,8 +4,10 @@
  *          Functionality is left undefined aside from stub functions to foster modularity
  * @param   setUseState - useState setter of the query.
  * @param   handleClear - stub function to allow for variable response in clearing the text field.
+ * @param   borderRadius - Boolean whether to turn borderRadius on
+ * @param   border - Boolean whether to turn border on
  * @param   query - the query to be searched for.
- * @type    {( handleChange: () => void, handleSubmit: () => void, handleClear: () => void, query: boolean )}
+ * @type    {( handleChange: () => void, handleSubmit: () => void, handleClear: () => void, query: boolean, border: boolean, borderRadius: boolean )}
  * @author  Tyler Maloney
  */
 import { FormEvent } from 'react';
@@ -21,6 +23,8 @@ import {
 export type SearchBarProps = {
   setUseState: (type: any) => void;
   handleClear: () => void;
+  borderRadius: boolean;
+  border: boolean;
   query: string;
 }
 
@@ -28,13 +32,20 @@ export default function SearchBar({
   setUseState,
   handleClear,
   query,
+  borderRadius = true,
+  border = true,
+
 }: SearchBarProps) {
   const handleChange = (event: FormEvent<HTMLInputElement>) => {
     setUseState(event.currentTarget.value);
   };
 
   return (
-    <WrapperDiv className="searchInput">
+    <WrapperDiv
+      className="searchInput"
+      borderRadius={borderRadius}
+      border={border}
+    >
       <StyledInput
         type="text"
         aria-label="search input field"

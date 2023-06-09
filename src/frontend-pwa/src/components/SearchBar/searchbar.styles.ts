@@ -6,26 +6,29 @@
 import styled from '@emotion/styled';
 import typography from '../../typography';
 
-export const WrapperDiv = styled.div`
-    max-width: 62.5em;
+type SearchBarProps = {
+  borderRadius: boolean;
+  border: boolean;
+}
+export const WrapperDiv = styled.div<SearchBarProps>`
+    width: 100%;
     height: 2.5em;
     padding: 0.25em;
     margin: 0.25em;
-    width: 20em; 
     display: flex;
     flex-direction: row;
     justify-content: center;
     background-color: white;
-    border-radius: 8pt;
-    border: 1px solid black;
+    border-radius: ${(props) => (props.borderRadius === true ? '8pt' : 0)};
+    border: ${(props) => (props.border ? '1px solid black' : 'none')};
 `;
 
 export const StyledInput = styled.input`
   ${typography.toString()}
-  max-width: 50em;
   padding: 0.125em 1em;
   border-radius: 0.5em;
   border: none;
+  width: 100%;
   background-color: inherit;
   &:focus {
     outline: white 0.2em;
