@@ -1,11 +1,13 @@
+/* eslint-disable max-len */
 /**
  * @summary This is a universal button component for use in our application.
- * @param handleClick - stub function to designate what occurs if button is clicked.
- * @param variant - dictates button coloring.
- * @param size - dictates button size for general design or mobile reponsiveness.
- * @param disabled - determines whether button is clickable.
- * @param text - the text that will display within the button.
- * @author Tyler Maloney
+ * @param   handleClick - optional stub function to designate what occurs if button is clicked.
+ * @param   variant - dictates button coloring.
+ * @param   size - dictates button size for general design or mobile reponsiveness.
+ * @param   disabled - prop/value to enable disabled functionality.
+ * @param   text - the text that will display within the button.
+ * @type    {( handleClick: () => void, variant: ButtonVariants, size: ButtonSizes, disabled: boolean, text: string )}
+ * @author  Tyler Maloney
  */
 
 import StyledButton from './button.styles';

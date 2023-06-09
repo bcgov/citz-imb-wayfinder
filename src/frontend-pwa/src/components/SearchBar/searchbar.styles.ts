@@ -1,6 +1,6 @@
 /**
  * @summary This is the styling page for the universal searchbar component.
- * @author Tyler Maloney
+ * @author  Tyler Maloney
  */
 
 import styled from '@emotion/styled';

@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 /**
  * @summary This is the styling page for the common button component.
- * @author Tyler Maloney
+ * @author  Tyler Maloney
  */
 import styled from '@emotion/styled';
 import typography from '../../typography';

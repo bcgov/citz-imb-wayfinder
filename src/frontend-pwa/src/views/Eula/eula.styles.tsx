@@ -1,6 +1,6 @@
 /**
  * @summary This is the styling page for the EULA view screen.
- * @author Tyler Maloney
+ * @author  Tyler Maloney
  * */
 
 import styled from '@emotion/styled';
