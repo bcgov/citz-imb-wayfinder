@@ -2,61 +2,54 @@
 /**
  * @summary This is a common SearchBar component for use in our application.
  *          Functionality is left undefined aside from stub functions to foster modularity
- * @param   handleChange - stub function to allow for variable response to input change.
- * @param   handleSubmit - stub function to allow for variable response in regard to query submission.
+ * @param   setUseState - useState setter of the query.
  * @param   handleClear - stub function to allow for variable response in clearing the text field.
  * @param   query - the query to be searched for.
  * @type    {( handleChange: () => void, handleSubmit: () => void, handleClear: () => void, query: boolean )}
  * @author  Tyler Maloney
  */
-import searchicon from '/searchicon.svg';
+import { FormEvent } from 'react';
 import clearicon from '/clearicon.svg';
 
 import {
   WrapperDiv,
   StyledInput,
-  StyledSearchButton,
-  StyledClearButton,
+  StyledButton,
+  StyledImg,
 } from './searchbar.styles';
 
 export type SearchBarProps = {
-  handleChange: () => void;
-  handleSubmit: () => void;
+  setUseState: (type: any) => void;
   handleClear: () => void;
   query: string;
 }
 
 export default function SearchBar({
-  handleChange,
-  handleSubmit,
+  setUseState,
   handleClear,
   query,
 }: SearchBarProps) {
+  const handleChange = (event: FormEvent<HTMLInputElement>) => {
+    setUseState(event.currentTarget.value);
+  };
+
   return (
     <WrapperDiv className="searchInput">
       <StyledInput
         type="text"
         aria-label="search input field"
-        placeholder="Enter something here..."
-        onChange={() => handleChange()}
+        placeholder="Filter search..."
+        onChange={handleChange}
         value={query}
       />
-      <StyledSearchButton
-        className="icon"
-        type="submit"
-        aria-label="submit button"
-        onClick={() => handleSubmit()}
-      >
-        <img src={searchicon} alt="submit!" />
-      </StyledSearchButton>
-      <StyledClearButton
+      <StyledButton
         className="icon"
         type="reset"
         aria-label="clear text field button"
-        onClick={() => handleClear()}
+        onClick={handleClear}
       >
-        <img src={clearicon} alt="clear!" />
-      </StyledClearButton>
+        <StyledImg src={clearicon} alt="clear!" />
+      </StyledButton>
     </WrapperDiv>
   );
 }
