@@ -4,9 +4,7 @@
  * @type {(locaionData : Array<SingleLocation>)}
  * @author Dallas Richmond
  */
-import {
-  Routes, Route,
-} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import Home from '../views/Home/Home';
 import Location from '../views/Location/Location';
@@ -16,17 +14,19 @@ import Settings from '../views/Settings/Settings';
 import SingleLocation from '../Type/SingleLocation';
 
 export type ViewRouterProps = {
-  locationData: Array<SingleLocation>;
-}
+  serviceBCLocations: Array<SingleLocation>;
+  serviceBCServices: Array<string>;
+};
 
 export default function ViewRouter({
-  locationData,
+  serviceBCLocations: locationData,
+  serviceBCServices,
 }: ViewRouterProps) {
   return (
     <Routes>
       <Route path="/" Component={Home} />
       <Route path="/location" element={<Location locations={locationData} />} />
-      <Route path="/services" element={<BCServices />} />
+      <Route path="/services" element={<BCServices serviceBCServices={serviceBCServices} serviceBCLocations={locationData} />} />
       <Route path="/report" element={<Report />} />
       <Route path="/settings" element={<Settings />} />
     </Routes>
