@@ -2,7 +2,7 @@
  * @summary CORS Configuration for Express API
  * @author  LocalNewsTV
  */
-const corsConfig = {
+export const corsConfig = {
   origin: [
     'https://wayfinder.apps.silver.devops.gov.bc.ca',
     'http://localhost:5173',
@@ -13,4 +13,11 @@ const corsConfig = {
   optionsSuccessStatus: 204,
 };
 
-export default corsConfig;
+export const corsScraperConfig = {
+  origin: [
+    '*',
+  ],
+  methods: 'PATCH',
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+};

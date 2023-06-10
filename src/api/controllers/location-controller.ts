@@ -24,7 +24,7 @@ type ResponseObject = {
  * }
  * @returns {ResponseObject} Array of Sites by Location
  */
-const getAllLocations = async (req: Request, res: Response): Promise<Response> => {
+export const getAllLocations = async (req: Request, res: Response): Promise<Response> => {
   const serviceArr: Array<string> = [];
   const responseObject: ResponseObject = {} as ResponseObject;
   const data: Array<SingleLocation> = await locationsModel.find();
@@ -40,4 +40,6 @@ const getAllLocations = async (req: Request, res: Response): Promise<Response> =
   return res.status(200).json(responseObject);
 };
 
-export default getAllLocations;
+export const updateLocations = async (req: Request, res: Response): Promise<Response> => (
+  res.status(201).send('Created')
+);
