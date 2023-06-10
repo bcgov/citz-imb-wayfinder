@@ -24,7 +24,7 @@ import concurrent.futures
 #
 #############################################################################
 
-MAX_WORKERS = 3 # Adjust the value based on the system capabilities
+MAX_WORKERS = 1 # Adjust the value based on the system capabilities
 CONFIG = dotenv_values(".env")
 BASE_URL = "https://www2.gov.bc.ca"
 START_POINT = '/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc'
@@ -298,8 +298,19 @@ try:
 
         # Format Data into JSON, Pretty print, and write to Output file
         jsonDoc.write(json.dumps(sorted(results, key=lambda k: k['locale']), indent=2))
+        jsonDoc.close()
     print(f"\033[1;32m Scraping successfully completed, view results in {OUTPUT_FILE}")
-
+    for result in results:
+        print(result)    
 except Exception as err:
     print(f"\033[1;31m {err}")
     print("Script Terminated")
+
+finally:
+    try:
+        with open(OUTPUT_FILE, "r") as jsonDoc:
+            locations = json.load(jsonDoc)
+            for location in locations:
+                print(location)
+    except Exception as err:
+        print('Error occured in unloading file')
