@@ -12,13 +12,19 @@ import httpResponses from '../utils/httpResponse';
 dotenv.config();
 const locationsModel = mongoose.model('location');
 
+/** ********************************************************************
+ *                Helper Utilities to the Endpoints
+ ******************************************************************** */
+
 /** @desc List of service locations available in the Database */
 const servicesOffered = [
   'ServiceBC',
   'HealthBC',
 ];
 
-/** @desc Server response object when using the GET method */
+/**
+ * @desc Server response object when using the GET method
+ */
 type ResponseObject = {
   serviceBCLocations: Array<SingleLocation>;
   serviceBCServices: Array<string>;
@@ -26,24 +32,33 @@ type ResponseObject = {
   healthBCServices: Array<string>;
 }
 
+/**
+ * @desc    Takes a Single Location, pulls the list of services from each then filters
+ *          the object into a unique list of alphabetized services.
+ * @param   locations Array of SingleLocations
+ * @returns Unique string array containing all services available in the dataset
+ */
 const extractServiceList = (locations: Array<SingleLocation>): Array<string> => {
   const result: Array<string> = [];
   locations.forEach((location) => result.push(...location.services));
   return [...new Set(result.sort())];
 };
 
+/** ********************************************************************
+ *               Endpoint Functionality (GET, POST, PATCH)
+ ******************************************************************** */
 /**
- * @desc Takes all SingleLocations from database then creates a unique
- *       list of alphabetically organized services. Data is used by Wayfinder
- *       application to seed the cache.
- * @summary sends seed data for frontend
- * @example {
- *  "serviceBCLocations": [{...}],
- *  "serviceBCServices" : [""],
- *  "healthBCLocations": [{}],
- *  "healthBCServices": [""],
- * }
- * @returns {ResponseObject} Array of Sites by Location
+ * @desc     Takes all SingleLocations from database then creates a unique
+ *           list of alphabetically organized services. Data is used by Wayfinder
+ *           application to seed the cache.
+ * @summary  GET method sends seed data for frontend
+ * @example  {
+ *             "serviceBCLocations": [{...}],
+ *              "serviceBCServices" : [""],
+ *              "healthBCLocations": [{}],
+ *              "healthBCServices": [""],
+ *           }
+ * @returns  {ResponseObject} Array of Sites by Location
  */
 export const getAllLocations = async (req: Request, res: Response): Promise<Response> => {
   const responseObject: ResponseObject = {} as ResponseObject;
@@ -58,12 +73,12 @@ export const getAllLocations = async (req: Request, res: Response): Promise<Resp
 };
 
 /**
- * @desc    To reduce load on reseeding updated data, Sends location data specific to one Service
- * @summary Sends smaller data chunk for less data size.
- * @typedef { Object } ResponseObject
+ * @desc     To reduce load on reseeding updated data, Sends location data specific to one Service
+ * @summary  POST Method, Sends location data for one service type.
+ * @typedef  { Object } ResponseObject
  * @property { Array } locationData Array of @type {SingleLocations}
  * @property { Array } serviceData String Array of @type {string}
- * @returns Returns services and locations of a single type e.g.: ServiceBC, HealthBC
+ * @returns  Returns services and locations of a single type e.g.: ServiceBC, HealthBC
  */
 export const locationByCriteria = async (req: Request, res: Response): Promise<Response> => {
   if (servicesOffered.includes(req.body.serviceType)) {
