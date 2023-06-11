@@ -44,11 +44,11 @@ paths:
               schema:
                 type: object
                 properties:
-                  locations:
+                  locationData:
                     type: array
                     items:
                       $ref: '#/components/schemas/SingleLocation'
-                  services:
+                  serviceData:
                     type: array
                     items:
                       type: string
