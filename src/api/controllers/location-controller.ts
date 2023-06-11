@@ -109,14 +109,13 @@ export const updateLocations = async (req: Request, res: Response): Promise<Resp
     && req.headers.authorization.split(' ')[1] === process.env.SCRAPER_API_KEY) {
     if (await locationsModel.findOne({ website: req.body.website })) {
       await locationsModel.updateOne({ website: req.body.website }, req.body);
-      res.status(204).send(httpResponses[204]);
-    } else {
-      try {
-        await locationsModel.create(req.body);
-        return res.status(201).send(httpResponses[201]);
-      } catch (ex) {
-        return res.status(400).send(httpResponses[400]);
-      }
+      return res.status(204).send(httpResponses[204]);
+    }
+    try {
+      await locationsModel.create(req.body);
+      return res.status(201).send(httpResponses[201]);
+    } catch (ex) {
+      return res.status(400).send(httpResponses[400]);
     }
   }
   return res.status(403).send(httpResponses[403]);
