@@ -19,12 +19,13 @@ function App() {
   const [eulaAccepted, setEulaAccepted] = useState(import.meta.env.DEV || false);
   const [serviceBCLocations, setServiceBCLocations] = useState<LocationsArray>([]);
   const [serviceBCServices, setServiceBCServices] = useState<Array<string>>([]);
+
   useEffect(() => {
     const getData = async () => {
       try {
         const { data } = await axios.get(`${constants.BACKEND_URL}/api/locations`);
-        setServiceBCLocations(data.locations);
-        setServiceBCServices(data.services);
+        setServiceBCLocations(data.serviceBCLocations);
+        setServiceBCServices(data.serviceBCServices);
       } catch (error) {
         console.error(error);
       }

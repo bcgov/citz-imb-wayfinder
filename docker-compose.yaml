@@ -17,6 +17,7 @@ services:
       - MONGO_DATABASE=${MONGO_DATABASE:-wf-db}
       - MONGO_SERVICE=${MONGO_SERVICE:-mongodb}
       - CONTAINERIZED=true
+      - SCRAPER_API_KEY=${SCRAPER_API_KEY:-devKey}
     networks:
       - wf-network
     ports:
