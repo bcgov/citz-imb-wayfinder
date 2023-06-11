@@ -19,9 +19,10 @@ const app: Application = express();
 app.use(morgan('tiny'));
 app.use(express.json());
 app.use(express.static('public'));
-app.use(cors(config.cors.corsConfig));
+app.use(cors(config.cors));
 app.use(rateLimit(config.rateLimitConfig));
 
+app.disable('x-powered-by');
 // Routing information
 app.use(
   '/api/api-docs',

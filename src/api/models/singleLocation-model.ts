@@ -9,6 +9,10 @@ const SingleLocationSchema = new mongoose.Schema({
     fax: { type: String },
     phone: { type: String },
   },
+  serviceType: {
+    type: String,
+    required: true,
+  },
   services: { type: [] },
   address: {
     province: { type: String },
@@ -20,7 +24,11 @@ const SingleLocationSchema = new mongoose.Schema({
     label: { type: String },
   },
   locale: { type: String },
-  website: { type: String },
+  website: {
+    type: String,
+    required: true,
+    immutable: true,
+  },
   latitude: {
     type: Number,
     required: true,
