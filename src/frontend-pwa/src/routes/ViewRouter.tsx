@@ -19,14 +19,14 @@ export type ViewRouterProps = {
 };
 
 export default function ViewRouter({
-  serviceBCLocations: locationData,
+  serviceBCLocations,
   serviceBCServices,
 }: ViewRouterProps) {
   return (
     <Routes>
       <Route path="/" Component={Home} />
-      <Route path="/location" element={<Location locations={locationData} />} />
-      <Route path="/services" element={<BCServices serviceBCServices={serviceBCServices} serviceBCLocations={locationData} />} />
+      <Route path="/location" element={<Location locations={serviceBCLocations} />} />
+      <Route path="/services" element={<BCServices services={serviceBCServices} locations={serviceBCLocations} />} />
       <Route path="/report" element={<Report />} />
       <Route path="/settings" element={<Settings />} />
     </Routes>
