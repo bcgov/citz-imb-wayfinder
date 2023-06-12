@@ -37,7 +37,7 @@ export const StyledHeaderTwo = styled.h2`
   ${typography.toString()}
   width: 100%;
   text-align: left;
-  margin: 0.25em;
+  margin: 0.5em 0;
 `;
 
 export const StyledAddress = styled.address`
@@ -56,7 +56,7 @@ export const StyledUl = styled.ul`
   width: 100%;
   margin: 0;
   padding-left: 3em;
-  margin-bottom: 3em;
+  margin-bottom: 0;
 `;
 export const StyledLi = styled.li`
   padding: 0;

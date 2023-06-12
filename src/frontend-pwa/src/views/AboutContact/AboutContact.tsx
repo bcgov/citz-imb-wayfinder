@@ -34,6 +34,12 @@ export default function AboutContact() {
       'Product Owner: Robert\u00A0K',
       'Technical Owner: Adam\u00A0K',
     ],
+    disclaimer: [
+      'This project is open sourced for fair use, with attribution',
+      'this work carries no warranty or implied guarantee',
+      'All third party libraries are those of their rightful owners or licensees',
+      'BC Government theme \u00A9 by the Government of BC',
+    ],
     about: 'The "Wayfinder" application is a mobile application that directs citizens and employees to government services. The Wayfinder proof of concept provides an extensible platform that allows new services and locations to be added as they become available. Another use case for the Wayfinder app is the ability to process application generated analytics data allowing the product team to analyze valuable usage data that will inform the creation of new services that can be delivered using the Wayfinder app.',
     contact: 'Please don\'t hesitate to reach out to us using the provided contact information above. We welcome any inquiries, feedback, or opportunities for further discussion. We will make every effort to respond to your message in a timely manner. Thank you for considering us, and we look forward to hearing from you soon.',
   };
@@ -58,6 +64,10 @@ export default function AboutContact() {
         <StyledP>
           {info.contact}
         </StyledP>
+        <StyledHeaderTwo>Disclaimer</StyledHeaderTwo>
+        <StyledUl>
+          {info.disclaimer.map((point, index) => <StyledLi key={index}>{point}</StyledLi>)}
+        </StyledUl>
         <StyledAddress>
           Email:&nbsp;
           <Link href={`mailto:${contact.email}?subject='Wayfinder App'`}>{contact.team}</Link>
