@@ -240,6 +240,7 @@ def scrape_url(url):
     # Verify data was extracted in scrape
     locationData["contact"]["fax"] = fax.text.strip() if fax else ""
     locationData["contact"]["phone"] = phone.text.strip() if phone else ""
+    locationData["serviceType"] = "ServiceBC"
 
     if street_address:
         locationData["address"] = scrape_postal_code(street_address) or {}

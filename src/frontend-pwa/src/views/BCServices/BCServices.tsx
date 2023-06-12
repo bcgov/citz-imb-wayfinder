@@ -25,17 +25,17 @@ import {
 } from './bcservices.styles';
 
 type Props = {
-  serviceBCServices: Array<string>;
-  serviceBCLocations: Array<SingleLocation>;
+  services: Array<string>;
+  locations: Array<SingleLocation>;
 };
 
 export default function BCServices({
-  serviceBCServices,
-  serviceBCLocations,
+  services,
+  locations,
 }: Props) {
   const [searchQuery, setSearchQuery] = useState('');
-  const filteredServiceSearch = serviceBCServices.filter((item) => item.toLowerCase().match(`${searchQuery.toLowerCase()}`));
-  const filteredLocationSearch = serviceBCLocations.filter((location) => (
+  const filteredServiceSearch = services.filter((item) => item.toLowerCase().match(`${searchQuery.toLowerCase()}`));
+  const filteredLocationSearch = locations.filter((location) => (
     filteredServiceSearch.some((service) => location.services.indexOf(service) !== -1)
   ));
 

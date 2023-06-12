@@ -9,7 +9,7 @@ const corsConfig = {
     'http://localhost:4173',
   ],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  preflightContinue: false,
+  preflightContinue: true,
   optionsSuccessStatus: 204,
 };
 
