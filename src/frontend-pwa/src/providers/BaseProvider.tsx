@@ -32,10 +32,8 @@ export default function BaseProvider<
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const contextValue = useMemo(() => ({ state, dispatch }), [state, dispatch]);
-
   return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <Context.Provider value={{ contextValue } as unknown as ContextObjType}>
+    <Context.Provider value={contextValue as unknown as ContextObjType}>
       {children}
     </Context.Provider>
   );
