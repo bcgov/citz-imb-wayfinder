@@ -1,38 +1,23 @@
 /**
  * @summary The root component of the application
- * @author Dallas Richmond
- * @author Tyler Maloney
+ * @author Dallas Richmond & Tyler Maloney
  */
 /* eslint-disable no-console */
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import SplashScreen from './components/SplashScreen/SplashScreen';
 import Eula from './views/Eula/Eula';
 import ViewRouter from './routes/ViewRouter';
-import LocationsArray from './Type/LocationsArray';
-import constants from './constants/Constants';
 import useAppService from './services/app/useAppService';
 
 function App() {
   const [eulaAccepted, setEulaAccepted] = useState(import.meta.env.DEV || false);
-  const [serviceBCLocations, setServiceBCLocations] = useState<LocationsArray>([]);
-  const [serviceBCServices, setServiceBCServices] = useState<Array<string>>([]);
   const { state, setLoading } = useAppService();
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const { data } = await axios.get(`${constants.BACKEND_URL}/api/locations`);
-        setServiceBCLocations(data.serviceBCLocations);
-        setServiceBCServices(data.serviceBCServices);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getData();
     setLoading(true);
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -46,10 +31,7 @@ function App() {
           {!eulaAccepted
             ? <Eula setEulaAccepted={setEulaAccepted} />
             : (
-              <ViewRouter
-                serviceBCLocations={serviceBCLocations}
-                serviceBCServices={serviceBCServices}
-              />
+              <ViewRouter />
             )}
           <Footer />
         </>
