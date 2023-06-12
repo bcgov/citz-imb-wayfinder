@@ -3,7 +3,7 @@
  * @author Dallas Richmond & Tyler Maloney
  */
 /* eslint-disable no-console */
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import SplashScreen from './components/SplashScreen/SplashScreen';
@@ -13,13 +13,8 @@ import useAppService from './services/app/useAppService';
 
 function App() {
   const [eulaAccepted, setEulaAccepted] = useState(import.meta.env.DEV || false);
-  const { state, setLoading } = useAppService();
+  const { state } = useAppService();
 
-  useEffect(() => {
-    setLoading(true);
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
