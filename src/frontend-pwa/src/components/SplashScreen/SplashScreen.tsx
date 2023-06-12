@@ -12,27 +12,16 @@ import {
 } from './splashscreen.styles';
 
 export default function SplashScreen() {
-  const { state, getAppData, setLoading } = useAppService();
-  getAppData();
-
-  const saveDataToLocalStorage = (key: string, data: any) => {
-    localStorage.setItem(key, JSON.stringify(data));
-  };
-
-  console.log('appData: ', state);
-
-  saveDataToLocalStorage('appData', state);
-
-  const getDataFromLocalStorage = (key: string) => {
-    const data = localStorage.getItem(key);
-    return data ? JSON.parse(data) : null;
-  };
-
-  const savedData = getDataFromLocalStorage('appData');
-
-  console.log('in local storage: ', savedData);
+  const {
+    setOnlineAppData, setOfflineAppData, setLoading,
+  } = useAppService();
 
   useEffect(() => {
+    if (navigator.onLine) {
+      setOnlineAppData();
+    } else {
+      setOfflineAppData();
+    }
     setLoading(false);
   });
 

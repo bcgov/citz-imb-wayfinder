@@ -19,7 +19,7 @@ function App() {
   const [eulaAccepted, setEulaAccepted] = useState(import.meta.env.DEV || false);
   const [serviceBCLocations, setServiceBCLocations] = useState<LocationsArray>([]);
   const [serviceBCServices, setServiceBCServices] = useState<Array<string>>([]);
-  const { state, setLoading, getAppData } = useAppService();
+  const { state, setLoading, setOnlineAppData } = useAppService();
 
   useEffect(() => {
     const getData = async () => {

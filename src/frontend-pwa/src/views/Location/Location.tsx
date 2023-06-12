@@ -21,7 +21,6 @@ import LocationListItem from '../../components/LocationListItem/LocationListItem
 
 export default function Location() {
   const { state } = useAppService();
-  console.log(state);
   const [currentLocation, setCurrentLocation] = useState({});
   const locations = state.appData.data.serviceBCLocations;
 

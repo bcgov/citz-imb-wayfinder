@@ -1,6 +1,6 @@
 import AppActionType from './AppActions';
 
-const { GET_APP_DATA, SET_LOADING, RESTORE_STATE } = AppActionType;
+const { SET_APP_DATA, SET_LOADING } = AppActionType;
 
 export type AppAction = {
   type: AppActionType;
@@ -21,12 +21,10 @@ export const initialState = {
  */
 export const reducer = (state: object, action: AppAction): object => {
   switch (action.type) {
-    case GET_APP_DATA:
+    case SET_APP_DATA:
       return { ...state, appData: action.payload };
     case SET_LOADING:
       return { ...state, isLoading: action.payload };
-    case RESTORE_STATE:
-      return { ...state };
     default:
       throw new Error();
   }
