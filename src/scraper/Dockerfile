@@ -8,4 +8,4 @@ RUN . /opt/venv/bin/activate && pip install -r requirements.txt
 
 # Run the application:
 COPY . .
-CMD . /opt/venv/bin/activate && exec python web_scraper.py
+CMD . /opt/venv/bin/activate && exec python servicebc_scraper.py

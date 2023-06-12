@@ -3,10 +3,11 @@ import requests
 from bs4 import BeautifulSoup  # Web Scraper Library
 import json
 import re
-from dotenv import dotenv_values
+import os
 import urllib  # Encodes URLs for HTTP requests
 from tqdm import tqdm  # Gives the CLI progress bar
 import concurrent.futures
+import time
 
 #############################################################################
 # PURPOSE: To assist Project Wayfinder in collecting and holding data about
@@ -25,7 +26,6 @@ import concurrent.futures
 #############################################################################
 
 MAX_WORKERS = 5 # Adjust the value based on the system capabilities
-CONFIG = dotenv_values(".env")
 BASE_URL = "https://www2.gov.bc.ca"
 START_POINT = '/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc'
 FILTER = "/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc/service-bc-location-"
@@ -71,12 +71,13 @@ def scrape_initial_urls(soup):
 #############################################################################
 def get_supplementary_api_data(locationString, localeString):
     queryString = f"{locationString}, {localeString}, ca"
-    response = requests.get(CONFIG['API_URL'] + urllib.parse.quote_plus(queryString))
-    if len(response.json()['data']) == 0:
+    response = requests.get('http://api.positionstack.com/v1/forward?access_key=' + os.environ['POSITION_STACK_API_KEY'] + '&country=ca&query=' + urllib.parse.quote_plus(queryString))
+    if len(response.json()['data']) == 0: #Unable to extract data with address string
+        #Tidy up string of double spaces in two passes.
         locationString = locationString.replace("  ", " ")
         locationString = locationString.replace("  ", " ")
         locationString = locationString.replace("Suite 1 -", "")
-        response = requests.get("https://api.geoapify.com/v1/geocode/search?text=" + urllib.parse.quote_plus(locationString) + "&apiKey=" + CONFIG['GEO_API_KEY'])
+        response = requests.get("https://api.geoapify.com/v1/geocode/search?text=" + urllib.parse.quote_plus(locationString) + "&apiKey=" + os.environ['GEO_API_KEY'])
         
     return response.json()
 
@@ -267,50 +268,71 @@ def scrape_url(url):
 
     return locationData
 
+
 #############################################################################
-##                           Start of Script                               ##
+# @desc - Start of main functionality, iterates through all available targets
+#         and scrapes them for information. Appends info to OUTPUT_FILE
 #############################################################################
-try:
-    print("\033[1;32m Beginning Scrape of BC Services")
-    # Create or overwrite output file
-    with open(OUTPUT_FILE, "w+") as jsonDoc:
-        links = list(set(scrape_initial_urls(soupifyDocument(BASE_URL + START_POINT))))
-        results = []  # List to store the scraping results
-
-        # Define a function to scrape a single URL
-        def scrape_single_url(url):
-            return scrape_url(url)
-
-        # Set the maximum number of concurrent workers
-        with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-            # Submit the scraping tasks to the executor and track the progress
-            futures = [executor.submit(scrape_single_url, link) for link in links]
-            # futures = [executor.submit(scrape_single_url, links[i]) for i in range(5)]
-            with tqdm(total=len(futures), ncols=100, colour="#669966", desc="Progress: ") as pbar:
-                # Iterate through the completed futures and retrieve the results
-                for future in concurrent.futures.as_completed(futures):
-                    try:
-                        result = future.result()
-                        results.append(result)
-                    except Exception as err:
-                        print(f"Error occurred while scraping URL: {err}")
-                    pbar.update(1)  # Update the progress bar
-
-        # Format Data into JSON, Pretty print, and write to Output file
-        jsonDoc.write(json.dumps(sorted(results, key=lambda k: k['locale']), indent=2))
-        jsonDoc.close()
-    print(f"\033[1;32m Scraping successfully completed, view results in {OUTPUT_FILE}")
-    
-except Exception as err:
-    print(f"\033[1;31m {err}")
-    print("Script Terminated")
-
-finally:
+def beginScrapeService():
     try:
-        with open(OUTPUT_FILE, "r") as jsonDoc:
-            locations = json.load(jsonDoc)
-            for location in locations:
-                # print(location)
-                pass
+        print("\033[1;32m Beginning Scrape of BC Services")
+        # Create or overwrite output file
+        with open(OUTPUT_FILE, "w+") as jsonDoc:
+            links = list(set(scrape_initial_urls(soupifyDocument(BASE_URL + START_POINT))))
+            results = []  # List to store the scraping results
+
+            # Define a function to scrape a single URL
+            def scrape_single_url(url):
+                return scrape_url(url)
+
+            # Set the maximum number of concurrent workers
+            with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+                # Submit the scraping tasks to the executor and track the progress
+                futures = [executor.submit(scrape_single_url, link) for link in links]
+                # futures = [executor.submit(scrape_single_url, links[i]) for i in range(5)]
+                with tqdm(total=len(futures), ncols=100, colour="#669966", desc="Scraping Websites: ") as pbar:
+                    # Iterate through the completed futures and retrieve the results
+                    for future in concurrent.futures.as_completed(futures):
+                        try:
+                            result = future.result()
+                            results.append(result)
+                        except Exception as err:
+                            print(f"Error occurred while scraping URL: {err}")
+                        pbar.update(1)  # Update the progress bar
+
+            # Format Data into JSON, Pretty print, and write to Output file
+            jsonDoc.write(json.dumps(sorted(results, key=lambda k: k['locale']), indent=2))
+            jsonDoc.close()
+        print(f"\033[1;32m Scraping successfully completed, view results in {OUTPUT_FILE}")
+        
     except Exception as err:
-        print('Error occured in unloading file')
+        print(f"\033[1;31m {err}")
+        print("Script Terminated")
+
+#############################################################################
+#   @desc - Takes data in OUTPUT_FILE and sends each object to the Target
+#           uses a Key for access. 
+#############################################################################
+def pushToDatabase():
+    try:
+        jsonDoc = open(OUTPUT_FILE, "r")
+        locations = json.load(jsonDoc)
+        headers = { 'Authorization': 'Bearer ' + os.environ["SCRAPER_API_KEY"] }
+        with tqdm(total=len(locations), ncols=100, colour="#669966", desc="Pushing to Database: ") as pbar:
+            for location in locations:
+                try:
+                    requests.patch(os.environ['WAYFINDER_API_URL'] + '/api/locations', json=location, headers=headers)
+                    pbar.update(1)
+                except Exception as ex:
+                    print('Error in PATCH request', ex);
+        print(f"\033[1;32m All tasks completed")
+                    
+    except Exception as err:
+        print('Error occured in unloading file', err)
+
+ 
+def main():
+    beginScrapeService()
+    pushToDatabase()
+    
+main()
