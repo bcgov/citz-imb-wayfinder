@@ -19,6 +19,7 @@ export default function SplashScreen() {
 
   useEffect(() => {
     // Todo: Need to properly implement Online Offline. Navigator.onLine won't be enough
+    // Change setOnlineAppData and setOfflineAppData to setAppData and pass in a isOnline prop
     if (navigator.onLine && Object.keys(state.appData).length === 0) {
       setOnlineAppData();
       setCurrentLocation();
