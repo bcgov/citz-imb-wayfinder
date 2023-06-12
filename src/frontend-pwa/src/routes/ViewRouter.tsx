@@ -25,7 +25,7 @@ export default function ViewRouter({
   return (
     <Routes>
       <Route path="/" Component={Home} />
-      <Route path="/location" element={<Location locations={serviceBCLocations} />} />
+      <Route path="/location" element={<Location />} />
       <Route path="/services" element={<BCServices services={serviceBCServices} locations={serviceBCLocations} />} />
       <Route path="/report" element={<Report />} />
       <Route path="/settings" element={<Settings />} />

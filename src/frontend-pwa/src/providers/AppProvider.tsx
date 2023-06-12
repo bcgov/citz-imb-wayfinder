@@ -2,7 +2,7 @@
  * @summary context provider for app data
  * @author Dallas Richmond
  */
-import { createContext, ReactNode } from 'react';
+import { createContext, ReactNode, useEffect } from 'react';
 import BaseProvider from './BaseProvider';
 import { initialState, reducer } from '../services/app/AppReducer';
 

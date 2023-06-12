@@ -7,6 +7,7 @@
 import { useState } from 'react';
 import ListItems from '../../components/ListItems/ListItems';
 import SingleLocation from '../../Type/SingleLocation';
+import useAppService from '../../services/app/useAppService';
 
 import {
   LocationViewWrapper,
@@ -14,14 +15,15 @@ import {
 } from './location.styles';
 import LocationListItem from '../../components/LocationListItem/LocationListItem';
 
-export type LocationProps = {
-  locations: Array<SingleLocation>;
-}
+// export type LocationProps = {
+//   locations: Array<SingleLocation>;
+// }
 
-export default function Location({
-  locations,
-}: LocationProps) {
+export default function Location() {
+  const { state } = useAppService();
+  console.log(state);
   const [currentLocation, setCurrentLocation] = useState({});
+  const locations = state.appData.data.serviceBCLocations;
 
   /**
    * @summary Gets the current location of the device from the browser
@@ -52,7 +54,7 @@ export default function Location({
       <ListItems
         headers={['Locations', 'Distance']}
       >
-        {locations.map((data, index) => (
+        {locations.map((data: SingleLocation, index: number) => (
           // eslint-disable-next-line react/no-array-index-key
           <LocationListItem itemData={data} key={index} currentLocation={currentLocation} />
         ))}

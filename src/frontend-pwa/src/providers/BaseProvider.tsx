@@ -8,8 +8,12 @@
  * @author  Zach Bourque & Brady Mitchell & Dallas Richmond
  */
 import React, {
-  Context as ContextType, ReactNode, useReducer, useMemo,
+  Context as ContextType, ReactNode, useReducer, useMemo, useEffect,
 } from 'react';
+
+import AppActionType from '../services/app/AppActions';
+
+const { RESTORE_STATE } = AppActionType;
 
 type BaseProviderProps<ContextObjType, StateType, ChildCompsType> = {
   Context: ContextType<ContextObjType>;
@@ -30,6 +34,17 @@ export default function BaseProvider<
   } = props;
 
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    const storedState = localStorage.getItem('appState');
+    if (storedState) {
+      dispatch({ type: RESTORE_STATE, payload: JSON.parse(storedState) });
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('appState', JSON.stringify(state));
+  }, [state]);
 
   const contextValue = useMemo(() => ({ state, dispatch }), [state, dispatch]);
   return (

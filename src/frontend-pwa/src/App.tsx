@@ -14,16 +14,12 @@ import ViewRouter from './routes/ViewRouter';
 import LocationsArray from './Type/LocationsArray';
 import constants from './constants/Constants';
 import useAppService from './services/app/useAppService';
-import { AppContext } from './providers/AppProvider';
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
   const [eulaAccepted, setEulaAccepted] = useState(import.meta.env.DEV || false);
   const [serviceBCLocations, setServiceBCLocations] = useState<LocationsArray>([]);
   const [serviceBCServices, setServiceBCServices] = useState<Array<string>>([]);
-  const { getAppData, state } = useAppService();
-  // const settingsState = useContext(AppContext);
-  console.log(state);
+  const { state, setLoading, getAppData } = useAppService();
 
   useEffect(() => {
     const getData = async () => {
@@ -31,20 +27,17 @@ function App() {
         const { data } = await axios.get(`${constants.BACKEND_URL}/api/locations`);
         setServiceBCLocations(data.serviceBCLocations);
         setServiceBCServices(data.serviceBCServices);
-        getAppData();
       } catch (error) {
         console.error(error);
       }
     };
     getData();
-    // TODO: Load in initial data in useEffect, will handle setIsLoading as well.
-    // will be handled in ticket this sprint, specifically [WAYF-101]
-    setIsLoading(false);
+    setLoading(true);
   }, []);
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
-      {isLoading ? (
+      {state.isLoading ? (
         <SplashScreen />
       ) : (
         <>

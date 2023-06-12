@@ -1,10 +1,10 @@
-import { useContext, useMemo } from 'react';
+import { useContext, useMemo, useEffect } from 'react';
 import axios from 'axios';
 import { AppContext } from '../../providers/AppProvider';
 import constants from '../../constants/Constants';
 import AppActionType from './AppActions';
 
-const { GET_APP_DATA } = AppActionType;
+const { GET_APP_DATA, SET_LOADING, RESTORE_STATE } = AppActionType;
 
 const useAppService = () => {
   const { state, dispatch } = useContext<any>(AppContext);
@@ -20,8 +20,13 @@ const useAppService = () => {
       }
     };
 
+    const setLoading = (value: boolean) => {
+      dispatch({ type: SET_LOADING, payload: value });
+    };
+
     return {
       getAppData,
+      setLoading,
       state,
     };
   }, [state, dispatch]);
