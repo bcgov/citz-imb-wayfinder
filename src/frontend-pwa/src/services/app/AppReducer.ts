@@ -11,6 +11,7 @@ export type AppAction = {
 export const initialState = {
   isLoading: true,
   appData: {},
+  currentLocation: {},
 };
 
 /**
