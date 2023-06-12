@@ -1,5 +1,6 @@
 /**
- * @summary A reusable that creates a splash screen for the app
+ * @summary A reusable that creates a splash screen for the app.
+ * It loads the inital app data
  * @author Dallas Richmond
  */
 import { useEffect } from 'react';
