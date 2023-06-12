@@ -16,13 +16,16 @@ import constants from './constants/Constants';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
-  const [eulaAccepted, setEulaAccepted] = useState(false);
-  const [locationData, setLocationData] = useState<LocationsArray>([]);
+  const [eulaAccepted, setEulaAccepted] = useState(import.meta.env.DEV || false);
+  const [serviceBCLocations, setServiceBCLocations] = useState<LocationsArray>([]);
+  const [serviceBCServices, setServiceBCServices] = useState<Array<string>>([]);
+
   useEffect(() => {
     const getData = async () => {
       try {
         const { data } = await axios.get(`${constants.BACKEND_URL}/api/locations`);
-        setLocationData(data.locations);
+        setServiceBCLocations(data.serviceBCLocations);
+        setServiceBCServices(data.serviceBCServices);
       } catch (error) {
         console.error(error);
       }
@@ -42,7 +45,12 @@ function App() {
           <Header />
           {!eulaAccepted
             ? <Eula setEulaAccepted={setEulaAccepted} />
-            : <ViewRouter locationData={locationData} />}
+            : (
+              <ViewRouter
+                serviceBCLocations={serviceBCLocations}
+                serviceBCServices={serviceBCServices}
+              />
+            )}
           <Footer />
         </>
       )}

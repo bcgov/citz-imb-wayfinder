@@ -13,6 +13,7 @@ db.locations.insertMany([
       "fax": "250 395-7837",
       "phone": "250 395-7832"
     },
+    "serviceType": "ServiceBC",
     "services": [
       "Address Change BC",
       "Affordable Child Care Benefit",
@@ -44,6 +45,7 @@ db.locations.insertMany([
       "fax": "250 453-9622",
       "phone": "250 453-2412"
     },
+    "serviceType": "ServiceBC",
     "services": [
       "Address Change BC",
       "Affordable Child Care Benefit",
@@ -103,6 +105,7 @@ db.locations.insertMany([
       "fax": "250 651-7707",
       "phone": "250 651-7595"
     },
+    "serviceType": "ServiceBC",
     "services": [
       "Address Change BC",
       "Affordable Child Care Benefit",
@@ -161,6 +164,7 @@ db.locations.insertMany([
       "fax": "250 799-5450",
       "phone": "250 799-5361"
     },
+    "serviceType": "ServiceBC",
     "services": [
       "Address Change BC",
       "Affordable Child Care Benefit",
@@ -221,6 +225,7 @@ db.locations.insertMany([
       "fax": "",
       "phone": "1 800 663-7867"
     },
+    "serviceType": "ServiceBC",
     "services": [
       "BC Services Card",
       "BCeID (ID for Online Government Services)",
@@ -245,6 +250,7 @@ db.locations.insertMany([
       "fax": "250 692-2530",
       "phone": "250 692-2528"
     },
+    "serviceType": "ServiceBC",
     "services": [
       "Address Change BC",
       "Affordable Child Care Benefit",
@@ -304,6 +310,7 @@ db.locations.insertMany([
       "fax": "250 286-7573",
       "phone": "250 286-7555"
     },
+    "serviceType": "ServiceBC",
     "services": [
       "Address Change BC",
       "Affordable Child Care Benefit",
@@ -363,6 +370,7 @@ db.locations.insertMany([
       "fax": "250 788-3802",
       "phone": "250 788-2239"
     },
+    "serviceType": "ServiceBC",
     "services": [
       "Address Change BC",
       "Affordable Child Care Benefit",
@@ -413,6 +421,7 @@ db.locations.insertMany([
       "locality": "Chetwynd",
       "label": "4744 52 St NW, Chetwynd, BC, Canada"
     },
+    "serviceType": "ServiceBC",
     "locale": "Chetwynd",
     "website": "https://www2.gov.bc.ca/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc/service-bc-location-chetwynd",
     "latitude": 55.69809,
@@ -423,6 +432,7 @@ db.locations.insertMany([
       "fax": "604 795-8408",
       "phone": "604 795-8415"
     },
+    "serviceType": "ServiceBC",
     "services": [
       "Address Change BC",
       "Affordable Child Care Benefit",
@@ -466,9 +476,15 @@ db.locations.insertMany([
     ],
     "address": {
       "province": "BC",
-      "postal_code": "V2R 3Z8"
+      "postal_code": "V2R 3Z8",
+      "region": "British Columbia",
+      "county": "Fraser Valley",
+      "locality": "Chilliwack",
+      "label": "45466 Yale Road, Chilliwack, BC V2R 3Z8, Canada"
     },
     "locale": "Chilliwack",
-    "website": "https://www2.gov.bc.ca/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc/service-bc-location-chilliwack"
+    "website": "https://www2.gov.bc.ca/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc/service-bc-location-chilliwack",
+    "latitude": 49.147241,
+    "longitude": -121.964378
   },
 ]);

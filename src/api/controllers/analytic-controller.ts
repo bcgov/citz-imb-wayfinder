@@ -5,6 +5,7 @@
 import { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import validationErrorHandler from '../utils/validationErrorHandler';
+import httpResponses from '../utils/httpResponse';
 
 const analyticModel = mongoose.model('analytic');
 
@@ -15,7 +16,7 @@ const analyticModel = mongoose.model('analytic');
  */
 export const takeAnalytic = async (req: Request, res: Response) => {
   await analyticModel.create(req.body)
-    .then(() => res.status(201).send('Created'))
+    .then(() => res.status(201).send(httpResponses[201]))
     .catch((error) => res.status(400).json(validationErrorHandler(error)));
 };
 

@@ -24,7 +24,7 @@ import concurrent.futures
 #
 #############################################################################
 
-MAX_WORKERS = 4 # Adjust the value based on the system capabilities
+MAX_WORKERS = 3 # Adjust the value based on the system capabilities
 CONFIG = dotenv_values(".env")
 BASE_URL = "https://www2.gov.bc.ca"
 START_POINT = '/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc'
@@ -65,11 +65,19 @@ def scrape_initial_urls(soup):
 #############################################################################
 # @desc: Take the location string scraped, refined with the locale, and gather
 #        additional details from a third party API
+#        Added a second API for refining locations in the event that the first one
+#        fails, a second chance is made somewhere else
 # @return: supplementary API data
 #############################################################################
 def get_supplementary_api_data(locationString, localeString):
     queryString = f"{locationString}, {localeString}, ca"
     response = requests.get(CONFIG['API_URL'] + urllib.parse.quote_plus(queryString))
+    if len(response.json()['data']) == 0:
+        locationString = locationString.replace("  ", " ")
+        locationString = locationString.replace("  ", " ")
+        locationString = locationString.replace("Suite 1 -", "")
+        response = requests.get("https://api.geoapify.com/v1/geocode/search?text=" + urllib.parse.quote_plus(locationString) + "&apiKey=" + CONFIG['GEO_API_KEY'])
+        
     return response.json()
 
 #############################################################################
@@ -232,6 +240,7 @@ def scrape_url(url):
     # Verify data was extracted in scrape
     locationData["contact"]["fax"] = fax.text.strip() if fax else ""
     locationData["contact"]["phone"] = phone.text.strip() if phone else ""
+    locationData["serviceType"] = "ServiceBC"
 
     if street_address:
         locationData["address"] = scrape_postal_code(street_address) or {}
@@ -248,6 +257,14 @@ def scrape_url(url):
         locationData["address"]["county"] = data.get('county', "")
         locationData["address"]["locality"] = data.get('locality', "")
         locationData["address"]["label"] = data.get('label', "")
+    elif supplement_data.get('features'):
+        data = supplement_data['features'][0]['properties']
+        locationData["latitude"] = data.get('lat', "")
+        locationData["longitude"] = data.get('lon', "")
+        locationData["address"]["region"] = data.get('state', "")
+        locationData["address"]["county"] = data.get('county', "")
+        locationData["address"]["locality"] = data.get('city', "")
+        locationData["address"]["label"] = data.get('formatted', "")
 
     return locationData
 

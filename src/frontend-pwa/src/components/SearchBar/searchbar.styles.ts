@@ -1,43 +1,52 @@
+/**
+ * @summary This is the styling page for the universal searchbar component.
+ * @author  Tyler Maloney
+ */
+
 import styled from '@emotion/styled';
 import typography from '../../typography';
 
-export const WrapperDiv = styled.div`
-    max-width: 62.5em;
-    margin: auto; 
-    width: 20em; 
-    height: 80%;
-    position: relative;
-    display: inline-block;
+type SearchBarProps = {
+  borderRadius: boolean;
+  border: boolean;
+}
+export const WrapperDiv = styled.div<SearchBarProps>`
+    width: 100%;
+    height: 2.5em;
+    padding: 0.25em;
+    margin: 0.25em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: white;
+    border-radius: ${(props) => (props.borderRadius === true ? '8pt' : 0)};
+    border: ${(props) => (props.border ? '1px solid black' : 'none')};
 `;
 
 export const StyledInput = styled.input`
   ${typography.toString()}
-  max-width: 50em;
-  width: 80%;
-  padding: 0.125em 3.125em 0.125em 0.3125em;
+  padding: 0.125em 1em;
   border-radius: 0.5em;
-  font-family: ‘BCSans’, ‘Noto Sans’, Verdana, Arial, sans-serif;
+  border: none;
+  width: 100%;
+  background-color: inherit;
   &:focus {
     outline: white 0.2em;
-}
+  }
 `;
 
-export const StyledSearchButton = styled.button`
-  position: absolute;
-  height: 1.5625em;
-  width: 1.5625em;
-  right: 3.625em;
-  top: 0.1875em;
-  padding: 0em;
-  background-color: #fbfbfb00;
+export const StyledButton = styled.button`
+  padding: 0;
+  margin: 0;
+  background-color: #fbfbfb0;
+  border: none;
+  background: inherit;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
-export const StyledClearButton = styled.button`
-  position: absolute;
-  height: 1.6875em;
-  width: 1.6875em;
-  right: 2.1875em;
-  top: 0.125em;
-  padding: 0em;
-  background-color: #fbfbfb00;
+export const StyledImg = styled.img`
+  height: 100%;
+  margin: 0;
 `;
