@@ -13,15 +13,13 @@ import {
 
 export default function SplashScreen() {
   const {
-    setOnlineAppData, setOfflineAppData, setLoading,
+    state, setOnlineAppData, setOfflineAppData, setLoading,
   } = useAppService();
 
   useEffect(() => {
-    if (navigator.onLine) {
-      console.log('Online');
-      setOfflineAppData();
-    } else {
-      console.log('Offline');
+    if (navigator.onLine && Object.keys(state.appData).length === 0) {
+      setOnlineAppData();
+    } else if (Object.keys(state.appData).length === 0) {
       setOfflineAppData();
     }
     setLoading(false);

@@ -18,7 +18,7 @@ import {
 export default function Location() {
   const { state } = useAppService();
   const [currentLocation, setCurrentLocation] = useState({});
-  const locations = state.appData.data.serviceBCLocations;
+  const locations = state.appData.data ? state.appData.data.serviceBCLocations : [];
 
   /**
    * @summary Gets the current location of the device from the browser

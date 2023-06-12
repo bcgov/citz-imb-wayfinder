@@ -33,6 +33,7 @@ function App() {
     };
     getData();
     setLoading(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
