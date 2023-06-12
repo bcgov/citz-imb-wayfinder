@@ -4,7 +4,7 @@
  * @author Tyler Maloney
  */
 /* eslint-disable no-console */
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -19,7 +19,7 @@ function App() {
   const [eulaAccepted, setEulaAccepted] = useState(import.meta.env.DEV || false);
   const [serviceBCLocations, setServiceBCLocations] = useState<LocationsArray>([]);
   const [serviceBCServices, setServiceBCServices] = useState<Array<string>>([]);
-  const { state, setLoading, setOnlineAppData } = useAppService();
+  const { state, setLoading } = useAppService();
 
   useEffect(() => {
     const getData = async () => {

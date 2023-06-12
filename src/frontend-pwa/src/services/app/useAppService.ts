@@ -14,7 +14,7 @@ const useAppService = () => {
     const setOnlineAppData = async () => {
       try {
         const data = await axios.get(`${constants.BACKEND_URL}/api/locations`);
-        saveDataToLocalStorage('appData', state.appData);
+        saveDataToLocalStorage('appData', data);
         dispatch({ type: SET_APP_DATA, payload: data });
       } catch (e) {
         // eslint-disable-next-line no-console

@@ -8,16 +8,12 @@ import { useState } from 'react';
 import ListItems from '../../components/ListItems/ListItems';
 import SingleLocation from '../../Type/SingleLocation';
 import useAppService from '../../services/app/useAppService';
+import LocationListItem from '../../components/LocationListItem/LocationListItem';
 
 import {
   LocationViewWrapper,
   TextHeader,
 } from './location.styles';
-import LocationListItem from '../../components/LocationListItem/LocationListItem';
-
-// export type LocationProps = {
-//   locations: Array<SingleLocation>;
-// }
 
 export default function Location() {
   const { state } = useAppService();

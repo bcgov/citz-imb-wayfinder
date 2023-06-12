@@ -18,8 +18,10 @@ export default function SplashScreen() {
 
   useEffect(() => {
     if (navigator.onLine) {
-      setOnlineAppData();
+      console.log('Online');
+      setOfflineAppData();
     } else {
+      console.log('Offline');
       setOfflineAppData();
     }
     setLoading(false);
