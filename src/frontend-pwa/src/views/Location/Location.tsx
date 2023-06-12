@@ -4,7 +4,6 @@
  * @type {(locations : Array<SingleLocation>)}
  * @author Dallas Richmond
  */
-import { useState } from 'react';
 import ListItems from '../../components/ListItems/ListItems';
 import SingleLocation from '../../Type/SingleLocation';
 import useAppService from '../../services/app/useAppService';
@@ -17,30 +16,9 @@ import {
 
 export default function Location() {
   const { state } = useAppService();
-  const [currentLocation, setCurrentLocation] = useState({});
   const locations = state.appData.data ? state.appData.data.serviceBCLocations : [];
+  const currentLocation = state.currentLocation ? state.currentLocation : null;
 
-  /**
-   * @summary Gets the current location of the device from the browser
-   * @author Dallas Richmond
-   */
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
-    }
-  };
-
-  /**
-   * @summary Sets the state of currentLocation to be the position
-   * @param position - The current position/location of the user's device
-   * @type {(position : object)}
-   * @author Dallas Richmond
-   */
-  const showPosition = (position: object) => {
-    setCurrentLocation(position);
-  };
-
-  getLocation();
   return (
     <LocationViewWrapper>
       <TextHeader>

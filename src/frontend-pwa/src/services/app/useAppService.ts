@@ -5,7 +5,7 @@ import constants from '../../constants/Constants';
 import AppActionType from './AppActions';
 import { saveDataToLocalStorage, getDataFromLocalStorage } from '../../utils/AppLocalStorage';
 
-const { SET_APP_DATA, SET_LOADING } = AppActionType;
+const { SET_APP_DATA, SET_LOADING, SET_CURRENT_LOCATION } = AppActionType;
 
 const useAppService = () => {
   const { state, dispatch } = useContext<any>(AppContext);
@@ -27,6 +27,16 @@ const useAppService = () => {
       dispatch({ type: SET_APP_DATA, payload: data });
     };
 
+    const setCurrentLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      }
+    };
+
+    const showPosition = (position: object) => {
+      dispatch({ type: SET_CURRENT_LOCATION, payload: position });
+    };
+
     const setLoading = (value: boolean) => {
       dispatch({ type: SET_LOADING, payload: value });
     };
@@ -34,6 +44,7 @@ const useAppService = () => {
     return {
       setOnlineAppData,
       setOfflineAppData,
+      setCurrentLocation,
       setLoading,
       state,
     };

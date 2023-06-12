@@ -1,6 +1,6 @@
 import AppActionType from './AppActions';
 
-const { SET_APP_DATA, SET_LOADING } = AppActionType;
+const { SET_APP_DATA, SET_LOADING, SET_CURRENT_LOCATION } = AppActionType;
 
 export type AppAction = {
   type: AppActionType;
@@ -25,6 +25,8 @@ export const reducer = (state: object, action: AppAction): object => {
       return { ...state, appData: action.payload };
     case SET_LOADING:
       return { ...state, isLoading: action.payload };
+    case SET_CURRENT_LOCATION:
+      return { ...state, currentLocation: action.payload };
     default:
       throw new Error();
   }
