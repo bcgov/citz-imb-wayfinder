@@ -16,9 +16,6 @@ import {
 } from './aboutcontact.styles';
 import pkg from '../../../package.json';
 
-/**
- * @returns TODO: Product Name, Versioning
- */
 export default function AboutContact() {
   const contact = {
     email: 'wayfinderdevelopers@gmail.com',
