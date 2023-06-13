@@ -14,7 +14,6 @@ import {
   StyledLi,
   StyledHeaderThree,
 } from './aboutcontact.styles';
-import constants from '../../constants/Constants';
 import pkg from '../../../package.json';
 
 /**
