@@ -9,6 +9,7 @@ import Location from '../views/Location/Location';
 import BCServices from '../views/BCServices/BCServices';
 import Report from '../views/Report/Report';
 import Settings from '../views/Settings/Settings';
+import AboutContact from '../views/AboutContact/AboutContact';
 
 export default function ViewRouter() {
   return (
@@ -18,6 +19,7 @@ export default function ViewRouter() {
       <Route path="/services" element={<BCServices />} />
       <Route path="/report" element={<Report />} />
       <Route path="/settings" element={<Settings />} />
+      <Route path="/settings/about" element={<AboutContact />} />
     </Routes>
   );
 }

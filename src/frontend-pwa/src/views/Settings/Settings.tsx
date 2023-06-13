@@ -4,12 +4,13 @@
  */
 import Slider from '../../components/Slider/Slider';
 import Toggle from '../../components/Toggle/Toggle';
-
+import NavButton from '../../components/NavButton/NavButton';
 import {
   SettingsContainer,
   Section,
   Title,
 } from './settings.styles';
+import file from '/file-text.svg';
 
 export default function Settings() {
   const handleSliderChange = () => {
@@ -48,6 +49,14 @@ export default function Settings() {
           ariaLabel="Analytics Toggle"
           onChange={handleToggleChange}
           defaultChecked
+        />
+      </Section>
+      <Section>
+        <NavButton
+          path="/settings/about"
+          text="About/Contact"
+          hex="#DBE1EB"
+          icon={file}
         />
       </Section>
     </SettingsContainer>
