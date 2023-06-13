@@ -18,8 +18,10 @@
     "@mui/material": "5.13.3",
     "axios": "1.4.0",
     "dotenv": "16.1.2",
+    "leaflet": "1.9.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-leaflet": "4.2.1",
     "react-router-dom": "6.11.2",
     "styled-components": "5.3.10",
     "typography": "0.16.21"
