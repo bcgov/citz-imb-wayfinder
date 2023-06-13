@@ -10,6 +10,7 @@ import {
   Section,
   Title,
 } from './settings.styles';
+import file from '/file-text.svg';
 
 export default function Settings() {
   const handleSliderChange = () => {
@@ -54,12 +55,8 @@ export default function Settings() {
         <NavButton
           path="/settings/about"
           text="About/Contact"
-          size="md"
-        />
-        <NavButton
-          path="/settings/eula"
-          text="Terms of Use"
-          size="md"
+          hex="#DBE1EB"
+          icon={file}
         />
       </Section>
     </SettingsContainer>

@@ -14,6 +14,7 @@ import {
   StyledLi,
 } from './aboutcontact.styles';
 import constants from '../../constants/Constants';
+import pkg from '../../../package.json';
 
 /**
  * @returns TODO: Product Name, Versioning
@@ -41,14 +42,14 @@ export default function AboutContact() {
       'BC Government theme \u00A9 by the Government of BC',
     ],
     about: 'The "Wayfinder" application is a mobile application that directs citizens and employees to government services. The Wayfinder proof of concept provides an extensible platform that allows new services and locations to be added as they become available. Another use case for the Wayfinder app is the ability to process application generated analytics data allowing the product team to analyze valuable usage data that will inform the creation of new services that can be delivered using the Wayfinder app.',
-    contact: 'Please don\'t hesitate to reach out to us using the provided contact information above. We welcome any inquiries, feedback, or opportunities for further discussion. We will make every effort to respond to your message in a timely manner. Thank you for considering us, and we look forward to hearing from you soon.',
+    contact: 'Please don\'t hesitate to reach out to us using the provided contact information below. We welcome any inquiries, feedback, or opportunities for further discussion. We will make every effort to respond to your message in a timely manner. Thank you for considering us, and we look forward to hearing from you soon.',
   };
   return (
     <AboutContainer>
       <ContentContainer>
         <StyledP>
-          Wayfinder&nbsp;
-          {constants.VER_KEY}
+          Wayfinder&nbsp;V
+          {pkg.version}
         </StyledP>
         <StyledHeaderTwo>About</StyledHeaderTwo>
         <StyledP>

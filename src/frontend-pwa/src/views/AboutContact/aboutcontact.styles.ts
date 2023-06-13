@@ -30,7 +30,7 @@ export const StyledP = styled.p`
   ${typography.toString()}
   text-align: left;
   width: 100%;
-  font-size: 12pt;
+  font-size: 10pt;
 `;
 
 export const StyledHeaderTwo = styled.h2`
@@ -38,11 +38,13 @@ export const StyledHeaderTwo = styled.h2`
   width: 100%;
   text-align: left;
   margin: 0.5em 0;
+  font-size: 14pt;
 `;
 
 export const StyledAddress = styled.address`
   ${typography.toString()}
   margin-top: 2em;
+  font-size: 11pt;
 `;
 export const Link = styled.a`
   ${typography.toString()}
@@ -57,9 +59,12 @@ export const StyledUl = styled.ul`
   margin: 0;
   padding-left: 3em;
   margin-bottom: 0;
+  @media (min-width: 768px){
+    padding-left: 14em;
+  }
 `;
 export const StyledLi = styled.li`
   padding: 0;
   margin: 0;
-  font-size: 12pt;
+  font-size: 10pt;
 `;

@@ -9,6 +9,7 @@ import Location from '../views/Location/Location';
 import BCServices from '../views/BCServices/BCServices';
 import Report from '../views/Report/Report';
 import Settings from '../views/Settings/Settings';
+import AboutContact from '../views/AboutContact/AboutContact';
 
 export default function ViewRouter() {
   return (
