@@ -60,7 +60,7 @@ export const StyledUl = styled.ul`
   padding-left: 3em;
   margin-bottom: 0;
   @media (min-width: 768px){
-    padding-left: 14em;
+    padding-left: 4em;
   }
 `;
 export const StyledLi = styled.li`
