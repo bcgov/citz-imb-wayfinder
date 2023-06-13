@@ -8,6 +8,9 @@ import {
   Wrapper,
   ButtonWrapper,
 } from './home.styles';
+import location from '/geo-alt-fill.svg';
+import report from '/newspaper.svg';
+import services from '/people-fill.svg';
 
 export default function Home() {
   return (
@@ -16,18 +19,24 @@ export default function Home() {
         <NavButton
           path="/location"
           text="Locate a Service"
+          icon={location}
+          hex="#DEF3FB"
         />
       </ButtonWrapper>
       <ButtonWrapper>
         <NavButton
           path="/services"
           text="Find BC Services"
+          icon={services}
+          hex="#EEE0E9"
         />
       </ButtonWrapper>
       <ButtonWrapper>
         <NavButton
           path="/report"
           text="Report an Event"
+          icon={report}
+          hex="#FEF2DF"
         />
       </ButtonWrapper>
     </Wrapper>
