@@ -16,36 +16,36 @@ const useAppService = () => {
 
   return useMemo(() => {
     /**
-     * @summary Get location data from the API and sets it in both localStorage and state if online
+     * @summary Gets location data from the API and sets it in both localStorage and state if online
+     * and sets the app state to localStorage values if Offline
      * @author Dallas Richmond
      */
-    const setOnlineAppData = async () => {
-      try {
-        const data = await axios.get(`${constants.BACKEND_URL}/api/locations`);
-        saveDataToLocalStorage('appData', data);
+    const setAppData = async (isOnline: boolean) => {
+      if (isOnline) {
+        try {
+          const data = await axios.get(`${constants.BACKEND_URL}/api/locations`);
+          saveDataToLocalStorage('appData', data);
+          dispatch({ type: SET_APP_DATA, payload: data });
+        } catch (e) {
+          // eslint-disable-next-line no-console
+          console.error(e);
+        }
+      } else {
+        const data = getDataFromLocalStorage('appData');
         dispatch({ type: SET_APP_DATA, payload: data });
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e);
       }
-    };
-
-    /**
-     * @summary Sets the app state to localStorage values if Offline
-     * @author Dallas Richmond
-     */
-    const setOfflineAppData = () => {
-      const data = getDataFromLocalStorage('appData');
-      dispatch({ type: SET_APP_DATA, payload: data });
     };
 
     /**
      * @summary uses the naviator to get the users current location
      * @author Dallas Richmond
      */
-    const setCurrentLocation = () => {
-      if (navigator.geolocation) {
+    const setCurrentLocation = (isOnline: boolean) => {
+      if (navigator.geolocation && isOnline) {
         navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        const currentLocation = getDataFromLocalStorage('currentLocation');
+        dispatch({ type: SET_CURRENT_LOCATION, payload: currentLocation });
       }
     };
 
@@ -56,6 +56,7 @@ const useAppService = () => {
      * @author Dallas Richmond
      */
     const showPosition = (position: object) => {
+      saveDataToLocalStorage('currentLocation', position);
       dispatch({ type: SET_CURRENT_LOCATION, payload: position });
     };
 
@@ -70,8 +71,7 @@ const useAppService = () => {
     };
 
     return {
-      setOnlineAppData,
-      setOfflineAppData,
+      setAppData,
       setCurrentLocation,
       setLoading,
       state,
