@@ -8,6 +8,7 @@ requests = "*"
 pyuser-agent = "*"
 python-dotenv = "*"
 tqdm = "*"
+mongothon = "*"
 
 [dev-packages]
 

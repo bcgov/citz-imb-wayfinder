@@ -40,8 +40,6 @@ services:
     build:
       context: ./src/frontend-pwa
       dockerfile: Dockerfile
-    environment:
-      - VITE_API_HOSTNAME=${VITE_API_HOSTNAME:-http://localhost:3000}
     networks:
       - wf-network
     ports: 
@@ -56,6 +54,26 @@ services:
       wf-api:
         condition: service_healthy
 
+  #############################################################################################
+  ###                                 Service BC Scraper                                    ###
+  #############################################################################################
+  servicebcscraper:
+    container_name: servicebcscraper
+    build:
+      context: ./src/scraper
+      dockerfile: Dockerfile
+    environment:
+      - POSITION_STACK_API_KEY=${POSITION_STACK_API_KEY}
+      - GEO_API_KEY=${GEO_API_KEY}
+      - SCRAPER_API_KEY=${SCRAPER_API_KEY:-devKey}
+      - WAYFINDER_API_URL=${WAYFINDER_API_URL:-http://wf-api:3000}
+    networks:
+      - wf-network
+    ports:
+      - "3030:3030"
+    depends_on:
+      wf-api:
+        condition: service_healthy
   #############################################################################################
   ###                                       Mongo                                           ###
   #############################################################################################

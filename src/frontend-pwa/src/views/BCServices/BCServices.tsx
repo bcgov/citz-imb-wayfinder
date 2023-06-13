@@ -16,6 +16,7 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import { ServiceListItem, headers } from '../../components/ServicesListItem/ServicesListItem';
 import Mapping from '../../components/Mapping/Mapping';
 import SingleLocation from '../../Type/SingleLocation';
+import useAppService from '../../services/app/useAppService';
 import {
   ContentContainer,
   MapContainer,
@@ -24,19 +25,14 @@ import {
   StyledP,
 } from './bcservices.styles';
 
-type Props = {
-  services: Array<string>;
-  locations: Array<SingleLocation>;
-};
-
-export default function BCServices({
-  services,
-  locations,
-}: Props) {
+export default function BCServices() {
   const [searchQuery, setSearchQuery] = useState('');
-  const filteredServiceSearch = services.filter((item) => item.toLowerCase().match(`${searchQuery.toLowerCase()}`));
-  const filteredLocationSearch = locations.filter((location) => (
-    filteredServiceSearch.some((service) => location.services.indexOf(service) !== -1)
+  const { state } = useAppService();
+  const services = state.appData.data ? state.appData.data.serviceBCServices : [];
+  const locations = state.appData.data ? state.appData.data.serviceBCLocations : [];
+  const filteredServiceSearch = services.filter((item : string) => item.toLowerCase().match(`${searchQuery.toLowerCase()}`));
+  const filteredLocationSearch = locations.filter((location : SingleLocation) => (
+    filteredServiceSearch.some((service : string) => location.services.indexOf(service) !== -1)
   ));
 
   return (
@@ -62,7 +58,7 @@ export default function BCServices({
             borderRadius={false}
           />
           <ListItems headers={headers}>
-            {filteredServiceSearch.map((data, index) => (
+            {filteredServiceSearch.map((data: string, index: number) => (
               <ServiceListItem key={index} service={data} />
             ))}
           </ListItems>
