@@ -41,7 +41,7 @@ export default function BCServices() {
         <MapContainer>
           {navigator.onLine
             ? (
-              <Mapping />
+              <Mapping locations={filteredLocationSearch} />
             )
             : (
               <StyledP>
