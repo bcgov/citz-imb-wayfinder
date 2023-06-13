@@ -8,25 +8,36 @@
 import {
   Link,
 } from 'react-router-dom';
-import { Button } from '../Button/Button';
+import {
+  ButtonCont,
+  ImageCont,
+  TextCont,
+  Image,
+} from './navButton.styles';
 
 export type RoutingLinkProps = {
   path: string;
   text: string;
+  icon: string;
+  hex: string;
 }
 
 export default function NavButton({
   path,
   text,
+  icon,
+  hex,
 }: RoutingLinkProps) {
   return (
-    <Link to={path}>
-      <Button
-        variant="primary"
-        size="lg"
-        disabled={false}
-        text={text}
-      />
+    <Link to={path} style={{ textDecoration: 'none' }}>
+      <ButtonCont hex={hex}>
+        <ImageCont>
+          <Image src={icon} alt={text} />
+        </ImageCont>
+        <TextCont>
+          {text}
+        </TextCont>
+      </ButtonCont>
     </Link>
   );
 }
