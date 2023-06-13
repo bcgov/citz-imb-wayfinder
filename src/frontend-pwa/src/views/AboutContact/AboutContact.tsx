@@ -24,7 +24,7 @@ export default function AboutContact() {
     team: 'Team Wayfinder',
   };
   const info = {
-    aboutTeam: 'This application was created by a team of three Information and Computer System students from Camosun College in summer of 2023. The team consists of',
+    aboutTeam: 'This app was developed as a capstone project for three Camosun college students in the summer of 2023. Their names and roles are:',
     tyler: {
       title: 'Tyler Maloney, Full stack Developer',
       bio: 'Tyler Maloney is an aspiring software developer with a fondness for problem-solving, woodworking, and learning. He has completed a series of self-directed projects, the most impressive of which is a VR FPS written in C#. Tyler also has familiarity with a bevy of languages and their associated tools, such as JavaScript, React, and Python. Tyler\'s soft skills work in fine complement to his technical abilities, as his personable and friendly demeanour helps him create professional relationships with colleagues and clients alike.',
@@ -43,8 +43,8 @@ export default function AboutContact() {
       'All third party libraries are those of their rightful owners or licensees',
       'BC Government theme \u00A9 by the Government of BC',
     ],
-    about: 'The "Wayfinder" application is a mobile application that directs citizens and employees to government services. The Wayfinder proof of concept provides an extensible platform that allows new services and locations to be added as they become available. Another use case for the Wayfinder app is the ability to process application generated analytics data allowing the product team to analyze valuable usage data that will inform the creation of new services that can be delivered using the Wayfinder app.',
-    contact: 'Please don\'t hesitate to reach out to us using the provided contact information below. We welcome any inquiries, feedback, or opportunities for further discussion. We will make every effort to respond to your message in a timely manner. Thank you for considering us, and we look forward to hearing from you soon.',
+    about: 'Wayfinder is an app that points people towards the government services they need. This is a proof of concept that provides an extensible platform to add new services and locations to over time. It is also a powerful analytics tool showing where people are and what they need which can help us know what services to create going forward!',
+    contact: 'Reach out to us and tell us your thoughts! We are building something new and welcome any growth opportunities you can give us. We will do our best to be available and responsive to your feedback. Thank you for being a part of Wayfinder!',
   };
   return (
     <AboutContainer>
