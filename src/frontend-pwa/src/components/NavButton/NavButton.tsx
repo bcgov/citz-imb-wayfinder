@@ -2,7 +2,9 @@
  * @summary A reusable nav button component used for routing to different pages
  * @param path - is the path the Link will route to
  * @param text - is the text displayed on the button
- * @type {(path: string, text: string)}
+ * @param hex - HexValue for the Nav Button background
+ * @param icon - Image to place in Nav Container
+ * @type {(path: string, text: string, icon: string, hex: string)}
  * @author Dallas Richmond
  */
 import {
