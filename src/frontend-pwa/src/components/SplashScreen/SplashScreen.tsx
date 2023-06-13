@@ -15,24 +15,22 @@ import {
 
 export default function SplashScreen() {
   const {
-    setOnlineAppData, setOfflineAppData, setCurrentLocation, setLoading,
+    setCurrentLocation, setLoading, setAppData,
   } = useAppService();
 
   useEffect(() => {
-    // Todo: Need to properly implement Online Offline. Navigator.onLine won't be enough
-    // Change setOnlineAppData and setOfflineAppData to setAppData and pass in a isOnline prop
     OnlineCheck()
-      .then((online) => {
-        if (online) {
-          setOnlineAppData();
-          setCurrentLocation();
-        } else if (!online) {
-          setOfflineAppData();
+      .then((isOnline) => {
+        if (isOnline === true) {
+          setAppData(isOnline);
+          setCurrentLocation(isOnline);
+        } else if (isOnline === false) {
+          setAppData(isOnline);
+          setCurrentLocation(isOnline);
         }
-        console.log(online);
       }).catch((error) => {
         // eslint-disable-next-line no-console
-        console.error(error);
+        console.log(error);
       });
     setLoading(false);
   });
