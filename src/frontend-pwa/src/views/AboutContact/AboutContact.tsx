@@ -12,6 +12,7 @@ import {
   Link,
   StyledUl,
   StyledLi,
+  StyledHeaderThree,
 } from './aboutcontact.styles';
 import constants from '../../constants/Constants';
 import pkg from '../../../package.json';
@@ -28,13 +29,18 @@ export default function AboutContact() {
   };
   const info = {
     aboutTeam: 'This application was created by a team of three Information and Computer System students from Camosun College in summer of 2023. The team consists of',
-    teamList: [
-      'Frontend Developers: Tyler\u00A0M & Dallas\u00A0R',
-      'Backend Developer: Matthew\u00A0L',
-      'UI/UX: Jesse\u00A0H',
-      'Product Owner: Robert\u00A0K',
-      'Technical Owner: Adam\u00A0K',
-    ],
+    tyler: {
+      title: 'Tyler Maloney, Full stack Developer',
+      bio: 'Tyler Maloney is an aspiring software developer with a fondness for problem-solving, woodworking, and learning. He has completed a series of self-directed projects, the most impressive of which is a VR FPS written in C#. Tyler also has familiarity with a bevy of languages and their associated tools, such as JavaScript, React, and Python. Tyler\'s soft skills work in fine complement to his technical abilities, as his personable and friendly demeanour helps him create professional relationships with colleagues and clients alike.',
+    },
+    dallas: {
+      title: 'Dallas Richmond, Frontend Lead',
+      bio: 'Dallas Richmond has a diverse education in astronomy, physics, and information systems. He switched from astronomy and physics to pursue the ICS diploma at Camosun College due to his passion for coding and its problem-solving potential. He enhanced his React and back-end development skills during his co-op at Gist Applications. Dallas is proficient in C++, C#, Java, JavaScript, HTML and CSS. He is a quick learner, a team player, and committed to continuously improving his skills as he anticipates the future of technology',
+    },
+    matthew: {
+      title: 'Matthew Logan, Backend Lead',
+      bio: 'Matthew Logan is a former Red Seal chef turned full-stack developer. Since attending Camosun College, Matthew has gained skills in web development, backend APIs and databases. Transitioning from chef to full-stack developer demonstrates his ability to pivot and adapt to new challenges. He is committed to continuous learning and improving his skills to stay current with industry trends. Matthew is a team player who collaborates effectively to deliver high-quality solutions.',
+    },
     disclaimer: [
       'This project is open sourced for fair use, with attribution',
       'this work carries no warranty or implied guarantee',
@@ -58,17 +64,32 @@ export default function AboutContact() {
         <StyledP>
           {info.aboutTeam}
         </StyledP>
-        <StyledUl>
-          {info.teamList.map((person, index) => <StyledLi key={index}>{person}</StyledLi>)}
-        </StyledUl>
-        <StyledHeaderTwo>Contact</StyledHeaderTwo>
+        <StyledHeaderThree>
+          {info.tyler.title}
+        </StyledHeaderThree>
         <StyledP>
-          {info.contact}
+          {info.tyler.bio}
+        </StyledP>
+        <StyledHeaderThree>
+          {info.dallas.title}
+        </StyledHeaderThree>
+        <StyledP>
+          {info.dallas.bio}
+        </StyledP>
+        <StyledHeaderThree>
+          {info.matthew.title}
+        </StyledHeaderThree>
+        <StyledP>
+          {info.matthew.bio}
         </StyledP>
         <StyledHeaderTwo>Disclaimer</StyledHeaderTwo>
         <StyledUl>
           {info.disclaimer.map((point, index) => <StyledLi key={index}>{point}</StyledLi>)}
         </StyledUl>
+        <StyledHeaderTwo>Contact</StyledHeaderTwo>
+        <StyledP>
+          {info.contact}
+        </StyledP>
         <StyledAddress>
           Email:&nbsp;
           <Link href={`mailto:${contact.email}?subject='Wayfinder App'`}>{contact.team}</Link>

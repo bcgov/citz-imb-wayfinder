@@ -41,6 +41,13 @@ export const StyledHeaderTwo = styled.h2`
   font-size: 14pt;
 `;
 
+export const StyledHeaderThree = styled.h3`
+  font-size: 12pt;
+  text-align: left;
+  width: 100%;
+  margin: 0.5em 0;
+`;
+
 export const StyledAddress = styled.address`
   ${typography.toString()}
   margin-top: 2em;
