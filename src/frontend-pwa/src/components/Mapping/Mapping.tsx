@@ -100,7 +100,7 @@ import {
 import SingleLocation from '../../Type/SingleLocation';
 import LocationsArray from '../../Type/LocationsArray';
 
-interface MappingProps {
+type MappingProps = {
   locations: LocationsArray;
 }
 

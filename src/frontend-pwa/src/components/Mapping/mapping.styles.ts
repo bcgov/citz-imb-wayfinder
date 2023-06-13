@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 // import styled from '@emotion/styled';
 
 // // import typography from '../../typography';
@@ -15,12 +16,12 @@
 
 // `;
 import styled from '@emotion/styled';
-import typography from 'typography'
+import typography from 'typography';
 import {
   MapContainer,
   TileLayer,
   Marker,
-  Popup
+  Popup,
 } from 'react-leaflet';
 
 export const MapWrapperDiv = styled.div`
