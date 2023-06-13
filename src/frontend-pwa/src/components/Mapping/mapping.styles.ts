@@ -28,7 +28,6 @@ export const MapWrapperDiv = styled.div`
     ${typography.toString()}
     width: 100%;
     height: 100%;
-    
 `;
 
 export const StyledMapContainer = styled(MapContainer)`
