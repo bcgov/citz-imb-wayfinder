@@ -18,7 +18,7 @@ export default function Home() {
       <ButtonWrapper>
         <NavButton
           path="/location"
-          text="Locate a Service"
+          text="Find an Office"
           icon={location}
           hex="#DEF3FB"
         />
