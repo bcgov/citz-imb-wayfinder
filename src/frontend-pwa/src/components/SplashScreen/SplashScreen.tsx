@@ -18,7 +18,7 @@ export default function SplashScreen() {
     setCurrentLocation,
     setLoading,
     setAppData,
-    setEulaState,
+    initializeEulaState,
   } = useAppService();
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function SplashScreen() {
       .then((Online) => {
         setAppData(Online);
         setCurrentLocation(Online);
-        setEulaState('checkEula');
+        initializeEulaState();
         setLoading(false);
       }).catch(() => {});
   });
