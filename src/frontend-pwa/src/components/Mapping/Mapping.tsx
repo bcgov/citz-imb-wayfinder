@@ -1,99 +1,122 @@
+/**
+ * TODO:    - resize "Marker" icon
+ *          - finalize what data will be shown within popup
+ *          - move some types to constants
+ *
+ * @summary - Visualize user location and a list of BCservice locations onto map of British Columbia
+ *          - provides limited contact information for relevant location via popup
+ *          - Map does not render offline
+ *
+ * @param   MappingProps - passes in {lat, long} as currentLocationType, and passes
+ *                       a list of BCService locations as a LocationsArray
+ * @type    {(locations: LocationsArray, currentLocation: CurrentLocationType)}
+ *
+ * @param   CurrentLocationType - passes the navigator's lat/long as a single object
+ * @type    {(lat: string, long: string)}
+ *
+ * @author  Tyler Maloney
+ */
 /* eslint-disable global-require */
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/images/marker-shadow.png';
-import * as Leaflet from 'leaflet';
-
-import iconUrl from '/marker-icon.png';
-import redIconUrl from '/marker-icon-2x-red.png';
-
 import {
   // MapContainer,
   TileLayer,
   Marker,
   Popup,
 } from 'react-leaflet';
+import * as Leaflet from 'leaflet';
+import baseIconImage from '/marker-icon.png';
+import baseIconImageMobile from '/marker-icon-2x.png';
+import redIconImage from '/marker-icon-red.png';
+import redIconImageMobile from '/marker-icon-2x-red.png';
 
 import {
   MapWrapperDiv,
   StyledPopup,
   StyledMapContainer,
-  StyledMarker,
+  // StyledMarker,
 } from './mapping.styles';
 import SingleLocation from '../../Type/SingleLocation';
 import LocationsArray from '../../Type/LocationsArray';
 
-type MappingProps = {
-  locations: LocationsArray;
+type CurrentLocationType = {
+  lat: string;
+  long: string;
 }
 
-export const newIcon = new Leaflet.Icon({
-  iconUrl,
+type MappingProps = {
+  locations: LocationsArray;
+  currentLocation: CurrentLocationType;
+}
+
+const baseIcon = Leaflet.icon({
+  iconUrl: baseIconImage,
+  iconRetinaUrl: baseIconImageMobile,
   iconAnchor: [5, 55],
   popupAnchor: [10, -44],
   iconSize: [25, 55],
 });
 
-export const redIcon = new Leaflet.Icon({
-  redIconUrl,
+const redIcon = Leaflet.icon({
+  iconUrl: redIconImage,
+  iconRetinaUrl: redIconImageMobile,
   iconAnchor: [5, 55],
   popupAnchor: [10, -44],
   iconSize: [25, 55],
 });
 
-export default function Mapping({ locations }: MappingProps) {
+export default function Mapping({ locations, currentLocation }: MappingProps) {
+  const lat = parseFloat(currentLocation?.lat);
+  const long = parseFloat(currentLocation?.long);
+
   return (
     <div>
+      { !isNaN(lat)
+      && (
       <MapWrapperDiv>
         <StyledMapContainer
-          center={[48.4284, -123.3656]}
+          center={[lat, long]}
           zoom={12}
           scrollWheelZoom
-          style={{ height: '80vh', width: '80wh' }}
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <StyledMarker icon={redIcon} position={[48.4284, -123.3656]}>
+          <Marker icon={redIcon} position={[lat, long]}>
             <Popup>
-              This is the lat/long center of Victoria, British Columbia!
-              <br />
-              <h1>oh buddy!</h1>
-              <br />
-              <br />
-              <br />
-              <br />
+              <h4>You are here!</h4>
             </Popup>
-          </StyledMarker>
+          </Marker>
           {locations.map((item: SingleLocation, index: number) => (
             // eslint-disable-next-line react/no-array-index-key
-            <Marker icon={newIcon} key={index} position={[item.latitude, item.longitude]}>
+            <Marker icon={baseIcon} key={index} position={[item.latitude, item.longitude]}>
               <StyledPopup>
                 <h3>
-                  Location:
+                  Location:&nbsp;
                   {item.locale}
                 </h3>
                 <p>
-                  Address:
+                  Address:&nbsp;
                   {item.address.label}
                 </p>
                 <p>Contact Info:</p>
                 <ul>
                   <li>
-                    Phone Number:
-                    {/* {item.contact.phone} */}
-                  </li>
-                  <li>
-                    Fax Number:
-                    {/* {item.contact.fax} */}
+                    Phone Number:&nbsp;
+                    {item.contact?.phone}
                   </li>
                 </ul>
-                <p>Services:</p>
+                <a href={item.website.toString()} target="_blank" rel="noopener noreferrer">
+                  Link to website
+                </a>
               </StyledPopup>
             </Marker>
           ))}
         </StyledMapContainer>
       </MapWrapperDiv>
+      )}
     </div>
   );
 }
