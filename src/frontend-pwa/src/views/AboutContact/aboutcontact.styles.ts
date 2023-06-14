@@ -64,10 +64,10 @@ export const StyledUl = styled.ul`
   ${typography.toString()}
   width: 100%;
   margin: 0;
-  padding-left: 3em;
+  padding-left: 1em;
   margin-bottom: 0;
   @media (min-width: 768px){
-    padding-left: 4em;
+    padding-left: 2em;
   }
 `;
 export const StyledLi = styled.li`
