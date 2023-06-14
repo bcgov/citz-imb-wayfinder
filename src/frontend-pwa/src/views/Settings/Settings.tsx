@@ -11,6 +11,7 @@ import {
   Title,
 } from './settings.styles';
 import file from '/file-text.svg';
+import person from '/person-lines-fill.svg';
 
 export default function Settings() {
   const handleSliderChange = () => {
@@ -55,6 +56,14 @@ export default function Settings() {
         <NavButton
           path="/settings/about"
           text="About/Contact"
+          hex="#DBE1EB"
+          icon={person}
+        />
+      </Section>
+      <Section>
+        <NavButton
+          path="/eula"
+          text="License Agreement"
           hex="#DBE1EB"
           icon={file}
         />
