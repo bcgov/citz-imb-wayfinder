@@ -15,7 +15,10 @@ import {
 
 export default function SplashScreen() {
   const {
-    setCurrentLocation, setLoading, setAppData, setEulaState,
+    setCurrentLocation,
+    setLoading,
+    setAppData,
+    setEulaState,
   } = useAppService();
 
   useEffect(() => {
@@ -24,11 +27,8 @@ export default function SplashScreen() {
         setAppData(Online);
         setCurrentLocation(Online);
         setEulaState('checkEula');
-      }).catch((error) => {
-        // eslint-disable-next-line no-console
-        console.log(error);
-      });
-    setLoading(false);
+        setLoading(false);
+      }).catch(() => {});
   });
 
   return (
