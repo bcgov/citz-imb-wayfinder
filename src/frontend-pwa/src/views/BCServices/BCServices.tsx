@@ -27,8 +27,8 @@ import {
 export default function BCServices() {
   const [searchQuery, setSearchQuery] = useState('');
   const { state } = useAppService();
-  const services = state.appData.data ? state.appData.data.serviceBCServices : [];
-  const locations = state.appData.data ? state.appData.data.serviceBCLocations : [];
+  const services = state.appData?.data ? state.appData.data.serviceBCServices : [];
+  const locations = state.appData?.data ? state.appData.data.serviceBCLocations : [];
   const filteredServiceSearch = services.filter((item : string) => item.toLowerCase().match(`${searchQuery.toLowerCase()}`));
   const filteredLocationSearch = locations.filter((location : SingleLocation) => (
     filteredServiceSearch.some((service : string) => location.services.includes(service))
