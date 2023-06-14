@@ -78,18 +78,19 @@ const useAppService = () => {
      * @type {( value: boolean )}
      * @author Dallas Richmond
      */
-    const setEulaState = (check: string) => {
-      if (check === 'checkEula') {
-        if (localStorageKeyExists(constants.EULA_ACCEPTED_KEY)) {
-          // eslint-disable-next-line max-len
-          dispatch({ type: SET_EULA, payload: getDataFromLocalStorage(constants.EULA_ACCEPTED_KEY) });
-        } else {
-          saveDataToLocalStorage(constants.EULA_ACCEPTED_KEY, false);
-          dispatch({ type: SET_EULA, payload: false });
-        }
-      } else if (check === 'setEula') {
-        saveDataToLocalStorage(constants.EULA_ACCEPTED_KEY, true);
-        dispatch({ type: SET_EULA, payload: true });
+    const setEulaState = () => {
+      saveDataToLocalStorage(constants.EULA_ACCEPTED_KEY, true);
+      dispatch({ type: SET_EULA, payload: true });
+    };
+
+    const initializeEulaState = () => {
+      if (localStorageKeyExists(constants.EULA_ACCEPTED_KEY)) {
+        dispatch(
+          { type: SET_EULA, payload: getDataFromLocalStorage(constants.EULA_ACCEPTED_KEY) },
+        );
+      } else {
+        saveDataToLocalStorage(constants.EULA_ACCEPTED_KEY, false);
+        dispatch({ type: SET_EULA, payload: false });
       }
     };
 
@@ -97,6 +98,7 @@ const useAppService = () => {
       setAppData,
       setCurrentLocation,
       setLoading,
+      initializeEulaState,
       setEulaState,
       state,
     };

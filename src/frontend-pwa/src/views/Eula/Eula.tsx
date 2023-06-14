@@ -116,7 +116,7 @@ export default function Eula() {
                 defaultChecked={termAgreement}
               />
               <Button
-                handleClick={() => setEulaState('setEula')}
+                handleClick={() => setEulaState()}
                 text="Submit"
                 variant="primary"
                 size="md"
