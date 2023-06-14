@@ -35,7 +35,7 @@ export default function CalcDistance({
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const distance = earthRadius * c;
 
-    return (`${distance.toFixed(2)} KM`);
+    return `${distance.toFixed(2)} KM`;
   }
   return 'N/A';
 }

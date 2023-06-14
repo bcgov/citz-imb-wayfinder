@@ -33,9 +33,4 @@ export const getDataFromLocalStorage = (key: string) => {
  * @returns boolean values
  * @author Dallas Richmond
  */
-export const localStorageKeyExists = (key: string) => {
-  if (getDataFromLocalStorage(key) === null) {
-    return false;
-  }
-  return true;
-};
+export const localStorageKeyExists = (key: string) => getDataFromLocalStorage(key) !== null;
