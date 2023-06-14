@@ -20,19 +20,22 @@ export default function CalcDistance({
 }: CalcDistanceProps): string {
   const { state } = useAppService();
 
-  const earthRadius = 6371;
+  if (state.currentLocation.lat && state.currentLocation.lat !== '' && state.currentLocation.long !== '') {
+    const earthRadius = 6371;
 
-  const currentLatRad = Math.PI / 180 * (state.currentLocation?.lat || 0);
-  const currentLongRad = Math.PI / 180 * (state.currentLocation?.long || 0);
-  const destinationLatRad = Math.PI / 180 * itemData.latitude;
-  const destinationLongRad = Math.PI / 180 * itemData.longitude;
+    const currentLatRad = Math.PI / 180 * (parseFloat(state.currentLocation.lat));
+    const currentLongRad = Math.PI / 180 * (parseFloat(state.currentLocation.long));
+    const destinationLatRad = Math.PI / 180 * itemData.latitude;
+    const destinationLongRad = Math.PI / 180 * itemData.longitude;
 
-  const dLat = destinationLatRad - currentLatRad;
-  const dLon = destinationLongRad - currentLongRad;
+    const dLat = destinationLatRad - currentLatRad;
+    const dLon = destinationLongRad - currentLongRad;
 
-  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(currentLatRad) * Math.cos(destinationLatRad) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  const distance = earthRadius * c;
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(currentLatRad) * Math.cos(destinationLatRad) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = earthRadius * c;
 
-  return (distance.toFixed(2));
+    return (distance.toFixed(2));
+  }
+  return 'Distance Unavailable';
 }

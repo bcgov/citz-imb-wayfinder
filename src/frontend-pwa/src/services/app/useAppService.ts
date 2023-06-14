@@ -42,12 +42,12 @@ const useAppService = () => {
      */
     const setCurrentLocation = async (isOnline: boolean) => {
       // eslint-disable-next-line quote-props
-      let currentLocation = { lat: 0, long: 0 };
+      let currentLocation = { lat: '', long: '' };
       try {
         if (navigator.geolocation && isOnline === true) {
           navigator.geolocation.getCurrentPosition((position) => {
-            currentLocation.lat = (position.coords.latitude);
-            currentLocation.long = (position.coords.longitude);
+            currentLocation.lat = (position.coords.latitude).toFixed(5);
+            currentLocation.long = (position.coords.longitude).toFixed(5);
             saveDataToLocalStorage('currentLocation', currentLocation);
             dispatch({ type: SET_CURRENT_LOCATION, payload: currentLocation });
           });
