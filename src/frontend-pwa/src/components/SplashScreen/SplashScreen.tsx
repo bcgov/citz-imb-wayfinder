@@ -20,13 +20,13 @@ export default function SplashScreen() {
 
   useEffect(() => {
     OnlineCheck()
-      .then((isOnline) => {
-        if (isOnline === true) {
-          setAppData(isOnline);
-          setCurrentLocation(isOnline);
-        } else if (isOnline === false) {
-          setAppData(isOnline);
-          setCurrentLocation(isOnline);
+      .then((Online) => {
+        if (Online === true) {
+          setAppData(Online);
+          setCurrentLocation(Online);
+        } else if (Online === false) {
+          setAppData(Online);
+          setCurrentLocation(Online);
         }
       }).catch((error) => {
         // eslint-disable-next-line no-console
