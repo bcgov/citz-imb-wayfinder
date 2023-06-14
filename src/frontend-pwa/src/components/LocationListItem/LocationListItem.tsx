@@ -1,15 +1,13 @@
 /**
  * @summary A reusable component that returns a table row item to be displayed in a list
  * @param itemData - is the data passed in to be displayed in each list item
- * @param currentLocation - is the current location of the user's device
- * @type {(itemData : SingleLocation, currentLocation : CurrentLocation)}
+ * @type {(itemData : SingleLocation)}
  * @author Dallas Richmond
  */
 
 /* eslint-disable prefer-template */
 /* eslint-disable max-len */
 import SingleLocation from '../../Type/SingleLocation';
-import CurrentLocation from '../../Type/CurrentLocation';
 import CalcDistance from '../../utils/CalcDistance';
 
 import {
@@ -20,12 +18,10 @@ import {
 
 export type ListItemProps = {
   itemData: SingleLocation;
-  currentLocation: CurrentLocation;
 }
 
 export default function ListItem({
   itemData,
-  currentLocation,
 }: ListItemProps) {
   return (
     <TableRow>
@@ -36,7 +32,6 @@ export default function ListItem({
         <TableDataWrapper>
           {CalcDistance({
             itemData,
-            currentLocation,
           }) + ' KM'}
         </TableDataWrapper>
       </TableData>

@@ -2,29 +2,28 @@
  * @summary Function to calculate the distance in KM from the
  * device's current location to a service location
  * @param itemData - is the data passed in to be displayed in each list item
- * @param currentLocation - is the current location of the user's device
  * @returns {string} - is the calculated distance in KM as a string
- * @type {(itemData : SingleLocation, currentLocation : CurrentLocation) => string}
+ * @type {(itemData : SingleLocation) => string}
  * @author Dallas Richmond
  */
 
 /* eslint-disable max-len */
 import SingleLocation from '../Type/SingleLocation';
-import CurrentLocation from '../Type/CurrentLocation';
+import useAppService from '../services/app/useAppService';
 
 export type CalcDistanceProps = {
   itemData: SingleLocation;
-  currentLocation: CurrentLocation;
 }
 
 export default function CalcDistance({
   itemData,
-  currentLocation,
 }: CalcDistanceProps): string {
+  const { state } = useAppService();
+
   const earthRadius = 6371;
 
-  const currentLatRad = Math.PI / 180 * (currentLocation.coords?.latitude || 0);
-  const currentLongRad = Math.PI / 180 * (currentLocation.coords?.longitude || 0);
+  const currentLatRad = Math.PI / 180 * (state.currentLocation?.lat || 0);
+  const currentLongRad = Math.PI / 180 * (state.currentLocation?.long || 0);
   const destinationLatRad = Math.PI / 180 * itemData.latitude;
   const destinationLongRad = Math.PI / 180 * itemData.longitude;
 

@@ -40,24 +40,25 @@ const useAppService = () => {
      * @summary uses the naviator to get the users current location
      * @author Dallas Richmond
      */
-    const setCurrentLocation = (isOnline: boolean) => {
-      if (navigator.geolocation && isOnline) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-      } else {
-        const currentLocation = getDataFromLocalStorage('currentLocation');
-        dispatch({ type: SET_CURRENT_LOCATION, payload: currentLocation });
+    const setCurrentLocation = async (isOnline: boolean) => {
+      // eslint-disable-next-line quote-props
+      let currentLocation = { lat: 0, long: 0 };
+      try {
+        if (navigator.geolocation && isOnline === true) {
+          navigator.geolocation.getCurrentPosition((position) => {
+            currentLocation.lat = (position.coords.latitude);
+            currentLocation.long = (position.coords.longitude);
+            saveDataToLocalStorage('currentLocation', currentLocation);
+            dispatch({ type: SET_CURRENT_LOCATION, payload: currentLocation });
+          });
+        } else if (!navigator.geolocation || isOnline === false) {
+          currentLocation = getDataFromLocalStorage('currentLocation');
+          dispatch({ type: SET_CURRENT_LOCATION, payload: currentLocation });
+        }
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.log(error);
       }
-    };
-
-    /**
-     * @summary Sets the state to the position
-     * @param position is the coordinates retrieved from navigator.geolocation
-     * @type {( position: object )}
-     * @author Dallas Richmond
-     */
-    const showPosition = (position: object) => {
-      saveDataToLocalStorage('currentLocation', position);
-      dispatch({ type: SET_CURRENT_LOCATION, payload: position });
     };
 
     /**

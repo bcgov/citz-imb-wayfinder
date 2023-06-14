@@ -6,7 +6,12 @@
  * @author Dallas Richmond
  */
 export const saveDataToLocalStorage = (key: string, data: any) => {
-  localStorage.setItem(key, JSON.stringify(data));
+  try {
+    localStorage.setItem(key, JSON.stringify(data));
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(error);
+  }
 };
 
 /**
