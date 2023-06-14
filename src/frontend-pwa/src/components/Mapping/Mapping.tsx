@@ -16,7 +16,6 @@
  *
  * @author  Tyler Maloney
  */
-/* eslint-disable global-require */
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/images/marker-shadow.png';
 import {
@@ -34,7 +33,6 @@ import {
   MapWrapperDiv,
   StyledPopup,
   StyledMapContainer,
-  // StyledMarker,
 } from './mapping.styles';
 import SingleLocation from '../../Type/SingleLocation';
 import LocationsArray from '../../Type/LocationsArray';
