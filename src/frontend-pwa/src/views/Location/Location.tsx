@@ -16,8 +16,7 @@ import {
 
 export default function Location() {
   const { state } = useAppService();
-  const locations = state.appData.data ? state.appData.data.serviceBCLocations : [];
-  const currentLocation = state.currentLocation ? state.currentLocation : null;
+  const locations = state.appData?.data ? state.appData.data.serviceBCLocations : [];
 
   return (
     <LocationViewWrapper>
@@ -29,7 +28,7 @@ export default function Location() {
       >
         {locations.map((data: SingleLocation, index: number) => (
           // eslint-disable-next-line react/no-array-index-key
-          <LocationListItem itemData={data} key={index} currentLocation={currentLocation} />
+          <LocationListItem itemData={data} key={index} />
         ))}
       </ListItems>
     </LocationViewWrapper>

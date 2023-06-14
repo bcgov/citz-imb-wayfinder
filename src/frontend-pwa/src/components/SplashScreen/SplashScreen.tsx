@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import logo from '/bc-logo-vertical.svg';
 import Spinner from '../Spinner/Spinner';
 import useAppService from '../../services/app/useAppService';
+import OnlineCheck from '../../utils/OnlineCheck';
 import {
   SplashScreenWrapper,
   Image,
@@ -14,18 +15,18 @@ import {
 
 export default function SplashScreen() {
   const {
-    state, setOnlineAppData, setOfflineAppData, setCurrentLocation, setLoading,
+    setCurrentLocation, setLoading, setAppData,
   } = useAppService();
 
   useEffect(() => {
-    // Todo: Need to properly implement Online Offline. Navigator.onLine won't be enough
-    // Change setOnlineAppData and setOfflineAppData to setAppData and pass in a isOnline prop
-    if (navigator.onLine && Object.keys(state.appData).length === 0) {
-      setOnlineAppData();
-      setCurrentLocation();
-    } else if (Object.keys(state.appData).length === 0) {
-      setOfflineAppData();
-    }
+    OnlineCheck()
+      .then((Online) => {
+        setAppData(Online);
+        setCurrentLocation(Online);
+      }).catch((error) => {
+        // eslint-disable-next-line no-console
+        console.log(error);
+      });
     setLoading(false);
   });
 

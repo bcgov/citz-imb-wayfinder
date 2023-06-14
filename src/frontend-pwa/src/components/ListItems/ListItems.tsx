@@ -2,7 +2,7 @@
  * @summary A reusable component that creates a list of ListItem components
  * @param headers - List of headers to display at top of list
  * @param children - All items to render into the List
- * @type {(items : Array<SingleLocation>, currentLocation : CurrentLocation)}
+ * @type {(items : Array<SingleLocation>)}
  * @author Dallas Richmond
  */
 
