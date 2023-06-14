@@ -5,7 +5,7 @@ type SingleLocation = {
   };
   services: [String];
   address: {
-     province: String;
+    province: String;
     street?: String;
     region?: String;
     county?: String;
