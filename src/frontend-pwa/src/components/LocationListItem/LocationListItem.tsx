@@ -4,11 +4,10 @@
  * @type {(itemData : SingleLocation)}
  * @author Dallas Richmond
  */
-
-/* eslint-disable prefer-template */
-/* eslint-disable max-len */
 import SingleLocation from '../../Type/SingleLocation';
 import CalcDistance from '../../utils/CalcDistance';
+import { localStorageKeyExists } from '../../utils/AppLocalStorage';
+import constants from '../../constants/Constants';
 
 import {
   TableData,
@@ -23,6 +22,8 @@ export type ListItemProps = {
 export default function ListItem({
   itemData,
 }: ListItemProps) {
+  const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
+
   return (
     <TableRow>
       <TableData>
@@ -30,9 +31,9 @@ export default function ListItem({
       </TableData>
       <TableData>
         <TableDataWrapper>
-          {CalcDistance({
+          {geolocationKnown ? CalcDistance({
             itemData,
-          }) + ' KM'}
+          }) : ''}
         </TableDataWrapper>
       </TableData>
     </TableRow>

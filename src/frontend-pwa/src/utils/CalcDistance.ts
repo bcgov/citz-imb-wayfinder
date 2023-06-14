@@ -20,7 +20,7 @@ export default function CalcDistance({
 }: CalcDistanceProps): string {
   const { state } = useAppService();
 
-  if (state.currentLocation.lat && state.currentLocation.lat !== '' && state.currentLocation.long !== '') {
+  if (state.currentLocation.lat && state.currentLocation.long) {
     const earthRadius = 6371;
 
     const currentLatRad = Math.PI / 180 * (parseFloat(state.currentLocation.lat));
@@ -35,7 +35,7 @@ export default function CalcDistance({
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const distance = earthRadius * c;
 
-    return (distance.toFixed(2));
+    return (`${distance.toFixed(2)} KM`);
   }
-  return 'Distance Unavailable';
+  return 'N/A';
 }

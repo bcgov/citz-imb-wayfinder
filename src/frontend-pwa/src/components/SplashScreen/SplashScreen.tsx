@@ -21,13 +21,8 @@ export default function SplashScreen() {
   useEffect(() => {
     OnlineCheck()
       .then((Online) => {
-        if (Online === true) {
-          setAppData(Online);
-          setCurrentLocation(Online);
-        } else if (Online === false) {
-          setAppData(Online);
-          setCurrentLocation(Online);
-        }
+        setAppData(Online);
+        setCurrentLocation(Online);
       }).catch((error) => {
         // eslint-disable-next-line no-console
         console.log(error);

@@ -24,14 +24,14 @@ const useAppService = () => {
       if (isOnline) {
         try {
           const data = await axios.get(`${constants.BACKEND_URL}/api/locations`);
-          saveDataToLocalStorage('appData', data);
+          saveDataToLocalStorage(constants.APP_DATA_KEY, data);
           dispatch({ type: SET_APP_DATA, payload: data });
         } catch (e) {
           // eslint-disable-next-line no-console
           console.error(e);
         }
       } else {
-        const data = getDataFromLocalStorage('appData');
+        const data = getDataFromLocalStorage(constants.APP_DATA_KEY);
         dispatch({ type: SET_APP_DATA, payload: data });
       }
     };
@@ -41,18 +41,17 @@ const useAppService = () => {
      * @author Dallas Richmond
      */
     const setCurrentLocation = async (isOnline: boolean) => {
-      // eslint-disable-next-line quote-props
       let currentLocation = { lat: '', long: '' };
       try {
-        if (navigator.geolocation && isOnline === true) {
+        if (navigator.geolocation && isOnline) {
           navigator.geolocation.getCurrentPosition((position) => {
             currentLocation.lat = (position.coords.latitude).toFixed(5);
             currentLocation.long = (position.coords.longitude).toFixed(5);
-            saveDataToLocalStorage('currentLocation', currentLocation);
+            saveDataToLocalStorage(constants.CURRENT_LOCATION_KEY, currentLocation);
             dispatch({ type: SET_CURRENT_LOCATION, payload: currentLocation });
           });
-        } else if (!navigator.geolocation || isOnline === false) {
-          currentLocation = getDataFromLocalStorage('currentLocation');
+        } else {
+          currentLocation = getDataFromLocalStorage(constants.CURRENT_LOCATION_KEY);
           dispatch({ type: SET_CURRENT_LOCATION, payload: currentLocation });
         }
       } catch (error) {
