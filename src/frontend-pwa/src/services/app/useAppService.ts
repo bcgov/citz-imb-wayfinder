@@ -73,9 +73,7 @@ const useAppService = () => {
     };
 
     /**
-     * @summary Used to set eula state to true or false within the app
-     * @param value is a boolean value which determines if the eula is accepted or not
-     * @type {( value: boolean )}
+     * @summary Used to set eula state to true
      * @author Dallas Richmond
      */
     const setEulaState = () => {
@@ -83,6 +81,10 @@ const useAppService = () => {
       dispatch({ type: SET_EULA, payload: true });
     };
 
+    /**
+     * @summary Used to initialize eula state from localstorage, otherwise to false
+     * @author Dallas Richmond
+     */
     const initializeEulaState = () => {
       if (localStorageKeyExists(constants.EULA_ACCEPTED_KEY)) {
         dispatch(
