@@ -29,18 +29,19 @@ export default function BCServices() {
   const { state } = useAppService();
   const services = state.appData?.data ? state.appData.data.serviceBCServices : [];
   const locations = state.appData?.data ? state.appData.data.serviceBCLocations : [];
-  const filteredServiceSearch = services.filter((item : string) => item.toLowerCase().match(`${searchQuery.toLowerCase()}`));
+  const { lat, long } = state.currentLocation;
+  const filteredServiceSearch = services.filter((item : string) => item.toLowerCase().match(`${searchQuery.toLowerCase().trim()}`));
   const filteredLocationSearch = locations.filter((location : SingleLocation) => (
     filteredServiceSearch.some((service : string) => location.services.includes(service))
   ));
-
+  const currentLocation = { lat, long };
   return (
     <ViewContainer>
       <ContentContainer>
         <MapContainer>
           {navigator.onLine
             ? (
-              <Mapping locations={filteredLocationSearch} />
+              <Mapping locations={filteredLocationSearch} currentLocation={currentLocation} />
             )
             : (
               <StyledP>
