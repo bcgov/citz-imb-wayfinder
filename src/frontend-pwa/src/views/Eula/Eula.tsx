@@ -9,13 +9,11 @@ import { useState } from 'react';
 import { Button } from '../../components/Button/Button';
 import { StyledContainer, StyledOuterDiv, StyledFieldSetDiv } from './eula.styles';
 import Toggle from '../../components/Toggle/Toggle';
+import useAppService from '../../services/app/useAppService';
 
-export type EulaProps = {
-  setEulaAccepted: (eulaAccepted: boolean) => void;
-};
-
-export default function Eula({ setEulaAccepted }: EulaProps) {
+export default function Eula() {
   const [termAgreement, setTermAgreement] = useState(false);
+  const { setEulaState } = useAppService();
   const handleConsentChange = () => {
     setTermAgreement(!termAgreement);
   };
@@ -117,7 +115,7 @@ export default function Eula({ setEulaAccepted }: EulaProps) {
             defaultChecked={termAgreement}
           />
           <Button
-            handleClick={() => setEulaAccepted(true)}
+            handleClick={() => setEulaState('setEula')}
             text="Submit"
             variant="primary"
             size="md"

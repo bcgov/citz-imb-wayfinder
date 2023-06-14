@@ -3,9 +3,11 @@ import axios from 'axios';
 import { AppContext } from '../../providers/AppProvider';
 import constants from '../../constants/Constants';
 import AppActionType from './AppActions';
-import { saveDataToLocalStorage, getDataFromLocalStorage } from '../../utils/AppLocalStorage';
+import { saveDataToLocalStorage, getDataFromLocalStorage, localStorageKeyExists } from '../../utils/AppLocalStorage';
 
-const { SET_APP_DATA, SET_LOADING, SET_CURRENT_LOCATION } = AppActionType;
+const {
+  SET_APP_DATA, SET_LOADING, SET_CURRENT_LOCATION, SET_EULA,
+} = AppActionType;
 
 /**
  * @summary Custom hook that provides app related functions
@@ -70,10 +72,32 @@ const useAppService = () => {
       dispatch({ type: SET_LOADING, payload: value });
     };
 
+    /**
+     * @summary Used to set eula state to true or false within the app
+     * @param value is a boolean value which determines if the eula is accepted or not
+     * @type {( value: boolean )}
+     * @author Dallas Richmond
+     */
+    const setEulaState = (check: string) => {
+      if (check === 'checkEula') {
+        if (localStorageKeyExists(constants.EULA_ACCEPTED_KEY)) {
+          // eslint-disable-next-line max-len
+          dispatch({ type: SET_EULA, payload: getDataFromLocalStorage(constants.EULA_ACCEPTED_KEY) });
+        } else {
+          saveDataToLocalStorage(constants.EULA_ACCEPTED_KEY, false);
+          dispatch({ type: SET_EULA, payload: false });
+        }
+      } else if (check === 'setEula') {
+        saveDataToLocalStorage(constants.EULA_ACCEPTED_KEY, true);
+        dispatch({ type: SET_EULA, payload: true });
+      }
+    };
+
     return {
       setAppData,
       setCurrentLocation,
       setLoading,
+      setEulaState,
       state,
     };
   }, [state, dispatch]);

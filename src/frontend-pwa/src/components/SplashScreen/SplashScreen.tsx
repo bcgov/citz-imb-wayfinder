@@ -15,7 +15,7 @@ import {
 
 export default function SplashScreen() {
   const {
-    setCurrentLocation, setLoading, setAppData,
+    setCurrentLocation, setLoading, setAppData, setEulaState,
   } = useAppService();
 
   useEffect(() => {
@@ -23,6 +23,7 @@ export default function SplashScreen() {
       .then((Online) => {
         setAppData(Online);
         setCurrentLocation(Online);
+        setEulaState('checkEula');
       }).catch((error) => {
         // eslint-disable-next-line no-console
         console.log(error);
