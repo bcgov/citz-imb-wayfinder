@@ -1,7 +1,11 @@
 import AppActionType from './AppActions';
 
 const {
-  SET_APP_DATA, SET_LOADING, SET_CURRENT_LOCATION, SET_EULA,
+  SET_APP_DATA,
+  SET_LOADING,
+  SET_CURRENT_LOCATION,
+  SET_EULA,
+  SET_SETTINGS,
 } = AppActionType;
 
 export type AppAction = {
@@ -15,6 +19,7 @@ export const initialState = {
   appData: {},
   currentLocation: {},
   eulaState: false,
+  settings: {},
 };
 
 /**
@@ -33,6 +38,8 @@ export const reducer = (state: object, action: AppAction): object => {
       return { ...state, currentLocation: action.payload };
     case SET_EULA:
       return { ...state, eulaAccepted: action.payload };
+    case SET_SETTINGS:
+      return { ...state, settings: action.payload };
     default:
       throw new Error();
   }
