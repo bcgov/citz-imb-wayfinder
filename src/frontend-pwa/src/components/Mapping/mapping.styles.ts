@@ -3,7 +3,7 @@ import typography from 'typography';
 import {
   MapContainer,
   // TileLayer,
-  // Marker,
+  Marker,
   Popup,
 } from 'react-leaflet';
 
@@ -20,8 +20,13 @@ export const StyledMapContainer = styled(MapContainer)`
     // align-items: center;
     // justify-content: center;
     // height: 30vh;
-    width: 65svh;
+    width: 65vw;
     overflow: hidden;
+`;
+
+export const StyledMarker = styled(Marker)`
+    background-color: red;
+    filter: saturate(500%) contrast(800%) brightness(500%) invert(80%) sepia(50%) hue-rotate(120deg);
 `;
 
 export const StyledPopup = styled(Popup)`
