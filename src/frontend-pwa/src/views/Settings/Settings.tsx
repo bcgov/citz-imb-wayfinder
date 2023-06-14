@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /**
  * @summary Settings view for the application
  * @author Dallas Richmond
  */
+import { useState } from 'react';
 import Slider from '../../components/Slider/Slider';
 import Toggle from '../../components/Toggle/Toggle';
 import NavButton from '../../components/NavButton/NavButton';
@@ -12,10 +14,16 @@ import {
 } from './settings.styles';
 import file from '/file-text.svg';
 import person from '/person-lines-fill.svg';
+import useAppService from '../../services/app/useAppService';
 
 export default function Settings() {
-  const handleSliderChange = () => {
-    //  TODO Slider logic goes here
+  const { setSettings, updateSettings, state } = useAppService();
+  const [locationRangeValue, setLocationRangeValue] = useState(state.settings.location_range);
+
+  const handleLocationRangeChange = (value: number) => {
+    setLocationRangeValue(value);
+    setSettings({ locationRange: value });
+    updateSettings();
   };
 
   const handleToggleChange = () => {
@@ -33,13 +41,14 @@ export default function Settings() {
           ariaLabel="Location Range"
           min={1}
           max={100}
-          onChange={handleSliderChange}
+          onChange={handleLocationRangeChange}
+          value={locationRangeValue}
         />
       </Section>
       <Section>
-        <Title>Darkmode</Title>
+        <Title>Offline Mode</Title>
         <Toggle
-          ariaLabel="Darkmode Toggle"
+          ariaLabel="Offline Toggle"
           onChange={handleToggleChange}
           defaultChecked
         />

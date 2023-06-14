@@ -4,9 +4,14 @@ import { AppContext } from '../../providers/AppProvider';
 import constants from '../../constants/Constants';
 import AppActionType from './AppActions';
 import { saveDataToLocalStorage, getDataFromLocalStorage, localStorageKeyExists } from '../../utils/AppLocalStorage';
+import SettingsObject from '../../Type/SettingsObject';
 
 const {
-  SET_APP_DATA, SET_LOADING, SET_CURRENT_LOCATION, SET_EULA,
+  SET_APP_DATA,
+  SET_LOADING,
+  SET_CURRENT_LOCATION,
+  SET_EULA,
+  SET_SETTINGS,
 } = AppActionType;
 
 /**
@@ -96,12 +101,44 @@ const useAppService = () => {
       }
     };
 
+    const updateSettings = () => {
+      if (localStorageKeyExists(constants.SETTINGS_KEY)) {
+        dispatch(
+          { type: SET_SETTINGS, payload: getDataFromLocalStorage(constants.SETTINGS_KEY) },
+        );
+      } else {
+        const settings = {
+          location_range: 50,
+          offline_mode: false,
+          analytics_opt_in: true,
+        };
+        saveDataToLocalStorage(constants.SETTINGS_KEY, settings);
+        dispatch({ type: SET_SETTINGS, payload: settings });
+      }
+    };
+
+    const setSettings = ({
+      locationRange = getDataFromLocalStorage(constants.SETTINGS_KEY).location_range,
+      offlineMode = getDataFromLocalStorage(constants.SETTINGS_KEY).dark_mode,
+      analyticsOptIn = getDataFromLocalStorage(constants.SETTINGS_KEY).analytics_opt_in,
+    }: SettingsObject) => {
+      const settings = {
+        location_range: locationRange,
+        offline_mode: offlineMode,
+        analytics_opt_in: analyticsOptIn,
+      };
+      saveDataToLocalStorage(constants.SETTINGS_KEY, settings);
+      dispatch({ type: SET_SETTINGS, payload: settings });
+    };
+
     return {
       setAppData,
       setCurrentLocation,
       setLoading,
       initializeEulaState,
       setEulaState,
+      updateSettings,
+      setSettings,
       state,
     };
   }, [state, dispatch]);
