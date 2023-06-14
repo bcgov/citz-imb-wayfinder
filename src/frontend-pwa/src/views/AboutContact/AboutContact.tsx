@@ -37,6 +37,10 @@ export default function AboutContact() {
       title: 'Matthew Logan, Backend Lead',
       bio: 'Matthew Logan is a former Red Seal chef turned full-stack developer. Since attending Camosun College, Matthew has gained skills in web development, backend APIs and databases. Transitioning from chef to full-stack developer demonstrates his ability to pivot and adapt to new challenges. He is committed to continuous learning and improving his skills to stay current with industry trends. Matthew is a team player who collaborates effectively to deliver high-quality solutions.',
     },
+    jesse: {
+      title: 'Jesse Holwerda, UI/UX Designer',
+      bio: 'Jesse Holwerda is a recently graduated English major who got his start in communications, but he has been carving out a space for himself in service design. He brings experience in CMS Lite, Figma, the adobe suite, Mural, and Plain language. Jesse has a background in program management and childcare and as estranged as all the roles he\'s had seem, he finds that he brings all that experience into his UX and design work. In his most recent project, Jesse revised intranet IA according to user interviews and removed 68 neglected pages.',
+    },
     disclaimer: [
       'This project is open sourced for fair use, with attribution',
       'this work carries no warranty or implied guarantee',
@@ -77,6 +81,12 @@ export default function AboutContact() {
         </StyledHeaderThree>
         <StyledP>
           {info.matthew.bio}
+        </StyledP>
+        <StyledHeaderThree>
+          {info.jesse.title}
+        </StyledHeaderThree>
+        <StyledP>
+          {info.jesse.bio}
         </StyledP>
         <StyledHeaderTwo>Disclaimer</StyledHeaderTwo>
         <StyledUl>
