@@ -18,7 +18,7 @@ export default function BackNavButton() {
     navigate(-1);
   };
 
-  if (location.pathname !== '/' && location.pathname !== '/eula') {
+  if (location.pathname !== '/') {
     return (
       <StyledBackButton aria-label="Back Button" type="button" onClick={goBack}>
         <StyledIcon src={backButton} alt="Back Button" />
