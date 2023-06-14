@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /**
  * TODO:    - Remove Border CSS from MapContainer when mapping implemented
  *          - Implement Mapping Props
@@ -32,7 +31,7 @@ export default function BCServices() {
   const locations = state.appData?.data ? state.appData.data.serviceBCLocations : [];
   const filteredServiceSearch = services.filter((item : string) => item.toLowerCase().match(`${searchQuery.toLowerCase()}`));
   const filteredLocationSearch = locations.filter((location : SingleLocation) => (
-    filteredServiceSearch.some((service : string) => location.services.indexOf(service) !== -1)
+    filteredServiceSearch.some((service : string) => location.services.includes(service))
   ));
 
   return (

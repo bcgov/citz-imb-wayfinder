@@ -1,8 +1,7 @@
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/images/marker-shadow.png';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import {
-  MapContainer,
+  // MapContainer,
   TileLayer,
   Marker,
   Popup,
@@ -12,7 +11,6 @@ import {
   MapWrapperDiv,
   StyledPopup,
   StyledMapContainer,
-  StyledPopupDiv,
 } from './mapping.styles';
 import SingleLocation from '../../Type/SingleLocation';
 import LocationsArray from '../../Type/LocationsArray';
