@@ -9,6 +9,7 @@
  */
 import {
   StyledSlider,
+  StyledP,
 } from './slider.styles';
 
 export type SliderProps = {
@@ -41,9 +42,9 @@ export default function Slider({
         value={value}
         onChange={handleChange}
       />
-      <p>
+      <StyledP>
         {`${value} KM`}
-      </p>
+      </StyledP>
     </div>
   );
 }
