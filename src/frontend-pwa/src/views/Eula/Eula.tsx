@@ -113,7 +113,7 @@ export default function Eula() {
               <Toggle
                 ariaLabel="Eula check"
                 onChange={handleConsentChange}
-                defaultChecked={termAgreement}
+                value={termAgreement}
               />
               <Button
                 handleClick={() => setEulaState()}
