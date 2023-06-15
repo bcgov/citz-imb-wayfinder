@@ -68,7 +68,7 @@ export default function Mapping({ locations, currentLocation }: MappingProps) {
   const long = parseFloat(currentLocation?.long);
 
   return (
-    <div>
+    <MapWrapperDiv>
       { !isNaN(lat)
       && (
       <MapWrapperDiv>
@@ -114,6 +114,6 @@ export default function Mapping({ locations, currentLocation }: MappingProps) {
         </StyledMapContainer>
       </MapWrapperDiv>
       )}
-    </div>
+    </MapWrapperDiv>
   );
 }

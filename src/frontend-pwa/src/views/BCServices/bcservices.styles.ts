@@ -24,7 +24,8 @@ export const ContentContainer = styled.div`
   height: 100%;
   align-items: center;
   justify-content: center;
-  max-width: 1000px;
+  max-width: 1250px;
+  overflow: hidden;
   @media (min-width: 768px) {
     flex-direction: row-reverse;
     padding: inherit 10pt;
@@ -41,7 +42,8 @@ export const ServiceListContainer = styled.div`
   @media (min-width: 768px) {
     height: 100%;
     max-height: 100%;
-    margin-right: 1em;
+    width: 425pt;
+    margin: 0 1em;
   }
 `;
 
@@ -52,7 +54,6 @@ export const MapContainer = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
-  background-color: #e8e8e8;
   @media (min-width: 768px) {
     height: 100%;
     border-radius: 4pt;

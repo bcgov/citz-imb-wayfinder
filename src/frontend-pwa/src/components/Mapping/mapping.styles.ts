@@ -12,19 +12,22 @@ import {
 
 export const MapWrapperDiv = styled.div`
     ${typography.toString()}
-    width: 100%;
-    height: 100%;
 `;
 
 export const StyledMapContainer = styled(MapContainer)`
     ${typography.toString()}
     height: 39.5svh;
-    width: 95svw;
+    max-height: 70svh;
+    width: 100svw;
     overflow: hidden;
     @media (min-width: 768px) {
-        height: 65vh;
-        width: 40vw;
-      }
+        height: 500pt;
+        width: 350pt;
+    }
+    @media (min-width: 1000px) {
+        height: 500pt;
+        width: 500pt;
+    }
 `;
 
 export const StyledPopup = styled(Popup)`
