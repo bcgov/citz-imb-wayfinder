@@ -11,6 +11,7 @@ import {
   Section,
   Title,
   SliderWrapper,
+  SettingsWrapper,
 } from './settings.styles';
 import file from '/file-text.svg';
 import person from '/person-lines-fill.svg';
@@ -59,54 +60,56 @@ export default function Settings() {
   };
 
   return (
-    <SettingsContainer>
-      <Section>
-        <h1>Settings</h1>
-      </Section>
-      <Section>
-        <SliderWrapper>
-          <Title>Location Range</Title>
-          <Slider
-            ariaLabel="Location Range"
-            min={1}
-            max={100}
-            onChange={handleLocationRangeChange}
-            value={locationRangeValue}
+    <SettingsWrapper>
+      <SettingsContainer>
+        <Section>
+          <h1>Settings</h1>
+        </Section>
+        <Section>
+          <SliderWrapper>
+            <Title>Location Range</Title>
+            <Slider
+              ariaLabel="Location Range"
+              min={1}
+              max={100}
+              onChange={handleLocationRangeChange}
+              value={locationRangeValue}
+            />
+          </SliderWrapper>
+        </Section>
+        <Section>
+          <Title>Offline Mode</Title>
+          <Toggle
+            ariaLabel="Offline Toggle"
+            onChange={handleOfflineToggleChange}
+            value={offlineToggleValue}
           />
-        </SliderWrapper>
-      </Section>
-      <Section>
-        <Title>Offline Mode</Title>
-        <Toggle
-          ariaLabel="Offline Toggle"
-          onChange={handleOfflineToggleChange}
-          value={offlineToggleValue}
-        />
-      </Section>
-      <Section>
-        <Title>Analytics</Title>
-        <Toggle
-          ariaLabel="Analytics Toggle"
-          onChange={handleAnalyticsToggleChange}
-          value={analyticsToggleValue}
-        />
-      </Section>
-      <Section>
-        <NavButton
-          path="/settings/about"
-          text="About/Contact"
-          hex="#DBE1EB"
-          icon={person}
-        />
-      </Section>
-      <Section>
-        <NavButton
-          path="/eula"
-          text="License Agreement"
-          hex="#DBE1EB"
-          icon={file}
-        />
-      </Section>
-    </SettingsContainer>
+        </Section>
+        <Section>
+          <Title>Analytics</Title>
+          <Toggle
+            ariaLabel="Analytics Toggle"
+            onChange={handleAnalyticsToggleChange}
+            value={analyticsToggleValue}
+          />
+        </Section>
+        <Section>
+          <NavButton
+            path="/settings/about"
+            text="About/Contact"
+            hex="#DBE1EB"
+            icon={person}
+          />
+        </Section>
+        <Section>
+          <NavButton
+            path="/eula"
+            text="License Agreement"
+            hex="#DBE1EB"
+            icon={file}
+          />
+        </Section>
+      </SettingsContainer>
+    </SettingsWrapper>
   );
 }
