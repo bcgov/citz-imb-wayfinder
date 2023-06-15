@@ -101,6 +101,10 @@ const useAppService = () => {
       }
     };
 
+    /**
+     * @summary Used to either initialize the settings or update them from localStorage
+     * @author Dallas Richmond
+     */
     const updateSettings = () => {
       if (localStorageKeyExists(constants.SETTINGS_KEY)) {
         dispatch(
@@ -117,9 +121,17 @@ const useAppService = () => {
       }
     };
 
+    /**
+     * @summary Sets the settings for the app
+     * @param locationRange is a number representing the distance to be searche in KMs
+     * @param offlineMode is a boolean value that determines if the app is in online or offline mode
+     * @param analyticsOptIn is a boolean value that allows the users to opt in or out of analytics
+     * @type {( locationRange: number, offlineMode: boolean, analyticsOptIn: boolean )}
+     * @author Dallas Richmond
+     */
     const setSettings = ({
       locationRange = getDataFromLocalStorage(constants.SETTINGS_KEY).location_range,
-      offlineMode = getDataFromLocalStorage(constants.SETTINGS_KEY).dark_mode,
+      offlineMode = getDataFromLocalStorage(constants.SETTINGS_KEY).offline_mode,
       analyticsOptIn = getDataFromLocalStorage(constants.SETTINGS_KEY).analytics_opt_in,
     }: SettingsObject) => {
       const settings = {
