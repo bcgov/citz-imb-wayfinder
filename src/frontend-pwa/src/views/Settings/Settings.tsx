@@ -10,6 +10,7 @@ import {
   SettingsContainer,
   Section,
   Title,
+  SliderWrapper,
 } from './settings.styles';
 import file from '/file-text.svg';
 import person from '/person-lines-fill.svg';
@@ -63,14 +64,16 @@ export default function Settings() {
         <h1>Settings</h1>
       </Section>
       <Section>
-        <Title>Location Range (KM)</Title>
-        <Slider
-          ariaLabel="Location Range"
-          min={1}
-          max={100}
-          onChange={handleLocationRangeChange}
-          value={locationRangeValue}
-        />
+        <SliderWrapper>
+          <Title>Location Range</Title>
+          <Slider
+            ariaLabel="Location Range"
+            min={1}
+            max={100}
+            onChange={handleLocationRangeChange}
+            value={locationRangeValue}
+          />
+        </SliderWrapper>
       </Section>
       <Section>
         <Title>Offline Mode</Title>

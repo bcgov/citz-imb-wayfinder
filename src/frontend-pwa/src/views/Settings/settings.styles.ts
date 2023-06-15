@@ -6,14 +6,15 @@ import styled from '@emotion/styled';
 import typography from '../../typography';
 
 export const SettingsContainer = styled.div`
-  width: 100vw;
-  padding: 100px;
+  max-width: 80vw;
+  padding: 4rem;
   border-radius: 4px;
-  position: fixed;
   top: 10%;
   left: 0%;
   @media (max-width: 768px) {
-    padding: 20px;
+    max-width: 100vw;
+    padding: 1rem;
+    border-radius: 4px;
   }
 `;
 
@@ -28,4 +29,8 @@ export const Title = styled.h2`
   ${typography.toString()}
   font-size: 18px;
   margin: 0;
+`;
+
+export const SliderWrapper = styled.div`
+  padding-top: 1rem;
 `;

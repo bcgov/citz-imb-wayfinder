@@ -7,6 +7,9 @@
  * @type {(ariaLabel : string, min : number, max: number, onChange: (value: number) => void)}
  * @author Dallas Richmond
  */
+import {
+  StyledSlider,
+} from './slider.styles';
 
 export type SliderProps = {
   ariaLabel: string;
@@ -30,7 +33,7 @@ export default function Slider({
 
   return (
     <div>
-      <input
+      <StyledSlider
         aria-label={ariaLabel}
         type="range"
         min={min}
@@ -39,7 +42,7 @@ export default function Slider({
         onChange={handleChange}
       />
       <p>
-        {value}
+        {`${value} KM`}
       </p>
     </div>
   );
