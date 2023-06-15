@@ -5,21 +5,17 @@
  * @type {(ariaLabel : string, onChange: (value: boolean) => void)}
  * @author Dallas Richmond
  */
-import { useState } from 'react';
 import StyledToggle from './toggle.styles';
 
 export type ToggleProps = {
   ariaLabel: string;
   onChange: (checked: boolean) => void;
-  defaultChecked: boolean;
+  value: boolean;
 };
 
-export default function Toggle({ ariaLabel, onChange, defaultChecked = false }: ToggleProps) {
-  const [checked, setChecked] = useState(defaultChecked);
-
+export default function Toggle({ ariaLabel, onChange, value }: ToggleProps) {
   const handleChange = () => {
-    const newChecked = !checked;
-    setChecked(newChecked);
+    const newChecked = !value;
     onChange(newChecked);
   };
 
@@ -27,7 +23,7 @@ export default function Toggle({ ariaLabel, onChange, defaultChecked = false }: 
     <StyledToggle
       aria-label={ariaLabel}
       type="checkbox"
-      checked={checked}
+      checked={value}
       onChange={handleChange}
     />
   );

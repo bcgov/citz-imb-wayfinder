@@ -3,7 +3,6 @@
  * @author Dallas Richmond & Tyler Maloney
  */
 /* eslint-disable no-console */
-import { useState } from 'react';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import SplashScreen from './components/SplashScreen/SplashScreen';
@@ -12,7 +11,6 @@ import ViewRouter from './routes/ViewRouter';
 import useAppService from './services/app/useAppService';
 
 function App() {
-  const [eulaAccepted, setEulaAccepted] = useState(import.meta.env.DEV || false);
   const { state } = useAppService();
 
   return (
@@ -23,8 +21,8 @@ function App() {
       ) : (
         <>
           <Header />
-          {!eulaAccepted
-            ? <Eula setEulaAccepted={setEulaAccepted} />
+          {!state.eulaAccepted
+            ? <Eula />
             : (
               <ViewRouter />
             )}

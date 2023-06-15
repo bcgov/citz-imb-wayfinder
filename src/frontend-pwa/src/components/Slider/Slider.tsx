@@ -7,33 +7,34 @@
  * @type {(ariaLabel : string, min : number, max: number, onChange: (value: number) => void)}
  * @author Dallas Richmond
  */
-
-import { useState } from 'react';
+import {
+  StyledSlider,
+  StyledP,
+} from './slider.styles';
 
 export type SliderProps = {
   ariaLabel: string;
   min: number;
   max: number;
   onChange: (value: number) => void;
+  value: number;
 }
 
 export default function Slider({
   ariaLabel,
   min,
   max,
+  value,
   onChange,
 }:SliderProps) {
-  const [value, setValue] = useState(min);
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(event.target.value, 10);
-    setValue(newValue);
     onChange(newValue);
   };
 
   return (
     <div>
-      <input
+      <StyledSlider
         aria-label={ariaLabel}
         type="range"
         min={min}
@@ -41,9 +42,9 @@ export default function Slider({
         value={value}
         onChange={handleChange}
       />
-      <p>
-        {value}
-      </p>
+      <StyledP>
+        {`${value} KM`}
+      </StyledP>
     </div>
   );
 }

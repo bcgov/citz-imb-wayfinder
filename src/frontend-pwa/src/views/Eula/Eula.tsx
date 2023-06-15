@@ -4,18 +4,15 @@
  * @author Tyler Maloney
  */
 /* eslint-disable max-len */
-
 import { useState } from 'react';
 import { Button } from '../../components/Button/Button';
 import { StyledContainer, StyledOuterDiv, StyledFieldSetDiv } from './eula.styles';
 import Toggle from '../../components/Toggle/Toggle';
+import useAppService from '../../services/app/useAppService';
 
-export type EulaProps = {
-  setEulaAccepted: (eulaAccepted: boolean) => void;
-};
-
-export default function Eula({ setEulaAccepted }: EulaProps) {
+export default function Eula() {
   const [termAgreement, setTermAgreement] = useState(false);
+  const { state, setEulaState } = useAppService();
   const handleConsentChange = () => {
     setTermAgreement(!termAgreement);
   };
@@ -106,25 +103,30 @@ export default function Eula({ setEulaAccepted }: EulaProps) {
           provision of Support Services, if any; and (c) Apple has no obligation whatsoever to
           furnish any maintenance and support services with respect to the Licensed Application.
         </p>
-        <legend>
-          If you agree to the previous terms, check the box below and click the agree button.
-        </legend>
-        <br />
-        <StyledFieldSetDiv>
-          <Toggle
-            ariaLabel="Eula check"
-            onChange={handleConsentChange}
-            defaultChecked={termAgreement}
-          />
-          <Button
-            handleClick={() => setEulaAccepted(true)}
-            text="Submit"
-            variant="primary"
-            size="md"
-            aria-label="submit button"
-            disabled={!termAgreement}
-          />
-        </StyledFieldSetDiv>
+        {!state.eulaAccepted ? (
+          <>
+            <legend>
+              If you agree to the previous terms, check the box below and click the agree button.
+            </legend>
+            <br />
+            <StyledFieldSetDiv>
+              <Toggle
+                ariaLabel="Eula check"
+                onChange={handleConsentChange}
+                value={termAgreement}
+              />
+              <Button
+                handleClick={() => setEulaState()}
+                text="Submit"
+                variant="primary"
+                size="md"
+                aria-label="submit button"
+                disabled={!termAgreement}
+              />
+            </StyledFieldSetDiv>
+          </>
+        )
+          : <div />}
       </StyledContainer>
     </StyledOuterDiv>
   );
