@@ -22,7 +22,7 @@ export const HeaderWrapper = styled.header`
         justify-content: space-evenly;
         padding: 0px;
     }
-    z-index: 2;
+    z-index: 2000;
 `;
 
 export const Heading = styled.h2`

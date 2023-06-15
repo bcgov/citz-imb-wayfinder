@@ -39,7 +39,6 @@ export const Container = styled.div`
   height: 300px;
   overflow: auto;
   width: 100%;
-  border-radius: 8pt;
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
   &::-webkit-scrollbar {
@@ -51,5 +50,8 @@ export const Container = styled.div`
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 4px;
     background: none;
+  }
+  @media (min-width: 768px){
+      border-radius: 8pt;
   }
 `;

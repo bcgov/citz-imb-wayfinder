@@ -38,17 +38,20 @@ export default function BCServices() {
   return (
     <ViewContainer>
       <ContentContainer>
-        <MapContainer>
-          {navigator.onLine
-            ? (
-              <Mapping locations={filteredLocationSearch} currentLocation={currentLocation} />
-            )
-            : (
+        {navigator.onLine
+          ? (
+            <Mapping
+              locations={filteredLocationSearch}
+              currentLocation={currentLocation}
+            />
+          )
+          : (
+            <MapContainer>
               <StyledP>
                 Sorry this feature is currently unavailable offline.
               </StyledP>
-            )}
-        </MapContainer>
+            </MapContainer>
+          )}
         <ServiceListContainer>
           <SearchBar
             query={searchQuery}

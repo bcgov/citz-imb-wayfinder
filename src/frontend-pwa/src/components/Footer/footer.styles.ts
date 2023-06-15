@@ -19,7 +19,7 @@ export const FooterWrapper = styled.footer`
   position: fixed;
   width: 100%;
   left: 0;
-  z-index: 2;
+  z-index: 2000;
 `;
 
 export const Container = styled.div`
