@@ -5,10 +5,6 @@
  * @author Dallas Richmond
  */
 import SingleLocation from '../../Type/SingleLocation';
-import CalcDistance from '../../utils/CalcDistance';
-import { localStorageKeyExists } from '../../utils/AppLocalStorage';
-import constants from '../../constants/Constants';
-import useAppService from '../../services/app/useAppService';
 
 import {
   TableData,
@@ -18,31 +14,23 @@ import {
 
 export type ListItemProps = {
   itemData: SingleLocation;
+  locationDistance: string;
 }
 
 export default function LocationListItem({
   itemData,
+  locationDistance,
 }: ListItemProps) {
-  const { state } = useAppService();
-  const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
-  const locationRange = state.settings.location_range;
-  if (geolocationKnown) {
-    const locationDistance = CalcDistance({ itemData });
-    if (parseFloat(locationDistance) >= locationRange) {
-      return null;
-    }
-    return (
-      <TableRow>
-        <TableData>
-          <TableDataWrapper>{itemData.locale}</TableDataWrapper>
-        </TableData>
-        <TableData>
-          <TableDataWrapper>
-            {geolocationKnown ? `${locationDistance} KM` : ''}
-          </TableDataWrapper>
-        </TableData>
-      </TableRow>
-    );
-  }
-  return null;
+  return (
+    <TableRow>
+      <TableData>
+        <TableDataWrapper>{itemData.locale}</TableDataWrapper>
+      </TableData>
+      <TableData>
+        <TableDataWrapper>
+          {`${locationDistance} KM`}
+        </TableDataWrapper>
+      </TableData>
+    </TableRow>
+  );
 }

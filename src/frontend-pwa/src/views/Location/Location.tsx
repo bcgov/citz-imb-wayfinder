@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/no-array-index-key */
 /**
  * @summary This is the main location view for mapping
@@ -12,6 +13,9 @@ import useAppService from '../../services/app/useAppService';
 import LocationListItem from '../../components/LocationListItem/LocationListItem';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import Mapping from '../../components/Mapping/Mapping';
+import CalcDistance from '../../utils/CalcDistance';
+import { localStorageKeyExists } from '../../utils/AppLocalStorage';
+import constants from '../../constants/Constants';
 
 import {
   ContentContainer,
@@ -24,10 +28,20 @@ import {
 export default function Location() {
   const { state } = useAppService();
   const [searchQuery, setSearchQuery] = useState('');
+
+  const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
   const locations = state.appData?.data ? state.appData.data.serviceBCLocations : [];
-  const filteredLocationSearch = locations.filter((location : SingleLocation) => (
-    location.locale.toLowerCase().match(`${searchQuery.toLowerCase().trim()}`)
-  ));
+  const locationRange = state.settings.location_range;
+
+  const filteredLocationSearch = locations.filter((location: SingleLocation) => {
+    if (geolocationKnown) {
+      const locationDistance = CalcDistance({ itemData: location });
+      if (parseFloat(locationDistance) <= locationRange) {
+        return (location.locale.toLowerCase().includes(searchQuery.toLowerCase().trim()));
+      }
+    }
+    return false;
+  });
 
   return (
     <ViewContainer>
@@ -56,8 +70,7 @@ export default function Location() {
           />
           <ListItems headers={['Locations', 'Distance']}>
             {filteredLocationSearch.map((data: SingleLocation, index: number) => (
-              <LocationListItem itemData={data} key={index} />
-            ))}
+              <LocationListItem itemData={data} locationDistance={CalcDistance({ itemData: data })} key={index} />))}
           </ListItems>
         </ServiceListContainer>
       </ContentContainer>
