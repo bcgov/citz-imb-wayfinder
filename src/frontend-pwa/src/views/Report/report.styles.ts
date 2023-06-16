@@ -5,7 +5,6 @@
 
 import styled from '@emotion/styled';
 import typography from '../../typography';
-// import {Input, Select, TextArea } from 'react';
 
 export const StyledReportOuterDiv = styled.div`
     width: 100%;
@@ -20,7 +19,6 @@ export const StyledReportOuterDiv = styled.div`
     align-items: center;
     justify-content: center;
     padding: 50pt 0;
-    background-color: green;
 `;
 export const StyledReportContainer = styled.div`
     ${typography.toString()}
@@ -33,8 +31,12 @@ export const StyledReportContainer = styled.div`
     justify-content: center;
     display: flex;
     padding: 5em 7.5pt;
-    background-color: red;
+    background-color: white;
     @media (max-width: 768px) {
         padding: 20px;
     }
+`;
+
+export const StyledTextArea = styled.textarea`
+    resize: none;
 `;
