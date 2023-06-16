@@ -44,7 +44,6 @@ export const StyledTextArea = styled.textarea`
 `;
 
 export const Section = styled.div`
-    // padding-top: 20px;
 `;
 
 export const StyledSelect = styled.select`

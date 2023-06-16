@@ -6,7 +6,6 @@
  *
  * @author  TylerMaloney
  */
-
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { Button } from '../../components/Button/Button';
@@ -26,10 +25,11 @@ export default function Report() {
   const [eventType, setEventType] = useState('');
   const [details, setDetails] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
+  const { state } = useAppService();
+  const latitude = state.currentLocation ? state.currentLocation.lat : 49.2827;
+  const longitude = state.currentLocation ? state.currentLocation.long : -123.2;
   const eventOptions: Array<string> = [
     'Damaged Infrastructure',
     'Animal Sighting',
@@ -89,24 +89,9 @@ export default function Report() {
       setDetails('');
       setPhoneNumber('');
     } catch (error) {
-      console.log('Error: ', error);
+      throw Error('Error: Form was not submitted');
     }
-    console.log(formData);
   };
-
-  // useEffect(() => {
-  //   // Get user's current position
-  //   navigator.geolocation.getCurrentPosition(
-  //     (position) => {
-  //       setLatitude(position.coords.latitude);
-  //       setLongitude(position.coords.longitude);
-  //     },
-  //     (_error) => {
-  //       setLatitude(49.2827);
-  //       setLongitude(123.1207);
-  //     },
-  //   );
-  // }, []);
 
   useEffect(() => {
     setIsFormValid(checkFormValidity());
