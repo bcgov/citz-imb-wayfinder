@@ -71,7 +71,7 @@ export default function Settings() {
             <Slider
               ariaLabel="Location Range"
               min={1}
-              max={100}
+              max={1000}
               onChange={handleLocationRangeChange}
               value={locationRangeValue}
             />
