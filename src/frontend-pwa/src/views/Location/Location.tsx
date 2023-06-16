@@ -4,6 +4,7 @@
  * @type {(locations : Array<SingleLocation>)}
  * @author Dallas Richmond
  */
+import { useState } from 'react';
 import ListItems from '../../components/ListItems/ListItems';
 import SingleLocation from '../../Type/SingleLocation';
 import useAppService from '../../services/app/useAppService';
@@ -16,6 +17,7 @@ import {
 
 export default function Location() {
   const { state } = useAppService();
+  const [searchQuery, setSearchQuery] = useState('');
   const locations = state.appData?.data ? state.appData.data.serviceBCLocations : [];
 
   return (
