@@ -1,7 +1,5 @@
 /* eslint-disable react/no-array-index-key */
 /**
- * TODO:    - implement error handling
- *          - make less ugly
  *
  * @summary - Event reporting page for the Wayfinder application.
  *          - Users can submit reports about events they witness.
@@ -9,31 +7,68 @@
  * @author  TylerMaloney
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
 import { Button } from '../../components/Button/Button';
-import { StyledReportContainer, StyledReportOuterDiv, StyledTextArea } from './report.styles';
+import {
+  StyledReportContainer,
+  StyledReportOuterDiv,
+  StyledTextArea,
+  Section,
+  StyledSelect,
+  StyledInput,
+  StyledP,
+} from './report.styles';
+import constants from '../../constants/Constants';
+import useAppService from '../../services/app/useAppService';
 
-export function Report() {
+export default function Report() {
   const [eventType, setEventType] = useState('');
   const [details, setDetails] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
-  const eventOptions: Array<string> = ['Damaged Infrastructure', 'Animal Sighting', 'Suggestion/Complaint', 'Miscellaneous'];
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isFormValid, setIsFormValid] = useState(false);
+  const eventOptions: Array<string> = [
+    'Damaged Infrastructure',
+    'Animal Sighting',
+    'Suggestion/Complaint',
+    'Miscellaneous',
+  ];
 
-  const handleEventTypeChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+  const checkFormValidity = useCallback(() => {
+    const isEventTypeValid = !!eventType;
+    const isDetailsValid = details.length >= 10 && details.length <= 256;
+    // eslint-disable-next-line operator-linebreak
+    const isPhoneNumberValid =
+      (phoneNumber.length === 0) || (phoneNumber.length >= 10 && phoneNumber.length <= 16);
+    const isValid = isEventTypeValid && isDetailsValid && isPhoneNumberValid;
+
+    if (!isDetailsValid) {
+      setErrorMessage('Tip: Details must be between 10 and 256 characters long');
+    } else if (!isPhoneNumberValid) {
+      setErrorMessage('Tip: Phone number must be between 10 and 16 characters long, if provided');
+    } else {
+      setErrorMessage('');
+    }
+
+    return isValid;
+  }, [eventType, details, phoneNumber]);
+
+  const handleEventTypeChange = (e: { target: { value: React.SetStateAction<string> } }) => {
     setEventType(e.target.value);
   };
 
-  const handleDetailsChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+  const handleDetailsChange = (e: { target: { value: React.SetStateAction<string> } }) => {
     setDetails(e.target.value);
   };
 
-  const handlePhoneNumberChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+  const handlePhoneNumberChange = (e: { target: { value: React.SetStateAction<string> } }) => {
     setPhoneNumber(e.target.value);
   };
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
     const currentTime = new Date();
@@ -48,84 +83,85 @@ export function Report() {
     };
 
     try {
-      // Send JSON object to the API endpoint
-      const response = await fetch('https://wf-api-ec1236-dev.apps.silver.devops.gov.bc.ca/api/report', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        // Reset form fields
-        setEventType('');
-        setDetails('');
-        setPhoneNumber('');
-      } else {
-        throw new Error('Form data submission failed');
-      }
+      await axios.post(`${constants.BACKEND_URL}/api/report`, formData);
+      setErrorMessage('');
+      setEventType('');
+      setDetails('');
+      setPhoneNumber('');
     } catch (error) {
-      throw new Error('fetch failed');
+      console.log('Error: ', error);
     }
+    console.log(formData);
   };
 
+  // useEffect(() => {
+  //   // Get user's current position
+  //   navigator.geolocation.getCurrentPosition(
+  //     (position) => {
+  //       setLatitude(position.coords.latitude);
+  //       setLongitude(position.coords.longitude);
+  //     },
+  //     (_error) => {
+  //       setLatitude(49.2827);
+  //       setLongitude(123.1207);
+  //     },
+  //   );
+  // }, []);
+
   useEffect(() => {
-    // Get user's current position
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setLatitude(position.coords.latitude);
-        setLongitude(position.coords.longitude);
-      },
-      (_error) => {
-        setLatitude(49.2827);
-        setLongitude(123.1207);
-      },
-    );
-  }, [latitude, longitude]);
+    setIsFormValid(checkFormValidity());
+  }, [checkFormValidity]);
 
   return (
     <form onSubmit={handleSubmit}>
       <StyledReportOuterDiv>
         <StyledReportContainer>
-          <h1>Report An Event</h1>
-          <label htmlFor="eventType">
+          <h2>Report An Event</h2>
+          <Section>
             <div>Event Type:</div>
-            <select id="eventType" value={eventType} onChange={handleEventTypeChange} required>
+            <StyledSelect
+              id="eventType"
+              aria-label="event select"
+              value={eventType}
+              onChange={handleEventTypeChange}
+              required
+            >
               <option value="">Select an event type</option>
               {eventOptions.map((event: string, index: number) => (
                 <option value={event} key={index}>
                   {event}
                 </option>
               ))}
-            </select>
-          </label>
-          <br />
-          <div>Event Details:</div>
-          <StyledTextArea
-            id="details"
-            value={details}
-            onChange={handleDetailsChange}
-            rows={10}
-            cols={30}
-            required
-          />
-          <br />
-          <label htmlFor="phoneNumber">
+            </StyledSelect>
+          </Section>
+          <Section>
+            <div>Event Details:</div>
+            <StyledTextArea
+              id="details"
+              aria-label="detail field"
+              value={details}
+              onChange={handleDetailsChange}
+              rows={7}
+              cols={25}
+              required
+            />
+          </Section>
+          <Section>
             <div>Phone Number (optional): </div>
-            <input
+            <StyledInput
               type="text"
+              aria-label="phone field"
               id="phoneNumber"
               value={phoneNumber}
               onChange={handlePhoneNumberChange}
             />
-          </label>
-          <br />
-          <Button text="Submit" variant="primary" size="md" disabled={false} />
+          </Section>
+          {errorMessage && <StyledP>{errorMessage}</StyledP>}
+          <Section>
+            <Button text="Submit" variant="primary" size="md" disabled={!isFormValid} />
+          </Section>
         </StyledReportContainer>
       </StyledReportOuterDiv>
     </form>
   );
 }
-
-export default Report;
