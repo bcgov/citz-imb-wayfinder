@@ -35,7 +35,7 @@ export default function Location() {
 
   const filteredLocationSearch = locations.filter((location: SingleLocation) => {
     if (geolocationKnown) {
-      const locationDistance = CalcDistance({ itemData: location });
+      const locationDistance = CalcDistance({ itemData: location, currentLocation: state.currentLocation });
       if (parseFloat(locationDistance) <= locationRange) {
         return (location.locale.toLowerCase().includes(searchQuery.toLowerCase().trim()));
       }
@@ -70,7 +70,7 @@ export default function Location() {
           />
           <ListItems headers={['Locations', 'Distance']}>
             {filteredLocationSearch.map((data: SingleLocation, index: number) => (
-              <LocationListItem itemData={data} locationDistance={CalcDistance({ itemData: data })} key={index} />))}
+              <LocationListItem itemData={data} locationDistance={CalcDistance({ itemData: data, currentLocation: state.currentLocation })} key={index} />))}
           </ListItems>
         </ServiceListContainer>
       </ContentContainer>

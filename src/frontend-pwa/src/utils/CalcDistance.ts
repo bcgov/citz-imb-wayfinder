@@ -9,22 +9,26 @@
 
 /* eslint-disable max-len */
 import SingleLocation from '../Type/SingleLocation';
-import useAppService from '../services/app/useAppService';
+
+type CurrentLocationProps = {
+  lat: string;
+  long: string;
+}
 
 export type CalcDistanceProps = {
   itemData: SingleLocation;
+  currentLocation: CurrentLocationProps;
 }
 
 export default function CalcDistance({
   itemData,
+  currentLocation,
 }: CalcDistanceProps): string {
-  const { state } = useAppService();
-
-  if (state.currentLocation.lat && state.currentLocation.long) {
+  if (currentLocation.lat && currentLocation.long) {
     const earthRadius = 6371;
 
-    const currentLatRad = Math.PI / 180 * (parseFloat(state.currentLocation.lat));
-    const currentLongRad = Math.PI / 180 * (parseFloat(state.currentLocation.long));
+    const currentLatRad = Math.PI / 180 * (parseFloat(currentLocation.lat));
+    const currentLongRad = Math.PI / 180 * (parseFloat(currentLocation.long));
     const destinationLatRad = Math.PI / 180 * itemData.latitude;
     const destinationLongRad = Math.PI / 180 * itemData.longitude;
 
