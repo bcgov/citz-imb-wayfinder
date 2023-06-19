@@ -23,10 +23,11 @@ export const initialState = {
 };
 
 /**
- * Handles app actions and returns the updated app state.
+ * @summary Handles app actions and returns the updated app state.
  * @param {object} state - The current app state.
  * @param {AppAction} action - The app action to be handled.
  * @returns {object} - The updated app state.
+ * @author Dallas Richmond
  */
 export const reducer = (state: object, action: AppAction): object => {
   switch (action.type) {
