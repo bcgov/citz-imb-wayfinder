@@ -4,6 +4,7 @@
  */
 import styled from '@emotion/styled';
 import typography from '../../typography';
+import mq from '../../constants/mq';
 
 export const HeaderWrapper = styled.header`
     background-color: #036;
@@ -18,7 +19,7 @@ export const HeaderWrapper = styled.header`
     position: fixed;
     width: 100%;
     left: 0;
-    @media (max-width: 768px) {
+    @media (max-width: ${mq.tablet}) {
         justify-content: space-evenly;
         padding: 0px;
     }
@@ -45,7 +46,7 @@ export const Image = styled.img`
     position: relative;
     height: 100%;
     padding-right: 10px;
-    @media (max-width: 768px) {
+    @media (max-width: ${mq.tablet}) {
         width: 100px;
         padding-right: 5px;
     }
