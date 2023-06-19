@@ -8,15 +8,16 @@ import typography from '../../typography';
 
 export const StyledReportOuterDiv = styled.div`
     width: 100%;
+    position: absolute;
     left:0;
     top:0;
-    min-width: 100vw;
-    min-height: 80vh;
+    min-width: 100svw;
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 30pt 0;
+    padding: 10pt 0;
     background-color: white;
     @media (min-width: 768px) {
         padding: 20px;
@@ -38,23 +39,54 @@ export const StyledReportContainer = styled.div`
     }
 `;
 
+export const StyledTextAreaWrapper = styled.div`
+`;
+
+export const StyledCharacterCounter = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+`;
+
 export const StyledTextArea = styled.textarea`
+    width: 100%;
     border-radius: 0.4em;
     resize: none;
+    padding: 5pt;
 `;
 
 export const Section = styled.div`
+    width: 80%;
+`;
+
+export const ButtonSection = styled.div`
+    display: flex;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+    @media (min-width: 768px) {
+        justify-content: left;
+    }
 `;
 
 export const StyledSelect = styled.select`
+    width: 100%;
     border-radius: 0.4em;
+    padding: 5pt;
 `;
 
 export const StyledInput = styled.input`
+    width: 100%;
     border-radius: 0.4em;
     border-width: 0.03em;
+    padding: 5pt;
 `;
 
 export const StyledP = styled.p`
-    color: red;
+    width: 100%;
+    min-height: 1.2em;
+    color: #8b0000;
+    font-size: 10pt;
+    padding: 0;
+    margin: 0;
 `;

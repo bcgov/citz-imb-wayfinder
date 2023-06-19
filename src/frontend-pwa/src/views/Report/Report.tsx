@@ -3,9 +3,11 @@
  *
  * @summary - Event reporting page for the Wayfinder application.
  *          - Users can submit reports about events they witness.
+ *          - Data is submitted to /report endpoint
  *
  * @author  TylerMaloney
  */
+
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { Button } from '../../components/Button/Button';
@@ -13,15 +15,19 @@ import {
   StyledReportContainer,
   StyledReportOuterDiv,
   StyledTextArea,
+  StyledTextAreaWrapper,
   Section,
+  ButtonSection,
   StyledSelect,
   StyledInput,
   StyledP,
+  StyledCharacterCounter,
 } from './report.styles';
 import constants from '../../constants/Constants';
 import useAppService from '../../services/app/useAppService';
 
 export default function Report() {
+  const charLimit = 256;
   const [eventType, setEventType] = useState('');
   const [details, setDetails] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -37,31 +43,38 @@ export default function Report() {
     'Miscellaneous',
   ];
 
+  const validatePhoneNumber = useCallback((): boolean => {
+    const regex = /^(?:\+?1-?)?(?:\(\d{3}\)|\d{3})-?\d{3}-?\d{4}$/gi;
+    if (!phoneNumber || phoneNumber.match(regex)) {
+      setErrorMessage('');
+      return true;
+    }
+    setErrorMessage('Invalid Format, Example (250) 555-5555');
+    return false;
+  }, [phoneNumber]);
+
+  const validateDetailBox = useCallback((): boolean => {
+    if (details.length >= 10 && details.length <= charLimit) {
+      return true;
+    }
+    setErrorMessage('Minimum message length is 10 characters.');
+    return false;
+  }, [details, charLimit]);
+
   const checkFormValidity = useCallback(() => {
     const isEventTypeValid = !!eventType;
-    const isDetailsValid = details.length >= 10 && details.length <= 256;
-    // eslint-disable-next-line operator-linebreak
-    const isPhoneNumberValid =
-      (phoneNumber.length === 0) || (phoneNumber.length >= 10 && phoneNumber.length <= 16);
-    const isValid = isEventTypeValid && isDetailsValid && isPhoneNumberValid;
-
-    if (!isDetailsValid) {
-      setErrorMessage('Tip: Details must be between 10 and 256 characters long');
-    } else if (!isPhoneNumberValid) {
-      setErrorMessage('Tip: Phone number must be between 10 and 16 characters long, if provided');
-    } else {
-      setErrorMessage('');
-    }
-
+    const isValid = isEventTypeValid && validateDetailBox() && validatePhoneNumber();
     return isValid;
-  }, [eventType, details, phoneNumber]);
+  }, [eventType, validateDetailBox, validatePhoneNumber]);
 
   const handleEventTypeChange = (e: { target: { value: React.SetStateAction<string> } }) => {
     setEventType(e.target.value);
   };
 
   const handleDetailsChange = (e: { target: { value: React.SetStateAction<string> } }) => {
-    setDetails(e.target.value);
+    if (e.target.value.length <= charLimit) {
+      setDetails(e.target.value);
+    }
   };
 
   const handlePhoneNumberChange = (e: { target: { value: React.SetStateAction<string> } }) => {
@@ -82,15 +95,18 @@ export default function Report() {
       time: currentTime,
     };
 
-    try {
-      await axios.post(`${constants.BACKEND_URL}/api/report`, formData);
-      setErrorMessage('');
-      setEventType('');
-      setDetails('');
-      setPhoneNumber('');
-    } catch (error) {
-      throw Error('Error: Form was not submitted');
-    }
+    await axios.post(`${constants.BACKEND_URL}/api/report`, formData)
+      .then(() => {
+        setErrorMessage('');
+        setEventType('');
+        setDetails('');
+        setPhoneNumber('');
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.log(err);
+        setErrorMessage('Unable to submit report.');
+      });
   };
 
   useEffect(() => {
@@ -120,16 +136,21 @@ export default function Report() {
             </StyledSelect>
           </Section>
           <Section>
-            <div>Event Details:</div>
-            <StyledTextArea
-              id="details"
-              aria-label="detail field"
-              value={details}
-              onChange={handleDetailsChange}
-              rows={7}
-              cols={25}
-              required
-            />
+            <StyledTextAreaWrapper>
+              <div>Event Details:</div>
+              <StyledTextArea
+                id="details"
+                aria-label="Event details field"
+                value={details}
+                onChange={handleDetailsChange}
+                onBlur={validateDetailBox}
+                rows={7}
+                cols={25}
+                placeholder="Enter event details..."
+                required
+              />
+              <StyledCharacterCounter>{`${details.length} / ${charLimit}`}</StyledCharacterCounter>
+            </StyledTextAreaWrapper>
           </Section>
           <Section>
             <div>Phone Number (optional): </div>
@@ -138,13 +159,16 @@ export default function Report() {
               aria-label="phone field"
               id="phoneNumber"
               value={phoneNumber}
+              onBlur={validatePhoneNumber}
               onChange={handlePhoneNumberChange}
             />
+            <StyledP>
+              {errorMessage}
+            </StyledP>
           </Section>
-          {errorMessage && <StyledP>{errorMessage}</StyledP>}
-          <Section>
+          <ButtonSection>
             <Button text="Submit" variant="primary" size="md" disabled={!isFormValid} />
-          </Section>
+          </ButtonSection>
         </StyledReportContainer>
       </StyledReportOuterDiv>
     </form>
