@@ -74,7 +74,7 @@ export default function Report() {
     return false;
   }, [details, charLimit]);
 
-/**
+  /**
  * Validates all form fields to ensure they contain valid values.
  *
  * @param {boolean} isValid - Indicates whether the form fields are valid (true)
