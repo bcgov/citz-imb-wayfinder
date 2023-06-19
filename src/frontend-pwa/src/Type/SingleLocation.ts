@@ -1,19 +1,19 @@
 type SingleLocation = {
   contact?: {
-    fax?: String;
-    phone?: String;
+    fax?: string;
+    phone?: string;
   };
-  services: [String];
+  services: [string];
   address: {
-    province: String;
-    street?: String;
-    region?: String;
-    county?: String;
-    locality?: String;
-    label?: String;
+    province: string;
+    street?: string;
+    region?: string;
+    county?: string;
+    locality?: string;
+    label?: string;
   };
-  locale: String;
-  website: String;
+  locale: string;
+  website: string;
   latitude: number;
   longitude: number;
 };
