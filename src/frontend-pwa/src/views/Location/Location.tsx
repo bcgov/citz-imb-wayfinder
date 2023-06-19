@@ -1,10 +1,13 @@
 /* eslint-disable max-len */
 /* eslint-disable react/no-array-index-key */
 /**
- * @summary This is the main location view for mapping
- * @param locations - is an array of single locations pulled from the /location endpoint
+ * @summary         -This is the main location view for mapping.
+ *                  -Sorts all available locations by distance
+ *                  -Only displays locations in range of user settings
+ *                  -Users can filter by location search
+ * @param locations an array of single locations pulled from the /location endpoint
  * @type {(locations : Array<SingleLocation>)}
- * @author Dallas Richmond
+ * @author Dallas Richmond, LocalNewsTV
  */
 import { useState } from 'react';
 import ListItems from '../../components/ListItems/ListItems';
@@ -25,6 +28,10 @@ import {
   StyledP,
 } from './location.styles';
 
+interface LocationWithDistance extends SingleLocation {
+ distance: string;
+}
+
 export default function Location() {
   const { state } = useAppService();
   const [searchQuery, setSearchQuery] = useState('');
@@ -42,6 +49,17 @@ export default function Location() {
     }
     return false;
   });
+  const distancedLocations: Array<LocationWithDistance> = [];
+
+  filteredLocationSearch.forEach((location: SingleLocation) => {
+    const distancedLocation: LocationWithDistance = location as LocationWithDistance;
+    distancedLocation.distance = CalcDistance({ itemData: location, currentLocation: state.currentLocation });
+    distancedLocations.push(distancedLocation);
+  });
+
+  distancedLocations.sort((a: LocationWithDistance, b: LocationWithDistance) => (
+    parseFloat(a.distance) > parseFloat(b.distance) ? 1 : -1
+  ));
 
   return (
     <ViewContainer>
@@ -69,8 +87,8 @@ export default function Location() {
             borderRadius={false}
           />
           <ListItems headers={['Locations', 'Distance']}>
-            {filteredLocationSearch.map((data: SingleLocation, index: number) => (
-              <LocationListItem itemData={data} locationDistance={CalcDistance({ itemData: data, currentLocation: state.currentLocation })} key={index} />))}
+            {distancedLocations.map((data: LocationWithDistance) => (
+              <LocationListItem itemData={data} locationDistance={data.distance} key={data.locale} />))}
           </ListItems>
         </ServiceListContainer>
       </ContentContainer>
