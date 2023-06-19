@@ -3,7 +3,10 @@
  *
  * @summary - Event reporting page for the Wayfinder application.
  *          - Users can submit reports about events they witness.
- *          - Data is submitted to /report endpoint
+ *          - Data is submitted to /report endpoint as "formData" object.
+ *
+ * @todo    - Implement temporary offline storage of formData, should the user
+ *            be offline at the moment of submission.
  *
  * @author  TylerMaloney
  */
@@ -43,16 +46,26 @@ export default function Report() {
     'Miscellaneous',
   ];
 
+  /**
+ * Validates the phone number (if inputted) against regex pattern.
+ * @returns {boolean} - indicates whether the phone number is valid (true), or not (false).
+ *                      Also returns true if nothing is entered, as the field is optional.
+ */
   const validatePhoneNumber = useCallback((): boolean => {
     const regex = /^(?:\+?1-?)?(?:\(\d{3}\)|\d{3})-?\d{3}-?\d{4}$/gi;
     if (!phoneNumber || phoneNumber.match(regex)) {
       setErrorMessage('');
       return true;
     }
-    setErrorMessage('Invalid Format, Example (250) 555-5555');
+    setErrorMessage('Invalid Format. Example: (250) 555-5555');
     return false;
   }, [phoneNumber]);
 
+  /**
+ * Validates the detail input is longer than the minumum length, or not present.
+ * @returns {boolean} - Indicates whether the message inputted is over the
+ *                      character minimum, but under the maximum.
+ */
   const validateDetailBox = useCallback((): boolean => {
     if (details.length >= 10 && details.length <= charLimit) {
       return true;
@@ -60,6 +73,14 @@ export default function Report() {
     setErrorMessage('Minimum message length is 10 characters.');
     return false;
   }, [details, charLimit]);
+
+/**
+ * Validates all form fields to ensure they contain valid values.
+ *
+ * @param {boolean} isValid - Indicates whether the form fields are valid (true)
+ *                            or not valid (false).
+ * @returns {boolean}       - Returns the validity status of the form fields.
+ */
 
   const checkFormValidity = useCallback(() => {
     const isEventTypeValid = !!eventType;
@@ -85,7 +106,6 @@ export default function Report() {
     e.preventDefault();
 
     const currentTime = new Date();
-
     const formData = {
       latitude,
       longitude,
