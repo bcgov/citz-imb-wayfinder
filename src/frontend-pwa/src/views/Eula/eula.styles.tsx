@@ -5,6 +5,7 @@
 
 import styled from '@emotion/styled';
 import typography from '../../typography';
+import mq from '../../constants/mq';
 
 export const StyledOuterDiv = styled.div`
     width: 100%;
@@ -23,7 +24,7 @@ export const StyledOuterDiv = styled.div`
 export const StyledContainer = styled.div`
     ${typography.toString()}
     width: 100%;
-    max-width: 768px;
+    max-width: ${mq.tablet};
     height: 100%;
     flex-direction: column;
     background-color: white;
@@ -31,7 +32,7 @@ export const StyledContainer = styled.div`
     justify-content: center;
     display: flex;
     padding: 5em 7.5pt;
-    @media (max-width: 768px) {
+    @media (max-width: ${mq.tablet}) {
         padding: 20px;
     }
 `;
@@ -46,7 +47,7 @@ ${typography.toString()}
     align-items: center;
     justify-content: space-evenly;
     padding: 2em 1em;
-    @media (min-width: 768px){
+    @media (min-width: ${mq.tablet}){
         width: 288pt;
     }
 `;

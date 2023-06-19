@@ -4,6 +4,7 @@
  */
 import styled from '@emotion/styled';
 import typography from '../../typography';
+import mq from '../../constants/mq';
 
 export const SettingsWrapper = styled.div`
   background-color: white;
@@ -26,7 +27,7 @@ export const SettingsContainer = styled.div`
   padding: 4rem;
   top: 10%;
   left: 0%;
-  @media (max-width: 768px) {
+  @media (max-width: ${mq.tablet}) {
     max-width: 100vw;
     padding: 2em;
   }

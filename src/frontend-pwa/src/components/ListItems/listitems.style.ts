@@ -4,12 +4,13 @@
  */
 import styled from '@emotion/styled';
 import typography from '../../typography';
+import mq from '../../constants/mq';
 
 export const Table = styled.table`
   border-collapse: collapse;
   border-radius: 8px;
   height: auto;
-  @media (max-width: 768px) {
+  @media (max-width: ${mq.tablet}) {
     font-size: 14px;
   }
 `;
@@ -51,7 +52,7 @@ export const Container = styled.div`
     border-radius: 4px;
     background: none;
   }
-  @media (min-width: 768px){
+  @media (min-width: ${mq.tablet}){
       border-radius: 8pt;
   }
 `;

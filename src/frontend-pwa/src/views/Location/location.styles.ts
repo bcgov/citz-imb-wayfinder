@@ -3,6 +3,7 @@
  * @author Dallas Richmond
  */
 import styled from '@emotion/styled';
+import mq from '../../constants/mq';
 
 export const ViewContainer = styled.div`
   background-color: white;
@@ -25,7 +26,7 @@ export const ContentContainer = styled.div`
   justify-content: center;
   max-width: 1250px;
   overflow: hidden;
-  @media (min-width: 768px) {
+  @media (min-width: ${mq.tablet}) {
     flex-direction: row-reverse;
     padding: inherit 10pt;
   }
@@ -38,7 +39,7 @@ export const ServiceListContainer = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
-  @media (min-width: 768px) {
+  @media (min-width: ${mq.tablet}) {
     height: 100%;
     max-height: 100%;
     width: 425pt;
@@ -53,7 +54,7 @@ export const MapContainer = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
-  @media (min-width: 768px) {
+  @media (min-width: ${mq.tablet}) {
     height: 100%;
     border-radius: 4pt;
   }

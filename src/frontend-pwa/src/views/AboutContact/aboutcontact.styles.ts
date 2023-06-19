@@ -3,6 +3,7 @@
  */
 import styled from '@emotion/styled';
 import typography from '../../typography';
+import mq from '../../constants/mq';
 
 export const AboutContainer = styled.div`
   position: absolute;
@@ -66,7 +67,7 @@ export const StyledUl = styled.ul`
   margin: 0;
   padding-left: 1em;
   margin-bottom: 0;
-  @media (min-width: 768px){
+  @media (min-width: ${mq.tablet}){
     padding-left: 2em;
   }
 `;

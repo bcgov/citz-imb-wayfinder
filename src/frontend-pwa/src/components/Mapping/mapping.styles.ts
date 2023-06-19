@@ -9,6 +9,7 @@ import {
   MapContainer,
   Popup,
 } from 'react-leaflet';
+import mq from '../../constants/mq';
 
 export const MapWrapperDiv = styled.div`
     ${typography.toString()}
@@ -20,7 +21,7 @@ export const StyledMapContainer = styled(MapContainer)`
     max-height: 70svh;
     width: 100svw;
     overflow: hidden;
-    @media (min-width: 768px) {
+    @media (min-width: ${mq.tablet}) {
         height: 500pt;
         width: 350pt;
     }
