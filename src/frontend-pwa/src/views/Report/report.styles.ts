@@ -5,6 +5,7 @@
 
 import styled from '@emotion/styled';
 import typography from '../../typography';
+import mq from '../../constants/mq';
 
 export const StyledReportOuterDiv = styled.div`
     width: 100%;
@@ -19,7 +20,7 @@ export const StyledReportOuterDiv = styled.div`
     justify-content: center;
     padding: 10pt 0;
     background-color: white;
-    @media (min-width: 768px) {
+    @media (min-width: ${mq.tablet}) {
         padding: 20px;
     }
 `;
@@ -34,7 +35,7 @@ export const StyledReportContainer = styled.div`
     gap: 0.5em 0;
     padding: 5em 7.5pt;
     background-color: white;
-    @media (min-width: 768px) {
+    @media (min-width: ${mq.tablet}) {
         padding: 20px;
     }
 `;
@@ -56,7 +57,10 @@ export const StyledTextArea = styled.textarea`
 `;
 
 export const Section = styled.div`
-    width: 80%;
+    width: 90%;
+    @media (min-width: ${mq.tablet}){
+        width: 80%;
+    }
 `;
 
 export const ButtonSection = styled.div`
@@ -64,7 +68,7 @@ export const ButtonSection = styled.div`
     width: 80%;
     align-items: center;
     justify-content: center;
-    @media (min-width: 768px) {
+    @media (min-width: ${mq.tablet}) {
         justify-content: left;
     }
 `;
@@ -73,6 +77,7 @@ export const StyledSelect = styled.select`
     width: 100%;
     border-radius: 0.4em;
     padding: 5pt;
+    background-color: inherit;
 `;
 
 export const StyledInput = styled.input`
