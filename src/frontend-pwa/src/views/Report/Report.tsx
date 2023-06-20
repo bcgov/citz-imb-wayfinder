@@ -1,16 +1,13 @@
 /* eslint-disable react/no-array-index-key */
 /**
  *
- * @summary - Event reporting page for the Wayfinder application.
- *          - Users can submit reports about events they witness.
- *          - Data is submitted to /report endpoint as "formData" object.
+ * @summary - Sends validated form and geolocation data to the API for
+ *            consumption, or stores in localStorage while offline
  *
- * @todo    - Implement temporary offline storage of formData, should the user
- *            be offline at the moment of submission.
+ * TODO:    - Implement offline caching
  *
  * @author  TylerMaloney
  */
-
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { Button } from '../../components/Button/Button';
@@ -47,7 +44,7 @@ export default function Report() {
   ];
 
   /**
- * Validates the phone number (if inputted) against regex pattern.
+ * @desc - Validates the phone number (if inputted) against regex pattern.
  * @returns {boolean} - indicates whether the phone number is valid (true), or not (false).
  *                      Also returns true if nothing is entered, as the field is optional.
  */
@@ -62,7 +59,7 @@ export default function Report() {
   }, [phoneNumber]);
 
   /**
- * Validates the detail input is longer than the minumum length, or not present.
+ * @desc - Validates the detail input is longer than the minumum length, or not present.
  * @returns {boolean} - Indicates whether the message inputted is over the
  *                      character minimum, but under the maximum.
  */
@@ -75,13 +72,11 @@ export default function Report() {
   }, [details, charLimit]);
 
   /**
- * Validates all form fields to ensure they contain valid values.
- *
+ * @desc - Validates all form fields to ensure they contain valid values.
  * @param {boolean} isValid - Indicates whether the form fields are valid (true)
  *                            or not valid (false).
- * @returns {boolean}       - Returns the validity status of the form fields.
+ * @returns {boolean}      - Returns isValid, set to either true or false.
  */
-
   const checkFormValidity = useCallback(() => {
     const isEventTypeValid = !!eventType;
     const isValid = isEventTypeValid && validateDetailBox() && validatePhoneNumber();
@@ -102,6 +97,10 @@ export default function Report() {
     setPhoneNumber(e.target.value);
   };
 
+  /**
+ * @desc - Sends a "formData" object to the /report endpoint.
+ *       - Form validity is determined externally through the useEffect below.
+ */
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
