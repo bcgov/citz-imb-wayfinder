@@ -1,7 +1,7 @@
 /**
- * @summary A reusable that creates a splash screen for the app.
- * It loads the inital app data
- * @author Dallas Richmond
+ * @summary A reusable component that creates a splash screen for the app.
+ *          It loads the inital app data
+ * @author  Dallas Richmond
  */
 import { useEffect } from 'react';
 import logo from '/bc-logo-vertical.svg';

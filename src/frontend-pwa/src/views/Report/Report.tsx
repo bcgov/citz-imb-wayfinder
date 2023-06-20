@@ -11,6 +11,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { Button } from '../../components/Button/Button';
+import Analytics from '../../utils/Analytics';
 import {
   StyledReportContainer,
   StyledReportOuterDiv,
@@ -114,6 +115,16 @@ export default function Report() {
       phoneNumber,
       time: currentTime,
     };
+
+    const analytics = {
+      latitude,
+      longitude,
+      usage: {
+        function: 'report',
+      },
+    };
+
+    Analytics(analytics);
 
     await axios.post(`${constants.BACKEND_URL}/api/report`, formData)
       .then(() => {
