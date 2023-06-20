@@ -33,6 +33,7 @@ const StyledButton = styled.button<ButtonProps>`
   &:disabled {
     transform:scale(1);
     background-color: #A0A0A0;
+    cursor: not-allowed;
   }
 `;
 

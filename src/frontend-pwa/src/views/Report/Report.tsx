@@ -28,6 +28,7 @@ import useAppService from '../../services/app/useAppService';
 
 export default function Report() {
   const charLimit = 256;
+  const minCharLimit = 10;
   const [eventType, setEventType] = useState('');
   const [details, setDetails] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -64,7 +65,7 @@ export default function Report() {
  *                      character minimum, but under the maximum.
  */
   const validateDetailBox = useCallback((): boolean => {
-    if (details.length >= 10 && details.length <= charLimit) {
+    if (details.length >= minCharLimit && details.length <= charLimit) {
       return true;
     }
     setErrorMessage('Minimum message length is 10 characters.');
@@ -75,7 +76,7 @@ export default function Report() {
  * @desc - Validates all form fields to ensure they contain valid values.
  * @param {boolean} isValid - Indicates whether the form fields are valid (true)
  *                            or not valid (false).
- * @returns {boolean}      - Returns isValid, set to either true or false.
+ * @returns {boolean}       - Returns isValid, set to either true or false.
  */
   const checkFormValidity = useCallback(() => {
     const isEventTypeValid = !!eventType;
