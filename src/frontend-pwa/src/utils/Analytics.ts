@@ -2,7 +2,7 @@
 import axios from 'axios';
 import constants from '../constants/Constants';
 
-export const ReportAnalytics = (request: object) => {
+const Analytics = (request: object) => {
   axios.post(`${constants.BACKEND_URL}/api/analytic`, request)
     .then((data) => {
       console.log('Data: ', data);
@@ -12,12 +12,4 @@ export const ReportAnalytics = (request: object) => {
     });
 };
 
-export const LocationAnalytics = (request: object) => {
-  axios.post(`${constants.BACKEND_URL}/api/analytic`, request)
-    .then((data) => {
-      console.log('Data: ', data);
-    })
-    .catch((error) => {
-      console.log('Error: ', error);
-    });
-};
+export default Analytics;
