@@ -4,11 +4,11 @@
  */
 
 type Analytic = {
-  latitude: Number;
-  longitude: Number;
+  latitude: number;
+  longitude: number;
   usage: {
-    search?: String;
-    function: String;
+    search?: string;
+    function: string;
   };
   date?: Date;
 };
