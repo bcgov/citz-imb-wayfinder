@@ -20,6 +20,9 @@ export const userSendsReport = async (req: Request, res: Response) => {
   await reportModel.create(req.body)
     .then(() => res.status(201).send(httpResponses[201]))
     .catch((error) => res.status(400).json(validationErrorHandler(error)));
+  if (req.body.eventType === 'APITest') {
+    await reportModel.deleteMany({ eventType: 'APITest' });
+  }
 };
 
 export default userSendsReport;
