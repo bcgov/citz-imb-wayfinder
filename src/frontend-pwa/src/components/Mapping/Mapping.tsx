@@ -83,7 +83,17 @@ export default function Mapping({ locations, currentLocation }: MappingProps) {
           />
           <Marker icon={redIcon} position={[lat, long]}>
             <Popup>
-              <h4>You are here!</h4>
+              <h5>
+                You are here!
+              </h5>
+              <p>
+                Current Latitude:&nbsp;
+                {currentLocation.lat}
+              </p>
+              <p>
+                Current Longitude:&nbsp;
+                {currentLocation.long}
+              </p>
             </Popup>
           </Marker>
           {locations.map((item: SingleLocation, index: number) => (
