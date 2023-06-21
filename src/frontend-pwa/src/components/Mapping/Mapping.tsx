@@ -87,11 +87,11 @@ export default function Mapping({ locations, currentLocation }: MappingProps) {
                 You are here!
               </h5>
               <p>
-                Current Latitude:
+                Current Latitude:&nbsp;
                 {currentLocation.lat}
               </p>
               <p>
-                Current Longitude:
+                Current Longitude:&nbsp;
                 {currentLocation.long}
               </p>
             </Popup>
