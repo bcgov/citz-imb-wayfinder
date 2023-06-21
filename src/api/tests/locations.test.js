@@ -22,6 +22,7 @@ describe('Verify Locations endpoint functions', () => {
     expect(response.status).toBe(200);
     expect(typeof response.body.serviceBCLocations).toBe(typeof []);
     expect(typeof response.body.serviceBCServices).toBe(typeof []);
+    expect(typeof response.body.allServices).toBe(typeof []);
   });
 });
 

@@ -30,6 +30,7 @@ type ResponseObject = {
   serviceBCServices: Array<string>;
   healthBCLocations: Array<SingleLocation>;
   healthBCServices: Array<string>;
+  allServices: Array<string>;
 }
 
 /**
@@ -57,6 +58,7 @@ const extractServiceList = (locations: Array<SingleLocation>): Array<string> => 
  *              "serviceBCServices" : [""],
  *              "healthBCLocations": [{}],
  *              "healthBCServices": [""],
+ *              "allServices": [""],
  *           }
  * @returns  {ResponseObject} Array of Sites by Location
  */
@@ -68,6 +70,10 @@ export const getAllLocations = async (req: Request, res: Response): Promise<Resp
   // Gather unique Services List
   responseObject.healthBCServices = extractServiceList(responseObject.healthBCLocations);
   responseObject.serviceBCServices = extractServiceList(responseObject.serviceBCLocations);
+  responseObject.allServices = [
+    ...responseObject.healthBCServices,
+    ...responseObject.serviceBCServices,
+  ].sort();
   // Ship results to client
   return res.status(200).json(responseObject);
 };
