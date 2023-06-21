@@ -31,6 +31,11 @@ paths:
                     items:
                       type: string
                     example: []
+                  allServices:
+                    type: array
+                    items:
+                      type: string
+                    example: ["Address Change BC", "Affordable Child Care Benefit", "Water Rental Payments"]
     post:
       tags:
         - Locations
