@@ -3,7 +3,7 @@
  * @author Dallas Richmond
  */
 import styled from '@emotion/styled';
-import mq from '../../constants/mq';
+import mq from '../../../constants/mq';
 
 export const StyledSlider = styled.input`
   margin-top: 1rem;

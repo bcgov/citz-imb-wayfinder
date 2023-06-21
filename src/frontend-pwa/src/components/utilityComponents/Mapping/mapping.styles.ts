@@ -9,7 +9,7 @@ import {
   MapContainer,
   Popup,
 } from 'react-leaflet';
-import mq from '../../constants/mq';
+import mq from '../../../constants/mq';
 
 export const MapWrapperDiv = styled.div`
     ${typography.toString()}

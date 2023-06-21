@@ -3,7 +3,7 @@
  * @author Dallas Richmond
  */
 import styled from '@emotion/styled';
-import typography from '../../typography';
+import typography from '../../../typography';
 
 export const SplashScreenWrapper = styled.div`
   flex-direction: column;

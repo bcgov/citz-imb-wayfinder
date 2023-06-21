@@ -3,8 +3,8 @@
  * @author Dallas Richmond
  */
 import styled from '@emotion/styled';
-import typography from '../../typography';
-import mq from '../../constants/mq';
+import typography from '../../../typography';
+import mq from '../../../constants/mq';
 
 export const Table = styled.table`
   border-collapse: collapse;

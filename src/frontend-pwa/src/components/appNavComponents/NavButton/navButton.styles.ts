@@ -3,7 +3,6 @@
  * @author Dallas Richmond
  */
 import styled from '@emotion/styled';
-import typography from '../../typography';
 
 type NavProps = {
   hex: string;

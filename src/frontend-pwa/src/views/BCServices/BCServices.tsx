@@ -10,10 +10,10 @@
  */
 /* eslint-disable react/no-array-index-key */
 import { useState } from 'react';
-import ListItems from '../../components/ListItems/ListItems';
-import SearchBar from '../../components/SearchBar/SearchBar';
-import { ServiceListItem, headers } from '../../components/ServicesListItem/ServicesListItem';
-import Mapping from '../../components/Mapping/Mapping';
+import ListItems from '../../components/listComponents/ListItems/ListItems';
+import SearchBar from '../../components/commonComponents/SearchBar/SearchBar';
+import { ServiceListItem, headers } from '../../components/listComponents/ServicesListItem/ServicesListItem';
+import Mapping from '../../components/utilityComponents/Mapping/Mapping';
 import SingleLocation from '../../Type/SingleLocation';
 import useAppService from '../../services/app/useAppService';
 import {

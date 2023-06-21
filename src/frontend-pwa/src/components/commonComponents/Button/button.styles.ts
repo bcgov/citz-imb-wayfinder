@@ -4,7 +4,7 @@
  * @author  Tyler Maloney
  */
 import styled from '@emotion/styled';
-import typography from '../../typography';
+import typography from '../../../typography';
 
 type ButtonProps = {
   variant: string,

@@ -4,7 +4,7 @@
  */
 import { useLocation } from 'react-router-dom';
 import gear from '/gear-icon.svg';
-import useAppService from '../../services/app/useAppService';
+import useAppService from '../../../services/app/useAppService';
 import {
   StyledSettingsButton,
   StyledIcon,

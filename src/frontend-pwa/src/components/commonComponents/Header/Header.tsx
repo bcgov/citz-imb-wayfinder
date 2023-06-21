@@ -3,8 +3,8 @@
  * @author Dallas Richmond
  */
 import logo from '/logo-banner.svg';
-import BackNavButton from '../BackNavButton/BackNavButton';
-import SettingsNavButton from '../SettingsNavButton/SettingsNavButton';
+import BackNavButton from '../../appNavComponents/BackNavButton/BackNavButton';
+import SettingsNavButton from '../../appNavComponents/SettingsNavButton/SettingsNavButton';
 import { Link } from 'react-router-dom';
 
 import {

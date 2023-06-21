@@ -4,7 +4,7 @@
  * @type {(itemData : SingleLocation)}
  * @author Dallas Richmond
  */
-import SingleLocation from '../../Type/SingleLocation';
+import SingleLocation from '../../../Type/SingleLocation';
 
 import {
   TableData,

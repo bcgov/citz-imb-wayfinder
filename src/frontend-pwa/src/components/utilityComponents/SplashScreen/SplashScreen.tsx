@@ -5,9 +5,9 @@
  */
 import { useEffect } from 'react';
 import logo from '/bc-logo-vertical.svg';
-import Spinner from '../Spinner/Spinner';
-import useAppService from '../../services/app/useAppService';
-import OnlineCheck from '../../utils/OnlineCheck';
+import Spinner from '../../commonComponents/Spinner/Spinner';
+import useAppService from '../../../services/app/useAppService';
+import OnlineCheck from '../../../utils/OnlineCheck';
 import {
   SplashScreenWrapper,
   Image,

@@ -34,8 +34,8 @@ import {
   StyledPopup,
   StyledMapContainer,
 } from './mapping.styles';
-import SingleLocation from '../../Type/SingleLocation';
-import LocationsArray from '../../Type/LocationsArray';
+import SingleLocation from '../../../Type/SingleLocation';
+import LocationsArray from '../../../Type/LocationsArray';
 
 type CurrentLocationType = {
   lat: string;
