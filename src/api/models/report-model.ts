@@ -28,12 +28,14 @@ const ReportSchema = new mongoose.Schema({
     type: String,
     minLength: 10,
     maxLength: 256,
+    trim: true,
   },
   phone: {
     required: false,
     type: String,
     minLength: 10,
     maxLength: 16,
+    match: /^(?:\+?1-?)?(?:\(\d{3}\)|\d{3})-?\d{3}-?\d{4}$/gi,
   },
 });
 
