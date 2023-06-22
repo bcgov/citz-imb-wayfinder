@@ -11,23 +11,26 @@ import {
   Heading,
   Banner,
   Image,
+  StyledLink,
 } from './header.styles';
 
 export default function Header() {
   return (
     <HeaderWrapper>
-      <Banner>
-        <Link to="/">
-          <Image src={logo} alt="Go to the Home page" />
-        </Link>
-        <Heading>Wayfinder</Heading>
-      </Banner>
       <div>
         <Link to="/settings">
           <SettingsNavButton />
         </Link>
         <BackNavButton />
       </div>
+      <Banner>
+        <Link to="/">
+          <Image src={logo} alt="Go to the Home page" />
+        </Link>
+        <StyledLink href="/">
+          <Heading>Wayfinder</Heading>
+        </StyledLink>
+      </Banner>
     </HeaderWrapper>
   );
 }
