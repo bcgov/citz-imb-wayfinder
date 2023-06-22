@@ -10,12 +10,11 @@
  * @author Dallas Richmond, LocalNewsTV
  */
 import { useState } from 'react';
-import ListItems from '../../components/ListItems/ListItems';
+import { ListItems, LocationListItem } from '../../components/lists';
 import SingleLocation from '../../Type/SingleLocation';
 import useAppService from '../../services/app/useAppService';
-import LocationListItem from '../../components/LocationListItem/LocationListItem';
-import SearchBar from '../../components/SearchBar/SearchBar';
-import Mapping from '../../components/Mapping/Mapping';
+import { SearchBar } from '../../components/common';
+import { Mapping } from '../../components/utility';
 import CalcDistance from '../../utils/CalcDistance';
 import { localStorageKeyExists } from '../../utils/AppLocalStorage';
 import constants from '../../constants/Constants';

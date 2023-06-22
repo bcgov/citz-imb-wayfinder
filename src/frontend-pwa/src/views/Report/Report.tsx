@@ -10,7 +10,7 @@
  */
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { Button } from '../../components/Button/Button';
+import { Button } from '../../components/common';
 import Analytics from '../../utils/Analytics';
 import {
   StyledReportContainer,

@@ -2,7 +2,7 @@
  * @summary The main view for the application
  * @author Dallas Richmond
  */
-import NavButton from '../../components/NavButton/NavButton';
+import { NavButton } from '../../components/appNav';
 
 import {
   Wrapper,
