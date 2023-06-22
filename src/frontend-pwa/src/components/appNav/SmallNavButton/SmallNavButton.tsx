@@ -6,7 +6,7 @@
  * @author LocalNewsTV
  */
 import { Link } from 'react-router-dom';
-import { ButtonText, IconWrapper, InputWrapper } from './SmallNavButton.styles';
+import { ButtonText, IconWrapper, InputWrapper } from './smallNavButton.styles';
 
 type FooterProps = {
   path: string;
