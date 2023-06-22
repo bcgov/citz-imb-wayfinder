@@ -5,9 +5,8 @@
  */
 /* eslint-disable max-len */
 import { useState } from 'react';
-import { Button } from '../../components/commonComponents/Button/Button';
+import { Button, Toggle } from '../../components/common';
 import { StyledContainer, StyledOuterDiv, StyledFieldSetDiv } from './eula.styles';
-import Toggle from '../../components/commonComponents/Toggle/Toggle';
 import useAppService from '../../services/app/useAppService';
 
 export default function Eula() {

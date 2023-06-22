@@ -3,9 +3,8 @@
  * @author Dallas Richmond & Tyler Maloney
  */
 /* eslint-disable no-console */
-import Header from './components/commonComponents/Header/Header';
-import Footer from './components/commonComponents/Footer/Footer';
-import SplashScreen from './components/utilityComponents/SplashScreen/SplashScreen';
+import { Header, Footer } from './components/common';
+import SplashScreen from './components/utility/SplashScreen/SplashScreen';
 import Eula from './views/Eula/Eula';
 import ViewRouter from './routes/ViewRouter';
 import useAppService from './services/app/useAppService';

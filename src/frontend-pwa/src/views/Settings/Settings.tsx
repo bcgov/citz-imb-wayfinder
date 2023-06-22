@@ -3,9 +3,8 @@
  * @author Dallas Richmond
  */
 import { useState } from 'react';
-import Slider from '../../components/commonComponents/Slider/Slider';
-import Toggle from '../../components/commonComponents/Toggle/Toggle';
-import NavButton from '../../components/appNavComponents/NavButton/NavButton';
+import { Slider, Toggle } from '../../components/common';
+import { NavButton } from '../../components/appNav';
 import {
   SettingsContainer,
   Section,

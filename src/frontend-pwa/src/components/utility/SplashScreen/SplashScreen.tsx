@@ -5,7 +5,7 @@
  */
 import { useEffect } from 'react';
 import logo from '/bc-logo-vertical.svg';
-import Spinner from '../../commonComponents/Spinner/Spinner';
+import { Spinner } from '../../common';
 import useAppService from '../../../services/app/useAppService';
 import OnlineCheck from '../../../utils/OnlineCheck';
 import {
