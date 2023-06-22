@@ -17,12 +17,7 @@ import {
 export default function Header() {
   return (
     <HeaderWrapper>
-      <div>
-        <Link to="/settings">
-          <SettingsNavButton />
-        </Link>
-        <BackNavButton />
-      </div>
+      <BackNavButton />
       <Banner>
         <Link to="/">
           <Image src={logo} alt="Go to the Home page" />
@@ -31,6 +26,11 @@ export default function Header() {
           <Heading>Wayfinder</Heading>
         </StyledLink>
       </Banner>
+      <div>
+        <Link to="/settings">
+          <SettingsNavButton />
+        </Link>
+      </div>
     </HeaderWrapper>
   );
 }
