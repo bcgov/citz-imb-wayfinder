@@ -1,6 +1,6 @@
 /**
  * @summary The main view for the application
- * @author Dallas Richmond
+ * @author Dallas Richmond, LocalNewsTV
  */
 import { NavButton } from '../../components/appNav';
 
@@ -8,9 +8,9 @@ import {
   Wrapper,
   ButtonWrapper,
 } from './home.styles';
-import location from '/geo-alt-fill.svg';
-import report from '/newspaper.svg';
-import services from '/people-fill.svg';
+import location from '/iconography/FindOfficeColor.svg';
+import report from '/iconography/ReportColor.svg';
+import services from '/iconography/FindServiceColor.svg';
 
 export default function Home() {
   return (
