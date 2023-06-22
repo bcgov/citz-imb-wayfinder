@@ -4,16 +4,25 @@
  * @author  LocalNewsTV
  */
 import { Request, Response } from 'express';
+import mongoose from 'mongoose';
+import validationErrorHandler from '../utils/validationErrorHandler';
+import httpResponses from '../utils/httpResponse';
+
+const reportModel = mongoose.model('report');
 
 /**
- * TODO: - Add real functionality
- *       - Create a mongoose model to receive data sent in
- * @desc endpoint to receive data from Wayfinder application
+ * @desc endpoint to receive user reports from Wayfinder application
+ *       endpoint uses Mongoose models to validate
  * @param req Request object representing a users report
  * @param res Server response confirming object was sent
  */
 export const userSendsReport = async (req: Request, res: Response) => {
-  res.status(201).send(req.body);
+  await reportModel.create(req.body)
+    .then(() => res.status(201).send(httpResponses[201]))
+    .catch((error) => res.status(400).json(validationErrorHandler(error)));
+  if (req.body.eventType === 'APITest') {
+    await reportModel.deleteMany({ eventType: 'APITest' });
+  }
 };
 
 export default userSendsReport;

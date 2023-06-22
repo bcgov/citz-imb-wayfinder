@@ -1,7 +1,7 @@
 /**
  * @summary Initial Test to show analytic endpoint is working as expected
  * @desc    Verifying:
- *            -The API returns proper results with a good/bad reports
+ *            -The API returns proper results with a good/bad analytics
  * @author  LocalNewsTV
  */
 const supertest = require('supertest');

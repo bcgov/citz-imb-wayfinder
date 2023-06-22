@@ -5,8 +5,9 @@ components:
       required:
         - latitude
         - longitude
-        - reportItem
-        - comment
+        - details
+        - time
+        - eventType
       description: A user report (Placeholder Information)
       properties:
         latitude:
@@ -15,12 +16,21 @@ components:
         longitude:
           type: number
           example: -121.297732
-        reportItem:
+        time:
+          type: number
+          example: 1234567890
+        eventType:
           type: string
-          example: Animal Sighting
-        comment:
+          example: APITest
+          minimum: 4
+          maximum: 52
+          pattern: '/^[a-zA-Z\s]+$/i'
+        details:
           type: string
           example: Bison spotted at location
+          minimum: 10
+          maximum: 256
         phone:
           type: string
           example: 778-867-5309
+          pattern: '/^(?:\+?1-?)?(?:\(\d{3}\)|\d{3})-?\d{3}-?\d{4}$/gi'

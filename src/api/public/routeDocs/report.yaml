@@ -17,5 +17,16 @@ paths:
           description: Created
           content:
             application/json:
+              type: string
+              example: Created
+        '400':
+          description: Invalid Data
+          content:
+            application/json:
               schema:
-                $ref: '#/components/schemas/Report'
+                type: object
+                properties:
+                  phone:
+                    type: string
+                    example: "Path `phone` is invalid (555-555d-3555)."
+                    

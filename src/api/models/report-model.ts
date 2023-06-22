@@ -22,18 +22,20 @@ const ReportSchema = new mongoose.Schema({
     minLength: 4,
     maxLength: 32,
     trim: true,
-    match: /^[a-zA-Z\s]+$/i,
+    match: /^(Damaged Infrastructure|Animal Sighting|Suggestion\/Complaint|Miscellaneous|APITest)$/i,
   },
   details: {
     type: String,
     minLength: 10,
     maxLength: 256,
+    trim: true,
   },
   phone: {
     required: false,
     type: String,
     minLength: 10,
     maxLength: 16,
+    match: /^(?:\+?1-?)?(?:\(\d{3}\)|\d{3})-?\d{3}-?\d{4}$/gi,
   },
 });
 
