@@ -4,7 +4,7 @@
  */
 /* eslint-disable no-console */
 import { Header, Footer } from './components/common';
-import SplashScreen from './components/utility/SplashScreen/SplashScreen';
+import { SplashScreen } from './components/utility';
 import Eula from './views/Eula/Eula';
 import ViewRouter from './routes/ViewRouter';
 import useAppService from './services/app/useAppService';
