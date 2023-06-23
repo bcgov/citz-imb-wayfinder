@@ -1,6 +1,6 @@
 /**
  * @summary Reusable BC Gov Header Component
- * @author Dallas Richmond
+ * @author Dallas Richmond, LocalNewsTV
  */
 import logo from '/logo-banner.svg';
 import { BackNavButton, SettingsNavButton } from '../../appNav';
@@ -11,23 +11,30 @@ import {
   Heading,
   Banner,
   Image,
+  StyledLink,
+  BannerLeft,
+  BannerRight,
 } from './header.styles';
 
 export default function Header() {
   return (
     <HeaderWrapper>
+      <BannerLeft>
+        <BackNavButton />
+      </BannerLeft>
       <Banner>
         <Link to="/">
           <Image src={logo} alt="Go to the Home page" />
         </Link>
-        <Heading>Wayfinder</Heading>
+        <StyledLink href="/">
+          <Heading>Wayfinder</Heading>
+        </StyledLink>
       </Banner>
-      <div>
+      <BannerRight>
         <Link to="/settings">
           <SettingsNavButton />
         </Link>
-        <BackNavButton />
-      </div>
+      </BannerRight>
     </HeaderWrapper>
   );
 }
