@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import {
   ButtonCont,
   ImageCont,
@@ -10,6 +11,7 @@ type ButtonProps = {
   icon: string;
   text: string;
   disabled: boolean;
+  route: string;
 }
 
 export default function OfficeNavButton({
@@ -17,18 +19,21 @@ export default function OfficeNavButton({
   icon,
   text,
   disabled,
+  route,
 }: ButtonProps) {
   return (
-    <ButtonCont
-      hex={hex}
-      disabled={disabled}
-    >
-      <ImageCont>
-        <Image src={icon} alt={text} />
-      </ImageCont>
-      <TextCont>
-        {text}
-      </TextCont>
-    </ButtonCont>
+    <Link to={disabled ? '#' : route} style={{ textDecoration: 'none' }}>
+      <ButtonCont
+        hex={hex}
+        disabled={disabled}
+      >
+        <ImageCont>
+          <Image src={icon} alt={text} />
+        </ImageCont>
+        <TextCont>
+          {text}
+        </TextCont>
+      </ButtonCont>
+    </Link>
   );
 }
