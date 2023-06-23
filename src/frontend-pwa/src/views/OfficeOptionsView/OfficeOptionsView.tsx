@@ -15,35 +15,30 @@ export default function OfficeOptionsView() {
           hex="#ADD8E6"
           text="Service BC"
           icon={service}
-          disabled={false}
           route={Services.serviceBC}
         />
         <OfficeNavButton
           hex="#FFF4AE"
           text="ICBC"
           icon={car}
-          disabled={false}
           route={Services.icbc}
         />
         <OfficeNavButton
           hex="#FFA500"
           text="Health BC"
           icon={hospital}
-          disabled={false}
           route={Services.healthBC}
         />
         <OfficeNavButton
           hex="#90EE90"
           text="Parks BC"
           icon={tree}
-          disabled={false}
           route={Services.parksBC}
         />
         <OfficeNavButton
           hex="#F54029"
           text="FireBC"
           icon={fire}
-          disabled={false}
           route={Services.fireBC}
         />
       </ContentContainer>

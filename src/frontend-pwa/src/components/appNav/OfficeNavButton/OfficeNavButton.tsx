@@ -1,3 +1,18 @@
+/**
+ * @summary Customizable Navigation button
+ *          Customizable Types:
+ *                -hex color
+ *                -Icons to display
+ *                -routes to route to
+ *                -disabled logic to implement
+ * @type {{
+ *          hex: string,
+ *          icon: string,
+ *          routes: string,
+ *          disabled: boolean
+ *        }}
+ * @author LocalNewsTV
+ */
 import { Link } from 'react-router-dom';
 import {
   ButtonCont,
@@ -10,7 +25,7 @@ type ButtonProps = {
   hex: string;
   icon: string;
   text: string;
-  disabled: boolean;
+  disabled?: boolean;
   route: string;
 }
 
@@ -18,14 +33,19 @@ export default function OfficeNavButton({
   hex,
   icon,
   text,
-  disabled,
+  disabled = false,
   route,
 }: ButtonProps) {
   return (
-    <Link to={disabled ? '#' : route} style={{ textDecoration: 'none' }}>
+    <Link
+      to={disabled ? '#' : route}
+      style={{ textDecoration: 'none' }}
+      role="button"
+    >
       <ButtonCont
         hex={hex}
         disabled={disabled}
+        aria-label={`${text} Button`}
       >
         <ImageCont>
           <Image src={icon} alt={text} />
@@ -37,3 +57,7 @@ export default function OfficeNavButton({
     </Link>
   );
 }
+
+OfficeNavButton.defaultProps = {
+  disabled: false,
+};
