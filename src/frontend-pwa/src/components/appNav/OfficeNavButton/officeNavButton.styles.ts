@@ -19,6 +19,9 @@ export const ButtonCont = styled.div<NavProps>`
   display: flex;
   margin: 3pt;
   cursor: ${(({ disabled }) => (disabled ? 'not-allowed' : 'pointer'))};
+  &:hover, &:active {
+    transform: scale(0.97);
+  }
 `;
 
 export const ImageCont = styled.div`

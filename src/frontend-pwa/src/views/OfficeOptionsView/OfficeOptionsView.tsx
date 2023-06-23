@@ -1,3 +1,9 @@
+/**
+ * @summary Allows user to see list of possible Service types
+ *          For demonstration purposes we have listed multiple options
+ *          ICBC is set to disabled for the purpose of presentation of disabled attribute
+ * @author LocalNewsTV
+ */
 import { ContentContainer, ViewContainer } from './officeOptionsView.styles';
 import { OfficeNavButton } from '../../components/appNav';
 import car from '/iconography/CarBlack.svg';
@@ -21,6 +27,7 @@ export default function OfficeOptionsView() {
           hex="#FFF4AE"
           text="ICBC"
           icon={car}
+          disabled
           route={Services.icbc}
         />
         <OfficeNavButton

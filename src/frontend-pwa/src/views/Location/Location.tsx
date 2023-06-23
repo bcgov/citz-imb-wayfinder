@@ -66,6 +66,8 @@ export default function Location() {
   distancedLocations.sort((a: LocationWithDistance, b: LocationWithDistance) => (
     parseFloat(a.distance) > parseFloat(b.distance) ? 1 : -1
   ));
+  const unavailable = <LocationListItem itemData={{ locale: 'Sorry, this service is currently not implemented' } as SingleLocation} locationDistance="" />;
+  const outOfRange = <LocationListItem itemData={{ locale: `No results within ${locationRange}KM` } as SingleLocation} locationDistance="" />;
 
   return (
     <ViewContainer>
@@ -95,6 +97,11 @@ export default function Location() {
           <ListItems headers={headers}>
             {distancedLocations.map((data: LocationWithDistance) => (
               <LocationListItem itemData={data} locationDistance={data.distance} key={data.locale} />))}
+            {locations.length === 0
+            && unavailable}
+            {locations.length > 0
+            && distancedLocations.length === 0
+            && outOfRange}
           </ListItems>
         </ServiceListContainer>
       </ContentContainer>
