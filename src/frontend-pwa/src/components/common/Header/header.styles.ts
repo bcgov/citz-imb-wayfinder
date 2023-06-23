@@ -9,7 +9,7 @@ import mq from '../../../constants/mq';
 export const HeaderWrapper = styled.header`
     background-color: #036;
     border-bottom: 2px solid #fcba19;
-    padding: 0 65px;
+    padding: 0;
     color: #fff;
     display: flex;
     justify-content: space-between;
@@ -19,9 +19,9 @@ export const HeaderWrapper = styled.header`
     position: fixed;
     width: 100%;
     left: 0;
-    @media (max-width: ${mq.tablet}) {
-        justify-content: space-evenly;
-        padding: 0px;
+    @media (min-width: ${mq.tablet}) {
+        justify-content: flex-start;
+        padding: 2em;
     }
     z-index: 2000;
 `;
@@ -38,9 +38,24 @@ export const Heading = styled.h2`
 export const Banner = styled.div`
     display: flex;
     align-items: center;
-    margin: 0 10px 0 0;
+    margin: 0;
+`;
+export const BannerRight = styled.div`
+    min-width: 35pt;
+    display: flex;
+    padding: 0 0.5em;
+    margin: 0;
+    @media (min-width: ${mq.tablet}){
+        margin: 0 0 0 auto;
+    }
 `;
 
+export const BannerLeft = styled.div`
+    min-width: 35pt;
+    display: flex;
+    padding: 0 0.5em;
+    margin: 0;
+`;
 export const Image = styled.img`
     width: 175px;
     top: 10px;
