@@ -1,6 +1,6 @@
 /**
  * @summary Reusable BC Gov Header Component
- * @author Dallas Richmond, Matthew Logan
+ * @author Dallas Richmond, LocalNewsTV
  */
 import logo from '/logo-banner.svg';
 import { BackNavButton, SettingsNavButton } from '../../appNav';
