@@ -5,6 +5,7 @@ import constants from '../../constants/Constants';
 import AppActionType from './AppActions';
 import { saveDataToLocalStorage, getDataFromLocalStorage, localStorageKeyExists } from '../../utils/AppLocalStorage';
 import SettingsObject from '../../Type/SettingsObject';
+import { errorHighAccuracy, successCallback } from '../../utils/GeolocationAccuracy';
 
 const {
   SET_APP_DATA,
@@ -48,19 +49,24 @@ const useAppService = () => {
      * @author Dallas Richmond
      */
     const setCurrentLocation = async (isOnline: boolean) => {
-      let currentLocation = { lat: '', long: '' };
+      // let currentLocation = { lat: '', long: '' };
       try {
-        if (navigator.geolocation && isOnline) {
-          navigator.geolocation.getCurrentPosition((position) => {
-            currentLocation.lat = (position.coords.latitude).toFixed(5);
-            currentLocation.long = (position.coords.longitude).toFixed(5);
-            saveDataToLocalStorage(constants.CURRENT_LOCATION_KEY, currentLocation);
-            dispatch({ type: SET_CURRENT_LOCATION, payload: currentLocation });
-          });
-        } else {
-          currentLocation = getDataFromLocalStorage(constants.CURRENT_LOCATION_KEY);
-          dispatch({ type: SET_CURRENT_LOCATION, payload: currentLocation });
-        }
+        // if (navigator.geolocation && isOnline) {
+        //   navigator.geolocation.getCurrentPosition((position) => {
+        //     currentLocation.lat = (position.coords.latitude).toFixed(5);
+        //     currentLocation.long = (position.coords.longitude).toFixed(5);
+        //     saveDataToLocalStorage(constants.CURRENT_LOCATION_KEY, currentLocation);
+        //     dispatch({ type: SET_CURRENT_LOCATION, payload: currentLocation });
+        //   });
+        // } else {
+        //   currentLocation = getDataFromLocalStorage(constants.CURRENT_LOCATION_KEY);
+        //   dispatch({ type: SET_CURRENT_LOCATION, payload: currentLocation });
+        // }
+        navigator.geolocation.getCurrentPosition(
+          successCallback,
+          errorHighAccuracy,
+          { maximumAge: 600000, timeout: 5000, enableHighAccuracy: true },
+        );
       } catch (error) {
         // eslint-disable-next-line no-console
         console.log(error);
