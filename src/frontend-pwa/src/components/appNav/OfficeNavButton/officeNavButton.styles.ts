@@ -20,7 +20,7 @@ export const ButtonCont = styled.div<NavProps>`
   margin: 3pt;
   cursor: ${(({ disabled }) => (disabled ? 'not-allowed' : 'pointer'))};
   &:hover, &:active {
-    transform: scale(0.97);
+    transform: scale(${(({ disabled }) => (disabled ? 1 : 0.97))});
   }
 `;
 
