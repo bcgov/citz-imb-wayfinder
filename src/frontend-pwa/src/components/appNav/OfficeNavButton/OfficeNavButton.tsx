@@ -5,12 +5,7 @@
  *                -Icons to display
  *                -routes to route to
  *                -disabled logic to implement
- * @type {{
- *          hex: string,
- *          icon: string,
- *          routes: string,
- *          disabled: boolean
- *        }}
+ * @type {ButtonProps}
  * @author LocalNewsTV
  */
 import { Link } from 'react-router-dom';

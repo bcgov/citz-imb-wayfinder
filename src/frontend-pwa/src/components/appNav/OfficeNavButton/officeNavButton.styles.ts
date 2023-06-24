@@ -29,7 +29,7 @@ export const ImageCont = styled.div`
   align-items: center;
   justify-content: center;
   width: 60pt;
-  height: 60pt;
+  height: 35pt;
   border-radius: 8pt;
   margin: 0 0 0 10pt;
   padding: 0;
