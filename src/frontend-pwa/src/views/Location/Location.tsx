@@ -10,6 +10,7 @@
  * @author Dallas Richmond, LocalNewsTV
  */
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { ListItems, LocationListItem } from '../../components/lists';
 import SingleLocation from '../../Type/SingleLocation';
 import useAppService from '../../services/app/useAppService';
@@ -34,11 +35,17 @@ interface LocationWithDistance extends SingleLocation {
 export default function Location() {
   const { state } = useAppService();
   const [searchQuery, setSearchQuery] = useState('');
-
+  const { service } = useParams();
   const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
-  const locations = state.appData?.data ? state.appData.data.serviceBCLocations : [];
+  const locations = state.appData?.data ? state.appData.data[`${service}Locations`] || [] : [];
   const locationRange = state.settings.location_range;
 
+  const headers: Array<string> = [];
+  if (service) {
+    headers.push(`${(service[0].toUpperCase() + service.substring(1, service.length))} Locations`, 'Distance');
+  } else {
+    headers.push('Locations', 'Distance');
+  }
   const filteredLocationSearch = locations.filter((location: SingleLocation) => {
     if (geolocationKnown) {
       const locationDistance = CalcDistance({ itemData: location, currentLocation: state.currentLocation });
@@ -59,6 +66,8 @@ export default function Location() {
   distancedLocations.sort((a: LocationWithDistance, b: LocationWithDistance) => (
     parseFloat(a.distance) > parseFloat(b.distance) ? 1 : -1
   ));
+  const unavailable = <LocationListItem itemData={{ locale: 'Sorry, this service is currently not implemented' } as SingleLocation} locationDistance="0" />;
+  const outOfRange = <LocationListItem itemData={{ locale: `No results within ${locationRange}KM` } as SingleLocation} locationDistance="0" />;
 
   return (
     <ViewContainer>
@@ -85,9 +94,14 @@ export default function Location() {
             border={false}
             borderRadius={false}
           />
-          <ListItems headers={['Locations', 'Distance']}>
+          <ListItems headers={headers}>
             {distancedLocations.map((data: LocationWithDistance) => (
               <LocationListItem itemData={data} locationDistance={data.distance} key={data.locale} />))}
+            {locations.length === 0
+            && unavailable}
+            {locations.length > 0
+            && distancedLocations.length === 0
+            && outOfRange}
           </ListItems>
         </ServiceListContainer>
       </ContentContainer>
