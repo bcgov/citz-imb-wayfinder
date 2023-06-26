@@ -23,6 +23,19 @@ export default function SplashScreen() {
     state,
   } = useAppService();
 
+  /**
+   * @summary Loads necessary app settings and data depending on online state
+   *          -setCurrentLocation attempts to use high accuracy Geolocation to get
+   *           the coordinates. If it can't it tries low accuracy. If not again it pulls
+   *           from local storage
+   *          -initializeEulaState takes the state from local storage if it exists, else
+   *           it sets the acceoted Eula to false
+   *          -updateSettings updates the settings from local storage or initializes them
+   *           to default values
+   *          -setAppData takes in a boolean that dictates whether the app is online or not
+   *           and either gets the data from the API locations endpoint or pulls from local
+   *           storage
+   */
   useEffect(() => {
     setCurrentLocation();
     initializeEulaState();
@@ -36,7 +49,7 @@ export default function SplashScreen() {
         .then((Online) => {
           setAppData(Online);
           setLoading(false);
-        }).catch(() => {});
+        });
     }
   });
 

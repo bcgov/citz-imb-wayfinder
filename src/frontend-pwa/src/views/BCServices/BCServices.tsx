@@ -35,7 +35,7 @@ export default function BCServices() {
   return (
     <ViewContainer>
       <ContentContainer>
-        {navigator.onLine && !state.settings.offline_mode
+        {!state.settings.offline_mode && navigator.onLine
           ? (
             <Mapping
               locations={filteredLocationSearch}
