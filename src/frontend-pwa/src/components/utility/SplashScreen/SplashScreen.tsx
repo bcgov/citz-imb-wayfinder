@@ -20,17 +20,24 @@ export default function SplashScreen() {
     setAppData,
     initializeEulaState,
     updateSettings,
+    state,
   } = useAppService();
 
   useEffect(() => {
-    OnlineCheck()
-      .then((Online) => {
-        setAppData(Online);
-        setCurrentLocation();
-        initializeEulaState();
-        updateSettings();
-        setLoading(false);
-      }).catch(() => {});
+    setCurrentLocation();
+    initializeEulaState();
+    updateSettings();
+
+    if (state.settings.offline_mode) {
+      setAppData(false);
+      setLoading(false);
+    } else {
+      OnlineCheck()
+        .then((Online) => {
+          setAppData(Online);
+          setLoading(false);
+        }).catch(() => {});
+    }
   });
 
   return (
