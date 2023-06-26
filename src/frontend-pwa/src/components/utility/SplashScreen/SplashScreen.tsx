@@ -26,7 +26,7 @@ export default function SplashScreen() {
     OnlineCheck()
       .then((Online) => {
         setAppData(Online);
-        setCurrentLocation(Online);
+        setCurrentLocation();
         initializeEulaState();
         updateSettings();
         setLoading(false);
