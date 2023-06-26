@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useContext, useMemo } from 'react';
 import axios from 'axios';
 import { AppContext } from '../../providers/AppProvider';
@@ -16,7 +17,7 @@ const {
 
 /**
  * @summary Custom hook that provides app related functions
- * @author Dallas Richmond
+ * @author  Dallas Richmond
  */
 const useAppService = () => {
   const { state, dispatch } = useContext<any>(AppContext);
@@ -24,8 +25,8 @@ const useAppService = () => {
   return useMemo(() => {
     /**
      * @summary Gets location data from the API and sets it in both localStorage and state if online
-     * and sets the app state to localStorage values if Offline
-     * @author Dallas Richmond
+     *          and sets the app state to localStorage values if Offline
+     * @author  Dallas Richmond
      */
     const setAppData = async (isOnline: boolean) => {
       if (isOnline) {
@@ -34,7 +35,6 @@ const useAppService = () => {
           saveDataToLocalStorage(constants.APP_DATA_KEY, data);
           dispatch({ type: SET_APP_DATA, payload: data });
         } catch (e) {
-          // eslint-disable-next-line no-console
           console.error(e);
         }
       } else {
@@ -45,33 +45,66 @@ const useAppService = () => {
 
     /**
      * @summary uses the naviator to get the users current location
-     * @author Dallas Richmond
+     *          Initially tries with high accuracy
+     * @author  Dallas Richmond
      */
-    const setCurrentLocation = async (isOnline: boolean) => {
-      let currentLocation = { lat: '', long: '' };
+    const setCurrentLocation = async () => {
       try {
-        if (navigator.geolocation && isOnline) {
-          navigator.geolocation.getCurrentPosition((position) => {
-            currentLocation.lat = (position.coords.latitude).toFixed(5);
-            currentLocation.long = (position.coords.longitude).toFixed(5);
-            saveDataToLocalStorage(constants.CURRENT_LOCATION_KEY, currentLocation);
-            dispatch({ type: SET_CURRENT_LOCATION, payload: currentLocation });
-          });
-        } else {
-          currentLocation = getDataFromLocalStorage(constants.CURRENT_LOCATION_KEY);
-          dispatch({ type: SET_CURRENT_LOCATION, payload: currentLocation });
-        }
+        navigator.geolocation.getCurrentPosition(
+          successCallback,
+          errorHighAccuracy,
+          { maximumAge: 600000, timeout: 5000, enableHighAccuracy: true },
+        );
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.log(error);
       }
     };
 
     /**
+     * @summary Error function that is called if high accuracy fails
+     * @param   error is an error object
+     * @author  Dallas Richmond
+     */
+    const errorHighAccuracy = (error: any) => {
+      if (error.code === error.TIMEOUT) {
+        navigator.geolocation.getCurrentPosition(
+          successCallback,
+          errorLowAccuracy,
+          { maximumAge: 600000, timeout: 10000, enableHighAccuracy: false },
+        );
+      }
+    };
+
+    /**
+     * @summary Error function that is called if low accuracy fails
+     * @param   error is an error object
+     * @author  Dallas Richmond
+     */
+    const errorLowAccuracy = () => {
+      console.log('Can not get high accuracy, trying low');
+      const currentLocation = getDataFromLocalStorage(constants.CURRENT_LOCATION_KEY);
+      dispatch({ type: SET_CURRENT_LOCATION, payload: currentLocation });
+    };
+
+    /**
+     * @summary Success function that is called if either the high or low accuracy
+     *          options are successful
+     * @param   position is the geo position object provided by naviator.geolocation
+     * @author  Dallas Richmond
+     */
+    const successCallback = (position: any) => {
+      const currentLocation = { lat: '', long: '' };
+      currentLocation.lat = (position.coords.latitude).toFixed(5);
+      currentLocation.long = (position.coords.longitude).toFixed(5);
+      saveDataToLocalStorage(constants.CURRENT_LOCATION_KEY, currentLocation);
+      dispatch({ type: SET_CURRENT_LOCATION, payload: currentLocation });
+    };
+
+    /**
      * @summary Used to set loading to true or false within the app
-     * @param value is a boolean value which determines if the app is loading or not
-     * @type {( value: boolean )}
-     * @author Dallas Richmond
+     * @param   value is a boolean value which determines if the app is loading or not
+     * @type    {( value: boolean )}
+     * @author  Dallas Richmond
      */
     const setLoading = (value: boolean) => {
       dispatch({ type: SET_LOADING, payload: value });
@@ -79,7 +112,7 @@ const useAppService = () => {
 
     /**
      * @summary Used to set eula state to true
-     * @author Dallas Richmond
+     * @author  Dallas Richmond
      */
     const setEulaState = () => {
       saveDataToLocalStorage(constants.EULA_ACCEPTED_KEY, true);
@@ -88,7 +121,7 @@ const useAppService = () => {
 
     /**
      * @summary Used to initialize eula state from localstorage, otherwise to false
-     * @author Dallas Richmond
+     * @author  Dallas Richmond
      */
     const initializeEulaState = () => {
       if (localStorageKeyExists(constants.EULA_ACCEPTED_KEY)) {
@@ -103,7 +136,7 @@ const useAppService = () => {
 
     /**
      * @summary Used to either initialize the settings or update them from localStorage
-     * @author Dallas Richmond
+     * @author  Dallas Richmond
      */
     const updateSettings = () => {
       if (localStorageKeyExists(constants.SETTINGS_KEY)) {
@@ -123,11 +156,13 @@ const useAppService = () => {
 
     /**
      * @summary Sets the settings for the app
-     * @param locationRange is a number representing the distance to be searche in KMs
-     * @param offlineMode is a boolean value that determines if the app is in online or offline mode
-     * @param analyticsOptIn is a boolean value that allows the users to opt in or out of analytics
-     * @type {( locationRange: number, offlineMode: boolean, analyticsOptIn: boolean )}
-     * @author Dallas Richmond
+     * @param   locationRange is a number representing the distance to be searche in KMs
+     * @param   offlineMode is a boolean value that determines if the app is in online
+     *          or offline mode
+     * @param   analyticsOptIn is a boolean value that allows the users to opt in or
+     *          out of analytics
+     * @type    {( SettingsObject )}
+     * @author  Dallas Richmond
      */
     const setSettings = ({
       locationRange = getDataFromLocalStorage(constants.SETTINGS_KEY).location_range,
