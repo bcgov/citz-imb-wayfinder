@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * @summary A reusable component that creates a splash screen for the app.
  *          It loads the inital app data
@@ -43,14 +44,15 @@ export default function SplashScreen() {
 
     if (state.settings.offline_mode) {
       setAppData(false);
-      setLoading(false);
     } else {
       OnlineCheck()
         .then((Online) => {
           setAppData(Online);
-          setLoading(false);
+        }).catch((error) => {
+          console.error('Error: ', error);
         });
     }
+    setLoading(false);
   });
 
   return (
