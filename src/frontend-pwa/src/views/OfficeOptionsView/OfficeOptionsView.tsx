@@ -6,11 +6,10 @@
  */
 import { ContentContainer, ViewContainer } from './officeOptionsView.styles';
 import { OfficeNavButton } from '../../components/appNav';
-import car from '/iconography/CarBlack.svg';
-import fire from '/iconography/FireBlack.svg';
-import tree from '/iconography/TreeBlack.svg';
-import service from '/iconography/FindOfficeBlack.svg';
-import hospital from '/iconography/HospitalBlack.svg';
+import car from '/iconography/CarColor.svg';
+import tree from '/iconography/TreeColor.svg';
+import service from '/iconography/FindOfficeColorServe.svg';
+import plus from '/iconography/PlusColor.svg';
 import Services from '../../enums/Services';
 
 export default function OfficeOptionsView() {
@@ -18,35 +17,28 @@ export default function OfficeOptionsView() {
     <ViewContainer>
       <ContentContainer>
         <OfficeNavButton
-          hex="#ADD8E6"
+          hex="#D6ECF3"
           text="Service BC"
           icon={service}
           route={Services.serviceBC}
         />
         <OfficeNavButton
-          hex="#FFF4AE"
+          hex="#EBD6F3"
           text="ICBC"
           icon={car}
-          disabled
           route={Services.icbc}
         />
         <OfficeNavButton
-          hex="#FFA500"
+          hex="#F3DDD6"
           text="Health BC"
-          icon={hospital}
+          icon={plus}
           route={Services.healthBC}
         />
         <OfficeNavButton
-          hex="#90EE90"
+          hex="#DEF3D6"
           text="Parks BC"
           icon={tree}
           route={Services.parksBC}
-        />
-        <OfficeNavButton
-          hex="#F54029"
-          text="FireBC"
-          icon={fire}
-          route={Services.fireBC}
         />
       </ContentContainer>
     </ViewContainer>
