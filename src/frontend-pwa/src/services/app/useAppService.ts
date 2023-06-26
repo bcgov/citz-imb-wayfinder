@@ -81,7 +81,6 @@ const useAppService = () => {
      * @author  Dallas Richmond
      */
     const errorLowAccuracy = () => {
-      console.log('Can not get high accuracy, trying low');
       const currentLocation = getDataFromLocalStorage(constants.CURRENT_LOCATION_KEY);
       dispatch({ type: SET_CURRENT_LOCATION, payload: currentLocation });
     };
