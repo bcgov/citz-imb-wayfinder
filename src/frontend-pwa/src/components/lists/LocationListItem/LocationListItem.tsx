@@ -4,6 +4,7 @@
  * @type {(itemData : SingleLocation)}
  * @author Dallas Richmond
  */
+import { Link } from 'react-router-dom';
 import SingleLocation from '../../../Type/SingleLocation';
 
 import {
@@ -15,16 +16,20 @@ import {
 export type ListItemProps = {
   itemData: SingleLocation;
   locationDistance: string;
+  service?: string;
 }
 
 export default function LocationListItem({
   itemData,
   locationDistance,
+  service = '',
 }: ListItemProps) {
   return (
     <TableRow>
       <TableData>
-        <TableDataWrapper>{itemData.locale}</TableDataWrapper>
+        <Link to={`/location/${service}/${itemData.locale}`} state={{ from: itemData }}>
+          <TableDataWrapper>{itemData.locale}</TableDataWrapper>
+        </Link>
       </TableData>
       <TableData>
         <TableDataWrapper>
@@ -34,3 +39,7 @@ export default function LocationListItem({
     </TableRow>
   );
 }
+
+LocationListItem.defaultProps = {
+  service: '',
+};

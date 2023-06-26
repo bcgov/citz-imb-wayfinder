@@ -4,9 +4,11 @@ type SingleLocation = {
     phone?: string;
   };
   services: [string];
+  serviceType: string;
   address: {
     province: string;
     street?: string;
+    postal_code?: string;
     region?: string;
     county?: string;
     locality?: string;
