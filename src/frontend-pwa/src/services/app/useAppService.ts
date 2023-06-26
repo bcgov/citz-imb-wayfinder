@@ -161,7 +161,7 @@ const useAppService = () => {
      *          or offline mode
      * @param   analyticsOptIn is a boolean value that allows the users to opt in or
      *          out of analytics
-     * @type    {( locationRange: number, offlineMode: boolean, analyticsOptIn: boolean )}
+     * @type    {( SettingsObject )}
      * @author  Dallas Richmond
      */
     const setSettings = ({
