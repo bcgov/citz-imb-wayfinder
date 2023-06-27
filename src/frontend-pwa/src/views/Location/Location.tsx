@@ -96,7 +96,7 @@ export default function Location() {
           />
           <ListItems headers={headers}>
             {distancedLocations.map((data: LocationWithDistance) => (
-              <LocationListItem itemData={data} locationDistance={data.distance} key={data.locale} />))}
+              <LocationListItem itemData={data} locationDistance={data.distance} key={data.locale} service={service} />))}
             {locations.length === 0
             && unavailable}
             {locations.length > 0

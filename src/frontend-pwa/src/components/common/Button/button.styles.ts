@@ -18,10 +18,10 @@ const StyledButton = styled.button<ButtonProps>`
   height: ${(props) => (props.size === 'sm' ? '35px' : props.size === 'md' ? '70px' : '100px')};
   border: none;
   border-radius: 8px;
-  padding: 12px 32px;
+  padding: ${(props) => (props.size === 'sm' ? '6pt 2pt' : '12px 32px')};
   text-align: center;
   text-decoration: none;
-  font-size: 18px;
+  font-size: ${(props) => (props.size === 'sm' ? '14px' : '18px')};
   font-weight: 500;
   letter-spacing: 1px;
   cursor: pointer;

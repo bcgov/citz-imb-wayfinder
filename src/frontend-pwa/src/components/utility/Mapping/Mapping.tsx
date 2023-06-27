@@ -9,13 +9,14 @@
  *
  * @param   MappingProps - passes in {lat, long} as currentLocationType, and passes
  *                       a list of BCService locations as a LocationsArray
- * @type    {(locations: LocationsArray, currentLocation: CurrentLocationType)}
+ * @type    {MappingProps}
  *
  * @param   CurrentLocationType - passes the navigator's lat/long as a single object
- * @type    {(lat: string, long: string)}
+ * @type    {CurrentLocationType}
  *
- * @author  Tyler Maloney
+ * @author  Tyler Maloney, LocalNewsTV
  */
+import { useParams, Link } from 'react-router-dom';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/images/marker-shadow.png';
 import {
@@ -28,14 +29,15 @@ import baseIconImage from '/marker-icon.png';
 import baseIconImageMobile from '/marker-icon-2x.png';
 import redIconImage from '/marker-icon-red.png';
 import redIconImageMobile from '/marker-icon-2x-red.png';
-
 import {
   MapWrapperDiv,
   StyledPopup,
   StyledMapContainer,
+  PopupInfo,
 } from './mapping.styles';
 import SingleLocation from '../../../Type/SingleLocation';
 import LocationsArray from '../../../Type/LocationsArray';
+import { Button } from '../../common';
 
 type CurrentLocationType = {
   lat: string;
@@ -66,7 +68,7 @@ const redIcon = Leaflet.icon({
 export default function Mapping({ locations, currentLocation }: MappingProps) {
   const lat = parseFloat(currentLocation?.lat);
   const long = parseFloat(currentLocation?.long);
-
+  const { service } = useParams();
   return (
     <MapWrapperDiv>
       { !isNaN(lat)
@@ -84,7 +86,7 @@ export default function Mapping({ locations, currentLocation }: MappingProps) {
           <Marker icon={redIcon} position={[lat, long]}>
             <Popup>
               <h5>
-                You are here!
+                Current Location
               </h5>
               <p>
                 Current Latitude:&nbsp;
@@ -104,20 +106,22 @@ export default function Mapping({ locations, currentLocation }: MappingProps) {
                   Location:&nbsp;
                   {item.locale}
                 </h3>
-                <p>
+                <PopupInfo>
                   Address:&nbsp;
                   {item.address.label}
-                </p>
-                <p>Contact Info:</p>
-                <ul>
-                  <li>
-                    Phone Number:&nbsp;
-                    {item.contact?.phone}
-                  </li>
-                </ul>
-                <a href={item.website.toString()} target="_blank" rel="noopener noreferrer">
-                  Link to website
-                </a>
+                </PopupInfo>
+                <PopupInfo>
+                  Phone Number:&nbsp;
+                  <Link to={`tel:+${item.contact?.phone?.replaceAll('-', '').replaceAll(' ', '')}`}>{item.contact?.phone}</Link>
+                </PopupInfo>
+                <Link to={`/location/${(item.serviceType[0].toLowerCase() + item.serviceType.substring(1, item.serviceType.length))}/${item.locale}`}>
+                  <Button
+                    text="More Info"
+                    variant="primary"
+                    size="sm"
+                    disabled={false}
+                  />
+                </Link>
               </StyledPopup>
             </Marker>
           ))}

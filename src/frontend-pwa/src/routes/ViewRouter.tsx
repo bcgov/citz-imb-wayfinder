@@ -12,6 +12,7 @@ import Settings from '../views/Settings/Settings';
 import AboutContact from '../views/AboutContact/AboutContact';
 import Eula from '../views/Eula/Eula';
 import OfficeOptionsView from '../views/OfficeOptionsView/OfficeOptionsView';
+import LocationInformation from '../views/LocationInformation/LocationInformation';
 
 export default function ViewRouter() {
   return (
@@ -24,6 +25,7 @@ export default function ViewRouter() {
       <Route path="/settings" Component={Settings} />
       <Route path="/settings/about" Component={AboutContact} />
       <Route path="/location" Component={OfficeOptionsView} />
+      <Route path="/location/:service/:locale" Component={LocationInformation} />
     </Routes>
   );
 }
