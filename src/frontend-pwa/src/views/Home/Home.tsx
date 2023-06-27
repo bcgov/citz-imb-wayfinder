@@ -3,7 +3,7 @@
  * @author Dallas Richmond, LocalNewsTV
  */
 import { NavButton } from '../../components/appNav';
-
+import { useState } from 'react';
 import {
   Wrapper,
   ButtonWrapper,
@@ -20,12 +20,18 @@ export default function Home() {
     'Let\'s get started',
     'What are you looking for today?',
     'Connecting citizens to services',
+    'Are you looking to report an event?',
+    'We hope you are having a good day',
+    'Let\'s connect you with the services you need',
+    'We are so happy you are here',
+    'Jump in and find what you need',
+    'How can we help you?',
   ];
-  const currentGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+  const [greeting] = useState(greetings[Math.floor(Math.random() * greetings.length)]);
   return (
     <ViewContainer>
       <Wrapper>
-        <GreetingWrapper>{currentGreeting}</GreetingWrapper>
+        <GreetingWrapper>{greeting}</GreetingWrapper>
         <ButtonWrapper>
           <NavButton
             path="/location"
