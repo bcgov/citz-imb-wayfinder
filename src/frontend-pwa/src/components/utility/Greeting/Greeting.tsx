@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useState } from 'react';
 import GreetingWrapper from './greeting.style';
 
 export default function Greeting() {
@@ -14,13 +14,10 @@ export default function Greeting() {
     'Jump in and find what you need',
     'How can we help you?',
   ];
-  const greet = useRef('');
-  useEffect(() => {
-    greet.current = greetings[Date.now() % greetings.length];
-  });
+  const [greet] = useState(greetings[Date.now() % greetings.length]);
   return (
     <GreetingWrapper>
-      {greet.current}
+      {greet}
     </GreetingWrapper>
   );
 }
