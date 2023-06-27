@@ -1,6 +1,6 @@
 /**
  * @summary - This page will dictate styling for our map and relevant components
- * @author  Tyler Maloney
+ * @author  Tyler Maloney, LocalNewsTV
  */
 
 import styled from '@emotion/styled';
@@ -35,6 +35,10 @@ export const StyledPopup = styled(Popup)`
     ${typography.toString()}
 `;
 
+export const PopupInfo = styled.p`
+    margin: 0;
+    padding: 0;
+`;
 export const StyledPopupDiv = styled.div`
     ${typography.toString()}
     max-height: 10em;

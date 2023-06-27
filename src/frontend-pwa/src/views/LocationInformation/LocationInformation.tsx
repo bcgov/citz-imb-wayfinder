@@ -81,7 +81,7 @@ export default function LocationInformation() {
               <Container>
                 <Text>Website:&nbsp;</Text>
                 <Text>
-                  <Link to={location.website}>More Information</Link>
+                  <Link to={location.website}>Official Website</Link>
                 </Text>
               </Container>
               {location.services
