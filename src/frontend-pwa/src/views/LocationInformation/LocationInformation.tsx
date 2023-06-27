@@ -1,3 +1,9 @@
+/**
+ * @summary View for additional details about a location
+ *          Conditional renders set per item to account for variants in SingleLocation items
+ *          Page loads passed on url params then filters the data set
+ *          Page displays 404 if invalid query sent
+ */
 import { Link, useParams } from 'react-router-dom';
 import useAppService from '../../services/app/useAppService';
 import { SingleLocation } from '../../Type';
@@ -8,6 +14,7 @@ import {
   Container,
   LocaleHeader,
   SubHeader,
+  Address,
 } from './locationInformation.style';
 import { ListItems, ServiceListItem } from '../../components/lists';
 
@@ -39,21 +46,29 @@ export default function LocationInformation() {
                 && (
                 <Container>
                   <Text>Phone Number:&nbsp;</Text>
-                  <Text>{location.contact?.phone}</Text>
+                  <Link to={`tel:+${location.contact?.phone.replaceAll('-', '').replaceAll(' ', '')}`}>
+                    <Text>
+                      {location.contact?.phone}
+                    </Text>
+                  </Link>
                 </Container>
                 )}
               {location.contact?.fax
                 && (
                 <Container>
                   <Text>Fax Number:&nbsp;</Text>
-                  <Link to={`tel:+${location.contact?.fax.replaceAll('-', '')}`}>{location.contact?.fax}</Link>
+                  <Link to={`tel:+${location.contact?.fax.replaceAll('-', '').replaceAll(' ', '')}`}>
+                    <Text>
+                      {location.contact?.fax}
+                    </Text>
+                  </Link>
                 </Container>
                 )}
               {location.address
                 && (
                 <Container>
                   <Text>Address:&nbsp;</Text>
-                  <Text>{`${location.address?.label || ''}`}</Text>
+                  <Address>{`${location.address?.label || ''}`}</Address>
                 </Container>
                 )}
               {location.address?.postal_code

@@ -37,6 +37,14 @@ export const ContentContainer = styled.div`
     padding: inherit 10pt;
   }
 `;
+export const Address = styled.p`
+  max-width: 50%;
+  text-break: normal;
+  text-align: right;
+  padding: 0 10pt;
+  margin: 0;
+`;
+
 export const Text = styled.p`
   margin: 0;
   padding: 0 10pt;
@@ -45,9 +53,12 @@ export const Text = styled.p`
 
 export const Container = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   width: 100%;
   max-width: 450pt;
   padding: 4pt 0;
+  &:last-of-type {
+    margin-top: 1.5em;
+  }
 `;

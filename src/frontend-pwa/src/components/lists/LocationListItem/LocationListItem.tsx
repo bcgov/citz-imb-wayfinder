@@ -27,9 +27,13 @@ export default function LocationListItem({
   return (
     <TableRow>
       <TableData>
-        <Link to={`/location/${service}/${itemData.locale}`} state={{ from: itemData }}>
-          <TableDataWrapper>{itemData.locale}</TableDataWrapper>
-        </Link>
+        {service
+          ? (
+            <Link to={`/location/${service}/${itemData.locale}`} state={{ from: itemData }}>
+              <TableDataWrapper>{itemData.locale}</TableDataWrapper>
+            </Link>
+          )
+          : <TableDataWrapper>{itemData.locale}</TableDataWrapper>}
       </TableData>
       <TableData>
         <TableDataWrapper>
