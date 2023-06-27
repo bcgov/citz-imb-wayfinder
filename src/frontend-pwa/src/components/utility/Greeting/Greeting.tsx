@@ -1,3 +1,8 @@
+/**
+ * @summary Returns a random greeting wrapped in a custom 'p' tag
+ *          Uses Date.now to remove fights with SSR Math.Random()
+ * @author LocalNewsTV
+ */
 import { useState } from 'react';
 import GreetingWrapper from './greeting.style';
 

@@ -1,3 +1,7 @@
+/**
+ * @summary Styling for Greeting Component
+ * @author LocalNewsTV
+ */
 import styled from '@emotion/styled';
 
 const GreetingWrapper = styled.p`
