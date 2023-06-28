@@ -3,6 +3,8 @@
  *          Conditional renders set per item to account for variants in SingleLocation items
  *          Page loads passed on url params then filters the data set
  *          Page displays 404 if invalid query sent
+ *          Analytics sent or cached if offline
+ * @author LocalNewsTV, Dallas Richmond
  */
 import { Link, useParams } from 'react-router-dom';
 import useAppService from '../../services/app/useAppService';
