@@ -9,6 +9,7 @@ type Report = {
   eventType: String;
   details: String
   phone?: String
+  ticketNum?: String
 }
 
 export default Report;
