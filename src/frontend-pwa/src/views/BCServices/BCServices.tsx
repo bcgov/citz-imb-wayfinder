@@ -6,7 +6,7 @@
  *
  * @summary - Search by BC Services View container. Displays map data for users to see locations,
  *          - Users can filter by services that will filter the maps markers.
- *          -Only displays locations in range of user settings
+ *          - Only displays locations in range of user settings
  *          - Map does not render offline
  * @author  LocalNewsTV, Dallas Richmond
  */
