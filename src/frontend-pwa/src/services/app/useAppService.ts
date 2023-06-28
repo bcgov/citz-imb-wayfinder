@@ -6,6 +6,8 @@ import constants from '../../constants/Constants';
 import AppActionType from './AppActions';
 import { saveDataToLocalStorage, getDataFromLocalStorage, localStorageKeyExists } from '../../utils/AppLocalStorage';
 import SettingsObject from '../../Type/SettingsObject';
+import Analytic from '../../Type/Analytic';
+import SendAnalytics from '../../utils/SendAnalytics';
 
 const {
   SET_APP_DATA,
@@ -177,6 +179,26 @@ const useAppService = () => {
       dispatch({ type: SET_SETTINGS, payload: settings });
     };
 
+    /**
+     * @summary Send analytic data to database if online, else stores n localstorage
+     * @param analytics is an analytic object containing location and usage data
+     * @type {( Analytic )}
+     * @author Dallas Richmond
+     */
+    // TODO Add a check if analytic data is a report. If so, save as report data
+    // and add to state
+    const setAnalytics = (online: boolean, analytics: Analytic) => {
+      if (online) {
+        SendAnalytics(analytics);
+      } else if (localStorageKeyExists(constants.OFFLINE_ANALYTIC_KEY)) {
+        const data = getDataFromLocalStorage(constants.OFFLINE_ANALYTIC_KEY);
+        data.push(analytics);
+        saveDataToLocalStorage(constants.OFFLINE_ANALYTIC_KEY, data);
+      } else {
+        saveDataToLocalStorage(constants.OFFLINE_ANALYTIC_KEY, [analytics]);
+      }
+    };
+
     return {
       setAppData,
       setCurrentLocation,
@@ -185,6 +207,7 @@ const useAppService = () => {
       setEulaState,
       updateSettings,
       setSettings,
+      setAnalytics,
       state,
     };
   }, [state, dispatch]);
