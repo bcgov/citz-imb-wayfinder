@@ -46,6 +46,7 @@ export const StyledTextAreaWrapper = styled.div`
 export const StyledCharacterCounter = styled.div`
     display: flex;
     width: 100%;
+    margin-top: 0.25em;
     justify-content: flex-end;
 `;
 
@@ -54,6 +55,8 @@ export const StyledTextArea = styled.textarea`
     border-radius: 0.4em;
     resize: none;
     padding: 5pt;
+    background-color: #F5F5F5;
+    border: 1px solid #DCDCDC;
 `;
 
 export const Section = styled.div`
@@ -77,7 +80,8 @@ export const StyledSelect = styled.select`
     width: 100%;
     border-radius: 0.4em;
     padding: 5pt;
-    background-color: inherit;
+    background-color: #F5F5F5;
+    border: 1px solid #DCDCDC;
 `;
 
 export const StyledInput = styled.input`
@@ -85,12 +89,25 @@ export const StyledInput = styled.input`
     border-radius: 0.4em;
     border-width: 0.03em;
     padding: 5pt;
+    background-color: #F5F5F5;
+    border: 1px solid #DCDCDC;
 `;
-
 export const StyledP = styled.p`
+    margin-bottom: 0.5em !important;
+    padding: 0;
+`;
+export const ErrorP = styled.p`
     width: 100%;
     min-height: 1.2em;
     color: #8b0000;
+    font-size: 10pt;
+    padding: 0;
+    margin: 0;
+`;
+export const SuccessP = styled.p`
+    width: 100%;
+    min-height: 1.2em;
+    color: green;
     font-size: 10pt;
     padding: 0;
     margin: 0;

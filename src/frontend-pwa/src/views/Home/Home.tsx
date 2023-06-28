@@ -21,7 +21,7 @@ export default function Home() {
         <ButtonWrapper>
           <NavButton
             path="/location"
-            text="Find an Office"
+            text="Find an office"
             icon={location}
             hex="#DEF3FB"
           />
@@ -29,7 +29,7 @@ export default function Home() {
         <ButtonWrapper>
           <NavButton
             path="/services"
-            text="Find BC Services"
+            text="Find BC services"
             icon={services}
             hex="#EEE0E9"
           />
@@ -37,7 +37,7 @@ export default function Home() {
         <ButtonWrapper>
           <NavButton
             path="/report"
-            text="Report an Event"
+            text="Report an event"
             icon={report}
             hex="#FEF2DF"
           />

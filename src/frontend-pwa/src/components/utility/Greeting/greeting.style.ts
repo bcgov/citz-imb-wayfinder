@@ -9,12 +9,12 @@ const GreetingWrapper = styled.p`
   width: 100%;
   padding: 5pt 10pt;
   text-align: center;
-  margin: -2em 0 0 0;
-  font-size: 14pt;
+  margin: -1em 0 0.5em 0;
+  font-size: 16pt;
   min-height: 2em;
   color: #036;
   justify-content: center;
-  font-style: italic;
+  font-weight: 600;
 `;
 
 export default GreetingWrapper;

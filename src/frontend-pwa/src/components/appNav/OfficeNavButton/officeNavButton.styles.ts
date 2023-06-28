@@ -11,10 +11,10 @@ type NavProps = {
 export const ButtonCont = styled.div<NavProps>`
   height: 55pt;
   width: 240pt;
-  border-radius: 8pt 0 0 8pt;
+  border-radius: 8pt;
   align-items: center;
   justify-content: flex-start;
-  background: linear-gradient(to right, ${({ hex, disabled }) => (disabled ? '#666' : hex)} 10%, #FFF);
+  background: ${({ hex, disabled }) => (disabled ? '#666' : hex)};
   padding: 5pt;
   display: flex;
   margin: 3pt;
@@ -44,7 +44,7 @@ export const TextCont = styled.div`
   text-wrap: auto;
   width: 100%;
   height: 70pt;
-  color: #003366;
+  color: black;
   margin: 0;
   padding: 0 2em 0 0;
 `;
