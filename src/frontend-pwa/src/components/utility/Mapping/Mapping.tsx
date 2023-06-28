@@ -68,7 +68,6 @@ const redIcon = Leaflet.icon({
 export default function Mapping({ locations, currentLocation }: MappingProps) {
   const lat = parseFloat(currentLocation?.lat);
   const long = parseFloat(currentLocation?.long);
-  const { service } = useParams();
   return (
     <MapWrapperDiv>
       { !isNaN(lat)

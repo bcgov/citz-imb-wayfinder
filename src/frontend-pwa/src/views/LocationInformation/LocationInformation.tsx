@@ -7,6 +7,7 @@
 import { Link, useParams } from 'react-router-dom';
 import useAppService from '../../services/app/useAppService';
 import { SingleLocation } from '../../Type';
+import NotFound from '../NotFound/NotFound';
 import {
   ContentContainer,
   Text,
@@ -21,10 +22,9 @@ import { ListItems, ServiceListItem } from '../../components/lists';
 export default function LocationInformation() {
   const { state } = useAppService();
   const { service, locale } = useParams();
-  const FourOhFour = <Text>404 Not Found</Text>;
   const locations = state.appData?.data ? state.appData.data[`${service}Locations`] : [];
   if (!locations) {
-    return FourOhFour;
+    return <NotFound />;
   }
   const location: SingleLocation = locations.filter(
     (element: SingleLocation) => element.locale === locale,
@@ -97,7 +97,7 @@ export default function LocationInformation() {
               )}
             </>
           )
-          : FourOhFour}
+          : <NotFound />}
       </ContentContainer>
     </ViewContainer>
   );
