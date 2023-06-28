@@ -5,6 +5,7 @@
  *                  -Sorts all available locations by distance
  *                  -Only displays locations in range of user settings
  *                  -Users can filter by location search
+ *                  -Analytics sent or cached if offline
  * @param locations an array of single locations pulled from the /location endpoint
  * @type {(locations : Array<SingleLocation>)}
  * @author Dallas Richmond, LocalNewsTV
