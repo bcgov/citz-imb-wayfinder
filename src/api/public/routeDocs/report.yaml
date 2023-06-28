@@ -17,8 +17,36 @@ paths:
           description: Created
           content:
             application/json:
-              type: string
-              example: Created
+              schema:
+                type: object
+                properties:
+                  latitude:
+                    type: number
+                    example: 51.644532
+                  longitude:
+                    type: number
+                    example: -121.297732
+                  time:
+                    type: number
+                    example: 1234567890
+                  eventType:
+                    type: string
+                    example: APITest
+                    minimum: 4
+                    maximum: 52
+                    pattern: '/^[a-zA-Z\s]+$/i'
+                  details:
+                    type: string
+                    example: Bison spotted at location
+                    minimum: 10
+                    maximum: 256
+                  phone:
+                    type: string
+                    example: 778-867-5309
+                    pattern: '/^(?:\+?1-?)?(?:\(\d{3}\)|\d{3})-?\d{3}-?\d{4}$/gi'
+                  ticketNum:
+                    type: string
+                    example: 7a9fa7faofj
         '400':
           description: Invalid Data
           content:
