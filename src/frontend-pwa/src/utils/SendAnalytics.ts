@@ -9,7 +9,8 @@ import axios from 'axios';
 import constants from '../constants/Constants';
 import Analytic from '../Type/Analytic';
 
-const Analytics = (request: Analytic) => {
+// TODO remove console.logs
+const SendAnalytics = (request: Analytic) => {
   axios.post(`${constants.BACKEND_URL}/api/analytic`, request)
     .then((data) => {
       console.log('Data: ', data);
@@ -19,4 +20,4 @@ const Analytics = (request: Analytic) => {
     });
 };
 
-export default Analytics;
+export default SendAnalytics;

@@ -17,18 +17,45 @@ import {
   Address,
 } from './locationInformation.style';
 import { ListItems, ServiceListItem } from '../../components/lists';
+import OnlineCheck from '../../utils/OnlineCheck';
+import { localStorageKeyExists } from '../../utils/AppLocalStorage';
+import constants from '../../constants/Constants';
 
 export default function LocationInformation() {
-  const { state } = useAppService();
+  const { state, setAnalytics } = useAppService();
   const { service, locale } = useParams();
   const FourOhFour = <Text>404 Not Found</Text>;
   const locations = state.appData?.data ? state.appData.data[`${service}Locations`] : [];
+  const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
   if (!locations) {
     return FourOhFour;
   }
   const location: SingleLocation = locations.filter(
     (element: SingleLocation) => element.locale === locale,
   )[0];
+
+  // Potentially wrap in useEffect
+  if (geolocationKnown) {
+    const latitude = state.currentLocation.lat;
+    const longitude = state.currentLocation.long;
+    const analytics = {
+      latitude,
+      longitude,
+      usage: {
+        search: location.locale,
+        function: 'find location',
+      },
+    };
+
+    if (state.settings.offline_mode) {
+      setAnalytics(false, analytics);
+    } else {
+      OnlineCheck()
+        .then((Online) => {
+          setAnalytics(Online, analytics);
+        });
+    }
+  }
 
   return (
     <ViewContainer>
