@@ -1,3 +1,7 @@
+/**
+ * @summary Styling for NotFound component
+ * @author LocalNewsTV
+ */
 import styled from '@emotion/styled';
 import mq from '../../constants/mq';
 

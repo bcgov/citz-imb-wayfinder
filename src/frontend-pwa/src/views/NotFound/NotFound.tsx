@@ -1,3 +1,7 @@
+/**
+ * @summary 404 Page that returns to home, and references the url provided in its error message
+ * @author LocalNewsTV
+ */
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '../../components/common';
 import {
