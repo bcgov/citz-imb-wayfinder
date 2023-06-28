@@ -141,6 +141,7 @@ export default function Report() {
       .catch((err) => {
         // eslint-disable-next-line no-console
         console.log(err);
+        setReportSentSuccess(false);
         setErrorMessage('Unable to submit report.');
       });
   };
