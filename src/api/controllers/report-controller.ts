@@ -17,10 +17,10 @@ const reportModel = mongoose.model('report');
  */
 export const userSendsReport = async (req: Request, res: Response) => {
   await reportModel.create(req.body)
-    .then((newEntry) => {
+    .then(async (newEntry) => {
       if (newEntry.eventType === 'APITest') {
         // eslint-disable-next-line no-underscore-dangle
-        reportModel.deleteOne({ id: newEntry._id });
+        await reportModel.deleteOne({ _id: newEntry._id });
       }
       return res.status(201).send(newEntry);
     })
