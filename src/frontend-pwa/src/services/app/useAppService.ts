@@ -180,8 +180,8 @@ const useAppService = () => {
     };
 
     /**
-     * @summary Send analytic data to database if online, else stores n localstorage
-     * @param analytics is an analytic object containing location and usage data
+     * @summary Sends analytic data to database if online, else stores in localstorage
+     * @param analytics is an object containing location and usage data
      * @type {( Analytic )}
      * @author Dallas Richmond
      */

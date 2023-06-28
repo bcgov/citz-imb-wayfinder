@@ -118,7 +118,6 @@ export default function Report() {
       time: currentTime,
     };
 
-    // Potentially wrap in useEffect
     if (geolocationKnown) {
       const analytics = {
         latitude,
