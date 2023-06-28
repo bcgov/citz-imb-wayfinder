@@ -34,7 +34,6 @@ export default function LocationInformation() {
     (element: SingleLocation) => element.locale === locale,
   )[0];
 
-  // Potentially wrap in useEffect
   if (geolocationKnown) {
     const latitude = state.currentLocation.lat;
     const longitude = state.currentLocation.long;
