@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /**
  * TODO:    - Remove Border CSS from MapContainer when mapping implemented
  *          - Implement Mapping Props
@@ -5,8 +6,9 @@
  *
  * @summary - Search by BC Services View container. Displays map data for users to see locations,
  *          - Users can filter by services that will filter the maps markers.
+ *          -Only displays locations in range of user settings
  *          - Map does not render offline
- * @author  LocalNewsTV
+ * @author  LocalNewsTV, Dallas Richmond
  */
 /* eslint-disable react/no-array-index-key */
 import { useState } from 'react';
@@ -15,6 +17,9 @@ import { SearchBar } from '../../components/common';
 import { Mapping } from '../../components/utility';
 import SingleLocation from '../../Type/SingleLocation';
 import useAppService from '../../services/app/useAppService';
+import { localStorageKeyExists } from '../../utils/AppLocalStorage';
+import constants from '../../constants/Constants';
+import CalcDistance from '../../utils/CalcDistance';
 import {
   ContentContainer,
   MapContainer,
@@ -28,10 +33,21 @@ export default function BCServices() {
   const { state } = useAppService();
   const services = state.appData?.data ? state.appData.data.serviceBCServices : [];
   const locations = state.appData?.data ? state.appData.data.serviceBCLocations : [];
+  const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
+  const locationRange = state.settings.location_range;
+
   const filteredServiceSearch = services.filter((item : string) => item.toLowerCase().match(`${searchQuery.toLowerCase().trim()}`));
-  const filteredLocationSearch = locations.filter((location : SingleLocation) => (
-    filteredServiceSearch.some((service : string) => location.services.includes(service))
-  ));
+
+  const filteredLocationSearch = locations.filter((location : SingleLocation) => {
+    if (geolocationKnown) {
+      const locationDistance = CalcDistance({ itemData: location, currentLocation: state.currentLocation });
+      if (parseFloat(locationDistance) <= locationRange) {
+        return filteredServiceSearch.some((service : string) => location.services.includes(service));
+      }
+    }
+    return false;
+  });
+
   return (
     <ViewContainer>
       <ContentContainer>
