@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-param-reassign */
 /**
  * @summary Definition of the Schema Model representing a User Report
  * @author LocalNewsTV
@@ -19,6 +21,7 @@ const ReportSchema = new mongoose.Schema({
   },
   eventType: {
     type: String,
+    required: true,
     minLength: 4,
     maxLength: 32,
     trim: true,
@@ -26,6 +29,7 @@ const ReportSchema = new mongoose.Schema({
   },
   details: {
     type: String,
+    required: true,
     minLength: 10,
     maxLength: 256,
     trim: true,
@@ -42,8 +46,11 @@ const ReportSchema = new mongoose.Schema({
 ReportSchema.set('toJSON', {
   versionKey: false,
   virtuals: true,
-  // eslint-disable-next-line no-underscore-dangle, no-param-reassign
-  transform: (doc, ret) => { delete ret._id; },
+  transform: (doc, ret) => {
+    ret.ticketNum = ret._id;
+    delete ret._id;
+    delete ret.id;
+  },
 });
 
 export default mongoose.model('report', ReportSchema);
