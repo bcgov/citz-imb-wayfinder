@@ -4,11 +4,12 @@
  * @author LocalNewsTV
  */
 import express from 'express';
-import takeAnalytic from '../controllers/analytic-controller';
+import { takeAnalytic, getAnalytic } from '../controllers/analytic-controller';
 
 const router = express.Router();
 
 router.route('/analytic')
-  .post(takeAnalytic);
+  .post(takeAnalytic)
+  .get(getAnalytic);
 
 export default router;

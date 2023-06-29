@@ -20,4 +20,17 @@ export const takeAnalytic = async (req: Request, res: Response) => {
     .catch((error) => res.status(400).json(validationErrorHandler(error)));
 };
 
-export default takeAnalytic;
+/**
+ * @desc get method for endpoint, sends all analytic info
+ *       uses password for auth to get the data
+ * @returns Array of all analytics
+ */
+export const getAnalytic = async (req: Request, res: Response) => {
+  if (req.headers.authorization
+    && req.headers.authorization.startsWith('Bearer ')
+    && req.headers.authorization.split(' ')[1] === process.env.ADMIN_KEY) {
+    const analytics = await analyticModel.find({});
+    return res.status(200).json(analytics);
+  }
+  return res.status(403).send(httpResponses[403]);
+};

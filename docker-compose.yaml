@@ -18,6 +18,7 @@ services:
       - MONGO_SERVICE=${MONGO_SERVICE:-mongodb}
       - CONTAINERIZED=true
       - SCRAPER_API_KEY=${SCRAPER_API_KEY:-devKey}
+      - ADMIN_KEY=${devKey}
     networks:
       - wf-network
     ports:
@@ -67,6 +68,7 @@ services:
       - GEO_API_KEY=${GEO_API_KEY}
       - SCRAPER_API_KEY=${SCRAPER_API_KEY:-devKey}
       - WAYFINDER_API_URL=${WAYFINDER_API_URL:-http://wf-api:3000}
+      - ADMIN_KEY=${devKey}
     networks:
       - wf-network
     ports:
