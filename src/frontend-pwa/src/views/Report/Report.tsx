@@ -22,6 +22,8 @@ import {
   StyledInput,
   StyledP,
   StyledCharacterCounter,
+  ErrorP,
+  SuccessP,
 } from './report.styles';
 import constants from '../../constants/Constants';
 import useAppService from '../../services/app/useAppService';
@@ -36,6 +38,7 @@ export default function Report() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
+  const [reportSentSuccess, setReportSentSuccess] = useState(false);
   const { state, setAnalytics } = useAppService();
   const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
   const latitude = state.currentLocation ? state.currentLocation.lat : 49.2827;
@@ -72,6 +75,7 @@ export default function Report() {
       return true;
     }
     setErrorMessage('Minimum message length is 10 characters.');
+    setReportSentSuccess(false);
     return false;
   }, [details, charLimit]);
 
@@ -143,10 +147,12 @@ export default function Report() {
         setEventType('');
         setDetails('');
         setPhoneNumber('');
+        setReportSentSuccess(true);
       })
       .catch((err) => {
         // eslint-disable-next-line no-console
         console.log(err);
+        setReportSentSuccess(false);
         setErrorMessage('Unable to submit report.');
       });
   };
@@ -161,7 +167,7 @@ export default function Report() {
         <StyledReportContainer>
           <h2>Report An Event</h2>
           <Section>
-            <div>Event Type:</div>
+            <StyledP>Event Type:</StyledP>
             <StyledSelect
               id="eventType"
               aria-label="event select"
@@ -179,14 +185,14 @@ export default function Report() {
           </Section>
           <Section>
             <StyledTextAreaWrapper>
-              <div>Event Details:</div>
+              <StyledP>Event Details:</StyledP>
               <StyledTextArea
                 id="details"
                 aria-label="Event details field"
                 value={details}
                 onChange={handleDetailsChange}
                 onBlur={validateDetailBox}
-                rows={7}
+                rows={5}
                 cols={25}
                 placeholder="Enter event details..."
                 required
@@ -195,7 +201,7 @@ export default function Report() {
             </StyledTextAreaWrapper>
           </Section>
           <Section>
-            <div>Phone Number (optional): </div>
+            <StyledP>Phone Number (optional): </StyledP>
             <StyledInput
               type="text"
               aria-label="phone field"
@@ -204,12 +210,22 @@ export default function Report() {
               onBlur={validatePhoneNumber}
               onChange={handlePhoneNumberChange}
             />
-            <StyledP>
-              {errorMessage}
-            </StyledP>
+
+            {reportSentSuccess
+              ? <SuccessP>Report Published</SuccessP>
+              : (
+                <ErrorP>
+                  {errorMessage}
+                </ErrorP>
+              )}
           </Section>
           <ButtonSection>
-            <Button text="Submit" variant="primary" size="md" disabled={!isFormValid} />
+            <Button
+              text="Submit"
+              variant="primary"
+              size="md"
+              disabled={!isFormValid}
+            />
           </ButtonSection>
         </StyledReportContainer>
       </StyledReportOuterDiv>

@@ -22,8 +22,8 @@ export const ImageCont = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60pt;
-  height: 60pt;
+  width: 50pt;
+  height: 45pt;
   border-radius: 8pt;
   margin: 0 0 0 10pt;
   padding: 0;
@@ -38,7 +38,7 @@ export const TextCont = styled.div`
   text-wrap: auto;
   width: 100%;
   height: 70pt;
-  color: #003366;
+  color: black;
   margin: 0;
   padding: 0;
 `;
