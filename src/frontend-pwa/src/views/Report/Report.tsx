@@ -11,7 +11,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { Button } from '../../components/common';
-import Analytics from '../../utils/Analytics';
 import {
   StyledReportContainer,
   StyledReportOuterDiv,
@@ -28,6 +27,8 @@ import {
 } from './report.styles';
 import constants from '../../constants/Constants';
 import useAppService from '../../services/app/useAppService';
+import { localStorageKeyExists } from '../../utils/AppLocalStorage';
+import OnlineCheck from '../../utils/OnlineCheck';
 
 export default function Report() {
   const charLimit = 256;
@@ -38,7 +39,8 @@ export default function Report() {
   const [errorMessage, setErrorMessage] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
   const [reportSentSuccess, setReportSentSuccess] = useState(false);
-  const { state } = useAppService();
+  const { state, setAnalytics } = useAppService();
+  const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
   const latitude = state.currentLocation ? state.currentLocation.lat : 49.2827;
   const longitude = state.currentLocation ? state.currentLocation.long : -123.2;
   const eventOptions: Array<string> = [
@@ -120,15 +122,24 @@ export default function Report() {
       time: currentTime,
     };
 
-    const analytics = {
-      latitude,
-      longitude,
-      usage: {
-        function: 'report',
-      },
-    };
+    if (geolocationKnown) {
+      const analytics = {
+        latitude,
+        longitude,
+        usage: {
+          function: 'report',
+        },
+      };
 
-    Analytics(analytics);
+      if (state.settings.offline_mode) {
+        setAnalytics(false, analytics);
+      } else {
+        OnlineCheck()
+          .then((Online) => {
+            setAnalytics(Online, analytics);
+          });
+      }
+    }
 
     await axios.post(`${constants.BACKEND_URL}/api/report`, formData)
       .then(() => {

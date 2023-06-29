@@ -5,6 +5,7 @@ const constants = {
   CURRENT_LOCATION_KEY: 'currentLocation',
   EULA_ACCEPTED_KEY: 'eulaAccepted',
   SETTINGS_KEY: 'settings',
+  OFFLINE_ANALYTIC_KEY: 'analyticsOffline',
 };
 
 export default constants;

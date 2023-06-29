@@ -3,6 +3,8 @@
  *          Conditional renders set per item to account for variants in SingleLocation items
  *          Page loads passed on url params then filters the data set
  *          Page displays 404 if invalid query sent
+ *          Analytics sent or cached if offline
+ * @author LocalNewsTV, Dallas Richmond
  */
 import { Link, useParams } from 'react-router-dom';
 import useAppService from '../../services/app/useAppService';
@@ -18,17 +20,43 @@ import {
   Address,
 } from './locationInformation.style';
 import { ListItems, ServiceListItem } from '../../components/lists';
+import OnlineCheck from '../../utils/OnlineCheck';
+import { localStorageKeyExists } from '../../utils/AppLocalStorage';
+import constants from '../../constants/Constants';
 
 export default function LocationInformation() {
-  const { state } = useAppService();
+  const { state, setAnalytics } = useAppService();
   const { service, locale } = useParams();
   const locations = state.appData?.data ? state.appData.data[`${service}Locations`] : [];
+  const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
   if (!locations) {
     return <NotFound />;
   }
   const location: SingleLocation = locations.filter(
     (element: SingleLocation) => element.locale === locale,
   )[0];
+
+  if (geolocationKnown) {
+    const latitude = state.currentLocation.lat;
+    const longitude = state.currentLocation.long;
+    const analytics = {
+      latitude,
+      longitude,
+      usage: {
+        search: location.locale,
+        function: 'find location',
+      },
+    };
+
+    if (state.settings.offline_mode) {
+      setAnalytics(false, analytics);
+    } else {
+      OnlineCheck()
+        .then((Online) => {
+          setAnalytics(Online, analytics);
+        });
+    }
+  }
 
   return (
     <ViewContainer>
