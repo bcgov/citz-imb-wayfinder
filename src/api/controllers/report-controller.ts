@@ -6,6 +6,7 @@
 import { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import validationErrorHandler from '../utils/validationErrorHandler';
+import httpResponses from '../utils/httpResponse';
 
 const reportModel = mongoose.model('report');
 
@@ -25,6 +26,21 @@ export const userSendsReport = async (req: Request, res: Response) => {
       return res.status(201).send(newEntry);
     })
     .catch((error) => res.status(400).json(validationErrorHandler(error)));
+};
+
+/**
+ * @desc get method for endpoint, sends all user submitted reports
+ *       uses password for auth to get the data
+ * @returns Array of all Reports
+ */
+export const getUserReports = async (req: Request, res: Response) => {
+  if (req.headers.authorization
+    && req.headers.authorization.startsWith('Bearer ')
+    && req.headers.authorization.split(' ')[1] === process.env.ADMIN_KEY) {
+    const reports = await reportModel.find({});
+    return res.status(200).json(reports);
+  }
+  return res.status(403).send(httpResponses[403]);
 };
 
 export default userSendsReport;
