@@ -9,6 +9,7 @@ import logo from '/bc-logo-vertical.svg';
 import { Spinner } from '../../common';
 import useAppService from '../../../services/app/useAppService';
 import OnlineCheck from '../../../utils/OnlineCheck';
+import SendCachedAnalytics from '../../../utils/SendCachedAnalytics';
 import {
   SplashScreenWrapper,
   Image,
@@ -48,6 +49,7 @@ export default function SplashScreen() {
       OnlineCheck()
         .then((Online) => {
           setAppData(Online);
+          SendCachedAnalytics(Online);
         }).catch((error) => {
           console.error('Error: ', error);
         });

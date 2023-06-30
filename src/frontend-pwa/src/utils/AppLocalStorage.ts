@@ -1,9 +1,9 @@
 /**
  * @summary Saves data to localStorage
- * @param key is the name that the data will be stored by in localStorage
- * @param data is the data to be stored
- * @type {( key: string, data: any)}
- * @author Dallas Richmond
+ * @param   key is the name that the data will be stored by in localStorage
+ * @param   data is the data to be stored
+ * @type    {( key: string, data: any)}
+ * @author  Dallas Richmond
  */
 export const saveDataToLocalStorage = (key: string, data: any) => {
   try {
@@ -16,10 +16,10 @@ export const saveDataToLocalStorage = (key: string, data: any) => {
 
 /**
  * @summary Retrieves data from localStorage if the key exists
- * @param key is the key name used to store the value in localStorage
- * @type {( key: string )}
+ * @param   key is the key name used to store the value in localStorage
+ * @type    {( key: string )}
  * @returns the parsed JSON data or null if the key does not exist in localStorage
- * @author Dallas Richmond
+ * @author  Dallas Richmond
  */
 export const getDataFromLocalStorage = (key: string) => {
   const data = localStorage.getItem(key);
@@ -28,9 +28,17 @@ export const getDataFromLocalStorage = (key: string) => {
 
 /**
  * @summary Checks to see if the key exists in localstorage
- * @param key is the key name used to store the value in localStorage
- * @type {( key: string )}
+ * @param   key is the key name used to store the value in localStorage
+ * @type    {( key: string )}
  * @returns boolean values
- * @author Dallas Richmond
+ * @author  Dallas Richmond
  */
 export const localStorageKeyExists = (key: string) => getDataFromLocalStorage(key) !== null;
+
+/**
+ * @summary Deletes localStorage key
+ * @param   key is the key name used to store the value in localStorage
+ * @type    {( key: string )}
+ * @author  Dallas Richmond
+ */
+export const deleteStorageKey = (key: string) => localStorage.removeItem(key);
