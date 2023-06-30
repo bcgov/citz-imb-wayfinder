@@ -31,6 +31,15 @@ paths:
                     items:
                       type: string
                     example: []
+                  ICBCLocations:
+                    type: array
+                    items:
+                      $ref: '#/#/components/schemas/SingleLocation'
+                  ICBCServices:
+                    type: array
+                    items:
+                      type: string
+                    example: []
                   allServices:
                     type: array
                     items:
