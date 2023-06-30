@@ -25,13 +25,14 @@ import time
 #
 #############################################################################
 
-MAX_WORKERS = 5 # Adjust the value based on the system capabilities
+MAX_WORKERS = 3 # Adjust the value based on the system capabilities
 BASE_URL = "https://www2.gov.bc.ca"
 START_POINT = '/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc'
 FILTER = "/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc/service-bc-location-"
 OUTPUT_FILE = "results.json"
 GOOGLE = "https://www.google.com/search?q="
 SERVICE_TYPE = "ServiceBC"
+LIST_REGEX = re.compile(r'[\d][.]')
 #############################################################################
 # @desc : Given a URL, requests the data and returns the soup object
 #         BeautifulSoup makes the content parsable for digestion
@@ -156,9 +157,9 @@ def scrape_limited_services(soup):
     results = []
     allow_list = ["BC", "Exam"]
     service_div = soup.find("div", class_="callout")
-    services_list = service_div.find('ul')
+    services_list = service_div.find_all('p')
     for list_item in services_list:
-        if list_item.find('ul'):
+        if list_item.find('a'):
             sublist_items = list_item.text.split("\n")
             for sublist_item in sublist_items:
                 if(substring in allow_list for substring in sublist_item):
@@ -183,7 +184,7 @@ def tidyServiceItem(serviceItem):
 
     # Apply the pattern substitution in a single pass
     serviceItem = pattern.sub("", serviceItem)
-
+    serviceItem = LIST_REGEX.sub("", serviceItem)
     # Remove trailing "Online" using regex substitution
     serviceItem = re.sub(removeOnline, "", serviceItem)
     
@@ -209,7 +210,7 @@ def scrape_url(url):
 
     # Extract desired data
     localeString = scrape_locale(soup)
-    if "services ONLY" in localeString:
+    if "*LIMITED services" in localeString:
         locationData["services"] = sorted(scrape_limited_services(soup))
         if "*" in localeString:
           localeString = localeString[:localeString.index('*')].strip()
