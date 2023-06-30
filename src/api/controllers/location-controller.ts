@@ -20,6 +20,7 @@ const locationsModel = mongoose.model('location');
 const servicesOffered = [
   'ServiceBC',
   'HealthBC',
+  'ICBC',
 ];
 
 /**
@@ -30,6 +31,8 @@ type ResponseObject = {
   serviceBCServices: Array<string>;
   healthBCLocations: Array<SingleLocation>;
   healthBCServices: Array<string>;
+  ICBCLocations: Array<SingleLocation>;
+  ICBCServices: Array<string>;
   allServices: Array<string>;
 }
 
@@ -67,12 +70,15 @@ export const getAllLocations = async (req: Request, res: Response): Promise<Resp
   // Get Locations lists
   responseObject.serviceBCLocations = await locationsModel.find({ serviceType: 'ServiceBC' });
   responseObject.healthBCLocations = await locationsModel.find({ serviceType: 'HealthBC' });
+  responseObject.ICBCLocations = await locationsModel.find({ serviceType: 'ICBC' });
   // Gather unique Services List
   responseObject.healthBCServices = extractServiceList(responseObject.healthBCLocations);
   responseObject.serviceBCServices = extractServiceList(responseObject.serviceBCLocations);
+  responseObject.ICBCServices = extractServiceList(responseObject.ICBCLocations);
   responseObject.allServices = [
     ...responseObject.healthBCServices,
     ...responseObject.serviceBCServices,
+    ...responseObject.ICBCServices,
   ].sort();
   // Ship results to client
   return res.status(200).json(responseObject);
@@ -113,8 +119,11 @@ export const updateLocations = async (req: Request, res: Response): Promise<Resp
   if (req.headers.authorization
     && req.headers.authorization.startsWith('Bearer ')
     && req.headers.authorization.split(' ')[1] === process.env.SCRAPER_API_KEY) {
-    if (await locationsModel.findOne({ website: req.body.website })) {
-      await locationsModel.updateOne({ website: req.body.website }, req.body);
+    if (await locationsModel.findOne({ website: req.body.website, locale: req.body.locale })) {
+      await locationsModel.updateOne({
+        website: req.body.website,
+        locale: req.body.locale,
+      }, req.body);
       return res.status(204).send(httpResponses[204]);
     }
     try {
