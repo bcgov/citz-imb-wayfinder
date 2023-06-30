@@ -101,10 +101,12 @@ export default function Mapping({ locations, currentLocation }: MappingProps) {
             // eslint-disable-next-line react/no-array-index-key
             <Marker icon={baseIcon} key={index} position={[item.latitude, item.longitude]}>
               <StyledPopup>
-                <h3>
-                  Location:&nbsp;
-                  {item.locale}
-                </h3>
+                <h3>{item.locale}</h3>
+                <PopupInfo>
+                  Type:&nbsp;
+                  {(item.serviceType[0].toUpperCase()
+                  + item.serviceType.substring(1, item.serviceType.length))}
+                </PopupInfo>
                 <PopupInfo>
                   Address:&nbsp;
                   {item.address.label}
