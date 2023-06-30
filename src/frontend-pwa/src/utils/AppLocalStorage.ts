@@ -41,4 +41,4 @@ export const localStorageKeyExists = (key: string) => getDataFromLocalStorage(ke
  * @type    {( key: string )}
  * @author  Dallas Richmond
  */
-export const deleteStorageKey = (key: string) => localStorage.removeItem(key);
+export const deleteLocalStorageKey = (key: string) => localStorage.removeItem(key);

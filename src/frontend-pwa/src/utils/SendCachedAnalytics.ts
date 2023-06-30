@@ -6,7 +6,7 @@
  * @author  Dallas Richmond
  */
 import SendAnalytics from './SendAnalytics';
-import { localStorageKeyExists, getDataFromLocalStorage, deleteStorageKey } from './AppLocalStorage';
+import { localStorageKeyExists, getDataFromLocalStorage, deleteLocalStorageKey } from './AppLocalStorage';
 import constants from '../constants/Constants';
 import Analytic from '../Type/Analytic';
 
@@ -16,7 +16,7 @@ const SendCachedAnalytics = (online: boolean) => {
     data.forEach((analyticData: Analytic) => {
       SendAnalytics(analyticData);
     });
-    deleteStorageKey(constants.OFFLINE_ANALYTIC_KEY);
+    deleteLocalStorageKey(constants.OFFLINE_ANALYTIC_KEY);
   }
 };
 
