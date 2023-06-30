@@ -4,20 +4,12 @@
  * @type {(request: object)}
  * @author Dallas Richmond
  */
-/* eslint-disable no-console */
 import axios from 'axios';
 import constants from '../constants/Constants';
 import Analytic from '../Type/Analytic';
 
-// TODO remove console.logs
 const SendAnalytics = (request: Analytic) => {
-  axios.post(`${constants.BACKEND_URL}/api/analytic`, request)
-    .then((data) => {
-      console.log('Data: ', data);
-    })
-    .catch((error) => {
-      console.log('Error: ', error);
-    });
+  axios.post(`${constants.BACKEND_URL}/api/analytic`, request);
 };
 
 export default SendAnalytics;

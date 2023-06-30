@@ -1,6 +1,8 @@
 /**
  * @summary Checks to see if there are cached analytics in local storage.
  *          If so, they are sent and the key is deleted
+ * @param   online is a boolean value that indicates that the device is online
+ * @type    {( online: boolean )}
  * @author  Dallas Richmond
  */
 import SendAnalytics from './SendAnalytics';
@@ -11,8 +13,8 @@ import Analytic from '../Type/Analytic';
 const SendCachedAnalytics = (online: boolean) => {
   if (online && localStorageKeyExists(constants.OFFLINE_ANALYTIC_KEY)) {
     const data = getDataFromLocalStorage(constants.OFFLINE_ANALYTIC_KEY);
-    data.forEach((element: Analytic) => {
-      SendAnalytics(element);
+    data.forEach((analyticData: Analytic) => {
+      SendAnalytics(analyticData);
     });
     deleteStorageKey(constants.OFFLINE_ANALYTIC_KEY);
   }
