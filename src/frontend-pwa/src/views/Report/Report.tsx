@@ -122,7 +122,7 @@ export default function Report() {
       time: currentTime,
     };
 
-    if (geolocationKnown) {
+    if (state.settings.analytics_opt_in && geolocationKnown) {
       const analytics = {
         latitude,
         longitude,

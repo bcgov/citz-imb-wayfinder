@@ -36,7 +36,7 @@ export default function LocationInformation() {
     (element: SingleLocation) => element.locale === locale,
   )[0];
 
-  if (geolocationKnown) {
+  if (state.settings.analytics_opt_in && geolocationKnown) {
     const latitude = state.currentLocation.lat;
     const longitude = state.currentLocation.long;
     const analytics = {
