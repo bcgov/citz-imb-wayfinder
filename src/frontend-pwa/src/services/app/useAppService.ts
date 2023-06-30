@@ -7,7 +7,7 @@ import AppActionType from './AppActions';
 import { saveDataToLocalStorage, getDataFromLocalStorage, localStorageKeyExists } from '../../utils/AppLocalStorage';
 import SettingsObject from '../../Type/SettingsObject';
 import Analytic from '../../Type/Analytic';
-import SendAnalytics from '../../utils/SendAnalytics';
+import { SendAnalytics } from '../../utils/AppAnalytics';
 
 const {
   SET_APP_DATA,

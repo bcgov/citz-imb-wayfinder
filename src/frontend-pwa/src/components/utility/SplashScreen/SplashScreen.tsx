@@ -9,7 +9,7 @@ import logo from '/bc-logo-vertical.svg';
 import { Spinner } from '../../common';
 import useAppService from '../../../services/app/useAppService';
 import OnlineCheck from '../../../utils/OnlineCheck';
-import SendCachedAnalytics from '../../../utils/SendCachedAnalytics';
+import { SendCachedAnalytics } from '../../../utils/AppAnalytics';
 import {
   SplashScreenWrapper,
   Image,
