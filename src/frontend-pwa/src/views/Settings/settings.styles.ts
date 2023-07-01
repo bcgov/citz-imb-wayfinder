@@ -51,7 +51,6 @@ export const Section = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
-
 export const Title = styled.h2`
   ${typography.toString()}
   font-size: 18px;
