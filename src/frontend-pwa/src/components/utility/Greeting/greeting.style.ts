@@ -9,7 +9,7 @@ const GreetingWrapper = styled.p`
   width: 100%;
   padding: 5pt 10pt;
   text-align: center;
-  margin: -1em 0 0.5em 0;
+  margin: 0 0 1em 0;
   font-size: 16pt;
   min-height: 2em;
   color: #036;

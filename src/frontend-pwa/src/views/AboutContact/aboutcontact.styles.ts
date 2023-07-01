@@ -38,12 +38,12 @@ export const StyledHeaderTwo = styled.h2`
   ${typography.toString()}
   width: 100%;
   text-align: left;
-  margin: 0.5em 0;
-  font-size: 14pt;
+  margin: 0.25em 0 0.75em 0;
+  font-size: 2.074rem;
 `;
 
 export const StyledHeaderThree = styled.h3`
-  font-size: 12pt;
+  font-size: 14pt;
   text-align: left;
   width: 100%;
   margin: 0.5em 0;

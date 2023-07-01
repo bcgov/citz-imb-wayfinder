@@ -15,4 +15,5 @@ export const StyledSlider = styled.input`
 
 export const StyledP = styled.p`
   font-size: 1.5rem;
+  margin: 0;
 `;

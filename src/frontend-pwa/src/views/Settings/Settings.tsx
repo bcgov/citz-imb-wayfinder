@@ -1,27 +1,39 @@
 /**
  * @summary Settings view for the application
- * @author Dallas Richmond
+ * @author  Dallas Richmond, LocalNewsTV
  */
 import { useState } from 'react';
 import { Slider, Toggle } from '../../components/common';
 import { NavButton } from '../../components/appNav';
+import { BannerTip } from '../../components/utility';
 import {
   SettingsContainer,
   Section,
   Title,
   SliderWrapper,
   SettingsWrapper,
+  TitleWrapper,
+  StyledSelect,
 } from './settings.styles';
 import file from '/file-text.svg';
 import person from '/person-lines-fill.svg';
 import useAppService from '../../services/app/useAppService';
+import MoreInfoButton from '../../components/common/MoreInfoButton/MoreInfoButton';
+import { SettingsContent } from '../../content/content';
 
 export default function Settings() {
+  const handleLang = (e: { target: { value: React.SetStateAction<string> } }) => {
+    setLang(e.target.value);
+  }
   const { setSettings, updateSettings, state } = useAppService();
   const [locationRangeValue, setLocationRangeValue] = useState(state.settings.location_range);
   const [offlineToggleValue, setOfflineToggleValue] = useState(state.settings.offline_mode);
   const [analyticsToggleValue, setAnalyticsToggleValue] = useState(state.settings.analytics_opt_in);
-
+  const [toolTip, setToolTip] = useState('');
+  /**
+   * TODO: use proper settings for language
+   */
+  const [lang, setLang] = useState('eng');
   /**
    * @summary Handles the change of the Location Range slider
    * @param value is the location range value of the slider
@@ -60,15 +72,39 @@ export default function Settings() {
 
   return (
     <SettingsWrapper>
+      <BannerTip
+        seconds={15}
+        text={toolTip}
+        setText={setToolTip}
+      />
       <SettingsContainer>
         <Section>
-          <h1>Settings</h1>
+          <h1>{SettingsContent.settingsTitle[lang]}</h1>
+        </Section>
+        <Section>
+          <TitleWrapper>
+            <Title>{SettingsContent.language[lang]}</Title>
+            <MoreInfoButton
+              tip={SettingsContent.languageToolTip[lang]}
+              setText={setToolTip}
+            />
+          </TitleWrapper>
+          <StyledSelect onChange={handleLang}>
+            <option value="eng">English</option>
+            <option value="fr">French</option>
+          </StyledSelect>
         </Section>
         <Section>
           <SliderWrapper>
-            <Title>Location Range</Title>
+            <TitleWrapper>
+              <Title>{SettingsContent.locationRange[lang]}</Title>
+              <MoreInfoButton
+                tip={SettingsContent.locationToolTip[lang]}
+                setText={setToolTip}
+              />
+            </TitleWrapper>
             <Slider
-              ariaLabel="Location Range"
+              ariaLabel={SettingsContent.locationRange[lang]}
               min={1}
               max={1000}
               onChange={handleLocationRangeChange}
@@ -77,17 +113,29 @@ export default function Settings() {
           </SliderWrapper>
         </Section>
         <Section>
-          <Title>Offline Mode</Title>
+          <TitleWrapper>
+            <Title>{SettingsContent.offlineMode[lang]}</Title>
+            <MoreInfoButton
+              tip={SettingsContent.offlineModeToolTip[lang]}
+              setText={setToolTip}
+            />
+          </TitleWrapper>
           <Toggle
-            ariaLabel="Offline Toggle"
+            ariaLabel={SettingsContent.offlineMode[lang]}
             onChange={handleOfflineToggleChange}
             value={offlineToggleValue}
           />
         </Section>
         <Section>
-          <Title>Analytics</Title>
+          <TitleWrapper>
+            <Title>{SettingsContent.analytics[lang]}</Title>
+            <MoreInfoButton
+              tip={SettingsContent.analyticsToolTip[lang]}
+              setText={setToolTip}
+            />
+          </TitleWrapper>
           <Toggle
-            ariaLabel="Analytics Toggle"
+            ariaLabel={SettingsContent.analytics[lang]}
             onChange={handleAnalyticsToggleChange}
             value={analyticsToggleValue}
           />
@@ -95,7 +143,7 @@ export default function Settings() {
         <Section>
           <NavButton
             path="/settings/about"
-            text="About/Contact"
+            text={SettingsContent.aboutContact[lang]}
             hex="#DBE1EB"
             icon={person}
           />
@@ -103,7 +151,7 @@ export default function Settings() {
         <Section>
           <NavButton
             path="/eula"
-            text="License Agreement"
+            text={SettingsContent.license[lang]}
             hex="#DBE1EB"
             icon={file}
           />
