@@ -12,6 +12,7 @@ import location from '/iconography/FindOffice.svg';
 import report from '/iconography/ReportColor.svg';
 import services from '/iconography/FindServiceColor.svg';
 import Greeting from '../../components/utility/Greeting/Greeting';
+import { homeContent } from '../../content/content';
 
 export default function Home() {
   return (
@@ -21,7 +22,7 @@ export default function Home() {
         <ButtonWrapper>
           <NavButton
             path="/location"
-            text="Find an office"
+            text={homeContent.findOffice.eng}
             icon={location}
             hex="#DEF3FB"
           />
@@ -29,7 +30,7 @@ export default function Home() {
         <ButtonWrapper>
           <NavButton
             path="/services"
-            text="Find BC services"
+            text={homeContent.findService.eng}
             icon={services}
             hex="#EEE0E9"
           />
@@ -37,7 +38,7 @@ export default function Home() {
         <ButtonWrapper>
           <NavButton
             path="/report"
-            text="Report an event"
+            text={homeContent.report.eng}
             icon={report}
             hex="#FEF2DF"
           />

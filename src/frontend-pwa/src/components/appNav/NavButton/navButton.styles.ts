@@ -40,7 +40,7 @@ export const TextCont = styled.div`
   height: 70pt;
   color: black;
   margin: 0;
-  padding: 0;
+  padding: 0 0 0 1em;
 `;
 export const Image = styled.img`
   height: 100%;

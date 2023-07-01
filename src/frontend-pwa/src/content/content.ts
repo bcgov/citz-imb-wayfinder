@@ -4,7 +4,7 @@
  * @author  LocalNewsTV
  * TODO:    Translations for:
  *            - About [x]
- *            - Main Menu
+ *            - Home 
  *            - Find An Office
  *            - LocationView
  *            - ServiceView
@@ -184,4 +184,19 @@ export const greetingContent = {
     'Plongez et trouvez ce dont vous avez besoin',
     'Comment pouvons-nous vous aider ?',
   ],
+};
+
+export const homeContent = {
+  findOffice: {
+    eng: 'Find an office',
+    fr: 'Trouver un bureau',
+  },
+  findService: {
+    eng: 'Find a service',
+    fr: 'Trouver un service',
+  },
+  report: {
+    eng: 'Report an event',
+    fr: 'Signaler un événement',
+  },
 };
