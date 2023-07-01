@@ -15,12 +15,12 @@ export const BannerContainer = styled.div<BannerContainerProps>`
   top: 0;
   left: 0;
   width: 100%;
-  height: 65pt;
+  height: 55pt;
   z-index: 2005;
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  background-color: #DBE1EB;
+  background-color: #791d5f;
   border-bottom: 2px solid black;
   padding: 1em;
   margin: 0;
@@ -35,8 +35,11 @@ export const StyledToolTip = styled.p`
   width: 100%;
   text-align: left;
   word-wrap: normal;
-  color: black;
+  color: white;
   margin: 0;
+  @media (min-width: ${mq.tablet}){
+    text-align: center;
+  }
 `;
 export const Exit = styled.img`
   margin: 0;

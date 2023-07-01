@@ -11,7 +11,7 @@ import {
   ExitCont,
   StyledToolTip,
 } from './bannerTip.style';
-import clearicon from '/clearicon.svg';
+import clearicon from '/iconography/ClearWhite.svg';
 
 type BannerProps = {
   text: string;
