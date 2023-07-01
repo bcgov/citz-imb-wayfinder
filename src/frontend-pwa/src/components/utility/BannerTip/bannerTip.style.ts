@@ -43,5 +43,5 @@ export const Exit = styled.img`
   padding: 0;
 `;
 export const ExitCont = styled.div`
-  margin: 0 1em;
+  margin: 0;
 `;
