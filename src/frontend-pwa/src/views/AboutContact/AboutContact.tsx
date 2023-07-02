@@ -3,6 +3,7 @@
  * @summary About + Contact Section for the Wayfinder Application
  * @author LocalNewsTV
  */
+import { useState } from 'react';
 import {
   AboutContainer,
   StyledP,
@@ -15,40 +16,15 @@ import {
   StyledHeaderThree,
 } from './aboutcontact.styles';
 import pkg from '../../../package.json';
+import { aboutContent } from '../../content/content';
 
 export default function AboutContact() {
+  const [lang] = useState('eng');
   const contact = {
     email: 'wayfinderdevelopers@gmail.com',
     repo: 'https://github.com/bcgov/citz-imb-wayfinder',
     mailing: '4000 Seymour, Victoria, V8X\u00A04S7',
     team: 'Team Wayfinder',
-  };
-  const info = {
-    aboutTeam: 'This app was developed as a capstone project for three Camosun college students in the summer of 2023. Their names and roles are:',
-    tyler: {
-      title: 'Tyler Maloney, Full stack Developer',
-      bio: 'Tyler Maloney is an aspiring software developer with a fondness for problem-solving, woodworking, and learning. He has completed a series of self-directed projects, the most impressive of which is a VR FPS written in C#. Tyler also has familiarity with a bevy of languages and their associated tools, such as JavaScript, React, and Python. Tyler\'s soft skills work in fine complement to his technical abilities, as his personable and friendly demeanour helps him create professional relationships with colleagues and clients alike.',
-    },
-    dallas: {
-      title: 'Dallas Richmond, Frontend Lead',
-      bio: 'Dallas Richmond has a diverse education in astronomy, physics, and information systems. He switched from astronomy and physics to pursue the ICS diploma at Camosun College due to his passion for coding and its problem-solving potential. He enhanced his React and back-end development skills during his co-op at Gist Applications. Dallas is proficient in C++, C#, Java, JavaScript, HTML and CSS. He is a quick learner, a team player, and committed to continuously improving his skills as he anticipates the future of technology',
-    },
-    matthew: {
-      title: 'Matthew Logan, Backend Lead',
-      bio: 'Matthew Logan is a former Red Seal chef turned full-stack developer. Since attending Camosun College, Matthew has gained skills in web development, backend APIs and databases. Transitioning from chef to full-stack developer demonstrates his ability to pivot and adapt to new challenges. He is committed to continuous learning and improving his skills to stay current with industry trends. Matthew is a team player who collaborates effectively to deliver high-quality solutions.',
-    },
-    jesse: {
-      title: 'Jesse Holwerda, UI/UX Designer',
-      bio: 'Jesse Holwerda is a recently graduated English major who got his start in communications, but he has been carving out a space for himself in service design. He brings experience in CMS Lite, Figma, the adobe suite, Mural, and Plain language. Jesse has a background in program management and childcare and as estranged as all the roles he\'s had seem, he finds that he brings all that experience into his UX and design work. In his most recent project, Jesse revised intranet IA according to user interviews and removed 68 neglected pages.',
-    },
-    disclaimer: [
-      'This project is open sourced for fair use, with attribution',
-      'this work carries no warranty or implied guarantee',
-      'All third party libraries are those of their rightful owners or licensees',
-      'BC Government theme \u00A9 by the Government of BC',
-    ],
-    about: 'Wayfinder is an app that points people towards the government services they need. This is a proof of concept that provides an extensible platform to add new services and locations to over time. It is also a powerful analytics tool showing where people are and what they need which can help us know what services to create going forward!',
-    contact: 'Reach out to us and tell us your thoughts! We are building something new and welcome any growth opportunities you can give us. We will do our best to be available and responsive to your feedback. Thank you for being a part of Wayfinder!',
   };
   return (
     <AboutContainer>
@@ -57,54 +33,58 @@ export default function AboutContact() {
           Wayfinder&nbsp;V
           {pkg.version}
         </StyledP>
-        <StyledHeaderTwo>About</StyledHeaderTwo>
+        <StyledHeaderTwo>{aboutContent.aboutTitle[lang]}</StyledHeaderTwo>
         <StyledP>
-          {info.about}
+          {aboutContent.about[lang]}
         </StyledP>
         <StyledP>
-          {info.aboutTeam}
-        </StyledP>
-        <StyledHeaderThree>
-          {info.tyler.title}
-        </StyledHeaderThree>
-        <StyledP>
-          {info.tyler.bio}
+          {aboutContent.aboutTeam[lang]}
         </StyledP>
         <StyledHeaderThree>
-          {info.dallas.title}
+          {aboutContent.tylerTitle[lang]}
         </StyledHeaderThree>
         <StyledP>
-          {info.dallas.bio}
+          {aboutContent.tylerBio[lang]}
         </StyledP>
         <StyledHeaderThree>
-          {info.matthew.title}
+          {aboutContent.dallasTitle[lang]}
         </StyledHeaderThree>
         <StyledP>
-          {info.matthew.bio}
+          {aboutContent.dallasBio[lang]}
         </StyledP>
         <StyledHeaderThree>
-          {info.jesse.title}
+          {aboutContent.matthewTitle[lang]}
         </StyledHeaderThree>
         <StyledP>
-          {info.jesse.bio}
+          {aboutContent.matthewBio[lang]}
         </StyledP>
-        <StyledHeaderTwo>Disclaimer</StyledHeaderTwo>
+        <StyledHeaderThree>
+          {aboutContent.jesseTitle[lang]}
+        </StyledHeaderThree>
+        <StyledP>
+          {aboutContent.jesseBio[lang]}
+        </StyledP>
+        <StyledHeaderTwo>{aboutContent.disclaimerTitle[lang]}</StyledHeaderTwo>
         <StyledUl>
-          {info.disclaimer.map((point, index) => <StyledLi key={index}>{point}</StyledLi>)}
+          {(aboutContent.disclaimer[lang]).map((point: string, index: number) => (
+            <StyledLi key={index}>{point}</StyledLi>))}
         </StyledUl>
-        <StyledHeaderTwo>Contact</StyledHeaderTwo>
+        <StyledHeaderTwo>{aboutContent.contactTitle[lang]}</StyledHeaderTwo>
         <StyledP>
-          {info.contact}
+          {aboutContent.contact[lang]}
         </StyledP>
         <StyledAddress>
-          Email:&nbsp;
+          {aboutContent.aboutTitle[lang]}
+          :&nbsp;
           <Link href={`mailto:${contact.email}?subject='Wayfinder App'`}>{contact.team}</Link>
           <br />
-          Mailing Address:&nbsp;
+          {aboutContent.mailingAddressTitle[lang]}
+          :&nbsp;
           {contact.mailing}
           <br />
-          GitHub Repo:&nbsp;
-          <Link href={contact.repo}>View it here</Link>
+          {aboutContent.githubRepo[lang]}
+          :&nbsp;
+          <Link href={contact.repo}>{aboutContent.viewIt[lang]}</Link>
         </StyledAddress>
       </ContentContainer>
     </AboutContainer>

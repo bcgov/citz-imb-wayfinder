@@ -1,11 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 /**
- *
- * @summary - Sends validated form and geolocation data to the API for
- *            consumption, or stores in localStorage while offline
- *
- * TODO:    - Implement offline caching
- *
+ * @summary Sends validated form and geolocation data to the API for
+ *          consumption, or stores in localStorage while offline
  * @author  TylerMaloney
  */
 import React, { useState, useEffect, useCallback } from 'react';
@@ -29,8 +25,10 @@ import constants from '../../constants/Constants';
 import useAppService from '../../services/app/useAppService';
 import { localStorageKeyExists } from '../../utils/AppLocalStorage';
 import OnlineCheck from '../../utils/OnlineCheck';
+import { reportContent } from '../../content/content';
 
 export default function Report() {
+  const [lang] = useState('eng');
   const charLimit = 256;
   const minCharLimit = 10;
   const [eventType, setEventType] = useState('');
@@ -43,17 +41,10 @@ export default function Report() {
   const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
   const latitude = state.currentLocation ? state.currentLocation.lat : 49.2827;
   const longitude = state.currentLocation ? state.currentLocation.long : -123.2;
-  const eventOptions: Array<string> = [
-    'Damaged Infrastructure',
-    'Animal Sighting',
-    'Suggestion/Complaint',
-    'Miscellaneous',
-  ];
 
   /**
  * @desc - Validates the phone number (if inputted) against regex pattern.
- * @returns {boolean} - indicates whether the phone number is valid (true), or not (false).
- *                      Also returns true if nothing is entered, as the field is optional.
+ * @returns {boolean} Valid phone number format, or blank.
  */
   const validatePhoneNumber = useCallback((): boolean => {
     const regex = /^(?:\+?1-?)?(?:\(\d{3}\)|\d{3})-?\d{3}-?\d{4}$/gi;
@@ -61,9 +52,9 @@ export default function Report() {
       setErrorMessage('');
       return true;
     }
-    setErrorMessage('Invalid Format. Example: (250) 555-5555');
+    setErrorMessage(reportContent.invalidPhone[lang]);
     return false;
-  }, [phoneNumber]);
+  }, [phoneNumber, lang]);
 
   /**
  * @desc - Validates the detail input is longer than the minumum length, or not present.
@@ -74,10 +65,10 @@ export default function Report() {
     if (details.length >= minCharLimit && details.length <= charLimit) {
       return true;
     }
-    setErrorMessage('Minimum message length is 10 characters.');
+    setErrorMessage(reportContent.minLengthValidationFailure[lang]);
     setReportSentSuccess(false);
     return false;
-  }, [details, charLimit]);
+  }, [details, charLimit, lang]);
 
   /**
  * @desc - Validates all form fields to ensure they contain valid values.
@@ -153,7 +144,7 @@ export default function Report() {
         // eslint-disable-next-line no-console
         console.log(err);
         setReportSentSuccess(false);
-        setErrorMessage('Unable to submit report.');
+        setErrorMessage(reportContent.reportFailure[lang]);
       });
   };
 
@@ -165,9 +156,9 @@ export default function Report() {
     <form onSubmit={handleSubmit}>
       <StyledReportOuterDiv>
         <StyledReportContainer>
-          <h2>Report An Event</h2>
+          <h2>{reportContent.reportLabel[lang]}</h2>
           <Section>
-            <StyledP>Event Type:</StyledP>
+            <StyledP>{reportContent.eventTypeLabel[lang]}</StyledP>
             <StyledSelect
               id="eventType"
               aria-label="event select"
@@ -175,9 +166,9 @@ export default function Report() {
               onChange={handleEventTypeChange}
               required
             >
-              <option value="">Select an event type</option>
-              {eventOptions.map((event: string, index: number) => (
-                <option value={event} key={index}>
+              <option value="">{reportContent.eventTypeOptionLabel[lang]}</option>
+              {reportContent.reportOptions[lang].map((event: string, index: number) => (
+                <option value={reportContent.reportOptions[lang][index]} key={index}>
                   {event}
                 </option>
               ))}
@@ -185,7 +176,7 @@ export default function Report() {
           </Section>
           <Section>
             <StyledTextAreaWrapper>
-              <StyledP>Event Details:</StyledP>
+              <StyledP>{reportContent.detailsLabel[lang]}</StyledP>
               <StyledTextArea
                 id="details"
                 aria-label="Event details field"
@@ -194,14 +185,14 @@ export default function Report() {
                 onBlur={validateDetailBox}
                 rows={5}
                 cols={25}
-                placeholder="Enter event details..."
+                placeholder={reportContent.enterDetails[lang]}
                 required
               />
               <StyledCharacterCounter>{`${details.length} / ${charLimit}`}</StyledCharacterCounter>
             </StyledTextAreaWrapper>
           </Section>
           <Section>
-            <StyledP>Phone Number (optional): </StyledP>
+            <StyledP>{reportContent.phoneLabel[lang]}</StyledP>
             <StyledInput
               type="text"
               aria-label="phone field"
@@ -212,16 +203,12 @@ export default function Report() {
             />
 
             {reportSentSuccess
-              ? <SuccessP>Report Published</SuccessP>
-              : (
-                <ErrorP>
-                  {errorMessage}
-                </ErrorP>
-              )}
+              ? <SuccessP>{reportContent.reportSentSuccess[lang]}</SuccessP>
+              : (<ErrorP>{errorMessage}</ErrorP>)}
           </Section>
           <ButtonSection>
             <Button
-              text="Submit"
+              text={reportContent.submit[lang]}
               variant="primary"
               size="md"
               disabled={!isFormValid}

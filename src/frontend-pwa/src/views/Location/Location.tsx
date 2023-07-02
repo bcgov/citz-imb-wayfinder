@@ -20,6 +20,7 @@ import { Mapping } from '../../components/utility';
 import CalcDistance from '../../utils/CalcDistance';
 import { localStorageKeyExists } from '../../utils/AppLocalStorage';
 import constants from '../../constants/Constants';
+import { locationContent } from '../../content/content';
 
 import {
   ContentContainer,
@@ -34,6 +35,7 @@ interface LocationWithDistance extends SingleLocation {
 }
 
 export default function Location() {
+  const [lang] = useState('eng');
   const { state } = useAppService();
   const [searchQuery, setSearchQuery] = useState('');
   const { service } = useParams();
@@ -43,9 +45,9 @@ export default function Location() {
 
   const headers: Array<string> = [];
   if (service) {
-    headers.push(`${(service[0].toUpperCase() + service.substring(1, service.length))} Locations`, 'Distance');
+    headers.push(`${(service[0].toUpperCase() + service.substring(1, service.length))} ${locationContent.headers[lang][0]}`, locationContent.headers[lang][1]);
   } else {
-    headers.push('Locations', 'Distance');
+    headers.push(...locationContent.headers[lang]);
   }
   const filteredLocationSearch = locations.filter((location: SingleLocation) => {
     if (geolocationKnown) {
@@ -67,8 +69,8 @@ export default function Location() {
   distancedLocations.sort((a: LocationWithDistance, b: LocationWithDistance) => (
     parseFloat(a.distance) > parseFloat(b.distance) ? 1 : -1
   ));
-  const unavailable = <LocationListItem itemData={{ locale: 'Sorry, this service is currently not implemented' } as SingleLocation} locationDistance="0" />;
-  const outOfRange = <LocationListItem itemData={{ locale: `No results within ${locationRange}KM` } as SingleLocation} locationDistance="0" />;
+  const unavailable = <LocationListItem itemData={{ locale: locationContent.notImplemented[lang] } as SingleLocation} locationDistance="0" />;
+  const outOfRange = <LocationListItem itemData={{ locale: `${locationContent.noResults[lang]} ${locationRange}KM` } as SingleLocation} locationDistance="0" />;
 
   return (
     <ViewContainer>
@@ -83,7 +85,7 @@ export default function Location() {
           : (
             <MapContainer>
               <StyledP>
-                Sorry this feature is currently unavailable offline.
+                {locationContent.unavailable[lang]}
               </StyledP>
             </MapContainer>
           )}

@@ -90,8 +90,9 @@ export default function Settings() {
             />
           </TitleWrapper>
           <StyledSelect onChange={handleLang}>
-            <option value="eng">English</option>
-            <option value="fr">French</option>
+            {SettingsContent.languages[lang].map((data: string, index: number) => (
+              <option value={SettingsContent.languages.keys[index]}>{data}</option>
+            ))}
           </StyledSelect>
         </Section>
         <Section>

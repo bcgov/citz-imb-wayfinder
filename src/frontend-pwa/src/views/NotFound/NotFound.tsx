@@ -2,6 +2,7 @@
  * @summary 404 Page that returns to home, and references the url provided in its error message
  * @author LocalNewsTV
  */
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '../../components/common';
 import {
@@ -13,28 +14,30 @@ import {
   TextContainer,
   ViewContainer,
 } from './NotFound.style';
+import { notFoundContent } from '../../content/content';
 
 function NotFound() {
+  const [lang] = useState('eng');
   const route = useLocation();
   return (
     <ViewContainer>
       <ContentContainer>
         <TextContainer>
           <HeaderTwo>
-            Not Found
+            {notFoundContent.notFound[lang]}
           </HeaderTwo>
         </TextContainer>
         <TextContainer>
           <Text>
             <Bold>404.&nbsp;</Bold>
-            <Soft>That&apos;s an error</Soft>
+            <Soft>{notFoundContent.anError[lang]}</Soft>
           </Text>
         </TextContainer>
         <TextContainer>
           <Text>
-            {`The requested URL\u00a0\u00a0${route.pathname} was not found on this server.`}
+            {`${notFoundContent.requestedURL[lang]}${route.pathname}${notFoundContent.notFoundHere[lang]}`}
             <Soft>
-              &nbsp;That&apos;s all we know
+              {notFoundContent.allWeKnow[lang]}
             </Soft>
           </Text>
         </TextContainer>
