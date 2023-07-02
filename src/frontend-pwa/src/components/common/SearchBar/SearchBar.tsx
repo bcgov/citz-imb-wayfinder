@@ -10,7 +10,7 @@
  * @type    {( handleChange: () => void, handleSubmit: () => void, handleClear: () => void, query: boolean, border: boolean, borderRadius: boolean )}
  * @author  Tyler Maloney
  */
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import clearicon from '/clearicon.svg';
 
 import {
@@ -19,6 +19,7 @@ import {
   StyledButton,
   StyledImg,
 } from './searchbar.styles';
+import { searchBarContent } from '../../../content/content';
 
 export type SearchBarProps = {
   setUseState: (type: any) => void;
@@ -36,6 +37,7 @@ export default function SearchBar({
   border = true,
 
 }: SearchBarProps) {
+  const [lang] = useState('eng');
   const handleChange = (event: FormEvent<HTMLInputElement>) => {
     setUseState(event.currentTarget.value);
   };
@@ -49,7 +51,7 @@ export default function SearchBar({
       <StyledInput
         type="text"
         aria-label="search input field"
-        placeholder="Filter search..."
+        placeholder={searchBarContent.placeholder[lang]}
         onChange={handleChange}
         value={query}
       />

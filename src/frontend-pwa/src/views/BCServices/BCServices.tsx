@@ -27,8 +27,10 @@ import {
   ServiceListContainer,
   StyledP,
 } from './bcservices.styles';
+import { locationContent } from '../../content/content';
 
 export default function BCServices() {
+  const [lang] = useState('eng');
   const [searchQuery, setSearchQuery] = useState('');
   const { state } = useAppService();
   const services = state.appData?.data ? state.appData?.data.allServices : [];
@@ -65,7 +67,7 @@ export default function BCServices() {
           : (
             <MapContainer>
               <StyledP>
-                Sorry this feature is currently unavailable offline.
+                {locationContent.unavailable[lang]}
               </StyledP>
             </MapContainer>
           )}

@@ -6,6 +6,7 @@
  *          Analytics sent or cached if offline
  * @author LocalNewsTV, Dallas Richmond
  */
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import useAppService from '../../services/app/useAppService';
 import { SingleLocation } from '../../Type';
@@ -23,8 +24,10 @@ import { ListItems, ServiceListItem } from '../../components/lists';
 import OnlineCheck from '../../utils/OnlineCheck';
 import { localStorageKeyExists } from '../../utils/AppLocalStorage';
 import constants from '../../constants/Constants';
+import { locationInfoContent } from '../../content/content';
 
 export default function LocationInformation() {
+  const [lang] = useState('eng');
   const { state, setAnalytics } = useAppService();
   const { service, locale } = useParams();
   const locations = state.appData?.data ? state.appData.data[`${service}Locations`] : [];
@@ -36,7 +39,7 @@ export default function LocationInformation() {
     (element: SingleLocation) => element.locale === locale,
   )[0];
 
-  if (state.settings.analytics_opt_in && geolocationKnown) {
+  if (state.settings.analytics_opt_in && geolocationKnown && location) {
     const latitude = state.currentLocation.lat;
     const longitude = state.currentLocation.long;
     const analytics = {
@@ -73,7 +76,7 @@ export default function LocationInformation() {
               {location.contact?.phone
                 && (
                 <Container>
-                  <Text>Phone Number:&nbsp;</Text>
+                  <Text>{locationInfoContent.phoneLabel[lang]}</Text>
                   <Link to={`tel:+${location.contact?.phone.replaceAll('-', '').replaceAll(' ', '')}`}>
                     <Text>
                       {location.contact?.phone}
@@ -84,7 +87,7 @@ export default function LocationInformation() {
               {location.contact?.fax
                 && (
                 <Container>
-                  <Text>Fax Number:&nbsp;</Text>
+                  <Text>{locationInfoContent.faxLabel[lang]}</Text>
                   <Link to={`tel:+${location.contact?.fax.replaceAll('-', '').replaceAll(' ', '')}`}>
                     <Text>
                       {location.contact?.fax}
@@ -95,27 +98,27 @@ export default function LocationInformation() {
               {location.address
                 && (
                 <Container>
-                  <Text>Address:&nbsp;</Text>
+                  <Text>{locationInfoContent.addressLabel[lang]}</Text>
                   <Address>{`${location.address?.label || ''}`}</Address>
                 </Container>
                 )}
               {location.address?.postal_code
                 && (
                 <Container>
-                  <Text>Postal Code:&nbsp;</Text>
+                  <Text>{locationInfoContent.postalLabel[lang]}</Text>
                   <Text>{`${location.address?.postal_code}`}</Text>
                 </Container>
                 )}
               <Container>
-                <Text>Website:&nbsp;</Text>
+                <Text>{locationInfoContent.websiteLabel[lang]}</Text>
                 <Text>
-                  <Link to={location.website}>Official Website</Link>
+                  <Link to={location.website}>{locationInfoContent.website[lang]}</Link>
                 </Text>
               </Container>
               {location.services
               && (
                 <Container>
-                  <ListItems headers={['Services Offered at this Location']}>
+                  <ListItems headers={[...locationInfoContent.listHeader[lang]]}>
                     {location.services.map((text, index) => (
                       // eslint-disable-next-line react/no-array-index-key
                       <ServiceListItem service={text} key={index} />

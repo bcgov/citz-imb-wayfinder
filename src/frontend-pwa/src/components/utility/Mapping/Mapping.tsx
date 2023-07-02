@@ -16,7 +16,8 @@
  *
  * @author  Tyler Maloney, LocalNewsTV
  */
-import { useParams, Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/images/marker-shadow.png';
 import {
@@ -38,6 +39,7 @@ import {
 import SingleLocation from '../../../Type/SingleLocation';
 import LocationsArray from '../../../Type/LocationsArray';
 import { Button } from '../../common';
+import { mappingContent } from '../../../content/content';
 
 type CurrentLocationType = {
   lat: string;
@@ -54,7 +56,7 @@ const baseIcon = Leaflet.icon({
   iconRetinaUrl: baseIconImageMobile,
   iconAnchor: [5, 55],
   popupAnchor: [10, -44],
-  iconSize: [25, 55],
+  iconSize: [25, 45],
 });
 
 const redIcon = Leaflet.icon({
@@ -62,10 +64,11 @@ const redIcon = Leaflet.icon({
   iconRetinaUrl: redIconImageMobile,
   iconAnchor: [5, 55],
   popupAnchor: [10, -44],
-  iconSize: [25, 55],
+  iconSize: [25, 45],
 });
 
 export default function Mapping({ locations, currentLocation }: MappingProps) {
+  const [lang] = useState('fr');
   const lat = parseFloat(currentLocation?.lat);
   const long = parseFloat(currentLocation?.long);
   return (
@@ -84,15 +87,13 @@ export default function Mapping({ locations, currentLocation }: MappingProps) {
           />
           <Marker icon={redIcon} position={[lat, long]}>
             <Popup>
-              <h5>
-                Current Location
-              </h5>
+              <h3>{mappingContent.currLocation[lang]}</h3>
               <p>
-                Current Latitude:&nbsp;
+                {mappingContent.currLat[lang]}
                 {currentLocation.lat}
               </p>
               <p>
-                Current Longitude:&nbsp;
+                {mappingContent.currLong[lang]}
                 {currentLocation.long}
               </p>
             </Popup>
@@ -103,16 +104,16 @@ export default function Mapping({ locations, currentLocation }: MappingProps) {
               <StyledPopup>
                 <h3>{item.locale}</h3>
                 <PopupInfo>
-                  Type:&nbsp;
+                  {mappingContent.type[lang]}
                   {(item.serviceType[0].toUpperCase()
                   + item.serviceType.substring(1, item.serviceType.length))}
                 </PopupInfo>
                 <PopupInfo>
-                  Address:&nbsp;
+                  {mappingContent.address[lang]}
                   {item.address.label}
                 </PopupInfo>
                 <PopupInfo>
-                  Phone Number:&nbsp;
+                  {mappingContent.phone[lang]}
                   <Link to={`tel:+${item.contact?.phone?.replaceAll('-', '').replaceAll(' ', '')}`}>{item.contact?.phone}</Link>
                 </PopupInfo>
                 <Link to={`/location/${(item.serviceType[0].toLowerCase() + item.serviceType.substring(1, item.serviceType.length))}/${item.locale}`}>

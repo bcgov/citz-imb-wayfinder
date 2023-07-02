@@ -3,6 +3,7 @@
  * @summary About + Contact Section for the Wayfinder Application
  * @author LocalNewsTV
  */
+import { useState } from 'react';
 import {
   AboutContainer,
   StyledP,
@@ -18,6 +19,7 @@ import pkg from '../../../package.json';
 import { aboutContent } from '../../content/content';
 
 export default function AboutContact() {
+  const [lang] = useState('eng');
   const contact = {
     email: 'wayfinderdevelopers@gmail.com',
     repo: 'https://github.com/bcgov/citz-imb-wayfinder',
@@ -31,58 +33,58 @@ export default function AboutContact() {
           Wayfinder&nbsp;V
           {pkg.version}
         </StyledP>
-        <StyledHeaderTwo>{aboutContent.aboutTitle.eng}</StyledHeaderTwo>
+        <StyledHeaderTwo>{aboutContent.aboutTitle[lang]}</StyledHeaderTwo>
         <StyledP>
-          {aboutContent.about.eng}
+          {aboutContent.about[lang]}
         </StyledP>
         <StyledP>
-          {aboutContent.aboutTeam.eng}
-        </StyledP>
-        <StyledHeaderThree>
-          {aboutContent.tylerTitle.eng}
-        </StyledHeaderThree>
-        <StyledP>
-          {aboutContent.tylerBio.eng}
+          {aboutContent.aboutTeam[lang]}
         </StyledP>
         <StyledHeaderThree>
-          {aboutContent.dallasTitle.eng}
+          {aboutContent.tylerTitle[lang]}
         </StyledHeaderThree>
         <StyledP>
-          {aboutContent.dallasBio.eng}
+          {aboutContent.tylerBio[lang]}
         </StyledP>
         <StyledHeaderThree>
-          {aboutContent.matthewTitle.eng}
+          {aboutContent.dallasTitle[lang]}
         </StyledHeaderThree>
         <StyledP>
-          {aboutContent.matthewBio.eng}
+          {aboutContent.dallasBio[lang]}
         </StyledP>
         <StyledHeaderThree>
-          {aboutContent.jesseTitle.eng}
+          {aboutContent.matthewTitle[lang]}
         </StyledHeaderThree>
         <StyledP>
-          {aboutContent.jesseBio.eng}
+          {aboutContent.matthewBio[lang]}
         </StyledP>
-        <StyledHeaderTwo>{aboutContent.disclaimerTitle.eng}</StyledHeaderTwo>
+        <StyledHeaderThree>
+          {aboutContent.jesseTitle[lang]}
+        </StyledHeaderThree>
+        <StyledP>
+          {aboutContent.jesseBio[lang]}
+        </StyledP>
+        <StyledHeaderTwo>{aboutContent.disclaimerTitle[lang]}</StyledHeaderTwo>
         <StyledUl>
-          {(aboutContent.disclaimer.eng).map((point: string, index: number) => (
+          {(aboutContent.disclaimer[lang]).map((point: string, index: number) => (
             <StyledLi key={index}>{point}</StyledLi>))}
         </StyledUl>
-        <StyledHeaderTwo>{aboutContent.contactTitle.eng}</StyledHeaderTwo>
+        <StyledHeaderTwo>{aboutContent.contactTitle[lang]}</StyledHeaderTwo>
         <StyledP>
-          {aboutContent.contact.eng}
+          {aboutContent.contact[lang]}
         </StyledP>
         <StyledAddress>
-          {aboutContent.aboutTitle.eng}
+          {aboutContent.aboutTitle[lang]}
           :&nbsp;
           <Link href={`mailto:${contact.email}?subject='Wayfinder App'`}>{contact.team}</Link>
           <br />
-          {aboutContent.mailingAddressTitle.eng}
+          {aboutContent.mailingAddressTitle[lang]}
           :&nbsp;
           {contact.mailing}
           <br />
-          {aboutContent.githubRepo.eng}
+          {aboutContent.githubRepo[lang]}
           :&nbsp;
-          <Link href={contact.repo}>{aboutContent.viewIt.eng}</Link>
+          <Link href={contact.repo}>{aboutContent.viewIt[lang]}</Link>
         </StyledAddress>
       </ContentContainer>
     </AboutContainer>

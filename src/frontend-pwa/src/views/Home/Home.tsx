@@ -2,6 +2,7 @@
  * @summary The main view for the application
  * @author Dallas Richmond, LocalNewsTV
  */
+import { useState } from 'react';
 import { NavButton } from '../../components/appNav';
 import {
   Wrapper,
@@ -15,6 +16,7 @@ import Greeting from '../../components/utility/Greeting/Greeting';
 import { homeContent } from '../../content/content';
 
 export default function Home() {
+  const [lang] = useState('eng');
   return (
     <ViewContainer>
       <Wrapper>
@@ -22,7 +24,7 @@ export default function Home() {
         <ButtonWrapper>
           <NavButton
             path="/location"
-            text={homeContent.findOffice.eng}
+            text={homeContent.findOffice[lang]}
             icon={location}
             hex="#DEF3FB"
           />
@@ -30,7 +32,7 @@ export default function Home() {
         <ButtonWrapper>
           <NavButton
             path="/services"
-            text={homeContent.findService.eng}
+            text={homeContent.findService[lang]}
             icon={services}
             hex="#EEE0E9"
           />
@@ -38,7 +40,7 @@ export default function Home() {
         <ButtonWrapper>
           <NavButton
             path="/report"
-            text={homeContent.report.eng}
+            text={homeContent.report[lang]}
             icon={report}
             hex="#FEF2DF"
           />

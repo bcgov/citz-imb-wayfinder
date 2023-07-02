@@ -8,7 +8,8 @@ import GreetingWrapper from './greeting.style';
 import { greetingContent } from '../../../content/content';
 
 export default function Greeting() {
-  const [greet] = useState(greetingContent.eng[Date.now() % greetingContent.eng.length]);
+  const [lang] = useState('eng');
+  const [greet] = useState(greetingContent[lang][Date.now() % greetingContent[lang].length]);
   return (
     <GreetingWrapper>
       {greet}
