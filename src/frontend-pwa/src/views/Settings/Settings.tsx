@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent */
 /* eslint-disable max-len */
 /**
  * @summary Settings view for the application
@@ -28,7 +29,7 @@ export default function Settings() {
   const [offlineToggleValue, setOfflineToggleValue] = useState(state.settings.offline_mode);
   const [analyticsToggleValue, setAnalyticsToggleValue] = useState(state.settings.analytics_opt_in);
   const [toolTip, setToolTip] = useState('');
-  const [lang, setLang] = useState(state.settings.lang);
+  const [lang, setLang] = useState(state.settings.lang || 'eng');
   /**
    * @summary Handles the change of the Location Range slider
    * @param value is the location range value of the slider
@@ -96,12 +97,10 @@ export default function Settings() {
               setText={setToolTip}
             />
           </TitleWrapper>
-          <StyledSelect onChange={handleLang}>
-            {SettingsContent.languages[lang].map((data: string, index: number) => {
-              let selected = false;
-              if (lang === SettingsContent.languages.keys[index]) selected = true;
-              return <option value={SettingsContent.languages.keys[index]} selected={selected}>{data}</option>;
-            })}
+          <StyledSelect onChange={handleLang} defaultValue={lang}>
+            {SettingsContent.languages[lang].map((data: string, index: number) => (
+            <option value={SettingsContent.languages.keys[index]} key={data}>{data}</option>
+            ))}
           </StyledSelect>
         </Section>
         <Section>
