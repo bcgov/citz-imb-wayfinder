@@ -149,6 +149,7 @@ const useAppService = () => {
           location_range: 500,
           offline_mode: false,
           analytics_opt_in: true,
+          lang: 'eng',
         };
         saveDataToLocalStorage(constants.SETTINGS_KEY, settings);
         dispatch({ type: SET_SETTINGS, payload: settings });
@@ -169,11 +170,13 @@ const useAppService = () => {
       locationRange = getDataFromLocalStorage(constants.SETTINGS_KEY).location_range,
       offlineMode = getDataFromLocalStorage(constants.SETTINGS_KEY).offline_mode,
       analyticsOptIn = getDataFromLocalStorage(constants.SETTINGS_KEY).analytics_opt_in,
+      language = getDataFromLocalStorage(constants.SETTINGS_KEY).lang,
     }: SettingsObject) => {
       const settings = {
         location_range: locationRange,
         offline_mode: offlineMode,
         analytics_opt_in: analyticsOptIn,
+        lang: language,
       };
       saveDataToLocalStorage(constants.SETTINGS_KEY, settings);
       dispatch({ type: SET_SETTINGS, payload: settings });

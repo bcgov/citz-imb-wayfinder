@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-indent */
+/* eslint-disable max-len */
 /**
  * @summary Settings view for the application
  * @author  Dallas Richmond, LocalNewsTV
@@ -22,18 +24,12 @@ import MoreInfoButton from '../../components/common/MoreInfoButton/MoreInfoButto
 import { SettingsContent } from '../../content/content';
 
 export default function Settings() {
-  const handleLang = (e: { target: { value: React.SetStateAction<string> } }) => {
-    setLang(e.target.value);
-  }
   const { setSettings, updateSettings, state } = useAppService();
   const [locationRangeValue, setLocationRangeValue] = useState(state.settings.location_range);
   const [offlineToggleValue, setOfflineToggleValue] = useState(state.settings.offline_mode);
   const [analyticsToggleValue, setAnalyticsToggleValue] = useState(state.settings.analytics_opt_in);
   const [toolTip, setToolTip] = useState('');
-  /**
-   * TODO: use proper settings for language
-   */
-  const [lang, setLang] = useState('eng');
+  const [lang, setLang] = useState(state.settings.lang || 'eng');
   /**
    * @summary Handles the change of the Location Range slider
    * @param value is the location range value of the slider
@@ -70,6 +66,18 @@ export default function Settings() {
     updateSettings();
   };
 
+  /**
+   * @summary Handles the change of the language select
+   * @param e is the event object of the select component
+   * @type {( e: { target: { value: React.SetStateAction<string> } } )}
+   * @author LocalNewsTV, Dallas Richmond
+   */
+  const handleLang = (e: { target: { value: string } }) => {
+    setLang(e.target.value);
+    setSettings({ language: e.target.value });
+    updateSettings();
+  };
+
   return (
     <SettingsWrapper>
       <BannerTip
@@ -89,9 +97,9 @@ export default function Settings() {
               setText={setToolTip}
             />
           </TitleWrapper>
-          <StyledSelect onChange={handleLang}>
+          <StyledSelect onChange={handleLang} defaultValue={lang}>
             {SettingsContent.languages[lang].map((data: string, index: number) => (
-              <option value={SettingsContent.languages.keys[index]}>{data}</option>
+            <option value={SettingsContent.languages.keys[index]} key={data}>{data}</option>
             ))}
           </StyledSelect>
         </Section>
