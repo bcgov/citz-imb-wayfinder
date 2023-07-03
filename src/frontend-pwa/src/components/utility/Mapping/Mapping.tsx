@@ -16,7 +16,6 @@
  *
  * @author  Tyler Maloney, LocalNewsTV
  */
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/images/marker-shadow.png';
@@ -40,6 +39,7 @@ import SingleLocation from '../../../Type/SingleLocation';
 import LocationsArray from '../../../Type/LocationsArray';
 import { Button } from '../../common';
 import { mappingContent } from '../../../content/content';
+import useAppService from '../../../services/app/useAppService';
 
 type CurrentLocationType = {
   lat: string;
@@ -68,7 +68,8 @@ const redIcon = Leaflet.icon({
 });
 
 export default function Mapping({ locations, currentLocation }: MappingProps) {
-  const [lang] = useState('fr');
+  const { state } = useAppService();
+  const { lang } = state.settings;
   const lat = parseFloat(currentLocation?.lat);
   const long = parseFloat(currentLocation?.long);
   return (

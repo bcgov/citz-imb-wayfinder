@@ -6,7 +6,6 @@
  *          Analytics sent or cached if offline
  * @author LocalNewsTV, Dallas Richmond
  */
-import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import useAppService from '../../services/app/useAppService';
 import { SingleLocation } from '../../Type';
@@ -27,8 +26,8 @@ import constants from '../../constants/Constants';
 import { locationInfoContent } from '../../content/content';
 
 export default function LocationInformation() {
-  const [lang] = useState('eng');
   const { state, setAnalytics } = useAppService();
+  const { lang } = state.settings;
   const { service, locale } = useParams();
   const locations = state.appData?.data ? state.appData.data[`${service}Locations`] : [];
   const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);

@@ -2,7 +2,6 @@
  * @summary Reusable BC Gov Footer Component
  * @author Dallas Richmond
  */
-import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { SmallNavButton } from '../../appNav';
 import { FooterWrapper, Container } from './footer.styles';
@@ -11,9 +10,11 @@ import service from '/iconography/FindServiceWhite.svg';
 import report from '/iconography/ReportWhite.svg';
 import home from '/iconography/HomeWhite.svg';
 import { footerContent } from '../../../content/content';
+import useAppService from '../../../services/app/useAppService';
 
 export default function Footer() {
-  const [lang] = useState('eng');
+  const { state } = useAppService();
+  const { lang } = state.settings;
   const location = useLocation();
   return (
     <FooterWrapper>

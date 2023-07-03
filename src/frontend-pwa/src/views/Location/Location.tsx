@@ -35,8 +35,8 @@ interface LocationWithDistance extends SingleLocation {
 }
 
 export default function Location() {
-  const [lang] = useState('eng');
   const { state } = useAppService();
+  const { lang } = state.settings;
   const [searchQuery, setSearchQuery] = useState('');
   const { service } = useParams();
   const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);

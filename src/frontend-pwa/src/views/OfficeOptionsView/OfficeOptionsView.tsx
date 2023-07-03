@@ -4,7 +4,6 @@
  *          ICBC is set to disabled for the purpose of presentation of disabled attribute
  * @author LocalNewsTV
  */
-import { useState } from 'react';
 import { ContentContainer, ViewContainer } from './officeOptionsView.styles';
 import { OfficeNavButton } from '../../components/appNav';
 import car from '/iconography/CarColor.svg';
@@ -13,9 +12,11 @@ import service from '/iconography/FindOfficeColorServe.svg';
 import plus from '/iconography/PlusColor.svg';
 import Services from '../../enums/Services';
 import { officeOptionsContent } from '../../content/content';
+import useAppService from '../../services/app/useAppService';
 
 export default function OfficeOptionsView() {
-  const [lang] = useState('eng');
+  const { state } = useAppService();
+  const { lang } = state.settings;
   return (
     <ViewContainer>
       <ContentContainer>

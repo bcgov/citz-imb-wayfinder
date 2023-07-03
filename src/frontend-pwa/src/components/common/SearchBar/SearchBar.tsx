@@ -10,8 +10,9 @@
  * @type    {( handleChange: () => void, handleSubmit: () => void, handleClear: () => void, query: boolean, border: boolean, borderRadius: boolean )}
  * @author  Tyler Maloney
  */
-import { FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import clearicon from '/clearicon.svg';
+import useAppService from '../../../services/app/useAppService';
 
 import {
   WrapperDiv,
@@ -37,7 +38,8 @@ export default function SearchBar({
   border = true,
 
 }: SearchBarProps) {
-  const [lang] = useState('eng');
+  const { state } = useAppService();
+  const { lang } = state.settings;
   const handleChange = (event: FormEvent<HTMLInputElement>) => {
     setUseState(event.currentTarget.value);
   };

@@ -2,7 +2,6 @@
  * @summary 404 Page that returns to home, and references the url provided in its error message
  * @author LocalNewsTV
  */
-import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '../../components/common';
 import {
@@ -15,9 +14,11 @@ import {
   ViewContainer,
 } from './NotFound.style';
 import { notFoundContent } from '../../content/content';
+import useAppService from '../../services/app/useAppService';
 
 function NotFound() {
-  const [lang] = useState('eng');
+  const { state } = useAppService();
+  const { lang } = state.settings;
   const route = useLocation();
   return (
     <ViewContainer>

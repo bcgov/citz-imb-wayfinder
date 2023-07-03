@@ -3,7 +3,6 @@
  * @summary About + Contact Section for the Wayfinder Application
  * @author LocalNewsTV
  */
-import { useState } from 'react';
 import {
   AboutContainer,
   StyledP,
@@ -17,9 +16,11 @@ import {
 } from './aboutcontact.styles';
 import pkg from '../../../package.json';
 import { aboutContent } from '../../content/content';
+import useAppService from '../../services/app/useAppService';
 
 export default function AboutContact() {
-  const [lang] = useState('eng');
+  const { state } = useAppService();
+  const { lang } = state.settings;
   const contact = {
     email: 'wayfinderdevelopers@gmail.com',
     repo: 'https://github.com/bcgov/citz-imb-wayfinder',

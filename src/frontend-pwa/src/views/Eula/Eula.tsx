@@ -12,9 +12,9 @@ import useAppService from '../../services/app/useAppService';
 import { eulaContent } from '../../content/content';
 
 export default function Eula() {
-  const [lang] = useState('eng');
   const [termAgreement, setTermAgreement] = useState(false);
   const { state, setEulaState } = useAppService();
+  const { lang } = state.settings;
   const handleConsentChange = () => {
     setTermAgreement(!termAgreement);
   };
