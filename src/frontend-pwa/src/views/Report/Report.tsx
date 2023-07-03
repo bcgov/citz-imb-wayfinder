@@ -28,7 +28,6 @@ import OnlineCheck from '../../utils/OnlineCheck';
 import { reportContent } from '../../content/content';
 
 export default function Report() {
-  const [lang] = useState('eng');
   const charLimit = 256;
   const minCharLimit = 10;
   const [eventType, setEventType] = useState('');
@@ -38,6 +37,7 @@ export default function Report() {
   const [isFormValid, setIsFormValid] = useState(false);
   const [reportSentSuccess, setReportSentSuccess] = useState(false);
   const { state, setAnalytics } = useAppService();
+  const { lang } = state.settings;
   const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
   const latitude = state.currentLocation ? state.currentLocation.lat : 49.2827;
   const longitude = state.currentLocation ? state.currentLocation.long : -123.2;

@@ -6,9 +6,11 @@
 import { useState } from 'react';
 import GreetingWrapper from './greeting.style';
 import { greetingContent } from '../../../content/content';
+import useAppService from '../../../services/app/useAppService';
 
 export default function Greeting() {
-  const [lang] = useState('eng');
+  const { state } = useAppService();
+  const { lang } = state.settings;
   const [greet] = useState(greetingContent[lang][Date.now() % greetingContent[lang].length]);
   return (
     <GreetingWrapper>

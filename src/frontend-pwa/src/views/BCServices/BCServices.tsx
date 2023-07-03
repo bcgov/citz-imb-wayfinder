@@ -30,9 +30,9 @@ import {
 import { locationContent } from '../../content/content';
 
 export default function BCServices() {
-  const [lang] = useState('eng');
   const [searchQuery, setSearchQuery] = useState('');
   const { state } = useAppService();
+  const { lang } = state.settings;
   const services = state.appData?.data ? state.appData?.data.allServices : [];
   const locations = state.appData?.data ? [
     ...state.appData.data.serviceBCLocations,

@@ -2,7 +2,6 @@
  * @summary The main view for the application
  * @author Dallas Richmond, LocalNewsTV
  */
-import { useState } from 'react';
 import { NavButton } from '../../components/appNav';
 import {
   Wrapper,
@@ -14,9 +13,11 @@ import report from '/iconography/ReportColor.svg';
 import services from '/iconography/FindServiceColor.svg';
 import Greeting from '../../components/utility/Greeting/Greeting';
 import { homeContent } from '../../content/content';
+import useAppService from '../../services/app/useAppService';
 
 export default function Home() {
-  const [lang] = useState('eng');
+  const { state } = useAppService();
+  const { lang } = state.settings;
   return (
     <ViewContainer>
       <Wrapper>
