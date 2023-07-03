@@ -35,7 +35,7 @@ export default function LocationInformation() {
     return <NotFound />;
   }
   const location: SingleLocation = locations.filter(
-    (element: SingleLocation) => element.locale === locale,
+    (element: SingleLocation) => element.locale.toLowerCase() === locale?.toLowerCase(),
   )[0];
 
   if (state.settings.analytics_opt_in && geolocationKnown && location) {
