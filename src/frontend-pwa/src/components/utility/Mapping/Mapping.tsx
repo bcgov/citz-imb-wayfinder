@@ -117,7 +117,7 @@ export default function Mapping({ locations, currentLocation }: MappingProps) {
                   {mappingContent.phone[lang]}
                   <Link to={`tel:+${item.contact?.phone?.replaceAll('-', '').replaceAll(' ', '')}`}>{item.contact?.phone}</Link>
                 </PopupInfo>
-                <Link to={`/location/${(item.serviceType[0].toLowerCase() + item.serviceType.substring(1, item.serviceType.length))}/${item.locale}`}>
+                <Link to={`/location/${item.serviceType}/${item.locale}`}>
                   <Button
                     text="More Info"
                     variant="primary"
