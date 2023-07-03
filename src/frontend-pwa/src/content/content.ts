@@ -2,21 +2,6 @@
  * @summary All Text content for the Wayfinder Application
  *          Allows for multi-language support
  * @author  LocalNewsTV
- * TODO:    Translations for:
- *            - About [x]
- *            - Home [x]
- *            - Find An Office [x]
- *            - LocationView [x]
- *            - ServiceView [x]
- *            - FooterNav [x]
- *            - Report + components [x]
- *            - Searchbar [x]
- *            - Terms and Conditions [x]
- *            - Mapping [x]
- *            - LocationInfo [x]
- *            - Greetings [x]
- *            - NotFound [x]
- *          Remove all extra 'useState's when implemented fully
  */
 
 export interface ContentMap {
