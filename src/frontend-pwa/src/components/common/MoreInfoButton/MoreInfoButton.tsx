@@ -1,7 +1,7 @@
 /**
  * @summary Companion Component for BannerTip.
  *          used to trigger State used by BannerTip to display
- * @author  LocalNewsTV, Dallas Richmond
+ * @author  LocalNewsTV
  */
 import { Image, ImageContainer } from './moreInfoButton.style';
 import info from '/iconography/MoreInfo.svg';

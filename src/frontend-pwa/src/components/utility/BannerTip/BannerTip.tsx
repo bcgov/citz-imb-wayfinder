@@ -2,7 +2,7 @@
  * @summary Banner for giving Tips and info to users, self destructs after period of time
  *          Can be closed early with exit button
  * @type    {BannerProps}
- * @author  LocalNewsTV, Dallas Richmond
+ * @author  LocalNewsTV
  */
 import { useEffect } from 'react';
 import {
