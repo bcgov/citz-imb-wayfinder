@@ -43,6 +43,20 @@ export const StyledReportContainer = styled.div`
 export const StyledTextAreaWrapper = styled.div`
 `;
 
+export const HeaderContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    @media (min-width: ${mq.tablet}){
+        width: 80%;
+    }
+    margin: 1.25em;
+`;
+export const StyledHeaderTwo = styled.h2`
+    padding: 0;
+    margin: 0 !important;
+`;
 export const StyledCharacterCounter = styled.div`
     display: flex;
     width: 100%;

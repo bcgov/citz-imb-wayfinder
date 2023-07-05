@@ -14,6 +14,7 @@ import Eula from '../views/Eula/Eula';
 import OfficeOptionsView from '../views/OfficeOptionsView/OfficeOptionsView';
 import LocationInformation from '../views/LocationInformation/LocationInformation';
 import NotFound from '../views/NotFound/NotFound';
+import ReportHistory from '../views/ReportHistory/ReportHistory';
 
 export default function ViewRouter() {
   return (
@@ -27,6 +28,7 @@ export default function ViewRouter() {
       <Route path="/settings/about" Component={AboutContact} />
       <Route path="/location" Component={OfficeOptionsView} />
       <Route path="/location/:service/:locale" Component={LocationInformation} />
+      <Route path="/report/history" Component={ReportHistory} />
       <Route path="*" Component={NotFound} />
     </Routes>
   );

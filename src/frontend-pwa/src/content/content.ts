@@ -306,6 +306,10 @@ export const reportContent: ContentMap = {
     eng: 'Submit',
     fr: 'Soumettre',
   },
+  history: {
+    eng: 'History',
+    fr: 'Histoire',
+  },
 };
 
 export const footerContent: ContentMap = {
