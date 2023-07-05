@@ -7,6 +7,7 @@ const constants = {
   SETTINGS_KEY: 'settings',
   OFFLINE_ANALYTIC_KEY: 'analyticsOffline',
   REPORTS_KEY: 'reports',
+  UNSENT_REPORTS_KEY: 'unsentReports',
 };
 
 export default constants;

@@ -40,16 +40,21 @@ export default function Report() {
   const [isFormValid, setIsFormValid] = useState(false);
   const [reportSentSuccess, setReportSentSuccess] = useState(false);
   const [ticketNum, setTicketNum] = useState(null);
-  const { state, setAnalytics, setReports } = useAppService();
+  const {
+    state,
+    setAnalytics,
+    setSuccessfulReports,
+    setOfflineReports,
+  } = useAppService();
   const { lang } = state.settings;
   const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
   const latitude = state.currentLocation ? state.currentLocation.lat : 49.2827;
   const longitude = state.currentLocation ? state.currentLocation.long : -123.2;
 
   /**
- * @desc - Validates the phone number (if inputted) against regex pattern.
- * @returns {boolean} Valid phone number format, or blank.
- */
+   * @desc - Validates the phone number (if inputted) against regex pattern.
+   * @returns {boolean} Valid phone number format, or blank.
+   */
   const validatePhoneNumber = useCallback((): boolean => {
     const regex = /^(?:\+?1-?)?(?:\(\d{3}\)|\d{3})-?\d{3}-?\d{4}$/gi;
     if (!phoneNumber || phoneNumber.match(regex)) {
@@ -61,10 +66,10 @@ export default function Report() {
   }, [phoneNumber, lang]);
 
   /**
- * @desc - Validates the detail input is longer than the minumum length, or not present.
- * @returns {boolean} - Indicates whether the message inputted is over the
- *                      character minimum, but under the maximum.
- */
+   * @desc - Validates the detail input is longer than the minumum length, or not present.
+   * @returns {boolean} - Indicates whether the message inputted is over the
+   *                      character minimum, but under the maximum.
+   */
   const validateDetailBox = useCallback((): boolean => {
     if (details.length >= minCharLimit && details.length <= charLimit) {
       return true;
@@ -75,11 +80,11 @@ export default function Report() {
   }, [details, charLimit, lang]);
 
   /**
- * @desc - Validates all form fields to ensure they contain valid values.
- * @param {boolean} isValid - Indicates whether the form fields are valid (true)
- *                            or not valid (false).
- * @returns {boolean}       - Returns isValid, set to either true or false.
- */
+   * @desc - Validates all form fields to ensure they contain valid values.
+   * @param {boolean} isValid - Indicates whether the form fields are valid (true)
+   *                            or not valid (false).
+   * @returns {boolean}       - Returns isValid, set to either true or false.
+   */
   const checkFormValidity = useCallback(() => {
     const isEventTypeValid = !!eventType;
     const isValid = isEventTypeValid && validateDetailBox() && validatePhoneNumber();
@@ -101,9 +106,9 @@ export default function Report() {
   };
 
   /**
- * @desc - Sends a "formData" object to the /report endpoint.
- *       - Form validity is determined externally through the useEffect below.
- */
+   * @desc - Sends a "formData" object to the /report endpoint.
+   *       - Form validity is determined externally through the useEffect below.
+   */
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
@@ -143,7 +148,7 @@ export default function Report() {
         setDetails('');
         setPhoneNumber('');
         setReportSentSuccess(true);
-        setReports(res.data);
+        setSuccessfulReports(res.data);
         setTicketNum(res.data.ticketNum);
       })
       .catch((err) => {
@@ -151,6 +156,7 @@ export default function Report() {
         console.log(err);
         setReportSentSuccess(false);
         setErrorMessage(reportContent.reportFailure[lang]);
+        if (err.code === 'ERR_NETWORK') setOfflineReports(formData);
       });
   };
 
