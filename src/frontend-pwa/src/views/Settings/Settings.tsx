@@ -7,7 +7,6 @@
 import { useState } from 'react';
 import { Slider, Toggle } from '../../components/common';
 import { NavButton } from '../../components/appNav';
-import { BannerTip } from '../../components/utility';
 import {
   SettingsContainer,
   Section,
@@ -28,7 +27,6 @@ export default function Settings() {
   const [locationRangeValue, setLocationRangeValue] = useState(state.settings.location_range);
   const [offlineToggleValue, setOfflineToggleValue] = useState(state.settings.offline_mode);
   const [analyticsToggleValue, setAnalyticsToggleValue] = useState(state.settings.analytics_opt_in);
-  const [toolTip, setToolTip] = useState('');
   const [lang, setLang] = useState(state.settings.lang || 'eng');
   /**
    * @summary Handles the change of the Location Range slider
@@ -80,11 +78,6 @@ export default function Settings() {
 
   return (
     <SettingsWrapper>
-      <BannerTip
-        seconds={15}
-        text={toolTip}
-        setText={setToolTip}
-      />
       <SettingsContainer>
         <Section>
           <h1>{SettingsContent.settingsTitle[lang]}</h1>
@@ -94,7 +87,6 @@ export default function Settings() {
             <Title>{SettingsContent.language[lang]}</Title>
             <MoreInfoButton
               tip={SettingsContent.languageToolTip[lang]}
-              setText={setToolTip}
             />
           </TitleWrapper>
           <StyledSelect onChange={handleLang} defaultValue={lang}>
@@ -109,7 +101,6 @@ export default function Settings() {
               <Title>{SettingsContent.locationRange[lang]}</Title>
               <MoreInfoButton
                 tip={SettingsContent.locationToolTip[lang]}
-                setText={setToolTip}
               />
             </TitleWrapper>
             <Slider
@@ -126,7 +117,6 @@ export default function Settings() {
             <Title>{SettingsContent.offlineMode[lang]}</Title>
             <MoreInfoButton
               tip={SettingsContent.offlineModeToolTip[lang]}
-              setText={setToolTip}
             />
           </TitleWrapper>
           <Toggle
@@ -140,7 +130,6 @@ export default function Settings() {
             <Title>{SettingsContent.analytics[lang]}</Title>
             <MoreInfoButton
               tip={SettingsContent.analyticsToolTip[lang]}
-              setText={setToolTip}
             />
           </TitleWrapper>
           <Toggle

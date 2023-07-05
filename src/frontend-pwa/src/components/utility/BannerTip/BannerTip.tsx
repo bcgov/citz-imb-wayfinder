@@ -12,28 +12,22 @@ import {
   StyledToolTip,
 } from './bannerTip.style';
 import clearicon from '/iconography/ClearWhite.svg';
+import useAppService from '../../../services/app/useAppService';
 
-type BannerProps = {
-  text: string;
-  setText: (text: any) => void;
-  seconds: number
-}
+function BannerTip() {
+  const { state, setToolTipText } = useAppService();
+  const seconds = 15;
 
-function BannerTip({
-  text,
-  setText,
-  seconds,
-}: BannerProps) {
-  const handleClear = () => { setText(''); };
+  const handleClear = () => { setToolTipText(''); };
   useEffect(() => {
-    if (text) {
+    if (state.toolTipText) {
       setTimeout(handleClear, (seconds * 1000));
     }
   });
   return (
-    <BannerContainer disabled={!text}>
+    <BannerContainer disabled={!state.toolTipText}>
       <StyledToolTip>
-        {text}
+        {state.toolTipText}
       </StyledToolTip>
       <ExitCont>
         <Exit

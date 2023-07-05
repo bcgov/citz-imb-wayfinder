@@ -7,6 +7,7 @@ const {
   SET_EULA,
   SET_SETTINGS,
   SET_REPORTS,
+  SET_TOOL_TIP_TEXT,
 } = AppActionType;
 
 export type AppAction = {
@@ -22,6 +23,7 @@ export const initialState = {
   eulaState: false,
   settings: {},
   reports: {},
+  toolTipText: '',
 };
 
 /**
@@ -45,6 +47,8 @@ export const reducer = (state: object, action: AppAction): object => {
       return { ...state, settings: action.payload };
     case SET_REPORTS:
       return { ...state, reports: action.payload };
+    case SET_TOOL_TIP_TEXT:
+      return { ...state, toolTipText: action.payload };
     default:
       throw new Error();
   }
