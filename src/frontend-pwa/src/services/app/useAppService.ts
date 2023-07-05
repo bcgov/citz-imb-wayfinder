@@ -9,6 +9,7 @@ import SettingsObject from '../../Type/SettingsObject';
 import Analytic from '../../Type/Analytic';
 import Report from '../../Type/Report';
 import { SendAnalytics } from '../../utils/AppAnalytics';
+import LocalStorageSettingsCheck from '../../utils/LocalStorageSettingsCheck';
 
 const {
   SET_APP_DATA,
@@ -142,7 +143,8 @@ const useAppService = () => {
      * @author  Dallas Richmond
      */
     const updateSettings = () => {
-      if (localStorageKeyExists(constants.SETTINGS_KEY)) {
+      if (localStorageKeyExists(constants.SETTINGS_KEY)
+      && LocalStorageSettingsCheck(getDataFromLocalStorage(constants.SETTINGS_KEY))) {
         dispatch(
           { type: SET_SETTINGS, payload: getDataFromLocalStorage(constants.SETTINGS_KEY) },
         );
