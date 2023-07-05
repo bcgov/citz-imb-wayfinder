@@ -18,6 +18,7 @@ const {
   SET_EULA,
   SET_SETTINGS,
   SET_REPORTS,
+  SET_TOOL_TIP_TEXT,
 } = AppActionType;
 
 /**
@@ -221,6 +222,10 @@ const useAppService = () => {
       dispatch({ type: SET_REPORTS, payload: getDataFromLocalStorage(constants.REPORTS_KEY) });
     };
 
+    const setToolTipText = (text: string) => {
+      dispatch({ type: SET_TOOL_TIP_TEXT, payload: text });
+    };
+
     return {
       setAppData,
       setCurrentLocation,
@@ -231,6 +236,7 @@ const useAppService = () => {
       setSettings,
       setAnalytics,
       setReports,
+      setToolTipText,
       state,
     };
   }, [state, dispatch]);

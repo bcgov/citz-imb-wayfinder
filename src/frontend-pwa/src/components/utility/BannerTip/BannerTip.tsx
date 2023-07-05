@@ -2,7 +2,7 @@
  * @summary Banner for giving Tips and info to users, self destructs after period of time
  *          Can be closed early with exit button
  * @type    {BannerProps}
- * @author  LocalNewsTV
+ * @author  LocalNewsTV, Dallas Richmond
  */
 import { useEffect } from 'react';
 import {
@@ -12,28 +12,27 @@ import {
   StyledToolTip,
 } from './bannerTip.style';
 import clearicon from '/iconography/ClearWhite.svg';
+import useAppService from '../../../services/app/useAppService';
 
 type BannerProps = {
-  text: string;
-  setText: (text: any) => void;
   seconds: number
 }
 
 function BannerTip({
-  text,
-  setText,
   seconds,
 }: BannerProps) {
-  const handleClear = () => { setText(''); };
+  const { state, setToolTipText } = useAppService();
+
+  const handleClear = () => { setToolTipText(''); };
   useEffect(() => {
-    if (text) {
+    if (state.toolTipText) {
       setTimeout(handleClear, (seconds * 1000));
     }
   });
   return (
-    <BannerContainer disabled={!text}>
+    <BannerContainer disabled={!state.toolTipText}>
       <StyledToolTip>
-        {text}
+        {state.toolTipText}
       </StyledToolTip>
       <ExitCont>
         <Exit

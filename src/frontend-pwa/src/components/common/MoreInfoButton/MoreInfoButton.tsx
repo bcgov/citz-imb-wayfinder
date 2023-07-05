@@ -1,24 +1,24 @@
 /**
  * @summary Companion Component for BannerTip.
  *          used to trigger State used by BannerTip to display
- * @author  LocalNewsTV
+ * @author  LocalNewsTV, Dallas Richmond
  */
 import { Image, ImageContainer } from './moreInfoButton.style';
 import info from '/iconography/MoreInfo.svg';
+import useAppService from '../../../services/app/useAppService';
 
 type MoreInfoProps = {
   tip: string;
-  setText: (tip: any) => void;
 }
 function MoreInfoButton({
   tip,
-  setText,
 }:MoreInfoProps) {
+  const { setToolTipText } = useAppService();
   return (
     <ImageContainer>
       <Image
         src={info}
-        onClick={() => setText(tip)}
+        onClick={() => setToolTipText(tip)}
       />
     </ImageContainer>
   );

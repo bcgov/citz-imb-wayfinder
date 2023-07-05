@@ -7,7 +7,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Header, Footer } from './components/common';
-import { SplashScreen } from './components/utility';
+import { SplashScreen, BannerTip } from './components/utility';
 import Eula from './views/Eula/Eula';
 import ViewRouter from './routes/ViewRouter';
 import useAppService from './services/app/useAppService';
@@ -27,6 +27,9 @@ function App() {
       ) : (
         <>
           <Header />
+          <BannerTip
+            seconds={15}
+          />
           {!state.eulaAccepted
             ? <Eula />
             : (
