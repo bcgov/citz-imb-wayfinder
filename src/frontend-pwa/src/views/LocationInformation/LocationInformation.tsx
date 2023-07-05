@@ -6,6 +6,7 @@
  *          Analytics sent or cached if offline
  * @author LocalNewsTV, Dallas Richmond
  */
+import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import useAppService from '../../services/app/useAppService';
 import { SingleLocation } from '../../Type';
@@ -31,34 +32,38 @@ export default function LocationInformation() {
   const { service, locale } = useParams();
   const locations = state.appData?.data ? state.appData.data[`${service}Locations`] : [];
   const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
+
+  useEffect(() => {
+    if (state.settings.analytics_opt_in && geolocationKnown && location) {
+      const latitude = state.currentLocation.lat;
+      const longitude = state.currentLocation.long;
+      const analytics = {
+        latitude,
+        longitude,
+        usage: {
+          search: location.locale,
+          function: 'find location',
+        },
+      };
+
+      if (state.settings.offline_mode) {
+        setAnalytics(false, analytics);
+      } else {
+        OnlineCheck()
+          .then((Online) => {
+            setAnalytics(Online, analytics);
+          });
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   if (!locations) {
     return <NotFound />;
   }
   const location: SingleLocation = locations.filter(
     (element: SingleLocation) => element.locale.toLowerCase() === locale?.toLowerCase(),
   )[0];
-
-  if (state.settings.analytics_opt_in && geolocationKnown && location) {
-    const latitude = state.currentLocation.lat;
-    const longitude = state.currentLocation.long;
-    const analytics = {
-      latitude,
-      longitude,
-      usage: {
-        search: location.locale,
-        function: 'find location',
-      },
-    };
-
-    if (state.settings.offline_mode) {
-      setAnalytics(false, analytics);
-    } else {
-      OnlineCheck()
-        .then((Online) => {
-          setAnalytics(Online, analytics);
-        });
-    }
-  }
 
   return (
     <ViewContainer>
