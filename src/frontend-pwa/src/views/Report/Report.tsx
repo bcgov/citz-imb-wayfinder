@@ -2,7 +2,7 @@
 /**
  * @summary Sends validated form and geolocation data to the API for
  *          consumption, or stores in localStorage while offline
- * @author  TylerMaloney
+ * @author  TylerMaloney, Dallas Richmond
  */
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
@@ -207,14 +207,14 @@ export default function Report() {
 
             {reportSentSuccess
               ? (
-                <SuccessP>
-                  <div>
+                <>
+                  <SuccessP>
                     {reportContent.reportSentSuccess[lang]}
-                  </div>
-                  <div>
+                  </SuccessP>
+                  <SuccessP>
                     {`Ticket Number: ${ticketNum}`}
-                  </div>
-                </SuccessP>
+                  </SuccessP>
+                </>
               )
               : (<ErrorP>{errorMessage}</ErrorP>)}
           </Section>
