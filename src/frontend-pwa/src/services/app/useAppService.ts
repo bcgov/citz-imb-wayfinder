@@ -222,6 +222,12 @@ const useAppService = () => {
       dispatch({ type: SET_REPORTS, payload: getDataFromLocalStorage(constants.REPORTS_KEY) });
     };
 
+    /**
+     * @summary Sets text state to be used by BannerTip and MoreInfoButton components
+     * @param text is a string to be displayed on the BannerTip component
+     * @type {( text: string )}
+     * @author Dallas Richmond
+     */
     const setToolTipText = (text: string) => {
       dispatch({ type: SET_TOOL_TIP_TEXT, payload: text });
     };
