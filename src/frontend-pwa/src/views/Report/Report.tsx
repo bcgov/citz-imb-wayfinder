@@ -133,14 +133,13 @@ export default function Report() {
     }
 
     await axios.post(`${constants.BACKEND_URL}/api/report`, formData)
-      .then((data) => {
+      .then((res) => {
         setErrorMessage('');
         setEventType('');
         setDetails('');
         setPhoneNumber('');
         setReportSentSuccess(true);
-        console.log('Report Data: ', data);
-        setReports(data);
+        setReports(res.data);
       })
       .catch((err) => {
         // eslint-disable-next-line no-console

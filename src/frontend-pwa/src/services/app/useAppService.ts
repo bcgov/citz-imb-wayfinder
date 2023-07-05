@@ -7,6 +7,7 @@ import AppActionType from './AppActions';
 import { saveDataToLocalStorage, getDataFromLocalStorage, localStorageKeyExists } from '../../utils/AppLocalStorage';
 import SettingsObject from '../../Type/SettingsObject';
 import Analytic from '../../Type/Analytic';
+import Report from '../../Type/Report';
 import { SendAnalytics } from '../../utils/AppAnalytics';
 
 const {
@@ -185,12 +186,10 @@ const useAppService = () => {
 
     /**
      * @summary Sends analytic data to database if online, else stores in localstorage
-     * @param analytics is an object containing location and usage data
-     * @type {( Analytic )}
-     * @author Dallas Richmond
+     * @param   analytics is an object containing location and usage data
+     * @type    {( Analytic )}
+     * @author  Dallas Richmond
      */
-    // TODO Add a check if analytic data is a report. If so, save as report data
-    // and add to state
     const setAnalytics = (online: boolean, analytics: Analytic) => {
       if (online) {
         SendAnalytics(analytics);
@@ -203,11 +202,21 @@ const useAppService = () => {
       }
     };
 
-    const setReports = (report: any) => {
+    /**
+     * @summary Saves successful reports to local storage and updates report state
+     * @param   report is the response data from a successful post to the report endpoint
+     * @type    {( report: Report )}
+     * @author  Dallas Richmond
+     */
+    const setReports = (report: Report) => {
       if (localStorageKeyExists(constants.REPORTS_KEY)) {
-        saveDataToLocalStorage(constants.REPORTS_KEY, report);
-        dispatch({ type: SET_REPORTS, payload: report });
+        const data = getDataFromLocalStorage(constants.REPORTS_KEY);
+        data.push(report);
+        saveDataToLocalStorage(constants.REPORTS_KEY, data);
+      } else {
+        saveDataToLocalStorage(constants.REPORTS_KEY, [report]);
       }
+      dispatch({ type: SET_REPORTS, payload: getDataFromLocalStorage(constants.REPORTS_KEY) });
     };
 
     return {
