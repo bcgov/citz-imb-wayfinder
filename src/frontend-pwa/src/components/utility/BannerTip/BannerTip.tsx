@@ -16,11 +16,12 @@ import useAppService from '../../../services/app/useAppService';
 
 function BannerTip() {
   const { state, setToolTipText } = useAppService();
+  const seconds = 15;
 
   const handleClear = () => { setToolTipText(''); };
   useEffect(() => {
     if (state.toolTipText) {
-      setTimeout(handleClear, (15000));
+      setTimeout(handleClear, (seconds * 1000));
     }
   });
   return (
