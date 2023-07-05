@@ -171,7 +171,7 @@ export default function Report() {
             >
               <option value="">{reportContent.eventTypeOptionLabel[lang]}</option>
               {reportContent.reportOptions[lang].map((event: string, index: number) => (
-                <option value={reportContent.reportOptions[lang][index]} key={index}>
+                <option value={reportContent.reportOptions.eng[index]} key={index}>
                   {event}
                 </option>
               ))}
