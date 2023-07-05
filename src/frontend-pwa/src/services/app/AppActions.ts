@@ -5,6 +5,7 @@ enum AppActionType {
   SET_CURRENT_LOCATION = 'SET_CURRENT_LOCATION',
   SET_EULA = 'SET_EULA',
   SET_SETTINGS = 'SET_SETTINGS',
+  SET_REPORTS = 'SET_REPORTS',
 }
 
 export default AppActionType;

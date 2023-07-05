@@ -7,7 +7,9 @@ import AppActionType from './AppActions';
 import { saveDataToLocalStorage, getDataFromLocalStorage, localStorageKeyExists } from '../../utils/AppLocalStorage';
 import SettingsObject from '../../Type/SettingsObject';
 import Analytic from '../../Type/Analytic';
+import Report from '../../Type/Report';
 import { SendAnalytics } from '../../utils/AppAnalytics';
+import LocalStorageSettingsCheck from '../../utils/LocalStorageSettingsCheck';
 
 const {
   SET_APP_DATA,
@@ -15,6 +17,7 @@ const {
   SET_CURRENT_LOCATION,
   SET_EULA,
   SET_SETTINGS,
+  SET_REPORTS,
 } = AppActionType;
 
 /**
@@ -140,7 +143,8 @@ const useAppService = () => {
      * @author  Dallas Richmond
      */
     const updateSettings = () => {
-      if (localStorageKeyExists(constants.SETTINGS_KEY)) {
+      if (localStorageKeyExists(constants.SETTINGS_KEY)
+      && LocalStorageSettingsCheck(getDataFromLocalStorage(constants.SETTINGS_KEY))) {
         dispatch(
           { type: SET_SETTINGS, payload: getDataFromLocalStorage(constants.SETTINGS_KEY) },
         );
@@ -184,12 +188,10 @@ const useAppService = () => {
 
     /**
      * @summary Sends analytic data to database if online, else stores in localstorage
-     * @param analytics is an object containing location and usage data
-     * @type {( Analytic )}
-     * @author Dallas Richmond
+     * @param   analytics is an object containing location and usage data
+     * @type    {( Analytic )}
+     * @author  Dallas Richmond
      */
-    // TODO Add a check if analytic data is a report. If so, save as report data
-    // and add to state
     const setAnalytics = (online: boolean, analytics: Analytic) => {
       if (online) {
         SendAnalytics(analytics);
@@ -202,6 +204,23 @@ const useAppService = () => {
       }
     };
 
+    /**
+     * @summary Saves successful reports to local storage and updates report state
+     * @param   report is the response data from a successful post to the report endpoint
+     * @type    {( report: Report )}
+     * @author  Dallas Richmond
+     */
+    const setReports = (report: Report) => {
+      if (localStorageKeyExists(constants.REPORTS_KEY)) {
+        const data = getDataFromLocalStorage(constants.REPORTS_KEY);
+        data.push(report);
+        saveDataToLocalStorage(constants.REPORTS_KEY, data);
+      } else {
+        saveDataToLocalStorage(constants.REPORTS_KEY, [report]);
+      }
+      dispatch({ type: SET_REPORTS, payload: getDataFromLocalStorage(constants.REPORTS_KEY) });
+    };
+
     return {
       setAppData,
       setCurrentLocation,
@@ -211,6 +230,7 @@ const useAppService = () => {
       updateSettings,
       setSettings,
       setAnalytics,
+      setReports,
       state,
     };
   }, [state, dispatch]);

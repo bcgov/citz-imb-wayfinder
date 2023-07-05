@@ -6,6 +6,7 @@ const {
   SET_CURRENT_LOCATION,
   SET_EULA,
   SET_SETTINGS,
+  SET_REPORTS,
 } = AppActionType;
 
 export type AppAction = {
@@ -20,6 +21,7 @@ export const initialState = {
   currentLocation: {},
   eulaState: false,
   settings: {},
+  reports: {},
 };
 
 /**
@@ -41,6 +43,8 @@ export const reducer = (state: object, action: AppAction): object => {
       return { ...state, eulaAccepted: action.payload };
     case SET_SETTINGS:
       return { ...state, settings: action.payload };
+    case SET_REPORTS:
+      return { ...state, reports: action.payload };
     default:
       throw new Error();
   }

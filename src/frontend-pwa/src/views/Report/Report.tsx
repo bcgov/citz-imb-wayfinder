@@ -2,7 +2,7 @@
 /**
  * @summary Sends validated form and geolocation data to the API for
  *          consumption, or stores in localStorage while offline
- * @author  TylerMaloney
+ * @author  TylerMaloney, Dallas Richmond
  */
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
@@ -36,7 +36,8 @@ export default function Report() {
   const [errorMessage, setErrorMessage] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
   const [reportSentSuccess, setReportSentSuccess] = useState(false);
-  const { state, setAnalytics } = useAppService();
+  const [ticketNum, setTicketNum] = useState(null);
+  const { state, setAnalytics, setReports } = useAppService();
   const { lang } = state.settings;
   const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
   const latitude = state.currentLocation ? state.currentLocation.lat : 49.2827;
@@ -133,12 +134,14 @@ export default function Report() {
     }
 
     await axios.post(`${constants.BACKEND_URL}/api/report`, formData)
-      .then(() => {
+      .then((res) => {
         setErrorMessage('');
         setEventType('');
         setDetails('');
         setPhoneNumber('');
         setReportSentSuccess(true);
+        setReports(res.data);
+        setTicketNum(res.data.ticketNum);
       })
       .catch((err) => {
         // eslint-disable-next-line no-console
@@ -168,7 +171,7 @@ export default function Report() {
             >
               <option value="">{reportContent.eventTypeOptionLabel[lang]}</option>
               {reportContent.reportOptions[lang].map((event: string, index: number) => (
-                <option value={reportContent.reportOptions[lang][index]} key={index}>
+                <option value={reportContent.reportOptions.eng[index]} key={index}>
                   {event}
                 </option>
               ))}
@@ -203,7 +206,9 @@ export default function Report() {
             />
 
             {reportSentSuccess
-              ? <SuccessP>{reportContent.reportSentSuccess[lang]}</SuccessP>
+              ? (
+                <SuccessP>{`${reportContent.reportSentSuccess[lang]}: #${ticketNum}`}</SuccessP>
+              )
               : (<ErrorP>{errorMessage}</ErrorP>)}
           </Section>
           <ButtonSection>

@@ -6,6 +6,7 @@ const constants = {
   EULA_ACCEPTED_KEY: 'eulaAccepted',
   SETTINGS_KEY: 'settings',
   OFFLINE_ANALYTIC_KEY: 'analyticsOffline',
+  REPORTS_KEY: 'reports',
 };
 
 export default constants;

@@ -257,8 +257,8 @@ export const reportContent: ContentMap = {
     fr: 'Numéro de téléphone (facultatif):',
   },
   reportSentSuccess: {
-    eng: 'Report published',
-    fr: 'Rapport publié',
+    eng: 'Report sent',
+    fr: 'Rapport envoyé',
   },
   reportFailure: {
     eng: 'Unable to submit report.',
