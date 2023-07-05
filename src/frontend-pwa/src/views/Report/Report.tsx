@@ -207,14 +207,7 @@ export default function Report() {
 
             {reportSentSuccess
               ? (
-                <>
-                  <SuccessP>
-                    {reportContent.reportSentSuccess[lang]}
-                  </SuccessP>
-                  <SuccessP>
-                    {`Ticket Number: ${ticketNum}`}
-                  </SuccessP>
-                </>
+                <SuccessP>{`${reportContent.reportSentSuccess[lang]}: #${ticketNum}`}</SuccessP>
               )
               : (<ErrorP>{errorMessage}</ErrorP>)}
           </Section>
