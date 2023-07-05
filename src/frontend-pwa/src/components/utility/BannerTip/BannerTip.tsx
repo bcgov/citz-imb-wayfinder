@@ -14,19 +14,13 @@ import {
 import clearicon from '/iconography/ClearWhite.svg';
 import useAppService from '../../../services/app/useAppService';
 
-type BannerProps = {
-  seconds: number
-}
-
-function BannerTip({
-  seconds,
-}: BannerProps) {
+function BannerTip() {
   const { state, setToolTipText } = useAppService();
 
   const handleClear = () => { setToolTipText(''); };
   useEffect(() => {
     if (state.toolTipText) {
-      setTimeout(handleClear, (seconds * 1000));
+      setTimeout(handleClear, (15000));
     }
   });
   return (

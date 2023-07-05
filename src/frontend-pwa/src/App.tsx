@@ -27,9 +27,7 @@ function App() {
       ) : (
         <>
           <Header />
-          <BannerTip
-            seconds={15}
-          />
+          <BannerTip />
           {!state.eulaAccepted
             ? <Eula />
             : (
