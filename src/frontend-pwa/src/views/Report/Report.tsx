@@ -36,7 +36,7 @@ export default function Report() {
   const [errorMessage, setErrorMessage] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
   const [reportSentSuccess, setReportSentSuccess] = useState(false);
-  const { state, setAnalytics } = useAppService();
+  const { state, setAnalytics, setReports } = useAppService();
   const { lang } = state.settings;
   const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
   const latitude = state.currentLocation ? state.currentLocation.lat : 49.2827;
@@ -133,12 +133,14 @@ export default function Report() {
     }
 
     await axios.post(`${constants.BACKEND_URL}/api/report`, formData)
-      .then(() => {
+      .then((data) => {
         setErrorMessage('');
         setEventType('');
         setDetails('');
         setPhoneNumber('');
         setReportSentSuccess(true);
+        console.log('Report Data: ', data);
+        setReports(data);
       })
       .catch((err) => {
         // eslint-disable-next-line no-console

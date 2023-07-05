@@ -15,6 +15,7 @@ const {
   SET_CURRENT_LOCATION,
   SET_EULA,
   SET_SETTINGS,
+  SET_REPORTS,
 } = AppActionType;
 
 /**
@@ -202,6 +203,13 @@ const useAppService = () => {
       }
     };
 
+    const setReports = (report: any) => {
+      if (localStorageKeyExists(constants.REPORTS_KEY)) {
+        saveDataToLocalStorage(constants.REPORTS_KEY, report);
+        dispatch({ type: SET_REPORTS, payload: report });
+      }
+    };
+
     return {
       setAppData,
       setCurrentLocation,
@@ -211,6 +219,7 @@ const useAppService = () => {
       updateSettings,
       setSettings,
       setAnalytics,
+      setReports,
       state,
     };
   }, [state, dispatch]);
