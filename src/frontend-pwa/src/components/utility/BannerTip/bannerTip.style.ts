@@ -47,6 +47,4 @@ export const Exit = styled.img`
 `;
 export const ExitCont = styled.div`
   margin: 0;
-  width: 100vw;
-  height: 100vh;
 `;
