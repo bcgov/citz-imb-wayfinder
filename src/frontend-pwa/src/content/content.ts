@@ -475,3 +475,42 @@ export const mappingContent: ContentMap = {
     fr: 'Numéro de téléphone: ',
   },
 };
+
+export const reportHistoryContent: ContentMap = {
+  historyHeader: {
+    eng: 'Report History',
+    fr: '',
+  },
+  headers: {
+    eng: [
+      'Date',
+      'Event Type',
+      '',
+    ],
+    fr: [
+      'Date',
+      'Type d\'événement',
+      '',
+    ],
+  },
+  detailsTitle: {
+    eng: 'Details',
+    fr: '',
+  },
+  eventTypeTitle: {
+    eng: 'Details',
+    fr: '',
+  },
+  locationTitle: {
+    eng: 'Report Location',
+    fr: '',
+  },
+  ticketNumTitle: {
+    eng: 'Ticket #',
+    fr: '#',
+  },
+  submitTitle: {
+    eng: 'Date Submitted',
+    fr: '',
+  },
+};
