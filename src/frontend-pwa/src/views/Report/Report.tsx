@@ -36,6 +36,7 @@ export default function Report() {
   const [errorMessage, setErrorMessage] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
   const [reportSentSuccess, setReportSentSuccess] = useState(false);
+  const [ticketNum, setTicketNum] = useState(null);
   const { state, setAnalytics, setReports } = useAppService();
   const { lang } = state.settings;
   const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
@@ -140,6 +141,7 @@ export default function Report() {
         setPhoneNumber('');
         setReportSentSuccess(true);
         setReports(res.data);
+        setTicketNum(res.data.ticketNum);
       })
       .catch((err) => {
         // eslint-disable-next-line no-console
@@ -204,7 +206,16 @@ export default function Report() {
             />
 
             {reportSentSuccess
-              ? <SuccessP>{reportContent.reportSentSuccess[lang]}</SuccessP>
+              ? (
+                <SuccessP>
+                  <div>
+                    {reportContent.reportSentSuccess[lang]}
+                  </div>
+                  <div>
+                    {`Ticket Number: ${ticketNum}`}
+                  </div>
+                </SuccessP>
+              )
               : (<ErrorP>{errorMessage}</ErrorP>)}
           </Section>
           <ButtonSection>
