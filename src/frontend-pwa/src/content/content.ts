@@ -306,6 +306,10 @@ export const reportContent: ContentMap = {
     eng: 'Submit',
     fr: 'Soumettre',
   },
+  history: {
+    eng: 'History',
+    fr: 'Histoire',
+  },
 };
 
 export const footerContent: ContentMap = {
@@ -469,5 +473,64 @@ export const mappingContent: ContentMap = {
   phone: {
     eng: 'Phone Number: ',
     fr: 'Numéro de téléphone: ',
+  },
+};
+
+export const reportHistoryContent: ContentMap = {
+  historyHeader: {
+    eng: 'Report History',
+    fr: 'Historique des rapports',
+  },
+  headers: {
+    eng: [
+      'Date',
+      'Event Type',
+      '',
+    ],
+    fr: [
+      'Date',
+      'Type d\'événement',
+      '',
+    ],
+  },
+  noReports: {
+    eng: 'No reports in history.',
+    fr: 'Aucun rapport dans l\'historique.',
+  },
+  detailsTitle: {
+    eng: 'Details:',
+    fr: 'Détails:',
+  },
+  eventTypeTitle: {
+    eng: 'Event Type:',
+    fr: 'Type d\'événement:',
+  },
+  locationTitle: {
+    eng: 'Report Location:',
+    fr: 'Lieu du rapport:',
+  },
+  locationTip: {
+    eng: 'Here are the recorded geographical coordinates (latitude and longitude) when your report was submitted.',
+    fr: 'Voici les coordonnées géographiques enregistrées (latitude et longitude) lorsque votre rapport a été soumis.',
+  },
+  ticketNumTitle: {
+    eng: 'Ticket #:',
+    fr: 'Numéro de ticket#:',
+  },
+  ticketNumTip: {
+    eng: 'This is the reference number for your submitted report.',
+    fr: 'Il s\'agit du numéro de référence de votre rapport qui a été soumis.',
+  },
+  submitTitle: {
+    eng: 'Date Submitted:',
+    fr: 'Date de soumission:',
+  },
+  placeholder: {
+    eng: 'Report details...',
+    fr: 'Détails du rapport...',
+  },
+  noValue: {
+    eng: 'N/A',
+    fr: 'N/A',
   },
 };

@@ -4,6 +4,7 @@
  *          consumption, or stores in localStorage while offline
  * @author  TylerMaloney, Dallas Richmond
  */
+import { NavLink } from 'react-router-dom';
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { Button } from '../../components/common';
@@ -20,6 +21,8 @@ import {
   StyledCharacterCounter,
   ErrorP,
   SuccessP,
+  HeaderContainer,
+  StyledHeaderTwo,
 } from './report.styles';
 import constants from '../../constants/Constants';
 import useAppService from '../../services/app/useAppService';
@@ -159,7 +162,17 @@ export default function Report() {
     <form onSubmit={handleSubmit}>
       <StyledReportOuterDiv>
         <StyledReportContainer>
-          <h2>{reportContent.reportLabel[lang]}</h2>
+          <HeaderContainer>
+            <StyledHeaderTwo>{reportContent.reportLabel[lang]}</StyledHeaderTwo>
+            <NavLink to="/report/history">
+              <Button
+                text={reportContent.history[lang]}
+                size="sm"
+                variant="primary"
+                disabled={false}
+              />
+            </NavLink>
+          </HeaderContainer>
           <Section>
             <StyledP>{reportContent.eventTypeLabel[lang]}</StyledP>
             <StyledSelect

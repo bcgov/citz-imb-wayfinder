@@ -16,17 +16,13 @@ import {
 } from './aboutcontact.styles';
 import pkg from '../../../package.json';
 import { aboutContent } from '../../content/content';
+import contactInfo from '../../content/contactInfo';
 import useAppService from '../../services/app/useAppService';
 
 export default function AboutContact() {
   const { state } = useAppService();
   const { lang } = state.settings;
-  const contact = {
-    email: 'wayfinderdevelopers@gmail.com',
-    repo: 'https://github.com/bcgov/citz-imb-wayfinder',
-    mailing: '4000 Seymour, Victoria, V8X\u00A04S7',
-    team: 'Team Wayfinder',
-  };
+  
   return (
     <AboutContainer>
       <ContentContainer>
@@ -77,15 +73,15 @@ export default function AboutContact() {
         <StyledAddress>
           {aboutContent.aboutTitle[lang]}
           :&nbsp;
-          <Link href={`mailto:${contact.email}?subject='Wayfinder App'`}>{contact.team}</Link>
+          <Link href={`mailto:${contactInfo.email}?subject='Wayfinder App'`}>{contactInfo.team}</Link>
           <br />
           {aboutContent.mailingAddressTitle[lang]}
           :&nbsp;
-          {contact.mailing}
+          {contactInfo.mailing}
           <br />
           {aboutContent.githubRepo[lang]}
           :&nbsp;
-          <Link href={contact.repo}>{aboutContent.viewIt[lang]}</Link>
+          <Link href={contactInfo.repo}>{aboutContent.viewIt[lang]}</Link>
         </StyledAddress>
       </ContentContainer>
     </AboutContainer>

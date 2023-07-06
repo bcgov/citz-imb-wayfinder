@@ -3,12 +3,12 @@
  * @author LocalNewsTV
  */
 type Report = {
-  latitude: Number;
-  longitude: Number;
+  latitude: number;
+  longitude: number;
   time: Date;
-  eventType: String;
-  details: String
-  phone?: String
-  ticketNum?: String
+  eventType: string;
+  details: string
+  phone?: string
+  ticketNum?: string
 }
 export default Report;
