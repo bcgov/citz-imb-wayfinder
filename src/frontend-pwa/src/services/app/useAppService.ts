@@ -224,7 +224,7 @@ const useAppService = () => {
 
     /**
      * @summary Saves unsuccessful reports to local storage
-     * @param   report is a user event to be saved to local storage
+     * @param   report is a user submitted Report object to be saved to local storage
      * @type    {( report: Report )}
      * @author  Dallas Richmond
      */
