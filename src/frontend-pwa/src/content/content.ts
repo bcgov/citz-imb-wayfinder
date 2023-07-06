@@ -264,6 +264,10 @@ export const reportContent: ContentMap = {
     eng: 'Unable to submit report.',
     fr: 'Impossible de soumettre le rapport.',
   },
+  reportNetworkFailure: {
+    eng: 'Unable to submit report. The report is saved and will be sent when the device is back online.',
+    fr: 'Impossible de soumettre le rapport. Le rapport est enregistré et sera envoyé lorsque l\'appareil sera de nouveau en ligne.',
+  },
   detailsLabel: {
     eng: 'Event details:',
     fr: 'Détails de l\'événement :',

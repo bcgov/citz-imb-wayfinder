@@ -155,8 +155,12 @@ export default function Report() {
         // eslint-disable-next-line no-console
         console.log(err);
         setReportSentSuccess(false);
-        setErrorMessage(reportContent.reportFailure[lang]);
-        if (err.code === 'ERR_NETWORK') setOfflineReports(formData);
+        if (err.code === 'ERR_NETWORK') {
+          setOfflineReports(formData);
+          setErrorMessage(reportContent.reportNetworkFailure[lang]);
+        } else {
+          setErrorMessage(reportContent.reportFailure[lang]);
+        }
       });
   };
 

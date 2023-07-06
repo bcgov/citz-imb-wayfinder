@@ -23,6 +23,7 @@ export default function SplashScreen() {
     setAppData,
     initializeEulaState,
     updateSettings,
+    setSuccessfulReports,
     state,
   } = useAppService();
 
@@ -51,7 +52,7 @@ export default function SplashScreen() {
         .then((Online) => {
           setAppData(Online);
           SendCachedAnalytics(Online);
-          SendCachedReports(Online);
+          SendCachedReports(Online, setSuccessfulReports);
         }).catch((error) => {
           console.error('Error: ', error);
         });

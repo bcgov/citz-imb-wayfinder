@@ -3,7 +3,6 @@ import axios from 'axios';
 import Report from '../Type/Report';
 import constants from '../constants/Constants';
 import { localStorageKeyExists, getDataFromLocalStorage, deleteLocalStorageKey } from './AppLocalStorage';
-import useAppService from '../services/app/useAppService';
 
 /**
  * @summary Function that posts the request to the report endpoint
@@ -11,9 +10,7 @@ import useAppService from '../services/app/useAppService';
  * @type    {( request: Report )}
  * @author  Dallas Richmond
  */
-export const SendReport = async (request: Report) => {
-  const { setSuccessfulReports } = useAppService();
-
+export const SendReport = async (request: Report, setSuccessfulReports: Function) => {
   await axios.post(`${constants.BACKEND_URL}/api/report`, request)
     .then((res) => {
       setSuccessfulReports(res.data);
@@ -27,14 +24,15 @@ export const SendReport = async (request: Report) => {
  * @summary Checks to see if there are cached reports in local storage.
  *          If so, they are sent and the key is deleted
  * @param   online is a boolean value that indicates that the device is online
- * @type    {( online: boolean )}
+ * @param   setSuccessfulReports is a function from the useAppService hook
+ * @type    {( online: boolean, setSuccessfulReports: Function )}
  * @author  Dallas Richmond
  */
-export const SendCachedReports = (online: boolean) => {
+export const SendCachedReports = (online: boolean, setSuccessfulReports: Function) => {
   if (online && localStorageKeyExists(constants.UNSENT_REPORTS_KEY)) {
     const data = getDataFromLocalStorage(constants.UNSENT_REPORTS_KEY);
     data.forEach((report: Report) => {
-      SendReport(report);
+      SendReport(report, setSuccessfulReports);
     });
     deleteLocalStorageKey(constants.UNSENT_REPORTS_KEY);
   }
