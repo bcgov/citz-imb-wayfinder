@@ -154,6 +154,7 @@ export default function Report() {
     if (state.settings.offline_mode) {
       setOfflineReports(formData);
       setErrorMessage(reportContent.reportNetworkFailure[lang]);
+      setReportSending(true);
     } else {
       await axios.post(`${constants.BACKEND_URL}/api/report`, formData)
         .then((res) => {
@@ -173,6 +174,7 @@ export default function Report() {
           }
         });
     }
+    setReportSending(false);
   };
 
   useEffect(() => {
