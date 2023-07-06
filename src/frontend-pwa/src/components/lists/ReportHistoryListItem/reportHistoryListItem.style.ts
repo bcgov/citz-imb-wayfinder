@@ -10,14 +10,9 @@ export const TableData = styled.td`
   border-bottom: 1px solid #ddd;
 `;
 
-export const DeleteTableData = styled.td`
-  display: flex;
-  justify-content: right;
-  align-items: center;
-`;
 export const DeleteIcon = styled.img`
   margin: 0;
-  padding: 0 0.5em;
+  height: 24pt;
 `;
 
 export const TableRow = styled.tr`
