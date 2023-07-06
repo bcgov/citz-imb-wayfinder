@@ -38,6 +38,7 @@ export default function Report() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
+  const [reportSending, setReportSending] = useState(false);
   const [reportSentSuccess, setReportSentSuccess] = useState(false);
   const [ticketNum, setTicketNum] = useState(null);
   const {
@@ -105,6 +106,13 @@ export default function Report() {
     setPhoneNumber(e.target.value);
   };
 
+  const clearFields = () => {
+    setErrorMessage('');
+    setEventType('');
+    setDetails('');
+    setPhoneNumber('');
+  };
+
   /**
    * @desc - Sends a "formData" object to the /report endpoint.
    *       - Form validity is determined externally through the useEffect below.
@@ -121,6 +129,8 @@ export default function Report() {
       phoneNumber,
       time: currentTime,
     };
+
+    clearFields();
 
     if (state.settings.analytics_opt_in && geolocationKnown) {
       const analytics = {
@@ -147,19 +157,17 @@ export default function Report() {
     } else {
       await axios.post(`${constants.BACKEND_URL}/api/report`, formData)
         .then((res) => {
-          setErrorMessage('');
-          setEventType('');
-          setDetails('');
-          setPhoneNumber('');
           setReportSentSuccess(true);
           setSuccessfulReports(res.data);
           setTicketNum(res.data.ticketNum);
+          setReportSending(true);
         })
         .catch((err) => {
           setReportSentSuccess(false);
           if (err.code === 'ERR_NETWORK') {
             setOfflineReports(formData);
             setErrorMessage(reportContent.reportNetworkFailure[lang]);
+            setReportSending(true);
           } else {
             setErrorMessage(reportContent.reportFailure[lang]);
           }
@@ -242,7 +250,7 @@ export default function Report() {
               text={reportContent.submit[lang]}
               variant="primary"
               size="md"
-              disabled={!isFormValid}
+              disabled={!reportSending && !isFormValid}
             />
           </ButtonSection>
         </StyledReportContainer>
