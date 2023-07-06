@@ -211,7 +211,7 @@ const useAppService = () => {
      * @type    {( report: Report )}
      * @author  Dallas Richmond
      */
-    const setReports = (report: Report) => {
+    const setSuccessfulReports = (report: Report) => {
       if (localStorageKeyExists(constants.REPORTS_KEY)) {
         const data = getDataFromLocalStorage(constants.REPORTS_KEY);
         data.push(report);
@@ -220,6 +220,22 @@ const useAppService = () => {
         saveDataToLocalStorage(constants.REPORTS_KEY, [report]);
       }
       dispatch({ type: SET_REPORTS, payload: getDataFromLocalStorage(constants.REPORTS_KEY) });
+    };
+
+    /**
+     * @summary Saves unsuccessful reports to local storage
+     * @param   report is a user submitted Report object to be saved to local storage
+     * @type    {( report: Report )}
+     * @author  Dallas Richmond
+     */
+    const setOfflineReports = (report: Report) => {
+      if (localStorageKeyExists(constants.UNSENT_REPORTS_KEY)) {
+        const data = getDataFromLocalStorage(constants.UNSENT_REPORTS_KEY);
+        data.push(report);
+        saveDataToLocalStorage(constants.UNSENT_REPORTS_KEY, data);
+      } else {
+        saveDataToLocalStorage(constants.UNSENT_REPORTS_KEY, [report]);
+      }
     };
 
     /**
@@ -241,8 +257,9 @@ const useAppService = () => {
       updateSettings,
       setSettings,
       setAnalytics,
-      setReports,
+      setSuccessfulReports,
       setToolTipText,
+      setOfflineReports,
       state,
     };
   }, [state, dispatch]);

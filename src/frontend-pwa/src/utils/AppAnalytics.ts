@@ -20,7 +20,6 @@ export const SendAnalytics = (request: Analytic) => {
  * @type    {( online: boolean )}
  * @author  Dallas Richmond
  */
-
 export const SendCachedAnalytics = (online: boolean) => {
   if (online && localStorageKeyExists(constants.OFFLINE_ANALYTIC_KEY)) {
     const data = getDataFromLocalStorage(constants.OFFLINE_ANALYTIC_KEY);

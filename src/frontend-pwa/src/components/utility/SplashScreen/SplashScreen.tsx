@@ -10,6 +10,7 @@ import { Spinner } from '../../common';
 import useAppService from '../../../services/app/useAppService';
 import OnlineCheck from '../../../utils/OnlineCheck';
 import { SendCachedAnalytics } from '../../../utils/AppAnalytics';
+import { SendCachedReports } from '../../../utils/AppReports';
 import {
   SplashScreenWrapper,
   Image,
@@ -22,6 +23,7 @@ export default function SplashScreen() {
     setAppData,
     initializeEulaState,
     updateSettings,
+    setSuccessfulReports,
     state,
   } = useAppService();
 
@@ -50,6 +52,7 @@ export default function SplashScreen() {
         .then((Online) => {
           setAppData(Online);
           SendCachedAnalytics(Online);
+          SendCachedReports(Online, setSuccessfulReports);
         }).catch((error) => {
           console.error('Error: ', error);
         });

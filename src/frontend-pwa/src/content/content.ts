@@ -264,6 +264,10 @@ export const reportContent: ContentMap = {
     eng: 'Unable to submit report.',
     fr: 'Impossible de soumettre le rapport.',
   },
+  reportNetworkFailure: {
+    eng: 'Offline: Report saved for future online submission.',
+    fr: 'Hors ligne : rapport enregistré pour une future soumission en ligne.',
+  },
   detailsLabel: {
     eng: 'Event details:',
     fr: 'Détails de l\'événement :',
