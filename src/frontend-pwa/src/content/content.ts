@@ -265,8 +265,8 @@ export const reportContent: ContentMap = {
     fr: 'Impossible de soumettre le rapport.',
   },
   reportNetworkFailure: {
-    eng: 'Offline: The report is saved and will be sent when the device is back online.',
-    fr: 'Hors ligne: Le rapport est enregistré et sera envoyé lorsque l\'appareil sera de nouveau en ligne.',
+    eng: 'Offline: Report saved for future online submission.',
+    fr: 'Hors ligne : rapport enregistré pour une future soumission en ligne.',
   },
   detailsLabel: {
     eng: 'Event details:',
