@@ -33,7 +33,7 @@ export const StyledReportContainer = styled.div`
     justify-content: center;
     display: flex;
     gap: 0.5em 0;
-    padding: 5em 7.5pt;
+    padding: 35pt 7.5pt;
     background-color: white;
     @media (min-width: ${mq.tablet}) {
         padding: 20px;
