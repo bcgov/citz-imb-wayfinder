@@ -7,6 +7,8 @@ import { localStorageKeyExists, getDataFromLocalStorage, deleteLocalStorageKey }
 /**
  * @summary Function that posts the request to the report endpoint
  * @param   request is a report to be sent to the report endpoint
+ * @param   setSuccessfulReports is a function from the useAppService hook
+ *          that saves successful reports to local storage
  * @type    {( request: Report )}
  * @author  Dallas Richmond
  */
@@ -25,6 +27,7 @@ export const SendReport = async (request: Report, setSuccessfulReports: Function
  *          If so, they are sent and the key is deleted
  * @param   online is a boolean value that indicates that the device is online
  * @param   setSuccessfulReports is a function from the useAppService hook
+ *          that saves successful reports to local storage
  * @type    {( online: boolean, setSuccessfulReports: Function )}
  * @author  Dallas Richmond
  */
