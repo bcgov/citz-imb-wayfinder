@@ -141,25 +141,30 @@ export default function Report() {
       }
     }
 
-    await axios.post(`${constants.BACKEND_URL}/api/report`, formData)
-      .then((res) => {
-        setErrorMessage('');
-        setEventType('');
-        setDetails('');
-        setPhoneNumber('');
-        setReportSentSuccess(true);
-        setSuccessfulReports(res.data);
-        setTicketNum(res.data.ticketNum);
-      })
-      .catch((err) => {
-        setReportSentSuccess(false);
-        if (err.code === 'ERR_NETWORK') {
-          setOfflineReports(formData);
-          setErrorMessage(reportContent.reportNetworkFailure[lang]);
-        } else {
-          setErrorMessage(reportContent.reportFailure[lang]);
-        }
-      });
+    if (state.settings.offline_mode) {
+      setOfflineReports(formData);
+      setErrorMessage(reportContent.reportNetworkFailure[lang]);
+    } else {
+      await axios.post(`${constants.BACKEND_URL}/api/report`, formData)
+        .then((res) => {
+          setErrorMessage('');
+          setEventType('');
+          setDetails('');
+          setPhoneNumber('');
+          setReportSentSuccess(true);
+          setSuccessfulReports(res.data);
+          setTicketNum(res.data.ticketNum);
+        })
+        .catch((err) => {
+          setReportSentSuccess(false);
+          if (err.code === 'ERR_NETWORK') {
+            setOfflineReports(formData);
+            setErrorMessage(reportContent.reportNetworkFailure[lang]);
+          } else {
+            setErrorMessage(reportContent.reportFailure[lang]);
+          }
+        });
+    }
   };
 
   useEffect(() => {
