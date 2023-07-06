@@ -152,8 +152,6 @@ export default function Report() {
         setTicketNum(res.data.ticketNum);
       })
       .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.log(err);
         setReportSentSuccess(false);
         if (err.code === 'ERR_NETWORK') {
           setOfflineReports(formData);
