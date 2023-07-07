@@ -22,17 +22,13 @@ import constants from '../../constants/Constants';
 import CalcDistance from '../../utils/CalcDistance';
 import {
   ContentContainer,
-  MapContainer,
   ViewContainer,
   ServiceListContainer,
-  StyledP,
 } from './bcservices.styles';
-import { locationContent } from '../../content/content';
 
 export default function BCServices() {
   const [searchQuery, setSearchQuery] = useState('');
   const { state } = useAppService();
-  const { lang } = state.settings;
   const services = state.appData?.data ? state.appData?.data.allServices : [];
   const locations = state.appData?.data ? [
     ...state.appData.data.serviceBCLocations,
@@ -57,20 +53,10 @@ export default function BCServices() {
   return (
     <ViewContainer>
       <ContentContainer>
-        {!state.settings.offline_mode && navigator.onLine
-          ? (
-            <Mapping
-              locations={filteredLocationSearch}
-              currentLocation={state.currentLocation}
-            />
-          )
-          : (
-            <MapContainer>
-              <StyledP>
-                {locationContent.unavailable[lang]}
-              </StyledP>
-            </MapContainer>
-          )}
+        <Mapping
+          locations={filteredLocationSearch}
+          currentLocation={state.currentLocation}
+        />
         <ServiceListContainer>
           <SearchBar
             query={searchQuery}

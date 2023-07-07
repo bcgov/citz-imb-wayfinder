@@ -8,6 +8,7 @@ const {
   SET_SETTINGS,
   SET_REPORTS,
   SET_TOOL_TIP_TEXT,
+  SET_ONLINE,
 } = AppActionType;
 
 export type AppAction = {
@@ -24,14 +25,15 @@ export const initialState = {
   settings: {},
   reports: {},
   toolTipText: '',
+  isOnline: false,
 };
 
 /**
  * @summary Handles app actions and returns the updated app state.
- * @param {object} state - The current app state.
- * @param {AppAction} action - The app action to be handled.
+ * @param   {object} state - The current app state.
+ * @param   {AppAction} action - The app action to be handled.
  * @returns {object} - The updated app state.
- * @author Dallas Richmond
+ * @author  Dallas Richmond
  */
 export const reducer = (state: object, action: AppAction): object => {
   switch (action.type) {
@@ -49,6 +51,8 @@ export const reducer = (state: object, action: AppAction): object => {
       return { ...state, reports: action.payload };
     case SET_TOOL_TIP_TEXT:
       return { ...state, toolTipText: action.payload };
+    case SET_ONLINE:
+      return { ...state, isOnline: action.payload };
     default:
       throw new Error();
   }

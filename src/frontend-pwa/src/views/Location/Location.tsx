@@ -24,10 +24,8 @@ import { locationContent } from '../../content/content';
 
 import {
   ContentContainer,
-  MapContainer,
   ViewContainer,
   ServiceListContainer,
-  StyledP,
 } from './location.styles';
 
 interface LocationWithDistance extends SingleLocation {
@@ -75,20 +73,10 @@ export default function Location() {
   return (
     <ViewContainer>
       <ContentContainer>
-        {!state.settings.offline_mode && navigator.onLine
-          ? (
-            <Mapping
-              locations={filteredLocationSearch}
-              currentLocation={state.currentLocation}
-            />
-          )
-          : (
-            <MapContainer>
-              <StyledP>
-                {locationContent.unavailable[lang]}
-              </StyledP>
-            </MapContainer>
-          )}
+        <Mapping
+          locations={filteredLocationSearch}
+          currentLocation={state.currentLocation}
+        />
         <ServiceListContainer>
           <SearchBar
             query={searchQuery}

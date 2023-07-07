@@ -5,7 +5,7 @@
  *
  * @summary - Visualize user location and a list of BCservice locations onto map of British Columbia
  *          - provides limited contact information for relevant location via popup
- *          - Map does not render offline
+ *          - Map is capable of rendering both online/offline, albeit at a reduced level of detail
  *
  * @param   MappingProps - passes in {lat, long} as currentLocationType, and passes
  *                       a list of BCService locations as a LocationsArray
@@ -72,6 +72,20 @@ export default function Mapping({ locations, currentLocation }: MappingProps) {
   const { lang } = state.settings;
   const lat = parseFloat(currentLocation?.lat);
   const long = parseFloat(currentLocation?.long);
+
+  /**
+   * const "onlineMode" renders true only if:
+    - the application's offline mode box is not checked.
+    - the application's online state is determined to be true.
+   */
+  const onlineMode = state.isOnline && !state.settings.offline_mode;
+  const zoomLevel = onlineMode ? 12 : 7;
+  const minZoomLevel = onlineMode ? 1 : 6;
+  const maxZoomLevel = onlineMode ? 17 : 9;
+  const tileLayerUrl = onlineMode
+    ? 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+    : '/mapTiles/{z}/{x}/{y}.png';
+
   return (
     <MapWrapperDiv>
       { !isNaN(lat)
@@ -79,12 +93,14 @@ export default function Mapping({ locations, currentLocation }: MappingProps) {
       <MapWrapperDiv>
         <StyledMapContainer
           center={[lat, long]}
-          zoom={12}
+          zoom={zoomLevel}
+          minZoom={minZoomLevel}
+          maxZoom={maxZoomLevel}
           scrollWheelZoom
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            url={tileLayerUrl}
           />
           <Marker icon={redIcon} position={[lat, long]}>
             <Popup>
