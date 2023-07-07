@@ -14,7 +14,7 @@
 import { useState } from 'react';
 import { ListItems, ServiceListItem, headers } from '../../components/lists';
 import { SearchBar } from '../../components/common';
-import { Mapping, OfflineMapping } from '../../components/utility';
+import { Mapping } from '../../components/utility';
 import SingleLocation from '../../Type/SingleLocation';
 import useAppService from '../../services/app/useAppService';
 import { localStorageKeyExists } from '../../utils/AppLocalStorage';
@@ -53,19 +53,10 @@ export default function BCServices() {
   return (
     <ViewContainer>
       <ContentContainer>
-        {!state.settings.offline_mode && state.isOnline
-          ? (
-            <Mapping
-              locations={filteredLocationSearch}
-              currentLocation={state.currentLocation}
-            />
-          )
-          : (
-            <OfflineMapping
-              locations={filteredLocationSearch}
-              currentLocation={state.currentLocation}
-            />
-          )}
+        <Mapping
+          locations={filteredLocationSearch}
+          currentLocation={state.currentLocation}
+        />
         <ServiceListContainer>
           <SearchBar
             query={searchQuery}

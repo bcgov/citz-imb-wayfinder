@@ -16,7 +16,7 @@ import { ListItems, LocationListItem } from '../../components/lists';
 import SingleLocation from '../../Type/SingleLocation';
 import useAppService from '../../services/app/useAppService';
 import { SearchBar } from '../../components/common';
-import { Mapping, OfflineMapping } from '../../components/utility';
+import { Mapping } from '../../components/utility';
 import CalcDistance from '../../utils/CalcDistance';
 import { localStorageKeyExists } from '../../utils/AppLocalStorage';
 import constants from '../../constants/Constants';
@@ -73,19 +73,10 @@ export default function Location() {
   return (
     <ViewContainer>
       <ContentContainer>
-        {!state.settings.offline_mode && state.isOnline
-          ? (
-            <Mapping
-              locations={filteredLocationSearch}
-              currentLocation={state.currentLocation}
-            />
-          )
-          : (
-            <OfflineMapping
-              locations={filteredLocationSearch}
-              currentLocation={state.currentLocation}
-            />
-          )}
+        <Mapping
+          locations={filteredLocationSearch}
+          currentLocation={state.currentLocation}
+        />
         <ServiceListContainer>
           <SearchBar
             query={searchQuery}
