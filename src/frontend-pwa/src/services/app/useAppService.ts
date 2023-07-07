@@ -19,6 +19,7 @@ const {
   SET_SETTINGS,
   SET_REPORTS,
   SET_TOOL_TIP_TEXT,
+  SET_ONLINE,
 } = AppActionType;
 
 /**
@@ -248,6 +249,16 @@ const useAppService = () => {
       dispatch({ type: SET_TOOL_TIP_TEXT, payload: text });
     };
 
+    /**
+     * @summary Sets the online state for the app
+     * @param   online is a boolean that indicates whether the app is online or not
+     * @type    {( online: boolean )}
+     * @author  Dallas Richmond
+     */
+    const setOnline = (online: boolean) => {
+      dispatch({ type: SET_ONLINE, payload: online });
+    };
+
     return {
       setAppData,
       setCurrentLocation,
@@ -260,6 +271,7 @@ const useAppService = () => {
       setSuccessfulReports,
       setToolTipText,
       setOfflineReports,
+      setOnline,
       state,
     };
   }, [state, dispatch]);

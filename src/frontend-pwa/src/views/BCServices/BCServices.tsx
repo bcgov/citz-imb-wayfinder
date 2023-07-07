@@ -14,7 +14,7 @@
 import { useState } from 'react';
 import { ListItems, ServiceListItem, headers } from '../../components/lists';
 import { SearchBar } from '../../components/common';
-import { Mapping } from '../../components/utility';
+import { Mapping, OfflineMapping } from '../../components/utility';
 import SingleLocation from '../../Type/SingleLocation';
 import useAppService from '../../services/app/useAppService';
 import { localStorageKeyExists } from '../../utils/AppLocalStorage';
@@ -22,17 +22,13 @@ import constants from '../../constants/Constants';
 import CalcDistance from '../../utils/CalcDistance';
 import {
   ContentContainer,
-  MapContainer,
   ViewContainer,
   ServiceListContainer,
-  StyledP,
 } from './bcservices.styles';
-import { locationContent } from '../../content/content';
 
 export default function BCServices() {
   const [searchQuery, setSearchQuery] = useState('');
   const { state } = useAppService();
-  const { lang } = state.settings;
   const services = state.appData?.data ? state.appData?.data.allServices : [];
   const locations = state.appData?.data ? [
     ...state.appData.data.serviceBCLocations,
@@ -57,7 +53,7 @@ export default function BCServices() {
   return (
     <ViewContainer>
       <ContentContainer>
-        {!state.settings.offline_mode && navigator.onLine
+        {!state.settings.offline_mode && state.isOnline
           ? (
             <Mapping
               locations={filteredLocationSearch}
@@ -65,11 +61,10 @@ export default function BCServices() {
             />
           )
           : (
-            <MapContainer>
-              <StyledP>
-                {locationContent.unavailable[lang]}
-              </StyledP>
-            </MapContainer>
+            <OfflineMapping
+              locations={filteredLocationSearch}
+              currentLocation={state.currentLocation}
+            />
           )}
         <ServiceListContainer>
           <SearchBar

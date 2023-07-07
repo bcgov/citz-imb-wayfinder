@@ -24,6 +24,7 @@ export default function SplashScreen() {
     initializeEulaState,
     updateSettings,
     setSuccessfulReports,
+    setOnline,
     state,
   } = useAppService();
 
@@ -50,6 +51,7 @@ export default function SplashScreen() {
     } else {
       OnlineCheck()
         .then((Online) => {
+          setOnline(Online);
           setAppData(Online);
           SendCachedAnalytics(Online);
           SendCachedReports(Online, setSuccessfulReports);
