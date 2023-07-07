@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "cypress:open": "cypress open"
+    "cypress": "cypress run --e2e"
   },
   "dependencies": {
     "@bcgov/bc-sans": "1.0.1",
