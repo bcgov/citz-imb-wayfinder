@@ -1,3 +1,7 @@
+/**
+ * @summary A test suite that runs through the app ensuring all views have the correct url
+ * @author  Dallas Richmond
+ */
 describe('View walkthrough', () => {
   it('successfully loads', () => {
     cy.visit('/');
