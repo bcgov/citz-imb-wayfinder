@@ -28,3 +28,24 @@ components:
           schema:
             type: string
             example: Created
+    204Updated:
+      description: Updated
+      content:
+        text/plain:
+          schema:
+            type: string
+            example: Updated
+    403Unauthorized:
+      description: Unauthorized
+      content:
+        text/plain:
+          schema:
+            type: string
+            example: Unauthorized
+    409Conflict:
+      description: Conflict
+      content:
+        text/plain:
+          schema:
+            type: string
+            example: Conflict

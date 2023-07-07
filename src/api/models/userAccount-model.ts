@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     minLength: 8,
-    maxLength: 30,
+    maxLength: 48,
     match: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
     lowercase: true,
   },

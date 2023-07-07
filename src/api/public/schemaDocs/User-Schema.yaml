@@ -1,0 +1,29 @@
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - username
+        - password
+        - email
+      description: User account to access analytic and reporting data collection
+      properties:
+        username:
+          type: string
+          example: Johnny
+          minLength: 4
+          maxLength: 30
+          pattern: /^[A-Za-z0-9]+$/
+        password:
+          type: string
+          minLength: 8
+          maxLength: 64
+          example: 1BadPassword!!
+        email:
+          type: string
+          minLength: 8
+          maxLength: 48
+          match: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
+          example: exampleEmail2023@gmail.com
+        admin:
+          type: boolean
