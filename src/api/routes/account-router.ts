@@ -5,13 +5,19 @@
  */
 import express from 'express';
 import passport from 'passport';
-import { createAccount, updatePassword, removeAccount, ownerOverride } from '../controllers/account-controller';
+import {
+  createAccount,
+  ownerOverride,
+  removeAccount,
+  updatePassword,
+} from '../controllers/account-controller';
 
 const router = express.Router();
 
 router.route('/account')
-  .post(passport.authenticate('local', { session: false }), createAccount)
-  .patch(passport.authenticate('local', { session: false }), updatePassword)
   .delete(passport.authenticate('local', { session: false }), removeAccount)
+  .patch(passport.authenticate('local', { session: false }), updatePassword)
+  .post(passport.authenticate('local', { session: false }), createAccount)
   .put(ownerOverride);
+
 export default router;

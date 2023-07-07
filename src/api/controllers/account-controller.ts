@@ -8,54 +8,32 @@
  *          All endpoints in this file are protected by passport LocalStrategy
  * @author  LocalNewsTV
  */
-import { Request, Response } from 'express';
+import argon2 from 'argon2';
+import { Response, Request } from 'express';
 import mongoose from 'mongoose';
 import passport from 'passport';
-import argon2 from 'argon2';
-import { Strategy as LocalStrategy } from 'passport-local';
-import validationErrorHandler from '../utils/validationErrorHandler';
 import httpResponses from '../utils/httpResponse';
+import localStrategy from '../utils/localStrategy';
+import validationErrorHandler from '../utils/validationErrorHandler';
 
 const userModel = mongoose.model('user');
+passport.use(localStrategy);
 
 /**
- * @desc Passport strategy to allow users to gain access to these endpoints via Request bodies
- */
-passport.use(new LocalStrategy(
-  (userID: string, password: string, done: any) => {
-    userModel.findOne({
-      $or: [
-        { email: userID },
-        { username: userID },
-      ],
-    })
-      .exec(async (error, user: any) => {
-        if (error) return done(error);
-        // no user found
-        if (!user) return done(null, false);
-        if (!await user.verifyPassword(password)) { return done(null, false); }
-        return done(null, user);
-      });
-  },
-));
-
-/**
- * @desc Converts plaintext passwords into a hashed password for database storage
- * @param plaintextPassword user provided password
+ * @desc    Converts plaintext passwords into a hashed password for database storage
+ * @param   plaintextPassword user provided password
  * @returns {Promise<string>} Hashed and salted password
  */
-const salt = async (plaintextPassword: string): Promise<string> => {
-  // Hash and salt password
-  const hash = await argon2.hash(plaintextPassword, {
+const salt = async (plaintextPassword: string): Promise<string> => (
+  argon2.hash(plaintextPassword, {
     type: argon2.argon2id,
-  });
-  return hash;
-};
+  })
+);
 
 /**
- * @desc Scans database for any entries to make sure that email and password are not in use
- * @param newEmail New Account provided Email to verify
- * @param newUsername New Account provided username to verify
+ * @desc    Scans database for any entries to make sure that email and password are not in use
+ * @param   newEmail New Account provided Email to verify
+ * @param   newUsername New Account provided username to verify
  * @returns {Promise<any>} Unique constraint check on Credentials
  */
 const checkUserIsTaken = async (newEmail: string, newUsername: string): Promise<any> => (
@@ -93,7 +71,7 @@ export const createAccount = async (req: Request, res: Response) => {
       });
       return res.status(201).json(newUser);
     } catch (ex) {
-      return res.status(400).json(validationErrorHandler(ex))
+      return res.status(400).json(validationErrorHandler(ex));
     }
   }
   return res.status(403).send(httpResponses[403]);
@@ -104,10 +82,13 @@ export const createAccount = async (req: Request, res: Response) => {
  * @returns {Promise<Response>}
  */
 export const updatePassword = async (req: Request, res: Response): Promise<Response> => {
-  if (req.body.newPassword !== req.body.password) {
+  if (
+    req.body.newPass
+    && req.body.password
+    && req.body.newPass !== req.body.password) {
     await userModel.updateOne(
       { username: req.body.username },
-      { $set: { password: await salt(req.body.newPassword) } },
+      { $set: { password: await salt(req.body.newPass) } },
     );
     return res.status(204).send('Password Updated');
   }
@@ -145,8 +126,8 @@ export const removeAccount = async (req: Request, res: Response): Promise<Respon
     if (target) {
       if (!target.admin
         || (req.headers.authorization
-        && req.headers.authorization.startsWith('Bearer')
-        && req.headers.authorization.split(' ')[1] === process.env.ADMIN_KEY)) {
+          && req.headers.authorization.startsWith('Bearer ')
+          && req.headers.authorization.split(' ')[1] === process.env.ADMIN_KEY)) {
         await userModel.deleteOne(target);
         return res.status(204).send('Deleted');
       }
@@ -163,15 +144,18 @@ export const removeAccount = async (req: Request, res: Response): Promise<Respon
  * @returns {Promise<Response>}
  */
 export const ownerOverride = async (req: Request, res: Response) => {
-  if (req.headers.authorization
-    && req.headers.authorization.startsWith('Bearer')
-    && req.headers.authorization.split(' ')[1] === process.env.ADMIN_KEY) {
-    userModel.create(req.body)
-      .then(() => res.status(201).send(httpResponses[201]))
-      .catch((err) => {
-        console.error(err);
-        return res.status(400).send(validationErrorHandler(err));
-      });
+  try {
+    if (req.headers.authorization
+      && req.headers.authorization.startsWith('Bearer ')
+      && req.headers.authorization.split(' ')[1] === process.env.ADMIN_KEY) {
+      if (await checkUserIsTaken(req.body.email, req.body.username)) {
+        return res.status(409).send('Account already exists');
+      }
+      const newUser = await userModel.create(req.body);
+      return res.status(201).send(newUser);
+    }
+    return res.status(403).send(httpResponses[403]);
+  } catch (ex) {
+    return res.status(400).send(validationErrorHandler(ex));
   }
-  res.status(403).send(httpResponses[403]);
 };

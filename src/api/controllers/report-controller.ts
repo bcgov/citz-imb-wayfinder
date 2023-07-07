@@ -3,18 +3,20 @@
  *          designed to take user reports from the application and store in database
  * @author  LocalNewsTV
  */
-import { Request, Response } from 'express';
+import { Response, Request } from 'express';
 import mongoose from 'mongoose';
-import validationErrorHandler from '../utils/validationErrorHandler';
+import passport from 'passport';
+import basicStrategy from '../utils/basicStrategy';
 import httpResponses from '../utils/httpResponse';
+import validationErrorHandler from '../utils/validationErrorHandler';
 
 const reportModel = mongoose.model('report');
 
+passport.use(basicStrategy);
+
 /**
  * @desc endpoint to receive user reports from Wayfinder application
- *       endpoint uses Mongoose models to validate
- * @param req Request object representing a users report
- * @param res Server response confirming object was sent
+ *       uses Mongoose models to validate
  */
 export const userSendsReport = async (req: Request, res: Response) => {
   await reportModel.create(req.body)
@@ -29,18 +31,15 @@ export const userSendsReport = async (req: Request, res: Response) => {
 };
 
 /**
- * @desc get method for endpoint, sends all user submitted reports
- *       uses password for auth to get the data
+ * @desc    get method for endpoint, sends all user submitted reports
+ *          uses password for auth to get the data
  * @returns Array of all Reports
  */
 export const getUserReports = async (req: Request, res: Response) => {
-  if (req.headers.authorization
-    && req.headers.authorization.startsWith('Bearer ')
-    && req.headers.authorization.split(' ')[1] === process.env.ADMIN_KEY) {
+  try {
     const reports = await reportModel.find({});
-    return res.status(200).json(reports);
+    res.status(200).json(reports);
+  } catch (ex) {
+    res.status(500).send(httpResponses[500]);
   }
-  return res.status(403).send(httpResponses[403]);
 };
-
-export default userSendsReport;
