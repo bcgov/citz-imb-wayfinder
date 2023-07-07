@@ -3,7 +3,7 @@
     "target": "ESNext",
     "types": [
       "vite-plugin-pwa/client",
-      "cypress"
+      "cypress",
     ],
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
@@ -24,6 +24,9 @@
     /* Temporary */
     "noUnusedLocals": false,
   },
-  "include": ["src", "cypress"],
+  "include": [
+    "src",
+    "cypress",
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

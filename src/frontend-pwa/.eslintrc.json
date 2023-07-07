@@ -60,5 +60,6 @@
         "extensions": [".js", ".jsx", ".ts", ".tsx", ".svg"]
       }
     }
-  }
+  },
+  "ignorePatterns": ["cypress.config.ts"]
 }
