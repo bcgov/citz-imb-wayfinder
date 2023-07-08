@@ -1,17 +1,23 @@
 /**
- * @summary collection of anonymous analytic information for use by BC Gov
+ * @summary Collection of anonymous usage data for Wayfinder Application
+ *          Analytics are submitted from the Wayfinder application
+ *          Obtaining analytic data requires basic authorization
+ * @type {Analytic} The created and stored products of this controller
  * @author LocalNewsTV
  */
 import { Request, Response } from 'express';
 import mongoose from 'mongoose';
+import passport from 'passport';
+import basicStrategy from '../utils/basicStrategy';
 import validationErrorHandler from '../utils/validationErrorHandler';
 import httpResponses from '../utils/httpResponse';
 
 const analyticModel = mongoose.model('analytic');
 
+passport.use(basicStrategy);
 /**
- * @desc Takes analytic information from Wayfinder application and adds to database
- *       Mongoose Schema validates entry and enforces types.
+ * @desc    Takes analytic information from Wayfinder application and adds to database
+ *          Mongoose Schema validates entry and enforces types.
  * @returns {Response}
  */
 export const takeAnalytic = async (req: Request, res: Response) => {
@@ -21,16 +27,15 @@ export const takeAnalytic = async (req: Request, res: Response) => {
 };
 
 /**
- * @desc get method for endpoint, sends all analytic info
- *       uses password for auth to get the data
+ * @desc    GET method for endpoint, sends all analytic info stored
+ *          Uses Basic Authentication strategy with Passport
  * @returns Array of all analytics
  */
 export const getAnalytic = async (req: Request, res: Response) => {
-  if (req.headers.authorization
-    && req.headers.authorization.startsWith('Bearer ')
-    && req.headers.authorization.split(' ')[1] === process.env.ADMIN_KEY) {
-    const analytics = await analyticModel.find({});
-    return res.status(200).json(analytics);
+  try {
+    const reports = await analyticModel.find({});
+    res.status(200).json(reports);
+  } catch (ex) {
+    res.status(500).send(httpResponses[500]);
   }
-  return res.status(403).send(httpResponses[403]);
 };

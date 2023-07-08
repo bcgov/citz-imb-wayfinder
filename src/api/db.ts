@@ -10,6 +10,7 @@ import dotenv from 'dotenv';
 import './models/singleLocation-model';
 import './models/analytic-model';
 import './models/report-model';
+import './models/userAccount-model';
 
 dotenv.config();
 mongoose.set('strictQuery', true);

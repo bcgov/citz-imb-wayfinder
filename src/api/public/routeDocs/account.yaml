@@ -1,0 +1,108 @@
+paths:
+  /account:
+    delete:
+      tags:
+        - Account
+      summary: Delete User account
+      description: Users can delete own account, or target an account for deletion
+      consumes:
+        - application/json
+      requestBody: 
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: Johnny
+                  minLength: 4
+                  maxLength: 30
+                  pattern: /^[A-Za-z0-9]+$/
+                password:
+                  type: string
+                  minLength: 8
+                  maxLength: 64
+                  example: 1BadPassword!!
+                target:
+                  type: string
+                  example: Johnny
+                  minLength: 4
+                  maxLength: 30
+    patch:
+      tags:
+        - Account
+      summary: Update User password
+      description: Allows user to update their password
+      consumes:
+        - application/json
+      requestBody: 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPassword'
+      responses:
+        '201':
+          $ref: '#/components/responses/201Created'
+        '204':
+          $ref: '#/components/responses/204Updated'
+        '429':
+          $ref: '#/components/responses/429TooManyRequests'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '403':
+          $ref: '#/components/responses/403Unauthorized'
+        '409':
+          $ref: '#/components/responsed/409Conflict'
+
+    post:
+      tags:
+        - Account
+      summary: Create new user accounts
+      description: Allows admin accounts to create new non-admin user accounts
+      consumes:
+        - application/json
+      requestBody:
+        content:
+          application/json:
+            name: User Auth + Details
+            description: Admin login info and new user info
+            schema:
+              $ref: '#/components/schemas/CreateUser'
+      responses:
+        '201':
+          $ref: '#/components/responses/201Created'
+        '429':
+          $ref: '#/components/responses/429TooManyRequests'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '403':
+          $ref: '#/components/responses/403Unauthorized'
+        '409':
+          $ref: '#/components/responsed/409Conflict'
+    
+    put:
+      tags:
+        - Account
+      summary: Create new Admin / User accounts
+      description: Uses owner authorization to create new Admin class users
+      consumes:
+        - application/json
+      requestBody:
+        content:
+          application/json:
+            name: User Auth + Details
+            description: New account info
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          $ref: '#/components/responses/201Created'
+        '429':
+          $ref: '#/components/responses/429TooManyRequests'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '403':
+          $ref: '#/components/responses/403Unauthorized'
+        '409':
+          $ref: '#/components/responsed/409Conflict'

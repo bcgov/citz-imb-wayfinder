@@ -4,12 +4,13 @@
  * @author LocalNewsTV
  */
 import express from 'express';
-import { takeAnalytic, getAnalytic } from '../controllers/analytic-controller';
+import passport from 'passport';
+import { getAnalytic, takeAnalytic } from '../controllers/analytic-controller';
 
 const router = express.Router();
 
 router.route('/analytic')
-  .post(takeAnalytic)
-  .get(getAnalytic);
+  .get(passport.authenticate('basic', { session: false }), getAnalytic)
+  .post(takeAnalytic);
 
 export default router;

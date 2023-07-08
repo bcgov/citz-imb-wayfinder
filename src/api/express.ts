@@ -6,6 +6,7 @@ import './db';
 import express, { Application } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import passport from 'passport';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import rateLimit from 'express-rate-limit';
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use(cors(config.cors));
 app.use(rateLimit(config.rateLimitConfig));
+app.use(passport.initialize());
 
 app.disable('x-powered-by');
 // Routing information
@@ -36,6 +38,7 @@ app.use('/api', [
   routers.locationRouter,
   routers.reportRouter,
   routers.analyticRouter,
+  routers.accountRouter,
 ]);
 
 // Integrate global error handler after routes to cover all ends.
