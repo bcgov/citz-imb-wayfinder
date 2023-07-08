@@ -53,11 +53,11 @@ objects:
         containers:
           - resources:
               limits:
-                cpu: 100m
-                memory: 150Mi
+                cpu: 125m
+                memory: 175Mi
               requests:
-                cpu: 50m
-                memory: 100Mi
+                cpu: 75m
+                memory: 125Mi
             readinessProbe:
               httpGet:
                 path: /api/health
