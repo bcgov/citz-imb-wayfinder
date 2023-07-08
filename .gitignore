@@ -30,3 +30,6 @@ dist-ssr
 
 # Mongo
 **/mongo
+
+# Cypress Error videos
+src/frontend-pwa/cypress/videos

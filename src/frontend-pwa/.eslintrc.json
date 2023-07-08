@@ -8,7 +8,8 @@
     "react-app",
     "plugin:import/errors",
     "plugin:import/warnings",
-    "plugin:import/typescript"
+    "plugin:import/typescript",
+    "plugin:cypress/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "overrides": [
@@ -59,5 +60,6 @@
         "extensions": [".js", ".jsx", ".ts", ".tsx", ".svg"]
       }
     }
-  }
+  },
+  "ignorePatterns": ["cypress.config.ts"]
 }
