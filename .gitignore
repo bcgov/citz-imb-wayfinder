@@ -32,4 +32,4 @@ dist-ssr
 **/mongo
 
 # Cypress Error videos
-src\frontend-pwa\cypress\videos
+src/frontend-pwa/cypress/videos
