@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /**
  * @summary The root component of the application
- * @author Dallas Richmond & Tyler Maloney
+ * @author  Dallas Richmond, Tyler Maloney
  */
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
