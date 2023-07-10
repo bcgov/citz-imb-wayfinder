@@ -43,7 +43,7 @@ export default function Location() {
 
   const headers: Array<string> = [];
   if (service) {
-    headers.push(`${(service[0].toUpperCase() + service.substring(1, service.length))} ${locationContent.headers[lang][0]}`, locationContent.headers[lang][1]);
+    headers.push(`${service} ${locationContent.headers[lang][0]}`, locationContent.headers[lang][1]);
   } else {
     headers.push(...locationContent.headers[lang]);
   }

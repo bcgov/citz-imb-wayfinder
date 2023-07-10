@@ -1,10 +1,11 @@
 // eslint-disable-next-line no-shadow
 enum Services {
-  serviceBC = 'serviceBC',
-  parksBC = 'parksBC',
-  healthBC = 'healthBC',
+  serviceBC = 'ServiceBC',
+  parksBC = 'ParksBC',
+  healthBC = 'HealthBC',
   icbc = 'ICBC',
-  fireBC = 'fireBC'
+  courts = 'Courts',
+  bcHousing = 'BCHousing',
 }
 
 export default Services;
