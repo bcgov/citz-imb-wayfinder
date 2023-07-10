@@ -63,10 +63,14 @@ const extractServiceList = (locations: Array<SingleLocation>): Array<string> => 
  *           application to seed the cache.
  * @summary  GET method sends seed data for frontend
  * @example  {
- *             "serviceBCLocations": [{...}],
+ *              "serviceBCLocations": [{...}],
  *              "serviceBCServices" : [""],
  *              "healthBCLocations": [{}],
  *              "healthBCServices": [""],
+ *              "CourtLocations": [{}],
+ *              "CourtServices": [""],
+ *              "BCHousingLocations": [{}],
+ *              "BCHousingServices": [""],
  *              "allServices": [""],
  *           }
  * @returns  {ResponseObject} Array of Sites by Location
