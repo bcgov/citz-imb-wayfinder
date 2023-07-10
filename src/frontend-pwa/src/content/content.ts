@@ -234,17 +234,21 @@ export const officeOptionsContent: ContentMap = {
     fr: 'Service BC',
   },
   healthBC: {
-    eng: 'Health BC',
-    fr: 'Santé BC',
+    eng: 'Hospitals',
+    fr: 'Hôpitaux',
   },
-  parksBC: {
-    eng: 'Parks BC',
-    fr: 'Parcs BC',
+  courts: {
+    eng: 'Provincial Courts',
+    fr: 'Cours provinciales',
   },
   icbc: {
     eng: 'ICBC',
     fr: 'ICBC',
   },
+  bcHousing: {
+    eng: 'BC Housing',
+    fr: 'Logement en BC'
+  }
 };
 
 export const reportContent: ContentMap = {

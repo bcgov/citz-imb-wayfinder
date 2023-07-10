@@ -31,9 +31,11 @@ export default function BCServices() {
   const { state } = useAppService();
   const services = state.appData?.data ? state.appData?.data.allServices : [];
   const locations = state.appData?.data ? [
-    ...state.appData.data.serviceBCLocations,
+    ...state.appData.data.ServiceBCLocations,
     ...state.appData.data.ICBCLocations,
-    ...state.appData.data.healthBCLocations,
+    ...state.appData.data.HealthBCLocations,
+    ...state.appData.data.CourtsLocations,
+    ...state.appData.data.BCHousingLocations,
   ] : [];
   const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
   const locationRange = state.settings.location_range;
