@@ -21,18 +21,24 @@ const servicesOffered = [
   'ServiceBC',
   'HealthBC',
   'ICBC',
+  'BCHousing',
+  'Courts',
 ];
 
 /**
  * @desc Server response object when using the GET method
  */
 type ResponseObject = {
-  serviceBCLocations: Array<SingleLocation>;
-  serviceBCServices: Array<string>;
-  healthBCLocations: Array<SingleLocation>;
-  healthBCServices: Array<string>;
+  ServiceBCLocations: Array<SingleLocation>;
+  ServiceBCServices: Array<string>;
+  HealthBCLocations: Array<SingleLocation>;
+  HealthBCServices: Array<string>;
   ICBCLocations: Array<SingleLocation>;
   ICBCServices: Array<string>;
+  BCHousingLocations: Array<SingleLocation>;
+  BCHousingServices: Array<string>;
+  CourtsLocations: Array<SingleLocation>;
+  CourtsServices: Array<string>;
   allServices: Array<string>;
 }
 
@@ -68,17 +74,24 @@ const extractServiceList = (locations: Array<SingleLocation>): Array<string> => 
 export const getAllLocations = async (req: Request, res: Response): Promise<Response> => {
   const responseObject: ResponseObject = {} as ResponseObject;
   // Get Locations lists
-  responseObject.serviceBCLocations = await locationsModel.find({ serviceType: 'ServiceBC' });
-  responseObject.healthBCLocations = await locationsModel.find({ serviceType: 'HealthBC' });
+  responseObject.ServiceBCLocations = await locationsModel.find({ serviceType: 'ServiceBC' });
+  responseObject.HealthBCLocations = await locationsModel.find({ serviceType: 'HealthBC' });
   responseObject.ICBCLocations = await locationsModel.find({ serviceType: 'ICBC' });
+  responseObject.CourtsLocations = await locationsModel.find({ serviceType: 'Courts' });
+  responseObject.BCHousingLocations = await locationsModel.find({ serviceType: 'BCHousing' });
   // Gather unique Services List
-  responseObject.healthBCServices = extractServiceList(responseObject.healthBCLocations);
-  responseObject.serviceBCServices = extractServiceList(responseObject.serviceBCLocations);
+  responseObject.HealthBCServices = extractServiceList(responseObject.HealthBCLocations);
+  responseObject.ServiceBCServices = extractServiceList(responseObject.ServiceBCLocations);
   responseObject.ICBCServices = extractServiceList(responseObject.ICBCLocations);
+  responseObject.BCHousingServices = extractServiceList(responseObject.BCHousingLocations);
+  responseObject.CourtsServices = extractServiceList(responseObject.CourtsLocations);
+
   responseObject.allServices = [
-    ...responseObject.healthBCServices,
-    ...responseObject.serviceBCServices,
+    ...responseObject.HealthBCServices,
+    ...responseObject.ServiceBCServices,
     ...responseObject.ICBCServices,
+    ...responseObject.CourtsServices,
+    ...responseObject.BCHousingServices,
   ].sort();
   // Ship results to client
   return res.status(200).json(responseObject);
