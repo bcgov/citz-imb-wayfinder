@@ -13,8 +13,8 @@ export default defineConfig({
         sourcemap: true,
       },
       manifest: {
-        name: "Wayfinder",
-        short_name: "Wayfinder",
+        name: "BC Wayfinder",
+        short_name: "BC Wayfinder",
         description: "A service and location finder for the BC Government",
         theme_color: "#003366",
         start_url: "/",
