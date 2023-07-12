@@ -38,6 +38,12 @@ export default function AboutContact() {
           {aboutContent.aboutTeam[lang]}
         </StyledP>
         <StyledHeaderThree>
+          {aboutContent.matthewTitle[lang]}
+        </StyledHeaderThree>
+        <StyledP>
+          {aboutContent.matthewBio[lang]}
+        </StyledP>
+        <StyledHeaderThree>
           {aboutContent.tylerTitle[lang]}
         </StyledHeaderThree>
         <StyledP>
@@ -49,18 +55,17 @@ export default function AboutContact() {
         <StyledP>
           {aboutContent.dallasBio[lang]}
         </StyledP>
-        <StyledHeaderThree>
-          {aboutContent.matthewTitle[lang]}
-        </StyledHeaderThree>
+        <StyledHeaderTwo>
+          {aboutContent.withThanksTitle[lang]}
+        </StyledHeaderTwo>
         <StyledP>
-          {aboutContent.matthewBio[lang]}
+          {aboutContent.withThanks[lang]}
         </StyledP>
-        <StyledHeaderThree>
-          {aboutContent.jesseTitle[lang]}
-        </StyledHeaderThree>
-        <StyledP>
-          {aboutContent.jesseBio[lang]}
-        </StyledP>
+        <StyledUl>
+          {aboutContent.imbMembers[lang].map((item: string, index: number) => (
+            <StyledLi key={index}>{item}</StyledLi>
+          ))}
+        </StyledUl>
         <StyledHeaderTwo>{aboutContent.disclaimerTitle[lang]}</StyledHeaderTwo>
         <StyledUl>
           {(aboutContent.disclaimer[lang]).map((point: string, index: number) => (

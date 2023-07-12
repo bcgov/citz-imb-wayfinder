@@ -74,11 +74,11 @@ export const SettingsContent: ContentMap = {
 
 export const aboutContent: ContentMap = {
   aboutTeam: {
-    eng: 'This app was developed as a capstone project for three Camosun College students in the summer of 2023. Their names and roles are:',
+    eng: 'This app was developed as a Capstone project for three Camosun College students in the summer of 2023. Their names and roles are:',
     fr: 'Cette application a été développée dans le cadre d\'un projet de fin d\'études pour trois étudiants du Collège Camosun à l\'été 2023. Leurs noms et rôles sont :',
   },
   tylerTitle: {
-    eng: 'Tyler Maloney, Full stack Developer',
+    eng: 'Tyler Maloney, Full Stack Developer',
     fr: 'Tyler Maloney, Développeur Full Stack',
   },
   tylerBio: {
@@ -86,28 +86,42 @@ export const aboutContent: ContentMap = {
     fr: 'Tyler Maloney est un développeur de logiciels en herbe avec un goût pour la résolution de problèmes, le travail du bois et l\'apprentissage. Il a réalisé une série de projets autodidactes, dont le plus impressionnant est un FPS en réalité virtuelle écrit en C#. Tyler a également une familiarité avec une multitude de langages et de leurs outils associés, tels que JavaScript, React et Python. Les compétences interpersonnelles de Tyler se complètent parfaitement à ses compétences techniques, car sa personnalité agréable et amicale l\'aide à créer des relations professionnelles avec ses collègues et ses clients.',
   },
   dallasTitle: {
-    eng: 'Dallas Richmond, Frontend Lead',
-    fr: 'Dallas Richmond, Chef Frontend',
+    eng: 'Dallas Richmond, Full Stack Developer',
+    fr: 'Dallas Richmond, Développeur Full Stack',
   },
   dallasBio: {
     eng: 'Dallas Richmond has a diverse education in astronomy, physics, and information systems. He switched from astronomy and physics to pursue the ICS diploma at Camosun College due to his passion for coding and its problem-solving potential. He enhanced his React and back-end development skills during his co-op at Gist Applications. Dallas is proficient in C++, C#, Java, JavaScript, HTML and CSS. He is a quick learner, a team player, and committed to continuously improving his skills as he anticipates the future of technology',
     fr: 'Dallas Richmond possède une éducation diversifiée en astronomie, en physique et en systèmes d\'information. Il a changé d\'orientation en abandonnant l\'astronomie et la physique pour poursuivre le diplôme en systèmes informatiques à Camosun College en raison de sa passion pour la programmation et son potentiel de résolution de problèmes. Il a renforcé ses compétences en développement React et back-end lors de son stage chez Gist Applications. Dallas maîtrise le C++, le C#, Java, JavaScript, HTML et CSS. Il est un apprenant rapide, un joueur d\'équipe et engagé à améliorer continuellement ses compétences en prévision de l\'avenir de la technologie',
   },
   matthewTitle: {
-    eng: 'Matthew Logan, Backend Lead',
-    fr: 'Matthew Logan, Chef Backend',
+    eng: 'Matthew Logan, Team Lead',
+    fr: 'Matthew Logan, Chef d\'équipe',
   },
   matthewBio: {
     eng: 'Matthew Logan is a former Red Seal chef turned full-stack developer. Since attending Camosun College, Matthew has gained skills in web development, backend APIs and databases. Transitioning from chef to full-stack developer demonstrates his ability to pivot and adapt to new challenges. He is committed to continuous learning and improving his skills to stay current with industry trends. Matthew is a team player who collaborates effectively to deliver high-quality solutions.',
     fr: 'Matthew Logan est un ancien chef certifié Red Seal devenu développeur full-stack. Depuis qu\'il a fréquenté le Collège Camosun, Matthew a acquis des compétences en développement web, en API backend et en bases de données. La transition du métier de chef à celui de développeur full-stack démontre sa capacité à pivoter et à s\'adapter à de nouveaux défis. Il est engagé dans un apprentissage continu et l\'amélioration de ses compétences afin de rester à jour avec les tendances de l\'industrie. Matthew est un joueur d\'équipe qui collabore efficacement pour fournir des solutions de haute qualité.',
   },
-  jesseTitle: {
-    eng: 'Jesse Holwerda, UI/UX Designer',
-    fr: 'Jesse Holwerda, Concepteur UI/UX',
+  imbMembers: {
+    eng: [
+      'Adam Kroon, Technical Owner',
+      'Jesse Holwerda, UX Perspective',
+      'Meghan Peebles, Scrum Master',
+      'Robert Kobenter, Product Owner',
+    ],
+    fr: [
+      'Adam Kroon, Propriétaire technique',
+      'Jesse Holwerda, Perspective UX',
+      'Meghan Peebles, Scrum Master',
+      'Robert Kobenter, Propriétaire du produit',
+    ],
   },
-  jesseBio: {
-    eng: 'Jesse Holwerda is a recently graduated English major who got his start in communications, but he has been carving out a space for himself in service design. He brings experience in CMS Lite, Figma, the adobe suite, Mural, and Plain language. Jesse has a background in program management and childcare and as estranged as all the roles he\'s had seem, he finds that he brings all that experience into his UX and design work. In his most recent project, Jesse revised intranet IA according to user interviews and removed 68 neglected pages.',
-    fr: 'Jesse Holwerda est un étudiant en anglais récemment diplômé qui a fait ses débuts dans la communication, mais il s\'est taillé une place dans la conception de services. Il apporte son expérience dans CMS Lite, Figma, la suite Adobe, Mural et Plain language. Jesse a une formation en gestion de programmes et en garde d\'enfants et aussi éloignés que tous les rôles qu\'il a eus semblent, il trouve qu\'il apporte toute cette expérience dans son travail UX et de conception. Dans son projet le plus récent, Jesse a révisé l\'intranet IA en fonction des entretiens avec les utilisateurs et a supprimé 68 pages négligées.',
+  withThanks: {
+    eng: 'Team Wayfinder extends its deepest gratitude to the esteemed staff members of IMB for their invaluable guidance throughout our transformative Capstone semester at Camosun College. We wholeheartedly appreciate the unwavering support and direction provided by each individual, which proved instrumental in steering our journey towards success. Your unwavering commitment to our growth and development has left an indelible mark on our team, and we are sincerely thankful for the wealth of knowledge and expertise you generously shared.',
+    fr: 'L\'équipe Wayfinder exprime sa plus profonde gratitude envers les estimés membres du personnel d\'IMB pour leur précieuse guidance tout au long de notre semestre de projet de fin d\'études à Camosun College. Nous apprécions sincèrement le soutien inébranlable et les conseils prodigués par chaque individu, qui ont joué un rôle déterminant dans notre parcours vers le succès. Votre engagement indéfectible envers notre croissance et notre développement a laissé une empreinte indélébile sur notre équipe, et nous vous remercions sincèrement pour la richesse de connaissances et d\'expertise que vous avez généreusement partagées.',
+  },
+  withThanksTitle: {
+    eng: 'Special Thanks',
+    fr: 'Remerciements spéciaux',
   },
   disclaimer: {
     eng: [
