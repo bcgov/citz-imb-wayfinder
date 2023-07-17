@@ -1,4 +1,4 @@
-import Toggle from './Toggle/Toggle';
+import Checkbox from './Checkbox/Checkbox';
 import Spinner from './Spinner/Spinner';
 import Slider from './Slider/Slider';
 import SearchBar from './SearchBar/SearchBar';
@@ -8,7 +8,7 @@ import { Button } from './Button/Button';
 import ToggleSwitch from './ToggleSwitch/ToggleSwitch';
 
 export {
-  Toggle,
+  Checkbox,
   Spinner,
   Slider,
   SearchBar,

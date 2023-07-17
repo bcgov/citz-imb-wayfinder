@@ -4,8 +4,8 @@
  */
 import styled from '@emotion/styled';
 
-const StyledToggle = styled.input`
+const StyledCheckbox = styled.input`
   height: 2.5em;
   width: 2.5em;
 `;
-export default StyledToggle;
+export default StyledCheckbox;
