@@ -11,7 +11,6 @@ import {
   SettingsContainer,
   Section,
   Title,
-  SliderWrapper,
   SettingsWrapper,
   TitleWrapper,
   StyledSelect,
