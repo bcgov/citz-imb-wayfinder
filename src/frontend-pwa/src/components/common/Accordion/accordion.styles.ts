@@ -2,8 +2,8 @@
  * @summary Styling for the Settings view
  * @author Dallas Richmond
  */
+import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
-import mq from '../../../constants/mq';
 
 export const AccordionWrapper = styled.div`
   height: auto;
@@ -31,7 +31,6 @@ export const AccordionTitle = styled.h2`
 `;
 
 export const AccordionContent = styled.div`
-  min-height: 200px;
   background-color: #ffffff;
   overflow: hidden;
 `;
@@ -40,7 +39,7 @@ export const StyledButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40pt;
+  width: 35pt;
   height: 35pt;
   margin: 0 0 0 10pt;
   padding: 0;
