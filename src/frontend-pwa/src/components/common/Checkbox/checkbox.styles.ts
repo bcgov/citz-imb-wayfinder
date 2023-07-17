@@ -1,5 +1,5 @@
 /**
- * @summary Styling for Toggle component
+ * @summary Styling for checkbox component
  * @author  Dallas Richmond
  */
 import styled from '@emotion/styled';
