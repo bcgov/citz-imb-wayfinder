@@ -5,7 +5,7 @@
  * @author  Dallas Richmond, LocalNewsTV
  */
 import { useState } from 'react';
-import { Slider, Toggle } from '../../components/common';
+import { Slider, ToggleSwitch } from '../../components/common';
 import { NavButton } from '../../components/appNav';
 import {
   SettingsContainer,
@@ -119,7 +119,7 @@ export default function Settings() {
               tip={SettingsContent.offlineModeToolTip[lang]}
             />
           </TitleWrapper>
-          <Toggle
+          <ToggleSwitch
             ariaLabel={SettingsContent.offlineMode[lang]}
             onChange={handleOfflineToggleChange}
             value={offlineToggleValue}
@@ -132,7 +132,7 @@ export default function Settings() {
               tip={SettingsContent.analyticsToolTip[lang]}
             />
           </TitleWrapper>
-          <Toggle
+          <ToggleSwitch
             ariaLabel={SettingsContent.analytics[lang]}
             onChange={handleAnalyticsToggleChange}
             value={analyticsToggleValue}

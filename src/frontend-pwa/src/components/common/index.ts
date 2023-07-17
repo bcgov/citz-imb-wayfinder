@@ -5,6 +5,7 @@ import SearchBar from './SearchBar/SearchBar';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import { Button } from './Button/Button';
+import ToggleSwitch from './ToggleSwitch/ToggleSwitch';
 
 export {
   Toggle,
@@ -14,4 +15,5 @@ export {
   Header,
   Footer,
   Button,
+  ToggleSwitch,
 };

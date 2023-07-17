@@ -1,6 +1,6 @@
 /**
  * @summary Styling for Toggle component
- * @author Dallas Richmond
+ * @author  Dallas Richmond
  */
 import styled from '@emotion/styled';
 
