@@ -6,7 +6,7 @@
  */
 /* eslint-disable max-len */
 import { useState } from 'react';
-import { Button, Toggle } from '../../components/common';
+import { Button, Checkbox } from '../../components/common';
 import { StyledContainer, StyledOuterDiv, StyledFieldSetDiv } from './eula.styles';
 import useAppService from '../../services/app/useAppService';
 import { eulaContent } from '../../content/content';
@@ -37,7 +37,7 @@ export default function Eula() {
             <legend>{eulaContent.agreeStatement[lang]}</legend>
             <br />
             <StyledFieldSetDiv>
-              <Toggle
+              <Checkbox
                 ariaLabel="Eula check"
                 onChange={handleConsentChange}
                 value={termAgreement}
