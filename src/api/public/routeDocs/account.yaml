@@ -4,7 +4,8 @@ paths:
       tags:
         - Account
       summary: Delete User account
-      description: Users can delete own account, or target an account for deletion
+      description: Endpoint for Admin accounts to delete other user accounts.
+                   Or Allow users to delete their own account.
       consumes:
         - application/json
       requestBody: 
