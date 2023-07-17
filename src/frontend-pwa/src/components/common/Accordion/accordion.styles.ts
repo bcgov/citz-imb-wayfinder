@@ -2,7 +2,6 @@
  * @summary Styling for the Settings view
  * @author Dallas Richmond
  */
-import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const AccordionWrapper = styled.div`
