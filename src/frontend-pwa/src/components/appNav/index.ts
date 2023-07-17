@@ -3,6 +3,7 @@ import NavButton from './NavButton/NavButton';
 import SettingsNavButton from './SettingsNavButton/SettingsNavButton';
 import SmallNavButton from './SmallNavButton/SmallNavButton';
 import OfficeNavButton from './OfficeNavButton/OfficeNavButton';
+import SettingsRowButton from './SettingsRowButton/SettingsRowButton';
 
 export {
   BackNavButton,
@@ -10,4 +11,5 @@ export {
   SettingsNavButton,
   SmallNavButton,
   OfficeNavButton,
+  SettingsRowButton,
 };
