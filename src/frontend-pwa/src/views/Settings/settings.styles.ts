@@ -47,6 +47,8 @@ export const SettingsContainer = styled.div`
 
 export const Section = styled.div`
   margin-bottom: 20px;
+  border-bottom: 1px solid #d9d9d9;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
