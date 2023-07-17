@@ -16,7 +16,7 @@ export const ImageCont = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40pt;
+  width: 35pt;
   height: 35pt;
   margin: 0 0 0 10pt;
   padding: 0;
