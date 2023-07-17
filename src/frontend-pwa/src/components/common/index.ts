@@ -6,6 +6,7 @@ import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import { Button } from './Button/Button';
 import Toggle from './Toggle/Toggle';
+import Accordion from './Accordion/Accordion';
 
 export {
   Checkbox,
@@ -16,4 +17,5 @@ export {
   Footer,
   Button,
   Toggle,
+  Accordion,
 };

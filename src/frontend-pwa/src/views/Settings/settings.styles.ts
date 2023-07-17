@@ -48,6 +48,7 @@ export const SettingsContainer = styled.div`
 export const Section = styled.div`
   border-bottom: 1px solid #88888847;
   height: 50px;
+  width: 240pt;
   display: flex;
   align-items: center;
   justify-content: space-between;

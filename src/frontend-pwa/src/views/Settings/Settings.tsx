@@ -5,7 +5,7 @@
  * @author  Dallas Richmond, LocalNewsTV
  */
 import { useState } from 'react';
-import { Slider, Toggle } from '../../components/common';
+import { Slider, Toggle, Accordion } from '../../components/common';
 import { SettingsRowButton } from '../../components/appNav';
 import {
   SettingsContainer,
@@ -94,21 +94,18 @@ export default function Settings() {
           </StyledSelect>
         </Section>
         <Section>
-          <SliderWrapper>
-            <TitleWrapper>
-              <Title>{SettingsContent.locationRange[lang]}</Title>
-              <MoreInfoButton
-                tip={SettingsContent.locationToolTip[lang]}
+          <Accordion
+            content={(
+              <Slider
+                ariaLabel={SettingsContent.locationRange[lang]}
+                min={1}
+                max={1000}
+                onChange={handleLocationRangeChange}
+                value={locationRangeValue}
               />
-            </TitleWrapper>
-            <Slider
-              ariaLabel={SettingsContent.locationRange[lang]}
-              min={1}
-              max={1000}
-              onChange={handleLocationRangeChange}
-              value={locationRangeValue}
-            />
-          </SliderWrapper>
+            )}
+            text={SettingsContent.locationRange[lang]}
+          />
         </Section>
         <Section>
           <TitleWrapper>
