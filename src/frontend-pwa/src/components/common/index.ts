@@ -5,7 +5,7 @@ import SearchBar from './SearchBar/SearchBar';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import { Button } from './Button/Button';
-import ToggleSwitch from './ToggleSwitch/ToggleSwitch';
+import Toggle from './Toggle/Toggle';
 
 export {
   Checkbox,
@@ -15,5 +15,5 @@ export {
   Header,
   Footer,
   Button,
-  ToggleSwitch,
+  Toggle,
 };

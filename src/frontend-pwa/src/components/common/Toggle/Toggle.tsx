@@ -1,5 +1,5 @@
 /**
- * @summary A reusable component that creates a basic toggle switch component
+ * @summary A reusable component that creates a basic toggle component
  * @param ariaLabel - an accessibility label for the input
  * @param onChange - is a function that is called when the toggle value changes
  * @type {(ariaLabel : string, onChange: (value: boolean) => void)}
@@ -13,7 +13,7 @@ export type ToggleProps = {
   value: boolean;
 };
 
-export default function ToggleSwitch({ ariaLabel, onChange, value }: ToggleProps) {
+export default function Toggle({ ariaLabel, onChange, value }: ToggleProps) {
   const handleChange = () => {
     const newChecked = !value;
     onChange(newChecked);
