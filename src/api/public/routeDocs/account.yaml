@@ -53,7 +53,7 @@ paths:
         '403':
           $ref: '#/components/responses/403Unauthorized'
         '409':
-          $ref: '#/components/responsed/409Conflict'
+          $ref: '#/components/responses/409Conflict'
 
     post:
       tags:
@@ -79,7 +79,7 @@ paths:
         '403':
           $ref: '#/components/responses/403Unauthorized'
         '409':
-          $ref: '#/components/responsed/409Conflict'
+          $ref: '#/components/responses/409Conflict'
     
     put:
       tags:
@@ -105,4 +105,4 @@ paths:
         '403':
           $ref: '#/components/responses/403Unauthorized'
         '409':
-          $ref: '#/components/responsed/409Conflict'
+          $ref: '#/components/responses/409Conflict'

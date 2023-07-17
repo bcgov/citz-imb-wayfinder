@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllLocations, locationByCriteria, updateLocations } from '../controllers/location-controller';
+import { getAllLocations, updatedInfo, updateLocations } from '../controllers/location-controller';
 
 /**
  * @summary The Locations Endpoint is intended to send a list of all BC Service Locations.
@@ -12,6 +12,6 @@ const router = express.Router();
 router.route('/locations')
   .get(getAllLocations)
   .patch(updateLocations)
-  .post(locationByCriteria);
+  .post(updatedInfo);
 
 export default router;
