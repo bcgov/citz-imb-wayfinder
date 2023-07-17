@@ -89,7 +89,7 @@ export default function Settings() {
               tip={SettingsContent.languageToolTip[lang]}
             />
           </TitleWrapper>
-          <StyledSelect onChange={handleLang} value={lang} defaultValue={lang}>
+          <StyledSelect onChange={handleLang} value={lang}>
             {SettingsContent.languages[lang].map((data: string, index: number) => (
             <option value={SettingsContent.languages.keys[index]} key={data}>{data}</option>
             ))}
