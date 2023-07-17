@@ -6,7 +6,7 @@
  */
 import { useState } from 'react';
 import { Slider, Toggle } from '../../components/common';
-import { NavButton } from '../../components/appNav';
+import { SettingsRowButton } from '../../components/appNav';
 import {
   SettingsContainer,
   Section,
@@ -16,8 +16,6 @@ import {
   TitleWrapper,
   StyledSelect,
 } from './settings.styles';
-import file from '/file-text.svg';
-import person from '/person-lines-fill.svg';
 import useAppService from '../../services/app/useAppService';
 import MoreInfoButton from '../../components/common/MoreInfoButton/MoreInfoButton';
 import { SettingsContent } from '../../content/content';
@@ -139,19 +137,15 @@ export default function Settings() {
           />
         </Section>
         <Section>
-          <NavButton
+          <SettingsRowButton
             path="/settings/about"
             text={SettingsContent.aboutContact[lang]}
-            hex="#DBE1EB"
-            icon={person}
           />
         </Section>
         <Section>
-          <NavButton
+          <SettingsRowButton
             path="/eula"
             text={SettingsContent.license[lang]}
-            hex="#DBE1EB"
-            icon={file}
           />
         </Section>
       </SettingsContainer>
