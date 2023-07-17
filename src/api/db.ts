@@ -11,6 +11,7 @@ import './models/singleLocation-model';
 import './models/analytic-model';
 import './models/report-model';
 import './models/userAccount-model';
+import './models/update-model';
 
 dotenv.config();
 mongoose.set('strictQuery', true);

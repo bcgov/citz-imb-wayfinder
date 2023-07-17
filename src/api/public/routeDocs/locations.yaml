@@ -48,8 +48,8 @@ paths:
     post:
       tags:
         - Locations
-      summary: Get Locations by Type
-      description: Get all locations and services of a single type (e.g. ServiceBC, HealthBC)
+      summary: Iterates 'updateArr' to send back an updated list of SingleLocations
+      description: Update route for the Wayfinder application to return data only when there has been a change in the dataset. Reduces data consumption in the application.
       responses:
         '200':
           description: OK

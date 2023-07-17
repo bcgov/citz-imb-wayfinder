@@ -7,23 +7,18 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { Request, Response } from 'express';
 import SingleLocation from '../types/SingleLocation';
+import UpdateDate from '../types/UpdateDate';
+import extractServiceList from '../utils/extractServiceList';
 import httpResponses from '../utils/httpResponse';
+import servicesOffered from '../utils/servicesOffered';
 
 dotenv.config();
 const locationsModel = mongoose.model('location');
+const dateModel = mongoose.model('updateDate');
 
 /** ********************************************************************
  *                Helper Utilities to the Endpoints
  ******************************************************************** */
-
-/** @desc List of service locations available in the Database */
-const servicesOffered = [
-  'ServiceBC',
-  'HealthBC',
-  'ICBC',
-  'BCHousing',
-  'Courts',
-];
 
 /**
  * @desc Server response object when using the GET method
@@ -40,19 +35,8 @@ type ResponseObject = {
   CourtsLocations: Array<SingleLocation>;
   CourtsServices: Array<string>;
   allServices: Array<string>;
+  updateArr: Array<UpdateDate>;
 }
-
-/**
- * @desc    Takes a Single Location, pulls the list of services from each then filters
- *          the object into a unique list of alphabetized services.
- * @param   locations Array of SingleLocations
- * @returns Unique string array containing all services available in the dataset
- */
-const extractServiceList = (locations: Array<SingleLocation>): Array<string> => {
-  const result: Array<string> = [];
-  locations.forEach((location) => result.push(...location.services));
-  return [...new Set(result.sort())];
-};
 
 /** ********************************************************************
  *               Endpoint Functionality (GET, POST, PATCH)
@@ -72,6 +56,7 @@ const extractServiceList = (locations: Array<SingleLocation>): Array<string> => 
  *              "BCHousingLocations": [{}],
  *              "BCHousingServices": [""],
  *              "allServices": [""],
+ *              "updateArr": [UpdateDate]
  *           }
  * @returns  {ResponseObject} Array of Sites by Location
  */
@@ -83,6 +68,10 @@ export const getAllLocations = async (req: Request, res: Response): Promise<Resp
   responseObject.ICBCLocations = await locationsModel.find({ serviceType: 'ICBC' });
   responseObject.CourtsLocations = await locationsModel.find({ serviceType: 'Courts' });
   responseObject.BCHousingLocations = await locationsModel.find({ serviceType: 'BCHousing' });
+
+  // Get list for when last updated
+  responseObject.updateArr = await dateModel.find({});
+
   // Gather unique Services List
   responseObject.HealthBCServices = extractServiceList(responseObject.HealthBCLocations);
   responseObject.ServiceBCServices = extractServiceList(responseObject.ServiceBCLocations);
@@ -101,27 +90,52 @@ export const getAllLocations = async (req: Request, res: Response): Promise<Resp
   return res.status(200).json(responseObject);
 };
 
+export interface ReturnObject {
+  [key: string]: any;
+}
+
 /**
- * @desc     To reduce load on reseeding updated data, Sends location data specific to one Service
- * @summary  POST Method, Sends location data for one service type.
- * @typedef  { Object } ResponseObject
- * @property { Array } locationData Array of @type {SingleLocations}
- * @property { Array } serviceData String Array of @type {string}
- * @returns  Returns services and locations of a single type e.g.: ServiceBC, HealthBC
+ * @desc    takes a user submitted array of {UpdateDate} and compares to stored server values
+ *          If a value does not match, the server prepares a new set of data to send to the phone
+ * @returns {ReturnObject} Updated object with arrays of SingleLocation, and new UpdateDate Array
  */
-export const locationByCriteria = async (req: Request, res: Response): Promise<Response> => {
-  if (servicesOffered.includes(req.body.serviceType)) {
-    const locationData: Array<SingleLocation> = await locationsModel.find({
-      serviceType: req.body.serviceType,
+export const updatedInfo = async (req: Request, res: Response) => {
+  const responseObject: ReturnObject = {};
+  if (req.body.updateArr && typeof req.body.updateArr === typeof []) {
+    const datesArr: Array<UpdateDate> = await dateModel.find({});
+    responseObject.datesArr = datesArr;
+    const promises = req.body.updateArr.map(async (item: UpdateDate) => {
+      if (servicesOffered.includes(item.serviceType)) {
+        const serviceDate: any = datesArr.find((service: UpdateDate) => (
+          item.serviceType === service.serviceType
+        ));
+        if (serviceDate
+          && new Date(item.dateModified).getTime() !== serviceDate.dateModified.getTime()) {
+          const updatedLocations: Array<SingleLocation> = await locationsModel.find(
+            { serviceType: item.serviceType },
+          );
+          const updatedServices = extractServiceList(updatedLocations);
+          responseObject[`${item.serviceType}Locations`] = updatedLocations;
+          responseObject[`${item.serviceType}Services`] = updatedServices;
+        }
+      }
     });
-    const serviceData: Array<string> = extractServiceList(locationData);
-    const response: Object = {
-      locationData,
-      serviceData,
-    };
-    return res.status(200).json(response);
+    await Promise.all(promises);
+    return res.status(200).json(responseObject);
   }
-  return res.status(400).send(httpResponses[400]);
+  return res.status(200).json(responseObject);
+};
+
+/**
+ * @desc Updates the date objects in the database to users only pull in datasets
+ *       containing new information. Scales to new service types.
+ */
+const updateDateObject = async (serviceType: string) => {
+  await dateModel.findOneAndUpdate(
+    { serviceType },
+    { dateModified: Date.now() },
+    { upsert: true },
+  );
 };
 
 /**
@@ -141,10 +155,12 @@ export const updateLocations = async (req: Request, res: Response): Promise<Resp
         website: req.body.website,
         locale: req.body.locale,
       }, req.body);
+      await updateDateObject(req.body.serviceType);
       return res.status(204).send(httpResponses[204]);
     }
     try {
       await locationsModel.create(req.body);
+      await updateDateObject(req.body.serviceType);
       return res.status(201).send(httpResponses[201]);
     } catch (ex) {
       return res.status(400).send(httpResponses[400]);
