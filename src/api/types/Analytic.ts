@@ -8,7 +8,18 @@ type Analytic = {
   longitude: number;
   usage: {
     search?: string;
-    function: string;
+    function?: string;
+    closestOffice?: {
+      serviceType: string;
+      locality: string;
+    }
+    serviceType?: string;
+    settings?: {
+      valueStr?: string;
+      valueBool?: boolean;
+      type: string;
+    }
+    newUser?: boolean
   };
   date?: Date;
 };
