@@ -17,7 +17,7 @@ type Analytic = {
     settings?: {
       valueStr?: string;
       valueBool?: boolean;
-      type: string;
+      settingType: string;
     }
     newUser?: boolean
   };
