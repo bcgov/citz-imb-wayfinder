@@ -13,7 +13,7 @@ export const AccordionItem = styled.div<AccordionProps>`
   border-bottom: ${(props) => (props.open ? 'none' : '1px solid #88888847')};
   border-top: 1px solid #88888847;
   min-height: 50px;
-  width: 80%;
+  width: 100%;
   display: flex;
 `;
 
@@ -32,7 +32,7 @@ export const AccordionContent = styled.div<AccordionProps>`
   display: ${(props) => (props.open ? 'block' : 'none')};
   background-color: #ffffff;
   padding: 5pt;
-  width: 80%;
+  width: 100%;
 `;
 
 export const StyledButton = styled.button`

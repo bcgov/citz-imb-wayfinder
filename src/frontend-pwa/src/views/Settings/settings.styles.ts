@@ -9,10 +9,16 @@ import mq from '../../constants/mq';
 export const SettingsContainer = styled.div`
   display: flex;
   justify-content: flex-start;
-  width: 100%;
+  width: 80%;
   padding: 50pt 0pt;
   flex-direction: column;
   max-height: 95%;
+  @media (min-width: ${mq.tablet}) {
+    width: 60%;
+  }
+  @media (min-width: ${mq.desktop}) {
+    width: 40%;
+  }
 `;
 
 export const ContentContainer = styled.div`
@@ -33,15 +39,14 @@ export const ContentContainer = styled.div`
 `;
 
 export const Header = styled.h1`
-  padding: 10pt 0pt 0pt 15pt;
-  width: 100%;
+  padding-top: 5pt;
 `;
 
 export const Section = styled.div`
   border-bottom: 1px solid #88888847;
   border-top: 1px solid #88888847;
   min-height: 50px;
-  width: 80%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;

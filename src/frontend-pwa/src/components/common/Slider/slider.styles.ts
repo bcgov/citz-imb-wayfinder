@@ -5,7 +5,7 @@
 import styled from '@emotion/styled';
 
 export const StyledSlider = styled.input`
-  width: 75vw;
+  width: 90%;
 `;
 
 export const StyledP = styled.p`
