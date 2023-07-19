@@ -28,6 +28,38 @@ components:
             function:
               type: string
               example: "find location"
+            closestOffice:
+              type: object
+              required:
+                - serviceType
+                - locality
+              properties:
+                serviceType:
+                  type: string
+                  example: ServiceBC
+                locality:
+                  type: string
+                  example: Victoria
+            serviceType:
+              type: string
+              example: ServiceBC
+            settings:
+              type: object
+              required:
+                - settingType
+              properties:
+                valueStr:
+                  type: string
+                  example: French
+                valueBool:
+                  type: boolean
+                  example: true
+                settingType:
+                  type: string
+                  example: language
+        newUser:
+          type: boolean
+          example: true
         date:
           type: number
           example: 1685987761167

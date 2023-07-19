@@ -28,7 +28,58 @@ const AnalyticSchema = new mongoose.Schema({
       minLength: 4,
       maxLength: 15,
       trim: true,
-      match: /^(find service|find location|report)$/i,
+      match: /^(find service|find location|report|report history|location details|settings|about)$/i,
+    },
+    closestOffice: {
+      required: false,
+      type: {
+        serviceType: {
+          type: String,
+          required: true,
+          minLength: 4,
+          maxLength: 20,
+          trim: true,
+          match: /^[a-zA-Z]+$/i,
+        },
+        locality: {
+          type: String,
+          required: true,
+          minLength: 4,
+          maxLength: 72,
+          trim: true,
+        },
+      },
+    },
+    serviceType: {
+      required: false,
+      type: String,
+      minLength: 4,
+      maxLength: 20,
+    },
+    settings: {
+      required: false,
+      type: {
+        valueStr: {
+          required: false,
+          type: String,
+          minLength: 4,
+          maxLength: 24,
+        },
+        valueBool: {
+          required: false,
+          type: Boolean,
+        },
+        settingType: {
+          type: String,
+          minLength: 4,
+          maxLength: 20,
+          match: /^(language|location range|offline mode|analytics)$/i,
+        },
+      },
+    },
+    newUser: {
+      type: Boolean,
+      required: false,
     },
   },
   date: {
