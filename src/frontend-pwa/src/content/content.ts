@@ -60,6 +60,10 @@ export const SettingsContent: ContentMap = {
     eng: 'What\'s New?',
     fr: 'Quoi de neuf?',
   },
+  refreshData: {
+    eng: 'Refresh App Data',
+    fr: 'Actualiser les données de l\'application',
+  },
   languages: {
     eng: [
       'English',

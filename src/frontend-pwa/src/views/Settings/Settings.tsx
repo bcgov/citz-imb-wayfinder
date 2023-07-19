@@ -5,7 +5,12 @@
  * @author  Dallas Richmond, LocalNewsTV
  */
 import { useState } from 'react';
-import { Slider, Toggle, Accordion } from '../../components/common';
+import {
+  Slider,
+  Toggle,
+  Accordion,
+  Button,
+} from '../../components/common';
 import { SettingsRowButton } from '../../components/appNav';
 import {
   Header,
@@ -22,11 +27,17 @@ import MoreInfoButton from '../../components/common/MoreInfoButton/MoreInfoButto
 import { SettingsContent } from '../../content/content';
 
 export default function Settings() {
-  const { setSettings, updateSettings, state } = useAppService();
+  const {
+    setAppData,
+    setSettings,
+    updateSettings,
+    state,
+  } = useAppService();
   const [locationRangeValue, setLocationRangeValue] = useState(state.settings.location_range);
   const [offlineToggleValue, setOfflineToggleValue] = useState(state.settings.offline_mode);
   const [analyticsToggleValue, setAnalyticsToggleValue] = useState(state.settings.analytics_opt_in);
   const [lang, setLang] = useState(state.settings.lang || 'eng');
+  const onlineCheck = state.isOnline && !state.settings.offline_mode;
   /**
    * @summary Handles the change of the Location Range slider
    * @param value is the location range value of the slider
@@ -73,6 +84,10 @@ export default function Settings() {
     setLang(e.target.value);
     setSettings({ language: e.target.value });
     updateSettings();
+  };
+
+  const handleRefresh = () => {
+    setAppData(onlineCheck);
   };
 
   return (
@@ -141,6 +156,18 @@ export default function Settings() {
             value={analyticsToggleValue}
           />
         </Section>
+        <Accordion
+          content={(
+            <Button
+              handleClick={handleRefresh}
+              variant="primary"
+              size="sm"
+              disabled={!onlineCheck}
+              text={!onlineCheck ? 'Offline' : 'Refresh'}
+            />
+          )}
+          text={(SettingsContent.refreshData[lang])}
+        />
         <Section>
           <SettingsRowButton
             path="/settings/about"
