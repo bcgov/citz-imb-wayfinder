@@ -18,11 +18,13 @@ import {
 type AccordionProps = {
   content: any;
   text: string;
+  tooltip?: any;
 }
 
 export default function Accordion({
   content,
   text,
+  tooltip,
 }: AccordionProps) {
   const [open, setOpen] = useState(false);
 
@@ -35,6 +37,7 @@ export default function Accordion({
       <AccordionItem onClick={toggle}>
         <AccordionTitle>
           {text}
+          {tooltip}
         </AccordionTitle>
         <StyledButton>
           <Image
@@ -51,3 +54,7 @@ export default function Accordion({
     </AccordionWrapper>
   );
 }
+
+Accordion.defaultProps = {
+  tooltip: '', // Provide a default empty function
+};

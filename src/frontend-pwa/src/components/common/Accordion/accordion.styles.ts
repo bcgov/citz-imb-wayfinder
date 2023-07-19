@@ -19,19 +19,19 @@ export const AccordionItem = styled.div`
 
 export const AccordionTitle = styled.h2`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
   font-size: 18px;
   text-wrap: auto;
   width: 100%;
-  height: 45pt;
   color: #000000CC;
   margin: 0;
+  align-items: center;
 `;
 
 export const AccordionContent = styled.div`
   background-color: #ffffff;
   overflow: hidden;
+  padding: 5pt;
 `;
 
 export const StyledButton = styled.button`
@@ -39,7 +39,6 @@ export const StyledButton = styled.button`
   align-items: center;
   justify-content: center;
   width: 35pt;
-  height: 35pt;
   margin: 0 0 0 10pt;
   padding: 0;
   background-color: #ffffff;

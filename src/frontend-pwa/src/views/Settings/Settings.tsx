@@ -104,6 +104,11 @@ export default function Settings() {
               />
             )}
             text={SettingsContent.locationRange[lang]}
+            tooltip={(
+              <MoreInfoButton
+                tip={SettingsContent.locationRange[lang]}
+              />
+            )}
           />
         </Section>
         <Section>
