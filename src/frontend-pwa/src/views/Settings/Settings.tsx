@@ -86,6 +86,10 @@ export default function Settings() {
     updateSettings();
   };
 
+  /**
+   * @summary Pulls in new app data if user hit the refresh button
+   * @author  Dallas Richmond
+   */
   const handleRefresh = () => {
     setAppData(onlineCheck);
   };
