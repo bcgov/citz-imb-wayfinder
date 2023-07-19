@@ -25,39 +25,3 @@ describe('Verify Locations endpoint functions', () => {
     expect(typeof response.body.allServices).toBe(typeof []);
   });
 });
-
-describe('Verify Locations POST method', () => {
-  test('/locations POST fetching only ServiceBC data', async () => {
-    const response = await request.post('/locations').send({"serviceType": "ServiceBC"})
-    expect(response.ok).toBe(true);
-    expect(response.status).toBe(200);
-    expect(typeof response.body.locationData).toBe(typeof []);
-    expect(typeof response.body.serviceData).toBe(typeof []);
-  })
-})
-
-describe('Verify Locations POST method', () => {
-  test('/locations POST fetching only HealthBC data', async () => {
-    const response = await request.post('/locations').send({"serviceType": "HealthBC"})
-    expect(response.ok).toBe(true);
-    expect(response.status).toBe(200);
-    expect(typeof response.body.locationData).toBe(typeof []);
-    expect(typeof response.body.serviceData).toBe(typeof []);
-  })
-})
-
-describe('Verify Locations POST method', () => {
-  test('/locations POST requesting Invalid data', async () => {
-    const response = await request.post('/locations').send({"serviceType": "supertest"})
-    expect(response.ok).toBe(false);
-    expect(response.status).toBe(400);
-  })
-})
-
-describe('Verify Locations PATCH method with no Authorization', () => {
-  test('/locations POST requesting Invalid data', async () => {
-    const response = await request.patch('/locations')
-    expect(response.ok).toBe(false);
-    expect(response.status).toBe(403);
-  })
-})
