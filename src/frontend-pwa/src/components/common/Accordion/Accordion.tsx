@@ -3,11 +3,11 @@
  * @summary A reusable accordion component
  * @author  Dallas Richmond
  */
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import nextArrow from '/next-arrow.svg';
+import MoreInfoButton from '../MoreInfoButton/MoreInfoButton';
 
 import {
-  AccordionWrapper,
   AccordionItem,
   AccordionContent,
   AccordionTitle,
@@ -18,7 +18,7 @@ import {
 type AccordionProps = {
   content: any;
   text: string;
-  tooltip?: any;
+  tooltip?: ReactElement<typeof MoreInfoButton>;
 }
 
 export default function Accordion({
@@ -33,8 +33,8 @@ export default function Accordion({
   };
 
   return (
-    <AccordionWrapper>
-      <AccordionItem onClick={toggle}>
+    <>
+      <AccordionItem open={open} onClick={toggle}>
         <AccordionTitle>
           {text}
           {tooltip}
@@ -50,8 +50,8 @@ export default function Accordion({
           />
         </StyledButton>
       </AccordionItem>
-      {open && <AccordionContent>{content}</AccordionContent>}
-    </AccordionWrapper>
+      <AccordionContent open={open}>{content}</AccordionContent>
+    </>
   );
 }
 

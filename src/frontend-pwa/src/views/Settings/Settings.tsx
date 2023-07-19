@@ -8,12 +8,14 @@ import { useState } from 'react';
 import { Slider, Toggle, Accordion } from '../../components/common';
 import { SettingsRowButton } from '../../components/appNav';
 import {
-  SettingsContainer,
+  Header,
   Section,
   Title,
-  SettingsWrapper,
   TitleWrapper,
   StyledSelect,
+  SliderWrapper,
+  SettingsContainer,
+  ContentContainer,
 } from './settings.styles';
 import useAppService from '../../services/app/useAppService';
 import MoreInfoButton from '../../components/common/MoreInfoButton/MoreInfoButton';
@@ -74,27 +76,29 @@ export default function Settings() {
   };
 
   return (
-    <SettingsWrapper>
-      <SettingsContainer>
-        <Section>
-          <h1>{SettingsContent.settingsTitle[lang]}</h1>
-        </Section>
-        <Section>
-          <TitleWrapper>
-            <Title>{SettingsContent.language[lang]}</Title>
+    <SettingsContainer>
+      <Header>
+        {SettingsContent.settingsTitle[lang]}
+      </Header>
+      <ContentContainer>
+        <Accordion
+          content={(
+            <StyledSelect onChange={handleLang} value={lang}>
+              {SettingsContent.languages[lang].map((data: string, index: number) => (
+              <option value={SettingsContent.languages.keys[index]} key={data}>{data}</option>
+              ))}
+            </StyledSelect>
+          )}
+          text={SettingsContent.language[lang]}
+          tooltip={(
             <MoreInfoButton
               tip={SettingsContent.languageToolTip[lang]}
             />
-          </TitleWrapper>
-          <StyledSelect onChange={handleLang} value={lang}>
-            {SettingsContent.languages[lang].map((data: string, index: number) => (
-            <option value={SettingsContent.languages.keys[index]} key={data}>{data}</option>
-            ))}
-          </StyledSelect>
-        </Section>
-        <Section>
-          <Accordion
-            content={(
+          )}
+        />
+        <Accordion
+          content={(
+            <SliderWrapper>
               <Slider
                 ariaLabel={SettingsContent.locationRange[lang]}
                 min={1}
@@ -102,15 +106,15 @@ export default function Settings() {
                 onChange={handleLocationRangeChange}
                 value={locationRangeValue}
               />
-            )}
-            text={SettingsContent.locationRange[lang]}
-            tooltip={(
-              <MoreInfoButton
-                tip={SettingsContent.locationRange[lang]}
-              />
-            )}
-          />
-        </Section>
+            </SliderWrapper>
+          )}
+          text={SettingsContent.locationRange[lang]}
+          tooltip={(
+            <MoreInfoButton
+              tip={SettingsContent.locationRange[lang]}
+            />
+          )}
+        />
         <Section>
           <TitleWrapper>
             <Title>{SettingsContent.offlineMode[lang]}</Title>
@@ -149,7 +153,31 @@ export default function Settings() {
             text={SettingsContent.license[lang]}
           />
         </Section>
-      </SettingsContainer>
-    </SettingsWrapper>
+        <Section>
+          <SettingsRowButton
+            path="/eula"
+            text={SettingsContent.license[lang]}
+          />
+        </Section>
+        <Section>
+          <SettingsRowButton
+            path="/eula"
+            text={SettingsContent.license[lang]}
+          />
+        </Section>
+        <Section>
+          <SettingsRowButton
+            path="/eula"
+            text={SettingsContent.license[lang]}
+          />
+        </Section>
+        <Section>
+          <SettingsRowButton
+            path="/eula"
+            text={SettingsContent.license[lang]}
+          />
+        </Section>
+      </ContentContainer>
+    </SettingsContainer>
   );
 }
