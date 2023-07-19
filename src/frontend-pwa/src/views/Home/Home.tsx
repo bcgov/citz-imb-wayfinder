@@ -27,7 +27,7 @@ export default function Home() {
             path="/location"
             text={homeContent.findOffice[lang]}
             icon={location}
-            hex="#DEF3FB"
+            hex="#C8E1F8"
           />
         </ButtonWrapper>
         <ButtonWrapper>
@@ -35,7 +35,7 @@ export default function Home() {
             path="/services"
             text={homeContent.findService[lang]}
             icon={services}
-            hex="#EEE0E9"
+            hex="#FFD6DA"
           />
         </ButtonWrapper>
         <ButtonWrapper>
@@ -43,7 +43,7 @@ export default function Home() {
             path="/report"
             text={homeContent.report[lang]}
             icon={report}
-            hex="#FEF2DF"
+            hex="#FDE7C6"
           />
         </ButtonWrapper>
       </Wrapper>
