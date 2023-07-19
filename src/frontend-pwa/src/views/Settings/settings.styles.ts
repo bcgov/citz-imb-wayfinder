@@ -1,6 +1,6 @@
 /**
  * @summary Styling for the Settings view
- * @author Dallas Richmond
+ * @author  Dallas Richmond
  */
 import styled from '@emotion/styled';
 import typography from '../../typography';
