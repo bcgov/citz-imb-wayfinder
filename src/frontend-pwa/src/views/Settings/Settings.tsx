@@ -102,7 +102,7 @@ export default function Settings() {
               <Slider
                 ariaLabel={SettingsContent.locationRange[lang]}
                 min={1}
-                max={1000}
+                max={5000}
                 onChange={handleLocationRangeChange}
                 value={locationRangeValue}
               />
@@ -145,6 +145,54 @@ export default function Settings() {
           <SettingsRowButton
             path="/settings/about"
             text={SettingsContent.aboutContact[lang]}
+          />
+        </Section>
+        <Section>
+          <SettingsRowButton
+            path="/eula"
+            text={SettingsContent.license[lang]}
+          />
+        </Section>
+        <Section>
+          <SettingsRowButton
+            path="/"
+            text={SettingsContent.changeLog[lang]}
+          />
+        </Section>
+        <Section>
+          <SettingsRowButton
+            path="/eula"
+            text={SettingsContent.license[lang]}
+          />
+        </Section>
+        <Section>
+          <SettingsRowButton
+            path="/eula"
+            text={SettingsContent.license[lang]}
+          />
+        </Section>
+        <Section>
+          <SettingsRowButton
+            path="/eula"
+            text={SettingsContent.license[lang]}
+          />
+        </Section>
+        <Section>
+          <SettingsRowButton
+            path="/eula"
+            text={SettingsContent.license[lang]}
+          />
+        </Section>
+        <Section>
+          <SettingsRowButton
+            path="/eula"
+            text={SettingsContent.license[lang]}
+          />
+        </Section>
+        <Section>
+          <SettingsRowButton
+            path="/eula"
+            text={SettingsContent.license[lang]}
           />
         </Section>
         <Section>

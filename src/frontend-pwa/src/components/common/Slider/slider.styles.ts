@@ -3,13 +3,9 @@
  * @author Dallas Richmond
  */
 import styled from '@emotion/styled';
-import mq from '../../../constants/mq';
 
 export const StyledSlider = styled.input`
-  width: 28vw;
-  @media (max-width: ${mq.tablet}) {
-    width: 80vw;
-  }
+  width: 75vw;
 `;
 
 export const StyledP = styled.p`

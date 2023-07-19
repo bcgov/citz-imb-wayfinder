@@ -1,5 +1,5 @@
 const mq = {
-  mobile: '480px',
+  mobile: '400px',
   tablet: '768px',
   desktop: '1025px',
 };
