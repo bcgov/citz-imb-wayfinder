@@ -56,6 +56,14 @@ export const SettingsContent: ContentMap = {
     eng: 'License Agreement',
     fr: 'Contrat de licence',
   },
+  changeLog: {
+    eng: 'What\'s New?',
+    fr: 'Quoi de neuf?',
+  },
+  refreshData: {
+    eng: 'Refresh App Data',
+    fr: 'Actualiser les données de l\'application',
+  },
   languages: {
     eng: [
       'English',
@@ -261,8 +269,8 @@ export const officeOptionsContent: ContentMap = {
   },
   bcHousing: {
     eng: 'BC Housing',
-    fr: 'Logement en BC'
-  }
+    fr: 'Logement en BC',
+  },
 };
 
 export const reportContent: ContentMap = {

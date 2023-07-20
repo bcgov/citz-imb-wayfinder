@@ -5,29 +5,39 @@
  * @author  Dallas Richmond, LocalNewsTV
  */
 import { useState } from 'react';
-import { Slider, Toggle } from '../../components/common';
-import { NavButton } from '../../components/appNav';
 import {
-  SettingsContainer,
+  Slider,
+  Toggle,
+  Accordion,
+  Button,
+} from '../../components/common';
+import { SettingsRowButton } from '../../components/appNav';
+import {
+  Header,
   Section,
   Title,
-  SliderWrapper,
-  SettingsWrapper,
   TitleWrapper,
   StyledSelect,
+  SliderWrapper,
+  SettingsContainer,
+  ContentContainer,
 } from './settings.styles';
-import file from '/file-text.svg';
-import person from '/person-lines-fill.svg';
 import useAppService from '../../services/app/useAppService';
 import MoreInfoButton from '../../components/common/MoreInfoButton/MoreInfoButton';
 import { SettingsContent } from '../../content/content';
 
 export default function Settings() {
-  const { setSettings, updateSettings, state } = useAppService();
+  const {
+    setAppData,
+    setSettings,
+    updateSettings,
+    state,
+  } = useAppService();
   const [locationRangeValue, setLocationRangeValue] = useState(state.settings.location_range);
   const [offlineToggleValue, setOfflineToggleValue] = useState(state.settings.offline_mode);
   const [analyticsToggleValue, setAnalyticsToggleValue] = useState(state.settings.analytics_opt_in);
   const [lang, setLang] = useState(state.settings.lang || 'eng');
+  const onlineCheck = state.isOnline && !state.settings.offline_mode;
   /**
    * @summary Handles the change of the Location Range slider
    * @param value is the location range value of the slider
@@ -76,42 +86,54 @@ export default function Settings() {
     updateSettings();
   };
 
+  /**
+   * @summary Pulls in new app data if user hit the refresh button
+   * @author  Dallas Richmond
+   */
+  const handleRefresh = () => {
+    setAppData(onlineCheck);
+  };
+
   return (
-    <SettingsWrapper>
-      <SettingsContainer>
-        <Section>
-          <h1>{SettingsContent.settingsTitle[lang]}</h1>
-        </Section>
-        <Section>
-          <TitleWrapper>
-            <Title>{SettingsContent.language[lang]}</Title>
+    <SettingsContainer>
+      <Header>
+        {SettingsContent.settingsTitle[lang]}
+      </Header>
+      <ContentContainer>
+        <Accordion
+          content={(
+            <StyledSelect onChange={handleLang} value={lang}>
+              {SettingsContent.languages[lang].map((data: string, index: number) => (
+              <option value={SettingsContent.languages.keys[index]} key={data}>{data}</option>
+              ))}
+            </StyledSelect>
+          )}
+          text={SettingsContent.language[lang]}
+          tooltip={(
             <MoreInfoButton
               tip={SettingsContent.languageToolTip[lang]}
             />
-          </TitleWrapper>
-          <StyledSelect onChange={handleLang} value={lang}>
-            {SettingsContent.languages[lang].map((data: string, index: number) => (
-            <option value={SettingsContent.languages.keys[index]} key={data}>{data}</option>
-            ))}
-          </StyledSelect>
-        </Section>
-        <Section>
-          <SliderWrapper>
-            <TitleWrapper>
-              <Title>{SettingsContent.locationRange[lang]}</Title>
-              <MoreInfoButton
-                tip={SettingsContent.locationToolTip[lang]}
+          )}
+        />
+        <Accordion
+          content={(
+            <SliderWrapper>
+              <Slider
+                ariaLabel={SettingsContent.locationRange[lang]}
+                min={1}
+                max={5000}
+                onChange={handleLocationRangeChange}
+                value={locationRangeValue}
               />
-            </TitleWrapper>
-            <Slider
-              ariaLabel={SettingsContent.locationRange[lang]}
-              min={1}
-              max={1000}
-              onChange={handleLocationRangeChange}
-              value={locationRangeValue}
+            </SliderWrapper>
+          )}
+          text={SettingsContent.locationRange[lang]}
+          tooltip={(
+            <MoreInfoButton
+              tip={SettingsContent.locationRange[lang]}
             />
-          </SliderWrapper>
-        </Section>
+          )}
+        />
         <Section>
           <TitleWrapper>
             <Title>{SettingsContent.offlineMode[lang]}</Title>
@@ -138,23 +160,37 @@ export default function Settings() {
             value={analyticsToggleValue}
           />
         </Section>
+        <Accordion
+          content={(
+            <Button
+              handleClick={handleRefresh}
+              variant="primary"
+              size="sm"
+              disabled={!onlineCheck}
+              text={!onlineCheck ? 'Offline' : 'Refresh'}
+            />
+          )}
+          text={(SettingsContent.refreshData[lang])}
+        />
         <Section>
-          <NavButton
+          <SettingsRowButton
             path="/settings/about"
             text={SettingsContent.aboutContact[lang]}
-            hex="#DBE1EB"
-            icon={person}
           />
         </Section>
         <Section>
-          <NavButton
+          <SettingsRowButton
             path="/eula"
             text={SettingsContent.license[lang]}
-            hex="#DBE1EB"
-            icon={file}
           />
         </Section>
-      </SettingsContainer>
-    </SettingsWrapper>
+        <Section>
+          <SettingsRowButton
+            path="/settings/changelog"
+            text={SettingsContent.changeLog[lang]}
+          />
+        </Section>
+      </ContentContainer>
+    </SettingsContainer>
   );
 }
