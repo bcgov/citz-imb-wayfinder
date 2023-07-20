@@ -39,7 +39,9 @@ export const ContentContainer = styled.div`
 `;
 
 export const Header = styled.h1`
-  padding-top: 5pt;
+  padding-left: 10pt;
+  width: 100%;
+  max-width: ${mq.tablet};
 `;
 
 export const Section = styled.div`
