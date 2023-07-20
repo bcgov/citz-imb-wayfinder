@@ -28,13 +28,10 @@ export default function Accordion({
 }: AccordionProps) {
   const [open, setOpen] = useState(false);
 
-  const toggle = () => {
-    setOpen(!open);
-  };
 
   return (
     <>
-      <AccordionItem open={open} onClick={toggle}>
+      <AccordionItem open={open} onClick={() => setOpen(!open)}>
         <AccordionTitle>
           {text}
           {tooltip}
