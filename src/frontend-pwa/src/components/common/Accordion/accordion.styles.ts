@@ -30,9 +30,12 @@ export const AccordionTitle = styled.h2`
 
 export const AccordionContent = styled.div<AccordionProps>`
   display: ${(props) => (props.open ? 'block' : 'none')};
+  box-sizing: content-box;
+  min-height: 3.5em;
   background-color: #ffffff;
-  padding: 5pt;
+  padding: 4pt;
   width: 100%;
+    overflow-x: hidden;
 `;
 
 export const StyledButton = styled.button`
