@@ -186,7 +186,7 @@ export default function Settings() {
         </Section>
         <Section>
           <SettingsRowButton
-            path="/"
+            path="/settings/changelog"
             text={SettingsContent.changeLog[lang]}
           />
         </Section>
