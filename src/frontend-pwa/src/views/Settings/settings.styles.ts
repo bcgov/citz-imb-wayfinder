@@ -8,17 +8,16 @@ import mq from '../../constants/mq';
 
 export const SettingsContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
-  width: 80%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100dvh;
   padding: 50pt 0pt;
   flex-direction: column;
-  max-height: 95%;
-  @media (min-width: ${mq.tablet}) {
-    width: 60%;
-  }
-  @media (min-width: ${mq.desktop}) {
-    width: 40%;
-  }
+  min-height: 100dvh;
 `;
 
 export const ContentContainer = styled.div`
@@ -26,6 +25,11 @@ export const ContentContainer = styled.div`
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
+  height: 70dvh;
+  width: 90dvw;
+  max-width: ${mq.tablet};
+  padding: 0 8pt;
+  overflow-x: hidden;
   &::-webkit-scrollbar {
     width: 8px;
     background: none;
