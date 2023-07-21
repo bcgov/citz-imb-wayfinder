@@ -8,9 +8,10 @@ import { useEffect } from 'react';
 import logo from '/bc-logo-vertical.svg';
 import { Spinner } from '../../common';
 import useAppService from '../../../services/app/useAppService';
-import OnlineCheck from '../../../utils/OnlineCheck';
-import { SendCachedAnalytics } from '../../../utils/AppAnalytics';
-import { SendCachedReports } from '../../../utils/AppReports';
+import UpdateOnLoad from '../../../utils/UpdateOnLoad';
+// import OnlineCheck from '../../../utils/OnlineCheck';
+// import { SendCachedAnalytics } from '../../../utils/AppAnalytics';
+// import { SendCachedReports } from '../../../utils/AppReports';
 import {
   SplashScreenWrapper,
   Image,
@@ -18,14 +19,14 @@ import {
 
 export default function SplashScreen() {
   const {
-    setCurrentLocation,
+    // setCurrentLocation,
     setLoading,
-    setAppData,
-    initializeEulaState,
-    updateSettings,
-    setSuccessfulReports,
-    setOnline,
-    state,
+    // setAppData,
+    // initializeEulaState,
+    // updateSettings,
+    // setSuccessfulReports,
+    // setOnline,
+    // state,
   } = useAppService();
 
   /**
@@ -42,23 +43,24 @@ export default function SplashScreen() {
    *           storage
    */
   useEffect(() => {
-    setCurrentLocation();
-    initializeEulaState();
-    updateSettings();
+    // setCurrentLocation();
+    // initializeEulaState();
+    // updateSettings();
 
-    if (state.settings.offline_mode) {
-      setAppData(false);
-    } else {
-      OnlineCheck()
-        .then((Online) => {
-          setOnline(Online);
-          setAppData(Online);
-          SendCachedAnalytics(Online);
-          SendCachedReports(Online, setSuccessfulReports);
-        }).catch((error) => {
-          console.error('Error: ', error);
-        });
-    }
+    // if (state.settings.offline_mode) {
+    //   setAppData(false);
+    // } else {
+    //   OnlineCheck()
+    //     .then((Online) => {
+    //       setOnline(Online);
+    //       setAppData(Online);
+    //       SendCachedAnalytics(Online);
+    //       SendCachedReports(Online, setSuccessfulReports);
+    //     }).catch((error) => {
+    //       console.error('Error: ', error);
+    //     });
+    // }
+    UpdateOnLoad();
     setLoading(false);
   });
 
