@@ -14,7 +14,7 @@ type ButtonProps = {
 
 const StyledButton = styled.button<ButtonProps>`
   ${typography.toString()}
-  width: ${(props) => (props.size === 'sm' ? '100px' : props.size === 'md' ? '200px' : '300px')};
+  width: ${(props) => (props.size === 'sm' ? '150px' : props.size === 'md' ? '200px' : '300px')};
   height: ${(props) => (props.size === 'sm' ? '35px' : props.size === 'md' ? '70px' : '100px')};
   border: none;
   border-radius: 8px;

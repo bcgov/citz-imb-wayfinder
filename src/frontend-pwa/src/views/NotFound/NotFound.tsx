@@ -45,7 +45,7 @@ function NotFound() {
         <TextContainer>
           <Link to="/">
             <Button
-              text="Go Home"
+              text={notFoundContent.returnHome[lang]}
               size="sm"
               variant="primary"
               disabled={false}
