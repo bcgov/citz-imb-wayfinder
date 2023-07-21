@@ -60,6 +60,9 @@ components:
         newUser:
           type: boolean
           example: true
+        appLaunch:
+          type: boolean
+          example: false
         date:
           type: number
           example: 1685987761167

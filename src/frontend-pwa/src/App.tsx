@@ -11,13 +11,30 @@ import { SplashScreen, BannerTip } from './components/utility';
 import Eula from './views/Eula/Eula';
 import ViewRouter from './routes/ViewRouter';
 import useAppService from './services/app/useAppService';
+import UpdateOnLoad from './utils/UpdateOnLoad';
 
 function App() {
-  const { state, setLoading } = useAppService();
+  const {
+    setCurrentLocation,
+    setAppData,
+    initializeEulaState,
+    updateSettings,
+    setSuccessfulReports,
+    setOnline,
+    state,
+  } = useAppService();
   const location = useLocation();
 
   useEffect(() => {
-    setLoading(true);
+    UpdateOnLoad({
+      setCurrentLocation,
+      setAppData,
+      initializeEulaState,
+      updateSettings,
+      setSuccessfulReports,
+      setOnline,
+      state,
+    });
   }, [location]);
 
   return (

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /**
  * @summary A reusable component that creates a splash screen for the app.
  *          It loads the inital app data
@@ -9,9 +8,9 @@ import logo from '/bc-logo-vertical.svg';
 import { Spinner } from '../../common';
 import useAppService from '../../../services/app/useAppService';
 import UpdateOnLoad from '../../../utils/UpdateOnLoad';
-// import OnlineCheck from '../../../utils/OnlineCheck';
-// import { SendCachedAnalytics } from '../../../utils/AppAnalytics';
-// import { SendCachedReports } from '../../../utils/AppReports';
+import { getDataFromLocalStorage, localStorageKeyExists } from '../../../utils/AppLocalStorage';
+import constants from '../../../constants/Constants';
+import OnlineCheck from '../../../utils/OnlineCheck';
 import {
   SplashScreenWrapper,
   Image,
@@ -19,48 +18,56 @@ import {
 
 export default function SplashScreen() {
   const {
-    // setCurrentLocation,
+    setCurrentLocation,
     setLoading,
-    // setAppData,
-    // initializeEulaState,
-    // updateSettings,
-    // setSuccessfulReports,
-    // setOnline,
-    // state,
+    setAppData,
+    initializeEulaState,
+    updateSettings,
+    setSuccessfulReports,
+    setOnline,
+    setAnalytics,
+    state,
   } = useAppService();
 
-  /**
-   * @summary Loads necessary app settings and data depending on online state
-   *          -setCurrentLocation attempts to use high accuracy Geolocation to get
-   *           the coordinates. If it can't it tries low accuracy. If not again it pulls
-   *           from local storage
-   *          -initializeEulaState takes the state from local storage if it exists, else
-   *           it sets the acceoted Eula to false
-   *          -updateSettings updates the settings from local storage or initializes them
-   *           to default values
-   *          -setAppData takes in a boolean that dictates whether the app is online or not
-   *           and either gets the data from the API locations endpoint or pulls from local
-   *           storage
-   */
   useEffect(() => {
-    // setCurrentLocation();
-    // initializeEulaState();
-    // updateSettings();
+    UpdateOnLoad({
+      setCurrentLocation,
+      setAppData,
+      initializeEulaState,
+      updateSettings,
+      setSuccessfulReports,
+      setOnline,
+      state,
+    });
 
-    // if (state.settings.offline_mode) {
-    //   setAppData(false);
-    // } else {
-    //   OnlineCheck()
-    //     .then((Online) => {
-    //       setOnline(Online);
-    //       setAppData(Online);
-    //       SendCachedAnalytics(Online);
-    //       SendCachedReports(Online, setSuccessfulReports);
-    //     }).catch((error) => {
-    //       console.error('Error: ', error);
-    //     });
-    // }
-    UpdateOnLoad();
+    /** Have to check local storage instead of using state.
+     *  This is because the splashscreen sets the state each time the app opens.
+     *  Due to it being asynchronous the state is not available to be used in the splashscreen.
+     */
+    if (localStorageKeyExists(constants.SETTINGS_KEY)
+      && localStorageKeyExists(constants.CURRENT_LOCATION_KEY)) {
+      const settings = getDataFromLocalStorage(constants.SETTINGS_KEY);
+      if (settings.analytics_opt_in) {
+        const location = getDataFromLocalStorage(constants.CURRENT_LOCATION_KEY);
+        const analytics = {
+          latitude: location.lat,
+          longitude: location.long,
+          usage: {
+            appLaunch: true,
+          },
+        };
+
+        if (settings.offline_mode) {
+          setAnalytics(false, analytics);
+        } else {
+          OnlineCheck()
+            .then((Online) => {
+              setAnalytics(Online, analytics);
+            });
+        }
+      }
+    }
+
     setLoading(false);
   });
 

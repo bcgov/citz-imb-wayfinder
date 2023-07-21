@@ -24,7 +24,7 @@ const AnalyticSchema = new mongoose.Schema({
     },
     function: {
       type: String,
-      required: true,
+      required: false,
       minLength: 4,
       maxLength: 15,
       trim: true,
@@ -80,6 +80,11 @@ const AnalyticSchema = new mongoose.Schema({
     newUser: {
       type: Boolean,
       required: false,
+    },
+    appLaunch: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
   },
   date: {

@@ -3,24 +3,30 @@
  * @summary Update app data and state between route changes
  * @author  Dallas Richmond
  */
-
-import useAppService from '../services/app/useAppService';
 import OnlineCheck from './OnlineCheck';
 import { SendCachedAnalytics } from './AppAnalytics';
 import { SendCachedReports } from './AppReports';
+import StateObject from '../Type/StateObject';
 
-export default function UpdateOnLoad() {
-  const {
-    setCurrentLocation,
-    setLoading,
-    setAppData,
-    initializeEulaState,
-    updateSettings,
-    setSuccessfulReports,
-    setOnline,
-    state,
-  } = useAppService();
+type UpdateOnLoadProps = {
+  setCurrentLocation: Function;
+  setAppData: Function;
+  initializeEulaState: Function;
+  updateSettings: Function;
+  setSuccessfulReports: Function;
+  setOnline: Function;
+  state: StateObject;
+};
 
+export default function UpdateOnLoad({
+  setCurrentLocation,
+  setAppData,
+  initializeEulaState,
+  updateSettings,
+  setSuccessfulReports,
+  setOnline,
+  state,
+}: UpdateOnLoadProps) {
   /**
    * @summary Loads necessary app settings and data depending on online state
    *          -setCurrentLocation attempts to use high accuracy Geolocation to get
@@ -51,5 +57,4 @@ export default function UpdateOnLoad() {
         console.error('Error: ', error);
       });
   }
-  setLoading(false);
 }

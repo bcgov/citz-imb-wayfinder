@@ -19,7 +19,8 @@ type Analytic = {
       valueBool?: boolean;
       settingType: string;
     }
-    newUser?: boolean
+    newUser?: boolean;
+    appLaunch?: boolean;
   };
   date?: Date;
 };
