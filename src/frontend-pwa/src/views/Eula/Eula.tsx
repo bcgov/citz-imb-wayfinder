@@ -10,13 +10,38 @@ import { Button, Checkbox } from '../../components/common';
 import { StyledContainer, StyledOuterDiv, StyledFieldSetDiv } from './eula.styles';
 import useAppService from '../../services/app/useAppService';
 import { eulaContent } from '../../content/content';
+import { localStorageKeyExists } from '../../utils/AppLocalStorage';
+import constants from '../../constants/Constants';
+import OnlineCheck from '../../utils/OnlineCheck';
 
 export default function Eula() {
   const [termAgreement, setTermAgreement] = useState(false);
-  const { state, setEulaState } = useAppService();
+  const { state, setEulaState, setAnalytics } = useAppService();
   const { lang } = state.settings;
+  const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
+  const latitude = state.currentLocation ? state.currentLocation.lat : 49.2827;
+  const longitude = state.currentLocation ? state.currentLocation.long : -123.2;
+
   const handleConsentChange = () => {
     setTermAgreement(!termAgreement);
+  };
+
+  const handleButtonClick = () => {
+    setEulaState();
+    if (geolocationKnown) {
+      const analytics = {
+        latitude,
+        longitude,
+        usage: {
+          newUser: true,
+        },
+      };
+
+      OnlineCheck()
+        .then((Online) => {
+          setAnalytics(Online, analytics);
+        });
+    }
   };
   return (
     <StyledOuterDiv>
@@ -43,7 +68,7 @@ export default function Eula() {
                 value={termAgreement}
               />
               <Button
-                handleClick={() => setEulaState()}
+                handleClick={() => handleButtonClick()}
                 text={eulaContent.submit[lang]}
                 variant="primary"
                 size="md"

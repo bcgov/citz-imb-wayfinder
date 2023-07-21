@@ -25,6 +25,9 @@ function App() {
   } = useAppService();
   const location = useLocation();
 
+  /**
+   * For updating App state
+   */
   useEffect(() => {
     UpdateOnLoad({
       setCurrentLocation,
