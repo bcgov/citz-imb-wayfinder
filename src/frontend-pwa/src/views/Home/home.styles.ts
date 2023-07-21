@@ -10,19 +10,23 @@ export const ViewContainer = styled.div`
     top: 0;
     left: 0;
     display: flex;
-    min-height: 100svh;
-    align-items: center;
+    height: 100svh;
     justify-content: center;
     width: 100%;
 `;
 
 export const Wrapper = styled.div`
     height: 100%;
-    margin-top: -2.5em;
+    padding-top: 0;
+    justify-content: center;
     display: flex;
+    box-content: content-box;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
+    object-fit: scale-down;
+    @media (max-height: 570px ){
+        padding: 60pt 0;
+    }
 `;
 
 export const ButtonWrapper = styled.div`

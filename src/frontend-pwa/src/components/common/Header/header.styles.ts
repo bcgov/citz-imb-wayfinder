@@ -29,6 +29,7 @@ export const HeaderWrapper = styled.header`
 export const Heading = styled.h2`
     ${typography.toString()}
     color: rgb(255, 255, 255);
+    font-size: 16pt;
     font-weight: 500;
     min-width: 150px;
     display: contents;
