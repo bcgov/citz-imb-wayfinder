@@ -8,14 +8,17 @@ type NavProps = {
   hex: string;
 }
 export const ButtonCont = styled.div<NavProps>`
-  height: 80pt;
-  width: 240pt;
+  height: 75pt;
+  width: 220pt;
   border-radius: 8pt;
   align-items: center;
   justify-content: flex-start;
   background-color: ${({ hex }) => hex || '#000'};
   padding: 5pt;
   display: flex;
+  &:hover {
+    transform: scale(0.95);
+  }
 `;
 
 export const ImageCont = styled.div`
