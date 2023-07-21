@@ -15,7 +15,7 @@ export default defineConfig({
       manifest: {
         name: "BC Wayfinder",
         short_name: "BC Wayfinder",
-        description: "A service and location finder for the BC Government",
+        description: "Wayfinder: Connecting Citizens to Services through Mapping | Reporting | Trusted Location Data",
         theme_color: "#003366",
         start_url: "/",
       
