@@ -15,6 +15,7 @@ import OfficeOptionsView from '../views/OfficeOptionsView/OfficeOptionsView';
 import LocationInformation from '../views/LocationInformation/LocationInformation';
 import NotFound from '../views/NotFound/NotFound';
 import ReportHistory from '../views/ReportHistory/ReportHistory';
+import WhatsNew from '../views/WhatsNew/WhatsNew';
 
 export default function ViewRouter() {
   return (
@@ -26,6 +27,7 @@ export default function ViewRouter() {
       <Route path="/report" Component={Report} />
       <Route path="/settings" Component={Settings} />
       <Route path="/settings/about" Component={AboutContact} />
+      <Route path="/settings/changelog" Component={WhatsNew} />
       <Route path="/location" Component={OfficeOptionsView} />
       <Route path="/location/:service/:locale" Component={LocationInformation} />
       <Route path="/report/history" Component={ReportHistory} />
