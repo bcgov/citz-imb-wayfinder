@@ -62,7 +62,7 @@ const AnalyticSchema = new mongoose.Schema({
         valueStr: {
           required: false,
           type: String,
-          minLength: 4,
+          minLength: 2,
           maxLength: 24,
         },
         valueBool: {
