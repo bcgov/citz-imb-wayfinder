@@ -382,6 +382,10 @@ export const notFoundContent: ContentMap = {
     eng: ' was not found on this server. ',
     fr: ' n\'a pas été trouvée sur ce serveur. ',
   },
+  returnHome: {
+    eng: 'Main Page',
+    fr: 'Page Principale',
+  },
 };
 
 export const searchBarContent: ContentMap = {
