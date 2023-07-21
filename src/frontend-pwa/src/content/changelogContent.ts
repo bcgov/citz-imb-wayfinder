@@ -1,3 +1,7 @@
+/**
+ * @desc   Changelog content displayed in the Wayfinder application.
+ * @author LocalNewsTV
+ */
 export interface ContentMap {
   [key: string]: { [lang: string]: String[] };
 }

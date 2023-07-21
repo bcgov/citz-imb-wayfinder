@@ -1,3 +1,8 @@
+/**
+ * @desc   View section for displaying all changelog information in the Wayfinder application
+ *         Iterates over the ChangeLog object file, displaying information as an unordered list
+ * @author LocalNewsTV
+ */
 import {
   ContentContainer,
   List,

@@ -1,3 +1,7 @@
+/**
+ * @desc   Emotion stylesheets for the What's New View for Wayfinder
+ * @author LocalNewsTV
+ */
 import styled from '@emotion/styled';
 import mq from '../../constants/mq';
 
