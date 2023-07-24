@@ -10,7 +10,7 @@
  * @type {(locations : Array<SingleLocation>)}
  * @author Dallas Richmond, LocalNewsTV
  */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ListItems, LocationListItem } from '../../components/lists';
 import SingleLocation from '../../Type/SingleLocation';
@@ -21,6 +21,7 @@ import CalcDistance from '../../utils/CalcDistance';
 import { localStorageKeyExists } from '../../utils/AppLocalStorage';
 import constants from '../../constants/Constants';
 import { locationContent } from '../../content/content';
+import OnlineCheck from '../../utils/OnlineCheck';
 
 import {
   ContentContainer,
@@ -33,13 +34,15 @@ interface LocationWithDistance extends SingleLocation {
 }
 
 export default function Location() {
-  const { state } = useAppService();
+  const { state, setAnalytics } = useAppService();
   const { lang } = state.settings;
   const [searchQuery, setSearchQuery] = useState('');
   const { service } = useParams();
   const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
   const locations = state.appData?.data ? state.appData.data[`${service}Locations`] || [] : [];
   const locationRange = state.settings.location_range;
+  const latitude = state.currentLocation ? state.currentLocation.lat : 49.2827;
+  const longitude = state.currentLocation ? state.currentLocation.long : -123.2;
 
   const headers: Array<string> = [];
   if (service) {
@@ -69,6 +72,40 @@ export default function Location() {
   ));
   const unavailable = <LocationListItem itemData={{ locale: locationContent.notImplemented[lang] } as SingleLocation} locationDistance="0" />;
   const outOfRange = <LocationListItem itemData={{ locale: `${locationContent.noResults[lang]} ${locationRange}KM` } as SingleLocation} locationDistance="0" />;
+
+  useEffect(() => {
+    try {
+      if (state.settings.analytics_opt_in
+        && geolocationKnown
+        && distancedLocations.length !== 0
+        && service) {
+        const analytics = {
+          latitude,
+          longitude,
+          usage: {
+            function: 'find location',
+            closestOffice: {
+              serviceType: service,
+              locality: distancedLocations[0].locale,
+            },
+          },
+        };
+
+        if (state.settings.offline_mode) {
+          setAnalytics(false, analytics);
+        } else {
+          OnlineCheck()
+            .then((Online) => {
+              setAnalytics(Online, analytics);
+            });
+        }
+      }
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <ViewContainer>
