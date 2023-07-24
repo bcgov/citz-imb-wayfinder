@@ -1,5 +1,3 @@
-// // sw-custom.js
-  
 self.addEventListener('activate', (event) => {
     event.waitUntil(
       self.clients.claim().then(() => {
@@ -67,40 +65,19 @@ self.addEventListener('activate', (event) => {
     );
   });
   
-  
-  
-
-// self.addEventListener('message', event => {
-//     if (event.data && event.data.action === 'clearCache') {
-//       caches.keys().then(cacheNames => {
-//         const cachesToDelete = cacheNames.filter(cacheName => cacheName.startsWith('workbox-precache-v2'));
-//         return Promise.all(cachesToDelete.map(cacheName => caches.delete(cacheName)));
-//       }).then(success => {
-//         event.source.postMessage({ action: 'clearCache', success });
-//         console.log('success i think, or at least this promise reutrned true')
-//       }).catch(error => {
-//         console.error('Cache clear error:', error);
-//         event.source.postMessage({ action: 'clearCache', error });
-//       });
-//     }
-//   });
-
 self.addEventListener('message', (event) => {
-    if (event.data && event.data.action === 'clearCache') {
-      caches.keys().then((cacheNames) => {
-        const mapTilesCacheName = cacheNames.find((cacheName) => cacheName === 'mapTiles');
-        if (mapTilesCacheName) {
-          return caches.delete(mapTilesCacheName);
-        } else {
-          return Promise.resolve();
-        }
-      }).then(() => {
-        event.source.postMessage({ action: 'clearCache', success: true });
-        console.log('"mapTiles" cache deleted successfully');
-      }).catch((error) => {
-        console.error('Cache clear error:', error);
-        event.source.postMessage({ action: 'clearCache', error });
-      });
-    }
-  });
+  if (event.data && event.data.action === 'clearCache') {
+    caches.keys().then((cacheNames) => {
+      const cachesToDelete = cacheNames.filter((cacheName) => cacheName === 'mapTiles' || cacheName === 'site');
+      return Promise.all(cachesToDelete.map((cacheName) => caches.delete(cacheName)));
+    }).then(() => {
+      event.source.postMessage({ action: 'clearCache', success: true });
+      console.log('"mapTiles" and "site" caches deleted successfully');
+    }).catch((error) => {
+      console.error('Cache clear error:', error);
+      event.source.postMessage({ action: 'clearCache', error });
+    });
+  }
+});
+  
   

@@ -69,8 +69,8 @@ export const SettingsContent: ContentMap = {
     fr: 'Effacer les données en cache',
   },
   clearCacheToolTip: {
-    eng: 'Deletes the cached site data.',
-    fr: 'Supprimer les données du site en cache',
+    eng: 'Deletes the cached site data. WARNING: WILL AFFECT OFFLINE FUNCTIONALITY',
+    fr: 'Supprime les données de site mises en cache. AVERTISSEMENT : AFFECTERA LA FONCTIONNALITÉ HORS LIGNE',
   },
   languages: {
     eng: [
