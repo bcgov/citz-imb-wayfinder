@@ -103,7 +103,7 @@ export const updatedInfo = async (req: Request, res: Response) => {
   const responseObject: ReturnObject = {};
   if (req.body.updateArr && typeof req.body.updateArr === typeof []) {
     const datesArr: Array<UpdateDate> = await dateModel.find({});
-    responseObject.datesArr = datesArr;
+    responseObject.updateArr = datesArr;
     const promises = req.body.updateArr.map(async (item: UpdateDate) => {
       if (servicesOffered.includes(item.serviceType)) {
         const serviceDate: any = datesArr.find((service: UpdateDate) => (
