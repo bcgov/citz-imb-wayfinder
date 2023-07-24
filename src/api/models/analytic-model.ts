@@ -26,7 +26,7 @@ const AnalyticSchema = new mongoose.Schema({
       type: String,
       required: false,
       minLength: 4,
-      maxLength: 15,
+      maxLength: 16,
       trim: true,
       match: /^(find service|find location|report|report history|location details|settings|about)$/i,
     },
