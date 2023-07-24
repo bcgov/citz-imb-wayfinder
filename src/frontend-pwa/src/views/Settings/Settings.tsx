@@ -3,7 +3,7 @@
 /* eslint-disable max-len */
 /**
  * @summary Settings view for the application
- * @author  Dallas Richmond, LocalNewsTV
+ * @author  Dallas Richmond, LocalNewsTV, Tyler Maloney
  */
 import { useState } from 'react';
 import {
