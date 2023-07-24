@@ -68,7 +68,7 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('message', (event) => {
   if (event.data && event.data.action === 'clearCache') {
     caches.keys().then((cacheNames) => {
-      const cachesToDelete = cacheNames.filter((cacheName) => cacheName === 'mapTiles' || cacheName === 'site');
+      const cachesToDelete = cacheNames.filter((cacheName) => cacheName === 'mapTiles');
       return Promise.all(cachesToDelete.map((cacheName) => caches.delete(cacheName)));
     }).then(() => {
       event.source.postMessage({ action: 'clearCache', success: true });
@@ -79,5 +79,3 @@ self.addEventListener('message', (event) => {
     });
   }
 });
-  
-  
