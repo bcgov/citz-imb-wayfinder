@@ -39,6 +39,7 @@ const useAppService = () => {
       if (isOnline) {
         try {
           const data = await axios.get(`${constants.BACKEND_URL}/api/locations`);
+          console.log('Data: ', data);
           saveDataToLocalStorage(constants.APP_DATA_KEY, data);
           dispatch({ type: SET_APP_DATA, payload: data });
         } catch (e) {
