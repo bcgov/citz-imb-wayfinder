@@ -99,7 +99,6 @@ export default function Settings() {
         caches.delete('mapTiles'),
         caches.delete('site'),
       ]);
-
       clearCachesPromise.then(() => {
         navigator.serviceWorker.getRegistration().then((registration) => {
           if (registration) {
