@@ -11,7 +11,7 @@
  * @author  LocalNewsTV, Dallas Richmond
  */
 /* eslint-disable react/no-array-index-key */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ListItems, ServiceListItem, headers } from '../../components/lists';
 import { SearchBar } from '../../components/common';
 import { Mapping } from '../../components/utility';
@@ -20,6 +20,7 @@ import useAppService from '../../services/app/useAppService';
 import { localStorageKeyExists } from '../../utils/AppLocalStorage';
 import constants from '../../constants/Constants';
 import CalcDistance from '../../utils/CalcDistance';
+import OnlineCheck from '../../utils/OnlineCheck';
 import {
   ContentContainer,
   ViewContainer,
@@ -28,7 +29,7 @@ import {
 
 export default function BCServices() {
   const [searchQuery, setSearchQuery] = useState('');
-  const { state } = useAppService();
+  const { state, setAnalytics } = useAppService();
   const services = state.appData?.data ? state.appData?.data.allServices : [];
   const locations = state.appData?.data ? [
     ...state.appData.data.ServiceBCLocations,
@@ -39,6 +40,8 @@ export default function BCServices() {
   ] : [];
   const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
   const locationRange = state.settings.location_range;
+  const latitude = state.currentLocation ? state.currentLocation.lat : 49.2827;
+  const longitude = state.currentLocation ? state.currentLocation.long : -123.2;
 
   const filteredServiceSearch = services.filter((item : string) => item.toLowerCase().match(`${searchQuery.toLowerCase().trim()}`));
 
@@ -51,6 +54,28 @@ export default function BCServices() {
     }
     return false;
   });
+
+  useEffect(() => {
+    if (state.settings.analytics_opt_in && geolocationKnown) {
+      const analytics = {
+        latitude,
+        longitude,
+        usage: {
+          function: 'find service',
+        },
+      };
+
+      if (state.settings.offline_mode) {
+        setAnalytics(false, analytics);
+      } else {
+        OnlineCheck()
+          .then((Online) => {
+            setAnalytics(Online, analytics);
+          });
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <ViewContainer>
