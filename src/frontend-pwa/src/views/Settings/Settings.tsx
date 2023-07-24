@@ -134,7 +134,17 @@ export default function Settings() {
       navigator.serviceWorker.controller.postMessage({ action: 'clearCache' });
     }
   };
+  // const handleClearCache = () => {
+  //   const confirmMessage = 'This action will prevent most offline functionality. Are you sure you want to proceed?';
+  //   const userConfirmation = window.confirm(confirmMessage);
 
+  //   if (userConfirmation) {
+  //     if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+  //       navigator.serviceWorker.controller.postMessage({ action: 'clearCache' });
+  //     }
+  //   }
+  // };
+  
   return (
     <SettingsContainer>
       <Header>
@@ -233,13 +243,18 @@ export default function Settings() {
         </Section>
         <Accordion
           content={(
-            <Button
-              handleClick={handleClearCache}
-              variant="primary"
-              size="sm"
-              disabled={false}
-              text={SettingsContent.clearCache[lang]}
-            />
+            <div>
+              <p style={{ fontSize: '0.8rem', color: 'red' }}>
+                WARNING: Deleting cached data will prevent most offline functionality.
+              </p>
+              <Button
+                handleClick={handleClearCache}
+                variant="primary"
+                size="sm"
+                disabled={false}
+                text={SettingsContent.clearCache[lang]}
+              />
+            </div>
           )}
           text="Cache"
           tooltip={(
