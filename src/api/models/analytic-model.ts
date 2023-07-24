@@ -73,7 +73,7 @@ const AnalyticSchema = new mongoose.Schema({
           type: String,
           minLength: 4,
           maxLength: 20,
-          match: /^(language|location range|offline mode|analytics)$/i,
+          match: /^(language|location range|offline mode|refresh data|clear cache)$/i,
         },
       },
     },

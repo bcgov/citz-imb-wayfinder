@@ -136,6 +136,23 @@ export default function Settings() {
     }
   };
 
+  const handleLocationRangeAnalytics = () => {
+    if (geolocationKnown) {
+      const analytics = {
+        latitude,
+        longitude,
+        usage: {
+          function: 'settings',
+          settings: {
+            valueStr: state.settings.location_range,
+            settingType: 'location range',
+          },
+        },
+      };
+      sendAnalytics(analytics);
+    }
+  };
+
   /**
    * @summary Pulls in new app data if user hit the refresh button
    * @author  Dallas Richmond
@@ -183,6 +200,7 @@ export default function Settings() {
               tip={SettingsContent.locationRange[lang]}
             />
           )}
+          handleClick={handleLocationRangeAnalytics}
         />
         <Section>
           <TitleWrapper>
