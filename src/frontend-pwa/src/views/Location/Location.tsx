@@ -75,7 +75,10 @@ export default function Location() {
 
   useEffect(() => {
     try {
-      if (state.settings.analytics_opt_in && geolocationKnown && distancedLocations.length !== 0) {
+      if (state.settings.analytics_opt_in
+        && geolocationKnown
+        && distancedLocations.length !== 0
+        && service) {
         const analytics = {
           latitude,
           longitude,

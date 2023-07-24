@@ -10,7 +10,7 @@ type Analytic = {
     search?: string;
     function?: string;
     closestOffice?: {
-      serviceType: string | undefined;
+      serviceType: string;
       locality: string;
     }
     serviceType?: string;
