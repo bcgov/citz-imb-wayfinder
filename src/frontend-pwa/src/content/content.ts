@@ -64,6 +64,14 @@ export const SettingsContent: ContentMap = {
     eng: 'Refresh App Data',
     fr: 'Actualiser les données de l\'application',
   },
+  clearCache: {
+    eng: 'Clear Cached Data',
+    fr: 'Effacer les données en cache',
+  },
+  clearCacheToolTip: {
+    eng: 'Deletes the cached site data.',
+    fr: 'Supprimer les données du site en cache',
+  },
   languages: {
     eng: [
       'English',

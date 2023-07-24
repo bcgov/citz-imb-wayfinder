@@ -4,12 +4,10 @@ import { VitePWA } from "vite-plugin-pwa";
 export default defineConfig({
   plugins: [
     VitePWA({
-      // strategies: "injectManifest",
       strategies: "generateSW",
       registerType: "autoUpdate",
       injectRegister: 'auto',
       includeAssets: ["**/*"],
-      // includeAssets: [""],
       workbox: {
         importScripts: ["sw-custom.js"],
         globPatterns: ["**/*"],
@@ -17,12 +15,6 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         sourcemap: true,
       },
-      // cache: {
-      //   prefix: 'wayfinder',
-      //   suffix: 'v1',
-      //   precache: 'precache',
-      //   runtime: 'runtime-cache',
-      // },
       manifest: {
         name: "BC Wayfinder",
         short_name: "BC Wayfinder",
