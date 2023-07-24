@@ -25,12 +25,17 @@ import {
 import useAppService from '../../services/app/useAppService';
 import MoreInfoButton from '../../components/common/MoreInfoButton/MoreInfoButton';
 import { SettingsContent } from '../../content/content';
+import { localStorageKeyExists } from '../../utils/AppLocalStorage';
+import constants from '../../constants/Constants';
+import Analytic from '../../Type/Analytic';
+import OnlineCheck from '../../utils/OnlineCheck';
 
 export default function Settings() {
   const {
     setAppData,
     setSettings,
     updateSettings,
+    setAnalytics,
     state,
   } = useAppService();
   const [locationRangeValue, setLocationRangeValue] = useState(state.settings.location_range);
@@ -38,6 +43,10 @@ export default function Settings() {
   const [analyticsToggleValue, setAnalyticsToggleValue] = useState(state.settings.analytics_opt_in);
   const [lang, setLang] = useState(state.settings.lang || 'eng');
   const onlineCheck = state.isOnline && !state.settings.offline_mode;
+  const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
+  const latitude = state.currentLocation ? state.currentLocation.lat : 49.2827;
+  const longitude = state.currentLocation ? state.currentLocation.long : -123.2;
+
   /**
    * @summary Handles the change of the Location Range slider
    * @param value is the location range value of the slider
@@ -60,6 +69,21 @@ export default function Settings() {
     setOfflineToggleValue(value);
     setSettings({ offlineMode: value });
     updateSettings();
+
+    if (geolocationKnown) {
+      const analytics = {
+        latitude,
+        longitude,
+        usage: {
+          function: 'settings',
+          settings: {
+            valueBool: value,
+            settingType: 'offline mode',
+          },
+        },
+      };
+      sendAnalytics(analytics);
+    }
   };
 
   /**
@@ -84,6 +108,32 @@ export default function Settings() {
     setLang(e.target.value);
     setSettings({ language: e.target.value });
     updateSettings();
+
+    if (geolocationKnown) {
+      const analytics = {
+        latitude,
+        longitude,
+        usage: {
+          function: 'settings',
+          settings: {
+            valueStr: e.target.value,
+            settingType: 'language',
+          },
+        },
+      };
+      sendAnalytics(analytics);
+    }
+  };
+
+  const sendAnalytics = (analytic: Analytic) => {
+    if (state.settings.offline_mode) {
+      setAnalytics(false, analytic);
+    } else {
+      OnlineCheck()
+        .then((Online) => {
+          setAnalytics(Online, analytic);
+        });
+    }
   };
 
   /**
