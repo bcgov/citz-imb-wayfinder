@@ -8,6 +8,7 @@ const constants = {
   OFFLINE_ANALYTIC_KEY: 'analyticsOffline',
   REPORTS_KEY: 'reports',
   UNSENT_REPORTS_KEY: 'unsentReports',
+  APP_INSTALL_KEY: 'appInstalled',
 };
 
 export default constants;

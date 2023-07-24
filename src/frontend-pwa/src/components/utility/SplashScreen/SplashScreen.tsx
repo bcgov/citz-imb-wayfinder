@@ -26,6 +26,7 @@ export default function SplashScreen() {
     setSuccessfulReports,
     setOnline,
     setAnalytics,
+    setAppInstall,
     state,
   } = useAppService();
 
@@ -37,6 +38,7 @@ export default function SplashScreen() {
       updateSettings,
       setSuccessfulReports,
       setOnline,
+      setAppInstall,
       state,
     });
 
