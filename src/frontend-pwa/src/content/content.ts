@@ -64,6 +64,10 @@ export const SettingsContent: ContentMap = {
     eng: 'Refresh App Data',
     fr: 'Actualiser les données de l\'application',
   },
+  refreshDataToolTip: {
+    eng: 'Manually pull in new office data if it exists',
+    fr: 'Extrayez manuellement les nouvelles données de bureau si elles existent',
+  },
   languages: {
     eng: [
       'English',
