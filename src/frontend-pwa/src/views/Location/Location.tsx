@@ -74,29 +74,34 @@ export default function Location() {
   const outOfRange = <LocationListItem itemData={{ locale: `${locationContent.noResults[lang]} ${locationRange}KM` } as SingleLocation} locationDistance="0" />;
 
   useEffect(() => {
-    if (state.settings.analytics_opt_in && geolocationKnown) {
-      const analytics = {
-        latitude,
-        longitude,
-        usage: {
-          function: 'find location',
-          closestOffice: {
-            serviceType: service,
-            locality: distancedLocations[0].locale,
+    try {
+      if (state.settings.analytics_opt_in && geolocationKnown && distancedLocations.length !== 0) {
+        const analytics = {
+          latitude,
+          longitude,
+          usage: {
+            function: 'find location',
+            closestOffice: {
+              serviceType: service,
+              locality: distancedLocations[0].locale,
+            },
           },
-        },
-      };
+        };
 
-      if (state.settings.offline_mode) {
-        setAnalytics(false, analytics);
-      } else {
-        OnlineCheck()
-          .then((Online) => {
-            setAnalytics(Online, analytics);
-          });
+        if (state.settings.offline_mode) {
+          setAnalytics(false, analytics);
+        } else {
+          OnlineCheck()
+            .then((Online) => {
+              setAnalytics(Online, analytics);
+            });
+        }
       }
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
