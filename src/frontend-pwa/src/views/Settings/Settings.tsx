@@ -159,6 +159,20 @@ export default function Settings() {
    */
   const handleRefresh = () => {
     setAppData(onlineCheck);
+
+    if (geolocationKnown) {
+      const analytics = {
+        latitude,
+        longitude,
+        usage: {
+          function: 'settings',
+          settings: {
+            settingType: 'refresh data',
+          },
+        },
+      };
+      sendAnalytics(analytics);
+    }
   };
 
   return (
