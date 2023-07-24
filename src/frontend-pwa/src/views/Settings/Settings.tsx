@@ -25,12 +25,17 @@ import {
 import useAppService from '../../services/app/useAppService';
 import MoreInfoButton from '../../components/common/MoreInfoButton/MoreInfoButton';
 import { SettingsContent } from '../../content/content';
+import { localStorageKeyExists } from '../../utils/AppLocalStorage';
+import constants from '../../constants/Constants';
+import Analytic from '../../Type/Analytic';
+import OnlineCheck from '../../utils/OnlineCheck';
 
 export default function Settings() {
   const {
     setAppData,
     setSettings,
     updateSettings,
+    setAnalytics,
     state,
   } = useAppService();
   const [locationRangeValue, setLocationRangeValue] = useState(state.settings.location_range);
@@ -38,11 +43,15 @@ export default function Settings() {
   const [analyticsToggleValue, setAnalyticsToggleValue] = useState(state.settings.analytics_opt_in);
   const [lang, setLang] = useState(state.settings.lang || 'eng');
   const onlineCheck = state.isOnline && !state.settings.offline_mode;
+  const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
+  const latitude = state.currentLocation ? state.currentLocation.lat : 49.2827;
+  const longitude = state.currentLocation ? state.currentLocation.long : -123.2;
+
   /**
    * @summary Handles the change of the Location Range slider
-   * @param value is the location range value of the slider
-   * @type {( value: number )}
-   * @author Dallas Richmond
+   * @param   value is the location range value of the slider
+   * @type    {( value: number )}
+   * @author  Dallas Richmond
    */
   const handleLocationRangeChange = (value: number) => {
     setLocationRangeValue(value);
@@ -52,21 +61,36 @@ export default function Settings() {
 
   /**
    * @summary Handles the change of the Offline toggle
-   * @param value is the offline toggle value
-   * @type {( value: boolean )}
-   * @author Dallas Richmond
+   * @param   value is the offline toggle value
+   * @type    {( value: boolean )}
+   * @author  Dallas Richmond
    */
   const handleOfflineToggleChange = (value: boolean) => {
     setOfflineToggleValue(value);
     setSettings({ offlineMode: value });
     updateSettings();
+
+    if (state.settings.analytics_opt_in && geolocationKnown) {
+      const analytics = {
+        latitude,
+        longitude,
+        usage: {
+          function: 'settings',
+          settings: {
+            valueBool: value,
+            settingType: 'offline mode',
+          },
+        },
+      };
+      sendAnalytics(analytics);
+    }
   };
 
   /**
    * @summary Handles the change of the Analytic toggle
-   * @param value is the analytics toggle value
-   * @type {( value: boolean )}
-   * @author Dallas Richmond
+   * @param   value is the analytics toggle value
+   * @type    {( value: boolean )}
+   * @author  Dallas Richmond
    */
   const handleAnalyticsToggleChange = (value: boolean) => {
     setAnalyticsToggleValue(value);
@@ -76,14 +100,67 @@ export default function Settings() {
 
   /**
    * @summary Handles the change of the language select
-   * @param e is the event object of the select component
-   * @type {( e: { target: { value: React.SetStateAction<string> } } )}
-   * @author LocalNewsTV, Dallas Richmond
+   * @param   e is the event object of the select component
+   * @type    {( e: { target: { value: React.SetStateAction<string> } } )}
+   * @author  LocalNewsTV, Dallas Richmond
    */
   const handleLang = (e: { target: { value: string } }) => {
     setLang(e.target.value);
     setSettings({ language: e.target.value });
     updateSettings();
+
+    if (state.settings.analytics_opt_in && geolocationKnown) {
+      const analytics = {
+        latitude,
+        longitude,
+        usage: {
+          function: 'settings',
+          settings: {
+            valueStr: e.target.value,
+            settingType: 'language',
+          },
+        },
+      };
+      sendAnalytics(analytics);
+    }
+  };
+
+  /**
+   * @summary Sends the analytic to the endpoint
+   * @param   analytic is the data that will be sent to the analytic endpoint
+   * @type    {(analytic: Analytic)}
+   * @author  Dallas Richmond
+   */
+  const sendAnalytics = (analytic: Analytic) => {
+    if (state.settings.offline_mode) {
+      setAnalytics(false, analytic);
+    } else {
+      OnlineCheck()
+        .then((Online) => {
+          setAnalytics(Online, analytic);
+        });
+    }
+  };
+
+  /**
+   * @summary Handles building the location range analytics
+   * @author  Dallas Richmond
+   */
+  const handleLocationRangeAnalytics = () => {
+    if (state.settings.analytics_opt_in && geolocationKnown) {
+      const analytics = {
+        latitude,
+        longitude,
+        usage: {
+          function: 'settings',
+          settings: {
+            valueStr: state.settings.location_range,
+            settingType: 'location range',
+          },
+        },
+      };
+      sendAnalytics(analytics);
+    }
   };
 
   /**
@@ -92,6 +169,20 @@ export default function Settings() {
    */
   const handleRefresh = () => {
     setAppData(onlineCheck);
+
+    if (state.settings.analytics_opt_in && geolocationKnown) {
+      const analytics = {
+        latitude,
+        longitude,
+        usage: {
+          function: 'settings',
+          settings: {
+            settingType: 'refresh data',
+          },
+        },
+      };
+      sendAnalytics(analytics);
+    }
   };
 
   return (
@@ -133,6 +224,7 @@ export default function Settings() {
               tip={SettingsContent.locationRange[lang]}
             />
           )}
+          handleClick={handleLocationRangeAnalytics}
         />
         <Section>
           <TitleWrapper>

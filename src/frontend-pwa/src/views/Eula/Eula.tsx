@@ -2,7 +2,7 @@
 /**
  * @summary This is the EULA page, set to display when it is detected
  *          that the user has not given their consent.
- * @author Tyler Maloney
+ * @author Tyler Maloney, Dallas Richmond
  */
 /* eslint-disable max-len */
 import { useState } from 'react';

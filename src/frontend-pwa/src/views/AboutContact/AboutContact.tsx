@@ -1,8 +1,9 @@
 /* eslint-disable react/no-array-index-key */
 /**
  * @summary About + Contact Section for the Wayfinder Application
- * @author LocalNewsTV
+ * @author LocalNewsTV, Dallas Richmond
  */
+import { useEffect } from 'react';
 import {
   AboutContainer,
   StyledP,
@@ -18,11 +19,39 @@ import pkg from '../../../package.json';
 import { aboutContent } from '../../content/content';
 import contactInfo from '../../content/contactInfo';
 import useAppService from '../../services/app/useAppService';
+import { localStorageKeyExists } from '../../utils/AppLocalStorage';
+import constants from '../../constants/Constants';
+import OnlineCheck from '../../utils/OnlineCheck';
 
 export default function AboutContact() {
-  const { state } = useAppService();
+  const { state, setAnalytics } = useAppService();
   const { lang } = state.settings;
-  
+  const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
+  const latitude = state.currentLocation ? state.currentLocation.lat : 49.2827;
+  const longitude = state.currentLocation ? state.currentLocation.long : -123.2;
+
+  useEffect(() => {
+    if (state.settings.analytics_opt_in && geolocationKnown) {
+      const analytics = {
+        latitude,
+        longitude,
+        usage: {
+          function: 'about',
+        },
+      };
+
+      if (state.settings.offline_mode) {
+        setAnalytics(false, analytics);
+      } else {
+        OnlineCheck()
+          .then((Online) => {
+            setAnalytics(Online, analytics);
+          });
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <AboutContainer>
       <ContentContainer>

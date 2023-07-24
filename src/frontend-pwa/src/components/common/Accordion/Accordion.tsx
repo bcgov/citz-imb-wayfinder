@@ -19,15 +19,16 @@ type AccordionProps = {
   content: any;
   text: string;
   tooltip?: ReactElement<typeof MoreInfoButton>;
+  handleClick?: () => void;
 }
 
 export default function Accordion({
   content,
   text,
   tooltip,
+  handleClick,
 }: AccordionProps) {
   const [open, setOpen] = useState(false);
-
 
   return (
     <>
@@ -36,7 +37,9 @@ export default function Accordion({
           {text}
           {tooltip}
         </AccordionTitle>
-        <StyledButton>
+        <StyledButton
+          onClick={handleClick}
+        >
           <Image
             src={nextArrow}
             alt={text}
@@ -54,4 +57,5 @@ export default function Accordion({
 
 Accordion.defaultProps = {
   tooltip: '', // Provide a default empty function
+  handleClick: () => {},
 };

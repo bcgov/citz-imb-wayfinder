@@ -42,7 +42,7 @@ export default function LocationInformation() {
         longitude,
         usage: {
           search: location.locale,
-          function: 'find location',
+          function: 'location details',
         },
       };
 
