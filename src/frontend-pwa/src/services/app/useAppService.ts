@@ -259,6 +259,21 @@ const useAppService = () => {
       dispatch({ type: SET_ONLINE, payload: online });
     };
 
+    /**
+     * @summary The local storage is cleared automatically if the app is uninstalled
+     * @author  Dallas Richmond
+     */
+    const setAppInstall = () => {
+      window.addEventListener('appinstalled', () => {
+        saveDataToLocalStorage(constants.APP_INSTALL_KEY, true);
+      });
+      window.addEventListener('beforeinstallprompt', () => {
+        if (localStorageKeyExists(constants.APP_INSTALL_KEY)) {
+          localStorage.clear();
+        }
+      });
+    };
+
     return {
       setAppData,
       setCurrentLocation,
@@ -272,6 +287,7 @@ const useAppService = () => {
       setToolTipText,
       setOfflineReports,
       setOnline,
+      setAppInstall,
       state,
     };
   }, [state, dispatch]);

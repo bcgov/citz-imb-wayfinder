@@ -15,6 +15,7 @@ type UpdateOnLoadProps = {
   updateSettings: Function;
   setSuccessfulReports: Function;
   setOnline: Function;
+  setAppInstall?: Function;
   state: StateObject;
 };
 
@@ -25,6 +26,7 @@ export default function UpdateOnLoad({
   updateSettings,
   setSuccessfulReports,
   setOnline,
+  setAppInstall,
   state,
 }: UpdateOnLoadProps) {
   /**
@@ -40,6 +42,9 @@ export default function UpdateOnLoad({
    *           and either gets the data from the API locations endpoint or pulls from local
    *           storage
    */
+  if (setAppInstall) {
+    setAppInstall();
+  }
   setCurrentLocation();
   initializeEulaState();
   updateSettings();
