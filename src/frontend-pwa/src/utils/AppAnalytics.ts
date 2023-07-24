@@ -10,7 +10,11 @@ import { localStorageKeyExists, getDataFromLocalStorage, deleteLocalStorageKey }
  * @author Dallas Richmond
  */
 export const SendAnalytics = (request: Analytic) => {
-  axios.post(`${constants.BACKEND_URL}/api/analytic`, request);
+  axios.post(`${constants.BACKEND_URL}/api/analytic`, request)
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    });
 };
 
 /**
