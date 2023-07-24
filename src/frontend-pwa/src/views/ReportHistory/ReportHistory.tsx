@@ -28,17 +28,40 @@ import useAppService from '../../services/app/useAppService';
 import { reportHistoryContent } from '../../content/content';
 import Report from '../../Type/Report';
 import MoreInfoButton from '../../components/common/MoreInfoButton/MoreInfoButton';
+import OnlineCheck from '../../utils/OnlineCheck';
 
 function ReportHistory() {
-  const { state } = useAppService();
+  const { state, setAnalytics } = useAppService();
   const { lang } = state.settings;
   const [currReport, setCurrReport] = useState({} as Report);
   const [deletionID, setDeletionID] = useState('');
   const [reports, setReports] = useState([]);
+  const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
+  const latitude = state.currentLocation ? state.currentLocation.lat : 49.2827;
+  const longitude = state.currentLocation ? state.currentLocation.long : -123.2;
   useEffect(() => {
     if (localStorageKeyExists(constants.REPORTS_KEY)) {
       setReports(getDataFromLocalStorage(constants.REPORTS_KEY).reverse());
     }
+    if (state.settings.analytics_opt_in && geolocationKnown) {
+      const analytics = {
+        latitude,
+        longitude,
+        usage: {
+          function: 'report history',
+        },
+      };
+
+      if (state.settings.offline_mode) {
+        setAnalytics(false, analytics);
+      } else {
+        OnlineCheck()
+          .then((Online) => {
+            setAnalytics(Online, analytics);
+          });
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   /**
    * @desc  Filters the stores list of data, removing the selected one
@@ -60,6 +83,7 @@ function ReportHistory() {
       </ViewContainer>
     );
   }
+
   return (
     <ViewContainer>
       <ContentContainer>
