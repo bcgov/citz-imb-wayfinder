@@ -64,6 +64,10 @@ export const SettingsContent: ContentMap = {
     eng: 'Refresh App Data',
     fr: 'Actualiser les données de l\'application',
   },
+  refreshDataToolTip: {
+    eng: 'Pull in new location data from the server',
+    fr: 'Récupérer de nouvelles données de localisation à partir du serveur',
+  },
   languages: {
     eng: [
       'English',

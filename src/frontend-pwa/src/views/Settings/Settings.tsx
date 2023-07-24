@@ -263,6 +263,11 @@ export default function Settings() {
             />
           )}
           text={(SettingsContent.refreshData[lang])}
+          tooltip={(
+            <MoreInfoButton
+              tip={SettingsContent.refreshDataToolTip[lang]}
+            />
+          )}
         />
         <Section>
           <SettingsRowButton
