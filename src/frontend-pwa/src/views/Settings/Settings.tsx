@@ -70,7 +70,7 @@ export default function Settings() {
     setSettings({ offlineMode: value });
     updateSettings();
 
-    if (geolocationKnown) {
+    if (state.settings.analytics_opt_in && geolocationKnown) {
       const analytics = {
         latitude,
         longitude,
@@ -109,7 +109,7 @@ export default function Settings() {
     setSettings({ language: e.target.value });
     updateSettings();
 
-    if (geolocationKnown) {
+    if (state.settings.analytics_opt_in && geolocationKnown) {
       const analytics = {
         latitude,
         longitude,
@@ -137,7 +137,7 @@ export default function Settings() {
   };
 
   const handleLocationRangeAnalytics = () => {
-    if (geolocationKnown) {
+    if (state.settings.analytics_opt_in && geolocationKnown) {
       const analytics = {
         latitude,
         longitude,
@@ -160,7 +160,7 @@ export default function Settings() {
   const handleRefresh = () => {
     setAppData(onlineCheck);
 
-    if (geolocationKnown) {
+    if (state.settings.analytics_opt_in && geolocationKnown) {
       const analytics = {
         latitude,
         longitude,

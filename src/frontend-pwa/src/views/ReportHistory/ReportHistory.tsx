@@ -5,7 +5,7 @@
  *          one convenient view for a user to reference their old reports
  *          View features Delete operations so users can remove and old reports they no longer need
  *          This view does not link to a database, so users cannot affect database entries directly
- * @author  LocalNewsTV
+ * @author  LocalNewsTV, Dallas Richmond
  */
 import { NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';

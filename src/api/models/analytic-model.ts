@@ -28,7 +28,7 @@ const AnalyticSchema = new mongoose.Schema({
       minLength: 4,
       maxLength: 16,
       trim: true,
-      match: /^(find service|find location|report|report history|location details|settings|about)$/i,
+      match: /^(find service|find location|report|report history|location details|settings|about|change log)$/i,
     },
     closestOffice: {
       required: false,
