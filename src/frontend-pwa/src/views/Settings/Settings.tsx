@@ -244,7 +244,7 @@ export default function Settings() {
               </p>
               <Button
                 handleClick={handleClearCache}
-                variant="primary"
+                variant="secondary"
                 size="sm"
                 disabled={false}
                 text={SettingsContent.clearCache[lang]}
