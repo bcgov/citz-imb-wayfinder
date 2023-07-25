@@ -64,13 +64,21 @@ export const SettingsContent: ContentMap = {
     eng: 'Refresh App Data',
     fr: 'Actualiser les données de l\'application',
   },
+  clearCacheAccordionTitle: {
+    eng: 'Delete Map Cache',
+    fr: 'Supprimer le cache',
+  },
   clearCache: {
-    eng: 'Clear Cached Data',
-    fr: 'Effacer les données en cache',
+    eng: 'Delete Data',
+    fr: 'Suprimmer les données',
   },
   clearCacheToolTip: {
-    eng: 'Deletes the cached site data. WARNING: WILL AFFECT OFFLINE FUNCTIONALITY',
-    fr: 'Supprime les données de site mises en cache. AVERTISSEMENT : AFFECTERA LA FONCTIONNALITÉ HORS LIGNE',
+    eng: 'Deletes the cached map data.',
+    fr: 'Supprime les données de site mises en cache.',
+  },
+  clearCacheWarningText: {
+    eng: 'WARNING: Deleting this will prevent offline map functionality.',
+    fr: 'AVERTISSEMENT : la suppression de ce paramètre empêchera la fonctionnalité de carte hors ligne.',
   },
   languages: {
     eng: [

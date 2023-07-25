@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-shadow */
 /* eslint-disable react/jsx-indent */
 /* eslint-disable max-len */
@@ -88,13 +89,19 @@ export default function Settings() {
   };
 
   /**
-   * @summary Pulls in new app data if user hit the refresh button
+   * @summary Pulls in new app data if user hits the refresh button.
+   *          Clears the browser cache, then forces the page
+   *          to unregister the service-worker and reload the
+   *          window. This forces an updated service-worker
+   *          to initialize and download, triggering all assets
+   *          to be downloaded anew.
+   *
+   *
    * @author  Dallas Richmond, Tyler Maloney
    */
   const handleRefresh = () => {
     setAppData(onlineCheck);
     if ('serviceWorker' in navigator) {
-      // Clear "mapTiles" and "site" caches
       const clearCachesPromise = Promise.all([
         caches.delete('mapTiles'),
         caches.delete('site'),
@@ -104,7 +111,6 @@ export default function Settings() {
           if (registration) {
             registration.unregister().then((isUnregistered) => {
               if (isUnregistered) {
-                // Reload the page after service worker is unregistered
                 window.location.reload();
               } else {
                 console.error('Service worker unregistration failed.');
@@ -113,7 +119,6 @@ export default function Settings() {
               console.error('Service worker unregistration failed:', error);
             });
           } else {
-            // Perform page reload even if no service worker is found
             window.location.reload();
           }
         }).catch((error) => {
@@ -126,7 +131,7 @@ export default function Settings() {
   };
 
   /**
-   * @summary Directs the service worker to clear all data from cache
+   * @summary Directs the service worker to clear all mapTile data from browser cache.
    * @author  Tyler Maloney
    */
   const handleClearCache = () => {
@@ -134,17 +139,7 @@ export default function Settings() {
       navigator.serviceWorker.controller.postMessage({ action: 'clearCache' });
     }
   };
-  // const handleClearCache = () => {
-  //   const confirmMessage = 'This action will prevent most offline functionality. Are you sure you want to proceed?';
-  //   const userConfirmation = window.confirm(confirmMessage);
 
-  //   if (userConfirmation) {
-  //     if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
-  //       navigator.serviceWorker.controller.postMessage({ action: 'clearCache' });
-  //     }
-  //   }
-  // };
-  
   return (
     <SettingsContainer>
       <Header>
@@ -244,8 +239,8 @@ export default function Settings() {
         <Accordion
           content={(
             <div>
-              <p style={{ fontSize: '0.8rem', color: 'red' }}>
-                WARNING: Deleting cached data will prevent most offline functionality.
+              <p style={{ color: 'red' }}>
+                {SettingsContent.clearCacheWarningText[lang]}
               </p>
               <Button
                 handleClick={handleClearCache}
@@ -256,7 +251,7 @@ export default function Settings() {
               />
             </div>
           )}
-          text="Cache"
+          text={SettingsContent.clearCacheAccordionTitle[lang]}
           tooltip={(
             <MoreInfoButton
               tip={SettingsContent.clearCacheToolTip[lang]}
