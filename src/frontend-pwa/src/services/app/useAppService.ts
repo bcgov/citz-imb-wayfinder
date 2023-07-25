@@ -51,7 +51,6 @@ const useAppService = () => {
             dispatch({ type: SET_APP_DATA, payload: data });
           } else {
             const data = await axios.get(`${constants.BACKEND_URL}/api/locations`);
-            console.log('data: ', data);
             saveDataToLocalStorage(constants.UPDATE_ARRAY_KEY, data.data.updateArr);
             saveDataToLocalStorage(constants.APP_DATA_KEY, data);
             dispatch({ type: SET_APP_DATA, payload: data });
