@@ -24,8 +24,6 @@
 self.addEventListener('activate', (event) => {
     event.waitUntil(
       self.clients.claim().then(() => {
-        console.log('Service worker has taken control of clients');
-        // Move specific assets from the precache to the "mapTiles" cache
         return caches.open('mapTiles').then((mapTilesCache) => {
           return caches.open('site').then((siteCache) => {
             return caches.keys().then((cacheNames) => {
@@ -37,24 +35,20 @@ self.addEventListener('activate', (event) => {
                       const mapTilesUrls = cacheKeys.filter((cacheKey) => cacheKey.url.includes('mapTiles'));
                       const siteUrls = cacheKeys.filter((cacheKey) => !cacheKey.url.includes('mapTiles'));
   
-                      // Move assets matching "mapTiles" to "mapTiles" cache
                       const mapTilesPromises = mapTilesUrls.map((url) => {
                         return precache.match(url).then((response) => {
                           if (response) {
                             return mapTilesCache.put(url, response.clone()).then(() => {
-                              // Delete the original asset from the precache
                               return precache.delete(url);
                             });
                           }
                         });
                       });
   
-                      // Move assets not matching "mapTiles" to "site" cache
                       const sitePromises = siteUrls.map((url) => {
                         return precache.match(url).then((response) => {
                           if (response) {
                             return siteCache.put(url, response.clone()).then(() => {
-                              // Delete the original asset from the precache
                               return precache.delete(url);
                             });
                           }
