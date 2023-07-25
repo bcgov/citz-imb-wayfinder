@@ -128,10 +128,21 @@ export default function Settings() {
   };
 
   /**
+<<<<<<< HEAD
    * @summary Sends the analytic to the endpoint
    * @param   analytic is the data that will be sent to the analytic endpoint
    * @type    {(analytic: Analytic)}
    * @author  Dallas Richmond
+=======
+   * @summary Pulls in new app data if user hits the refresh button.
+   *          Clears the browser cache, then forces the page
+   *          to unregister the service-worker and reload the
+   *          window. This forces an updated service-worker
+   *          to initialize and download, triggering all assets
+   *          to be downloaded anew.
+   *
+   * @author  Dallas Richmond, Tyler Maloney
+>>>>>>> 876968c701de1531d73af8b191d73b50da6ecdb9
    */
   const sendAnalytics = (analytic: Analytic) => {
     if (state.settings.offline_mode) {
@@ -178,6 +189,7 @@ export default function Settings() {
   const handleRefresh = () => {
     setAppData(onlineCheck);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     if (state.settings.analytics_opt_in && geolocationKnown) {
       const analytics = {
@@ -192,6 +204,8 @@ export default function Settings() {
       };
       sendAnalytics(analytics);
 =======
+=======
+>>>>>>> 876968c701de1531d73af8b191d73b50da6ecdb9
     if ('serviceWorker' in navigator) {
       const clearCachesPromise = Promise.all([
         caches.delete('mapTiles'),
@@ -218,7 +232,10 @@ export default function Settings() {
       }).catch((error) => {
         console.error('Error clearing caches:', error);
       });
+<<<<<<< HEAD
 >>>>>>> f3c7799 (final tweaks + comments)
+=======
+>>>>>>> 876968c701de1531d73af8b191d73b50da6ecdb9
     }
   };
 
