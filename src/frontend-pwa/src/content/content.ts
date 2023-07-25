@@ -67,6 +67,7 @@ export const SettingsContent: ContentMap = {
   refreshDataToolTip: {
     eng: 'Pull in new location data from the server',
     fr: 'Récupérer de nouvelles données de localisation à partir du serveur',
+  },
   clearCacheAccordionTitle: {
     eng: 'Delete Map Cache',
     fr: 'Supprimer le cache',
