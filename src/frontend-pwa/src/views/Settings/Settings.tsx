@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable react/jsx-indent */
 /* eslint-disable max-len */
 /**
@@ -185,6 +186,18 @@ export default function Settings() {
     }
   };
 
+  // tylers test function
+  const handleClearCache = () => {
+    if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({ action: 'clearCache' });
+      console.log('testing if handleClearCache fires');
+    }
+  };
+
+  const handleClearLocalStorage = () => {
+    localStorage.clear();
+    console.log('local storage cleared');
+  };
   return (
     <SettingsContainer>
       <Header>
@@ -286,6 +299,22 @@ export default function Settings() {
             path="/settings/changelog"
             text={SettingsContent.changeLog[lang]}
           />
+        </Section>
+        <Section>
+        <Button
+          handleClick={handleClearCache}
+          variant="primary"
+          size="sm"
+          disabled={false}
+          text="Clear Maptile"
+        />
+        <Button
+          handleClick={handleClearLocalStorage}
+          variant="primary"
+          size="sm"
+          disabled={false}
+          text="Clear Local"
+        />
         </Section>
       </ContentContainer>
     </SettingsContainer>
