@@ -173,7 +173,6 @@ export default function Settings() {
    *          to initialize and download, triggering all assets
    *          to be downloaded anew.
    *
-   *
    * @author  Dallas Richmond, Tyler Maloney
    */
   const handleRefresh = () => {
