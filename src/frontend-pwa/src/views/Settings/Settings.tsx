@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-indent */
 /* eslint-disable max-len */
 /**
@@ -164,8 +165,15 @@ export default function Settings() {
   };
 
   /**
-   * @summary Pulls in new app data if user hit the refresh button
-   * @author  Dallas Richmond
+   * @summary Pulls in new app data if user hits the refresh button.
+   *          Clears the browser cache, then forces the page
+   *          to unregister the service-worker and reload the
+   *          window. This forces an updated service-worker
+   *          to initialize and download, triggering all assets
+   *          to be downloaded anew.
+   *
+   *
+   * @author  Dallas Richmond, Tyler Maloney
    */
   const handleRefresh = () => {
     setAppData(onlineCheck);
@@ -182,6 +190,43 @@ export default function Settings() {
         },
       };
       sendAnalytics(analytics);
+    }
+    if ('serviceWorker' in navigator) {
+      const clearCachesPromise = Promise.all([
+        caches.delete('mapTiles'),
+        caches.delete('site'),
+      ]);
+      clearCachesPromise.then(() => {
+        navigator.serviceWorker.getRegistration().then((registration) => {
+          if (registration) {
+            registration.unregister().then((isUnregistered) => {
+              if (isUnregistered) {
+                window.location.reload();
+              } else {
+                console.error('Service worker unregistration failed.');
+              }
+            }).catch((error) => {
+              console.error('Service worker unregistration failed:', error);
+            });
+          } else {
+            window.location.reload();
+          }
+        }).catch((error) => {
+          console.error('Error getting service worker registration:', error);
+        });
+      }).catch((error) => {
+        console.error('Error clearing caches:', error);
+      });
+    }
+  };
+
+  /**
+   * @summary Directs the service worker to clear all mapTile data from browser cache.
+   * @author  Tyler Maloney
+   */
+  const handleClearCache = () => {
+    if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({ action: 'clearCache' });
     }
   };
 
@@ -287,6 +332,28 @@ export default function Settings() {
             text={SettingsContent.changeLog[lang]}
           />
         </Section>
+        <Accordion
+          content={(
+            <div>
+              <p style={{ color: 'red' }}>
+                {SettingsContent.clearCacheWarningText[lang]}
+              </p>
+              <Button
+                handleClick={handleClearCache}
+                variant="primary"
+                size="sm"
+                disabled={false}
+                text={SettingsContent.clearCache[lang]}
+              />
+            </div>
+          )}
+          text={SettingsContent.clearCacheAccordionTitle[lang]}
+          tooltip={(
+            <MoreInfoButton
+              tip={SettingsContent.clearCacheToolTip[lang]}
+            />
+          )}
+        />
       </ContentContainer>
     </SettingsContainer>
   );
