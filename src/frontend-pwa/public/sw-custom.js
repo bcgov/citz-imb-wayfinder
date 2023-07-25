@@ -21,63 +21,63 @@
  * @type   {event}
  * @author Tyler Maloney
  */
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    self.clients.claim().then(() => {
-      return caches.open('mapTiles').then((mapTilesCache) => {
-        return caches.open('site').then((siteCache) => {
-          return caches.keys().then((cacheNames) => {
-            const precacheNames = cacheNames.filter((cacheName) => cacheName.startsWith('workbox-precache-v2'));
-            return Promise.all(
-              precacheNames.map((precacheName) => {
-                return caches.open(precacheName).then((precache) => {
-                  return precache.keys().then((cacheKeys) => {
-                    const mapTilesUrls = cacheKeys.filter((cacheKey) => cacheKey.url.includes('mapTiles'));
-                    const siteUrls = cacheKeys.filter((cacheKey) => !cacheKey.url.includes('mapTiles'));
+// self.addEventListener('activate', (event) => {
+//   event.waitUntil(
+//     self.clients.claim().then(() => {
+//       return caches.open('mapTiles').then((mapTilesCache) => {
+//         return caches.open('site').then((siteCache) => {
+//           return caches.keys().then((cacheNames) => {
+//             const precacheNames = cacheNames.filter((cacheName) => cacheName.startsWith('workbox-precache-v2'));
+//             return Promise.all(
+//               precacheNames.map((precacheName) => {
+//                 return caches.open(precacheName).then((precache) => {
+//                   return precache.keys().then((cacheKeys) => {
+//                     const mapTilesUrls = cacheKeys.filter((cacheKey) => cacheKey.url.includes('mapTiles'));
+//                     const siteUrls = cacheKeys.filter((cacheKey) => !cacheKey.url.includes('mapTiles'));
 
-                    const mapTilesPromises = mapTilesUrls.map((url) => {
-                      return precache.match(url).then((response) => {
-                        if (response) {
-                          return mapTilesCache.put(url, response.clone()).then(() => {
-                            return precache.delete(url);
-                          });
-                        }
-                      });
-                    });
+//                     const mapTilesPromises = mapTilesUrls.map((url) => {
+//                       return precache.match(url).then((response) => {
+//                         if (response) {
+//                           return mapTilesCache.put(url, response.clone()).then(() => {
+//                             return precache.delete(url);
+//                           });
+//                         }
+//                       });
+//                     });
 
-                    const sitePromises = siteUrls.map((url) => {
-                      return precache.match(url).then((response) => {
-                        if (response) {
-                          return siteCache.put(url, response.clone()).then(() => {
-                            return precache.delete(url);
-                          });
-                        }
-                      });
-                    });
+//                     const sitePromises = siteUrls.map((url) => {
+//                       return precache.match(url).then((response) => {
+//                         if (response) {
+//                           return siteCache.put(url, response.clone()).then(() => {
+//                             return precache.delete(url);
+//                           });
+//                         }
+//                       });
+//                     });
 
-                    return Promise.all([...mapTilesPromises, ...sitePromises]);
-                  });
-                });
-              })
-            );
-          });
-        });
-      }).then(() => {
-        return caches.keys().then((cacheNames) => {
-          const precacheNamesToDelete = cacheNames.filter((cacheName) => cacheName.startsWith('workbox-precache-v2'));
-          return Promise.all(
-            precacheNamesToDelete.map((cacheName) => {
-              return caches.delete(cacheName);
-            })
-          );
-        });
-      }).then(() => {
-      }).catch((error) => {
-        console.error('Error deleting caches:', error);
-      });
-    })
-  );
-});
+//                     return Promise.all([...mapTilesPromises, ...sitePromises]);
+//                   });
+//                 });
+//               })
+//             );
+//           });
+//         });
+//       }).then(() => {
+//         return caches.keys().then((cacheNames) => {
+//           const precacheNamesToDelete = cacheNames.filter((cacheName) => cacheName.startsWith('workbox-precache-v2'));
+//           return Promise.all(
+//             precacheNamesToDelete.map((cacheName) => {
+//               return caches.delete(cacheName);
+//             })
+//           );
+//         });
+//       }).then(() => {
+//       }).catch((error) => {
+//         console.error('Error deleting caches:', error);
+//       });
+//     })
+//   );
+// });
 
 /**
 * @summary Deletes the "mapTiles" cache, through an event linked to the
@@ -90,16 +90,34 @@ self.addEventListener('activate', (event) => {
 * @type  {event}
 * @author Tyler Maloney
 */
+// self.addEventListener('message', (event) => {
+// if (event.data && event.data.action === 'clearCache') {
+//   caches.keys().then((cacheNames) => {
+//     const cachesToDelete = cacheNames.filter((cacheName) => cacheName === 'mapTiles');
+//     return Promise.all(cachesToDelete.map((cacheName) => caches.delete(cacheName)));
+//   }).then(() => {
+//     event.source.postMessage({ action: 'clearCache', success: true });
+//   }).catch((error) => {
+//     console.error('Cache clear error:', error);
+//     event.source.postMessage({ action: 'clearCache', error });
+//   });
+// }
+// });
+//below code will delete basic precache, alternate solution
 self.addEventListener('message', (event) => {
-if (event.data && event.data.action === 'clearCache') {
-  caches.keys().then((cacheNames) => {
-    const cachesToDelete = cacheNames.filter((cacheName) => cacheName === 'mapTiles');
-    return Promise.all(cachesToDelete.map((cacheName) => caches.delete(cacheName)));
-  }).then(() => {
-    event.source.postMessage({ action: 'clearCache', success: true });
-  }).catch((error) => {
-    console.error('Cache clear error:', error);
-    event.source.postMessage({ action: 'clearCache', error });
+  if (event.data && event.data.action === 'clearCache') {
+    caches.keys().then((cacheNames) => {
+      const precacheNamesToDelete = cacheNames.filter((cacheName) => cacheName.startsWith('workbox-precache-v2'));
+          return Promise.all(
+            precacheNamesToDelete.map((cacheName) => {
+              return caches.delete(cacheName);
+            })
+          );
+    }).then(() => {
+      event.source.postMessage({ action: 'clearCache', success: true });
+    }).catch((error) => {
+      console.error('Cache clear error:', error);
+      event.source.postMessage({ action: 'clearCache', error });
+    });
+  }
   });
-}
-});

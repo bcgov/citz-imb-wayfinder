@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [
     VitePWA({
       strategies: "generateSW",
+      // strategies: 'injectManifest',
       registerType: "autoUpdate",
       injectRegister: 'auto',
       includeAssets: ["**/*"],
