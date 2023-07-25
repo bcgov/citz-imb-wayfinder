@@ -166,7 +166,7 @@ export default function Settings() {
 
   /**
    * @summary Pulls in new app data if user hit the refresh button
-   * @author  Dallas Richmond
+   * @author  Dallas Richmond, Tyler Maloney
    */
   const handleRefresh = () => {
     setAppData(onlineCheck);
@@ -186,18 +186,16 @@ export default function Settings() {
     }
   };
 
-  // tylers test function
+  /**
+   * @summary Directs the service worker to clear all data from cache
+   * @author  Tyler Maloney
+   */
   const handleClearCache = () => {
     if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
       navigator.serviceWorker.controller.postMessage({ action: 'clearCache' });
-      console.log('testing if handleClearCache fires');
     }
   };
 
-  const handleClearLocalStorage = () => {
-    localStorage.clear();
-    console.log('local storage cleared');
-  };
   return (
     <SettingsContainer>
       <Header>
@@ -300,22 +298,23 @@ export default function Settings() {
             text={SettingsContent.changeLog[lang]}
           />
         </Section>
-        <Section>
-        <Button
-          handleClick={handleClearCache}
-          variant="primary"
-          size="sm"
-          disabled={false}
-          text="Clear Maptile"
+        <Accordion
+          content={(
+            <Button
+              handleClick={handleClearCache}
+              variant="primary"
+              size="sm"
+              disabled={false}
+              text={SettingsContent.clearCache[lang]}
+            />
+          )}
+          text="Cache"
+          tooltip={(
+            <MoreInfoButton
+              tip={SettingsContent.clearCacheToolTip[lang]}
+            />
+          )}
         />
-        <Button
-          handleClick={handleClearLocalStorage}
-          variant="primary"
-          size="sm"
-          disabled={false}
-          text="Clear Local"
-        />
-        </Section>
       </ContentContainer>
     </SettingsContainer>
   );
