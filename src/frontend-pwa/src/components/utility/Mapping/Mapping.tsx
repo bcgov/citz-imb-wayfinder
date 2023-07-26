@@ -86,6 +86,9 @@ export default function Mapping({ locations, currentLocation }: MappingProps) {
     ? 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
     : '/mapTiles/{z}/{x}/{y}.png';
 
+  // eslint-disable-next-line no-console
+  console.log('Are map tiles cached?: ', state.mapsCached);
+
   return (
     <MapWrapperDiv>
       { !isNaN(lat)

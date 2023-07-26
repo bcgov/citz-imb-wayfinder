@@ -8,6 +8,7 @@ enum AppActionType {
   SET_REPORTS = 'SET_REPORTS',
   SET_TOOL_TIP_TEXT = 'SET_TOOL_TIP_TEXT',
   SET_ONLINE = 'SET_ONLINE',
+  SET_MAP_CACHED = 'SET_MAP_CACHED',
 }
 
 export default AppActionType;

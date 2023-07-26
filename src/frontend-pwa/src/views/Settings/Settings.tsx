@@ -37,6 +37,7 @@ export default function Settings() {
     setSettings,
     updateSettings,
     setAnalytics,
+    setMapsCache,
     state,
   } = useAppService();
   const [locationRangeValue, setLocationRangeValue] = useState(state.settings.location_range);
@@ -199,6 +200,7 @@ export default function Settings() {
       });
       navigator.serviceWorker.register('/sw.js')
         .then(() => {
+          setMapsCache(true);
           window.location.reload();
         })
         .catch((error) => {
@@ -229,6 +231,7 @@ export default function Settings() {
             });
         });
     }
+    setMapsCache(false);
   };
 
   return (

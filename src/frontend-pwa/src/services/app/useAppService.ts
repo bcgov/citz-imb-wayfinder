@@ -20,6 +20,7 @@ const {
   SET_REPORTS,
   SET_TOOL_TIP_TEXT,
   SET_ONLINE,
+  SET_MAP_CACHED,
 } = AppActionType;
 
 /**
@@ -274,6 +275,10 @@ const useAppService = () => {
       });
     };
 
+    const setMapsCache = (cached: boolean) => {
+      dispatch({ type: SET_MAP_CACHED, payload: cached });
+    };
+
     return {
       setAppData,
       setCurrentLocation,
@@ -288,6 +293,7 @@ const useAppService = () => {
       setOfflineReports,
       setOnline,
       setAppInstall,
+      setMapsCache,
       state,
     };
   }, [state, dispatch]);
