@@ -175,142 +175,6 @@ export default function Settings() {
    *
    * @author  Dallas Richmond, Tyler Maloney
    */
-  // const handleRefresh = () => {
-  //   setAppData(onlineCheck);
-  //   if (state.settings.analytics_opt_in && geolocationKnown) {
-  //     const analytics = {
-  //       latitude,
-  //       longitude,
-  //       usage: {
-  //         function: 'settings',
-  //         settings: {
-  //           settingType: 'refresh data',
-  //         },
-  //       },
-  //     };
-  //     sendAnalytics(analytics);
-  //   }
-  //   // if ('serviceWorker' in navigator) {
-  //   //   const clearCachesPromise = Promise.all([
-  //   //     caches.delete('mapTiles'),
-  //   //     caches.delete('site'),
-  //   //   ]);
-  //   //   console.log(clearCachesPromise);
-  //   //   clearCachesPromise.then(() => {
-  //   //     navigator.serviceWorker.getRegistration().then((registration) => {
-  //   //       if (registration) {
-  //   //         registration.unregister().then((isUnregistered) => {
-  //   //           if (isUnregistered) {
-  //   //             console.log('service worker unregistered');
-  //   //             window.location.reload();
-  //   //           } else {
-  //   //             console.error('Service worker unregistration failed.');
-  //   //           }
-  //   //         }).catch((error) => {
-  //   //           console.error('Service worker unregistration failed:', error);
-  //   //         });
-  //   //       } else {
-  //   //         window.location.reload();
-  //   //       }
-  //   //     }).catch((error) => {
-  //   //       console.error('Error getting service worker registration:', error);
-  //   //     });
-  //   //   }).catch((error) => {
-  //   //     console.error('Error clearing caches:', error);
-  //   //   });
-  //   // }
-  //   if ('serviceWorker' in navigator) {
-  //     const clearCachesPromise = caches.keys()
-  //       .then((cacheNames) => {
-  //         const cacheDeletionPromises = cacheNames.filter((cacheName) => cacheName.startsWith('workbox-precache-v2'))
-  //           .map((cacheName) => caches.delete(cacheName));
-  //         return Promise.all(cacheDeletionPromises);
-  //       });
-
-  //     console.log(clearCachesPromise);
-  //     clearCachesPromise.then(() => {
-  //       navigator.serviceWorker.getRegistration().then((registration) => {
-  //         if (registration) {
-  //           registration.unregister().then((isUnregistered) => {
-  //             if (isUnregistered) {
-  //               console.log('service worker unregistered');
-  //               window.location.reload();
-  //             } else {
-  //               console.error('Service worker unregistration failed.');
-  //             }
-  //           }).catch((error) => {
-  //             console.error('Service worker unregistration failed:', error);
-  //           });
-  //         } else {
-  //           window.location.reload();
-  //         }
-  //       }).catch((error) => {
-  //         console.error('Error getting service worker registration:', error);
-  //       });
-  //     }).catch((error) => {
-  //       console.error('Error clearing caches:', error);
-  //     });
-  //   }
-
-  //   // if (state.settings.analytics_opt_in && geolocationKnown) {
-  //   //   const analytics = {
-  //   //     latitude,
-  //   //     longitude,
-  //   //     usage: {
-  //   //       function: 'settings',
-  //   //       settings: {
-  //   //         settingType: 'refresh data',
-  //   //       },
-  //   //     },
-  //   //   };
-  //   //   sendAnalytics(analytics);
-  //   // }
-  // };
-
-  // const handleRefresh = () => {
-  //   setAppData(onlineCheck);
-  //   if (state.settings.analytics_opt_in && geolocationKnown) {
-  //     const analytics = {
-  //       latitude,
-  //       longitude,
-  //       usage: {
-  //         function: 'settings',
-  //         settings: {
-  //           settingType: 'refresh data',
-  //         },
-  //       },
-  //     };
-  //     sendAnalytics(analytics);
-  //   }
-
-  //   if ('serviceWorker' in navigator) {
-  //     const clearCachesPromise = caches.keys()
-  //       .then((cacheNames) => {
-  //         const cacheDeletionPromises = cacheNames.filter((cacheName) => cacheName.startsWith('workbox-precache-v2'))
-  //           .map((cacheName) => caches.delete(cacheName));
-  //         return Promise.all(cacheDeletionPromises);
-  //       });
-  //     console.log(clearCachesPromise);
-  //     clearCachesPromise.then(() => {
-  //       navigator.serviceWorker.getRegistration().then((registration) => {
-  //         if (registration) {
-  //           registration.unregister().then(() => {
-  //             console.log('service worker unregistered');
-  //             window.location.reload();
-  //           }).catch((error) => {
-  //             console.error('Service worker unregistration failed:', error);
-  //           });
-  //         } else {
-  //           window.location.reload();
-  //         }
-  //       }).catch((error) => {
-  //         console.error('Error getting service worker registration:', error);
-  //       });
-  //     }).catch((error) => {
-  //       console.error('Error clearing caches:', error);
-  //     });
-  //   }
-  // };
   const handleRefresh = () => {
     setAppData(onlineCheck);
     if (state.settings.analytics_opt_in && geolocationKnown) {
@@ -328,28 +192,18 @@ export default function Settings() {
     }
 
     if ('serviceWorker' in navigator) {
-      const clearCachesPromise = caches.keys()
-        .then((cacheNames) => {
-          const cacheDeletionPromises = cacheNames.filter((cacheName) => cacheName.startsWith('workbox-precache-v2'))
-            .map((cacheName) => caches.delete(cacheName));
-          return Promise.all(cacheDeletionPromises);
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        registrations.forEach((registration) => {
+          registration.unregister();
         });
-
-      console.log(clearCachesPromise);
-      clearCachesPromise.then(() => {
-        // Instead of unregistering the service worker, we will update it
-        navigator.serviceWorker.register('/sw.js')
-          .then(() => {
-            console.log('Service worker updated successfully.');
-            // window.location.reload();
-          })
-          .catch((error) => {
-            console.error('Service worker registration failed:', error);
-            // window.location.reload();
-          });
-      }).catch((error) => {
-        console.error('Error clearing caches:', error);
       });
+      navigator.serviceWorker.register('/sw.js')
+        .then(() => {
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error('Error registering service worker:', error);
+        });
     }
   };
 
@@ -358,8 +212,22 @@ export default function Settings() {
    * @author  Tyler Maloney
    */
   const handleClearCache = () => {
-    if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
-      navigator.serviceWorker.controller.postMessage({ action: 'clearCache' });
+    if ('serviceWorker' in navigator) {
+      caches.keys()
+        .then((cacheNames) => {
+          const precacheName = cacheNames.filter((cacheName) => cacheName.startsWith('workbox-precache-v2'));
+          caches.open(precacheName[0])
+            .then((cache) => {
+              cache.keys()
+                .then((keys) => {
+                  keys.forEach((key) => {
+                    if (key.url.includes('/mapTiles')) {
+                      cache.delete(key.url);
+                    }
+                  });
+                });
+            });
+        });
     }
   };
 

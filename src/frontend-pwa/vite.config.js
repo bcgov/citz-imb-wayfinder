@@ -5,12 +5,10 @@ export default defineConfig({
   plugins: [
     VitePWA({
       strategies: "generateSW",
-      // strategies: 'injectManifest',
       registerType: "autoUpdate",
       injectRegister: 'auto',
       includeAssets: ["**/*"],
       workbox: {
-        importScripts: ["sw-custom.js"],
         globPatterns: ["**/*"],
         globFollow: true,
         cleanupOutdatedCaches: true,
