@@ -176,6 +176,7 @@ export default function Settings() {
    *
    * @author  Dallas Richmond, Tyler Maloney
    */
+  // TODO: Add new add map tiles button with a check to see if map tiles already exist (Don't want to keep bringing in more)
   const handleRefresh = () => {
     setAppData(onlineCheck);
     if (state.settings.analytics_opt_in && geolocationKnown) {

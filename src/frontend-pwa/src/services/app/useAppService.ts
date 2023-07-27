@@ -276,6 +276,7 @@ const useAppService = () => {
     };
 
     const setMapsCache = (cached: boolean) => {
+      saveDataToLocalStorage(constants.MAPS_CACHED_KEY, cached);
       dispatch({ type: SET_MAP_CACHED, payload: cached });
     };
 

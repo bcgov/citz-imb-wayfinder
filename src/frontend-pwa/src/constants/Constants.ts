@@ -9,6 +9,7 @@ const constants = {
   REPORTS_KEY: 'reports',
   UNSENT_REPORTS_KEY: 'unsentReports',
   APP_INSTALL_KEY: 'appInstalled',
+  MAPS_CACHED_KEY: 'mapsCached',
 };
 
 export default constants;
