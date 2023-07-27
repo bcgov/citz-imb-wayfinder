@@ -22,6 +22,7 @@ import {
   SliderWrapper,
   SettingsContainer,
   ContentContainer,
+  ModalWrapper,
 } from './settings.styles';
 import useAppService from '../../services/app/useAppService';
 import MoreInfoButton from '../../components/common/MoreInfoButton/MoreInfoButton';
@@ -44,6 +45,7 @@ export default function Settings() {
   const [offlineToggleValue, setOfflineToggleValue] = useState(state.settings.offline_mode);
   const [analyticsToggleValue, setAnalyticsToggleValue] = useState(state.settings.analytics_opt_in);
   const [lang, setLang] = useState(state.settings.lang || 'eng');
+  const [isClearCacheModalOpen, setIsClearCacheModalOpen] = useState(false);
   const onlineCheck = state.isOnline && !state.settings.offline_mode;
   const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
   const latitude = state.currentLocation ? state.currentLocation.lat : 49.2827;
@@ -166,17 +168,9 @@ export default function Settings() {
   };
 
   /**
-   * @summary Pulls in new app data if user hits the refresh button.
-   *          Clears the browser cache, then forces the page
-   *          to unregister the service-worker and reload the
-   *          window. This forces an updated service-worker
-   *          to initialize and download, triggering all assets
-   *          to be downloaded anew.
-   *
-   *
-   * @author  Dallas Richmond, Tyler Maloney
+   * @summary Refreshes app data, builds analytics for usage of "refresh data button"
+   * @author  Dallas Richmond
    */
-  // TODO: Add new add map tiles button with a check to see if map tiles already exist (Don't want to keep bringing in more)
   const handleRefresh = () => {
     setAppData(onlineCheck);
     if (state.settings.analytics_opt_in && geolocationKnown) {
@@ -192,7 +186,18 @@ export default function Settings() {
       };
       sendAnalytics(analytics);
     }
+  };
 
+  /**
+   * @summary Pulls in new map tile data if user hits the refresh button.
+   *          Forces the page to unregister the service-worker and reload
+   *          the window. This forces an updated service-worker to initialize
+   *          and download, triggering assets to be downloaded anew.
+   *
+   *
+   * @author  Dallas Richmond, Tyler Maloney
+   */
+  const handleMapTiles = () => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then((registrations) => {
         registrations.forEach((registration) => {
@@ -211,10 +216,20 @@ export default function Settings() {
   };
 
   /**
-   * @summary Directs the service worker to clear all mapTile data from browser cache.
+   * @summary Show the map tile confirmation modal to the user.
    * @author  Tyler Maloney
    */
-  const handleClearCache = () => {
+  const handleClearCacheConfirm = () => {
+    setIsClearCacheModalOpen(true);
+  };
+
+  /**
+   * @summary Clears all mapTile data from browser cache,
+   *          sets the mapsCached state to false,
+   *          and closes the confirmation modal.
+   * @author  Tyler Maloney, Dallas Richmond
+   */
+  const handleCacheModalConfirm = () => {
     if ('serviceWorker' in navigator) {
       caches.keys()
         .then((cacheNames) => {
@@ -233,28 +248,33 @@ export default function Settings() {
         });
     }
     setMapsCache(false);
+    setIsClearCacheModalOpen(false);
+  };
+
+  /**
+   * @summary Closes the map tile confirmation modal.
+   * @author  Tyler Maloney
+   */
+  const handleModalCancel = () => {
+    setIsClearCacheModalOpen(false);
   };
 
   return (
     <SettingsContainer>
-      <Header>
-        {SettingsContent.settingsTitle[lang]}
-      </Header>
+      <Header>{SettingsContent.settingsTitle[lang]}</Header>
       <ContentContainer>
         <Accordion
           content={(
             <StyledSelect onChange={handleLang} value={lang}>
               {SettingsContent.languages[lang].map((data: string, index: number) => (
-              <option value={SettingsContent.languages.keys[index]} key={data}>{data}</option>
+                <option value={SettingsContent.languages.keys[index]} key={data}>
+                  {data}
+                </option>
               ))}
             </StyledSelect>
           )}
           text={SettingsContent.language[lang]}
-          tooltip={(
-            <MoreInfoButton
-              tip={SettingsContent.languageToolTip[lang]}
-            />
-          )}
+          tooltip={<MoreInfoButton tip={SettingsContent.languageToolTip[lang]} />}
         />
         <Accordion
           content={(
@@ -269,19 +289,13 @@ export default function Settings() {
             </SliderWrapper>
           )}
           text={SettingsContent.locationRange[lang]}
-          tooltip={(
-            <MoreInfoButton
-              tip={SettingsContent.locationRange[lang]}
-            />
-          )}
+          tooltip={<MoreInfoButton tip={SettingsContent.locationRange[lang]} />}
           handleClick={handleLocationRangeAnalytics}
         />
         <Section>
           <TitleWrapper>
             <Title>{SettingsContent.offlineMode[lang]}</Title>
-            <MoreInfoButton
-              tip={SettingsContent.offlineModeToolTip[lang]}
-            />
+            <MoreInfoButton tip={SettingsContent.offlineModeToolTip[lang]} />
           </TitleWrapper>
           <Toggle
             ariaLabel={SettingsContent.offlineMode[lang]}
@@ -292,9 +306,7 @@ export default function Settings() {
         <Section>
           <TitleWrapper>
             <Title>{SettingsContent.analytics[lang]}</Title>
-            <MoreInfoButton
-              tip={SettingsContent.analyticsToolTip[lang]}
-            />
+            <MoreInfoButton tip={SettingsContent.analyticsToolTip[lang]} />
           </TitleWrapper>
           <Toggle
             ariaLabel={SettingsContent.analytics[lang]}
@@ -304,61 +316,81 @@ export default function Settings() {
         </Section>
         <Accordion
           content={(
-            <Button
-              handleClick={handleRefresh}
-              variant="primary"
-              size="sm"
-              disabled={!onlineCheck}
-              text={!onlineCheck ? 'Offline' : 'Refresh'}
-            />
+            <div>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <Button
+                  handleClick={handleRefresh}
+                  variant="primary"
+                  size="sm"
+                  disabled={!onlineCheck}
+                  text={!onlineCheck ? 'Offline' : 'Refresh'}
+                />
+              </div>
+            </div>
           )}
-          text={(SettingsContent.refreshData[lang])}
-          tooltip={(
-            <MoreInfoButton
-              tip={SettingsContent.refreshDataToolTip[lang]}
-            />
-          )}
+          text={SettingsContent.refreshData[lang]}
+          tooltip={<MoreInfoButton tip={SettingsContent.refreshDataToolTip[lang]} />}
         />
-        <Section>
-          <SettingsRowButton
-            path="/settings/about"
-            text={SettingsContent.aboutContact[lang]}
-          />
-        </Section>
-        <Section>
-          <SettingsRowButton
-            path="/eula"
-            text={SettingsContent.license[lang]}
-          />
-        </Section>
-        <Section>
-          <SettingsRowButton
-            path="/settings/changelog"
-            text={SettingsContent.changeLog[lang]}
-          />
-        </Section>
         <Accordion
           content={(
             <div>
-              <p style={{ color: 'red' }}>
-                {SettingsContent.clearCacheWarningText[lang]}
-              </p>
-              <Button
-                handleClick={handleClearCache}
-                variant="secondary"
-                size="sm"
-                disabled={false}
-                text={SettingsContent.clearCache[lang]}
-              />
+              <div style={{ display: 'flex', gap: '10px' }}>
+                {state.mapsCached ? (
+                  <Button
+                    handleClick={handleClearCacheConfirm}
+                    variant="secondary"
+                    size="sm"
+                    disabled={!state.mapsCached}
+                    text={SettingsContent.clearCache[lang]}
+                  />
+                ) : (
+                  <Button
+                    handleClick={handleMapTiles}
+                    variant="primary"
+                    size="sm"
+                    disabled={!onlineCheck}
+                    text={!onlineCheck ? 'Offline' : 'Refresh'}
+                  />
+                )}
+                {/* Modal Component for Clear Cache Confirmation */}
+                {isClearCacheModalOpen && (
+                  <ModalWrapper>
+                    <p>Are you sure you want to clear the cache data?</p>
+                    <p>Offline map will be unavailable.</p>
+                    <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+                      <Button
+                        handleClick={handleCacheModalConfirm}
+                        variant="secondary"
+                        size="sm"
+                        text="Confirm"
+                        disabled={false}
+                      />
+                      <Button
+                        handleClick={handleModalCancel}
+                        variant="primary"
+                        size="sm"
+                        text="Cancel"
+                        disabled={false}
+                      />
+                    </div>
+                  </ModalWrapper>
+                )}
+              </div>
             </div>
           )}
-          text={SettingsContent.clearCacheAccordionTitle[lang]}
-          tooltip={(
-            <MoreInfoButton
-              tip={SettingsContent.clearCacheToolTip[lang]}
-            />
-          )}
+          // TODO: language support
+          text="Offline Map Tiles"
+          tooltip={<MoreInfoButton tip={SettingsContent.refreshDataToolTip[lang]} />}
         />
+        <Section>
+          <SettingsRowButton path="/settings/about" text={SettingsContent.aboutContact[lang]} />
+        </Section>
+        <Section>
+          <SettingsRowButton path="/eula" text={SettingsContent.license[lang]} />
+        </Section>
+        <Section>
+          <SettingsRowButton path="/settings/changelog" text={SettingsContent.changeLog[lang]} />
+        </Section>
       </ContentContainer>
     </SettingsContainer>
   );

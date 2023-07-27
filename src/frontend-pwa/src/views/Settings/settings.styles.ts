@@ -82,3 +82,16 @@ export const StyledSelect = styled.select`
     background-color: #F5F5F5;
     border: 1px solid #DCDCDC;
 `;
+
+export const ModalWrapper = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  background-color: #FFF;
+  padding: 1.25em;
+  border-radius: 0.313em;
+  box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.2);
+  border: 0.125em solid #003366;
+`;

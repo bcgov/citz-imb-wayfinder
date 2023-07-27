@@ -90,6 +90,15 @@ export default function Mapping({ locations, currentLocation }: MappingProps) {
   console.log('Are map tiles cached?: ', state.mapsCached);
   // TODO: Add conditional rendering to map in offline mode if maps are cached
 
+  if (!onlineMode && !state.mapsCached) {
+    return (
+      <p style={{ color: 'darkred' }}>
+        The map data was not found and the device appears to be offline.
+        The offline map is unable to be rendered.
+      </p>
+    );
+  }
+
   return (
     <MapWrapperDiv>
       { !isNaN(lat)
