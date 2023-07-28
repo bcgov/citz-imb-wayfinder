@@ -323,7 +323,7 @@ export default function Settings() {
                   variant="primary"
                   size="sm"
                   disabled={!onlineCheck}
-                  text={!onlineCheck ? 'Offline' : 'Refresh'}
+                  text={!onlineCheck ? SettingsContent.refreshDataButtonTextOffline[lang] : SettingsContent.refreshDataButtonTextRefresh[lang]}
                 />
               </div>
             </div>
@@ -349,27 +349,25 @@ export default function Settings() {
                     variant="primary"
                     size="sm"
                     disabled={!onlineCheck}
-                    text={!onlineCheck ? 'Offline' : 'Refresh'}
+                    text={!onlineCheck ? SettingsContent.refreshDataButtonTextOffline[lang] : SettingsContent.refreshDataButtonTextRefresh[lang]}
                   />
                 )}
-                {/* Modal Component for Clear Cache Confirmation */}
                 {isClearCacheModalOpen && (
                   <ModalWrapper>
-                    <p>Are you sure you want to clear the cache data?</p>
-                    <p>Offline map will be unavailable.</p>
+                    <p>{SettingsContent.clearCacheConfirmText[lang]}</p>
                     <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
                       <Button
                         handleClick={handleCacheModalConfirm}
                         variant="secondary"
                         size="sm"
-                        text="Confirm"
+                        text={SettingsContent.clearCacheButtonConfirm[lang]}
                         disabled={false}
                       />
                       <Button
                         handleClick={handleModalCancel}
                         variant="primary"
                         size="sm"
-                        text="Cancel"
+                        text={SettingsContent.clearCacheButtonCancel[lang]}
                         disabled={false}
                       />
                     </div>
@@ -378,9 +376,8 @@ export default function Settings() {
               </div>
             </div>
           )}
-          // TODO: language support
-          text="Offline Map Tiles"
-          tooltip={<MoreInfoButton tip={SettingsContent.refreshDataToolTip[lang]} />}
+          text={SettingsContent.offlineMapTilesTitle[lang]}
+          tooltip={<MoreInfoButton tip={SettingsContent.offlineMapTilesToolTip[lang]} />}
         />
         <Section>
           <SettingsRowButton path="/settings/about" text={SettingsContent.aboutContact[lang]} />

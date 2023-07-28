@@ -68,9 +68,21 @@ export const SettingsContent: ContentMap = {
     eng: 'Pull in new location data from the server',
     fr: 'Récupérer de nouvelles données de localisation à partir du serveur',
   },
-  clearCacheAccordionTitle: {
-    eng: 'Delete Map Cache',
-    fr: 'Supprimer le cache',
+  refreshDataButtonTextRefresh: {
+    eng: 'Refresh',
+    fr: 'Rafraîchir',
+  },
+  refreshDataButtonTextOffline: {
+    eng: 'Offline',
+    fr: 'Hors ligne',
+  },
+  offlineMapTilesTitle: {
+    eng: 'Offline Map Tiles',
+    fr: 'Tuiles de carte hors ligne',
+  },
+  offlineMapTilesToolTip: {
+    eng: 'To decrease app size, you can delete the saved tiles. This will prevent offline map functionality.',
+    fr: 'Pour réduire la taille de l\'application, vous pouvez supprimer les vignettes enregistrées. Cela empêchera la fonctionnalité de carte hors ligne.',
   },
   clearCache: {
     eng: 'Delete Data',
@@ -80,9 +92,17 @@ export const SettingsContent: ContentMap = {
     eng: 'Deletes the cached map data.',
     fr: 'Supprime les données de site mises en cache.',
   },
-  clearCacheWarningText: {
-    eng: 'WARNING: Deleting this will prevent offline map functionality.',
-    fr: 'AVERTISSEMENT : la suppression de ce paramètre empêchera la fonctionnalité de carte hors ligne.',
+  clearCacheConfirmText: {
+    eng: 'Are you sure you want to clear the cache data? Offline map will be unavailable.',
+    fr: 'Voulez-vous vraiment effacer les données du cache ? La carte hors ligne ne sera pas disponible.',
+  },
+  clearCacheButtonConfirm: {
+    eng: 'Confirm',
+    fr: 'Confirmer',
+  },
+  clearCacheButtonCancel: {
+    eng: 'Cancel',
+    fr: 'Annuler',
   },
   languages: {
     eng: [
