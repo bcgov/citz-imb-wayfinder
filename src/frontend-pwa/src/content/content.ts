@@ -92,6 +92,10 @@ export const SettingsContent: ContentMap = {
     eng: 'Download',
     fr: 'Télécharger',
   },
+  installMapTilesModalWarning: {
+    eng: 'The size of the mapTile package is ~35MB. do you wish to proceed with the download?',
+    fr: 'La taille du package mapTile est d\'environ 35 Mo. Souhaitez-vous poursuivre le téléchargement ?',
+  },
   clearCache: {
     eng: 'Delete Data',
     fr: 'Suprimmer les données',

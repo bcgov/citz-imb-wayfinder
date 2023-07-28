@@ -48,6 +48,7 @@ export default function Settings() {
   const [analyticsToggleValue, setAnalyticsToggleValue] = useState(state.settings.analytics_opt_in);
   const [lang, setLang] = useState(state.settings.lang || 'eng');
   const [isClearCacheModalOpen, setIsClearCacheModalOpen] = useState(false);
+  const [isInstallMapTilesModalOpen, setIsInstallMapTilesModalOpen] = useState(false);
   const onlineCheck = state.isOnline && !state.settings.offline_mode;
   const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
   const latitude = state.currentLocation ? state.currentLocation.lat : 49.2827;
@@ -191,6 +192,14 @@ export default function Settings() {
   };
 
   /**
+   * @summary Opens the map tile confirmation modal.
+   * @author  Tyler Maloney
+   */
+  const handleInstallMapTilesConfirm = () => {
+    setIsInstallMapTilesModalOpen(true);
+  };
+
+  /**
    * @summary Pulls in new map tile data if user hits the refresh button.
    *          Forces the page to unregister the service-worker and reload
    *          the window. This forces an updated service-worker to initialize
@@ -199,7 +208,7 @@ export default function Settings() {
    *
    * @author  Dallas Richmond, Tyler Maloney
    */
-  const handleMapTiles = () => {
+  const handleInstallMapTilesModalConfirm = () => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then((registrations) => {
         registrations.forEach((registration) => {
@@ -215,6 +224,15 @@ export default function Settings() {
           console.error('Error registering service worker:', error);
         });
     }
+    setIsInstallMapTilesModalOpen(false);
+  };
+
+  /**
+   * @summary Closes the map tile confirmation modal.
+   * @author  Tyler Maloney
+   */
+  const handleInstallMapTilesModalCancel = () => {
+    setIsInstallMapTilesModalOpen(false);
   };
 
   /**
@@ -261,7 +279,7 @@ export default function Settings() {
    * @summary Closes the map tile confirmation modal.
    * @author  Tyler Maloney
    */
-  const handleModalCancel = () => {
+  const handleCacheModalCancel = () => {
     setIsClearCacheModalOpen(false);
   };
 
@@ -351,7 +369,7 @@ export default function Settings() {
                   />
                 ) : (
                   <Button
-                    handleClick={handleMapTiles}
+                    handleClick={handleInstallMapTilesConfirm}
                     variant="primary"
                     size="sm"
                     disabled={!onlineCheck}
@@ -370,7 +388,28 @@ export default function Settings() {
                         disabled={false}
                       />
                       <Button
-                        handleClick={handleModalCancel}
+                        handleClick={handleCacheModalCancel}
+                        variant="primary"
+                        size="sm"
+                        text={SettingsContent.clearCacheButtonCancel[lang]}
+                        disabled={false}
+                      />
+                    </ModalPopup>
+                  </ModalWrapper>
+                )}
+                {isInstallMapTilesModalOpen && (
+                  <ModalWrapper>
+                    <p>{SettingsContent.installMapTilesModalWarning[lang]}</p>
+                    <ModalPopup>
+                      <Button
+                        handleClick={handleInstallMapTilesModalConfirm}
+                        variant="tertiary"
+                        size="sm"
+                        text={SettingsContent.clearCacheButtonConfirm[lang]}
+                        disabled={false}
+                      />
+                      <Button
+                        handleClick={handleInstallMapTilesModalCancel}
                         variant="primary"
                         size="sm"
                         text={SettingsContent.clearCacheButtonCancel[lang]}
