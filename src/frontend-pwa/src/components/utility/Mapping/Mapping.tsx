@@ -34,6 +34,7 @@ import {
   StyledPopup,
   StyledMapContainer,
   PopupInfo,
+  MapTilesNotFoundDiv,
 } from './mapping.styles';
 import SingleLocation from '../../../Type/SingleLocation';
 import LocationsArray from '../../../Type/LocationsArray';
@@ -86,16 +87,13 @@ export default function Mapping({ locations, currentLocation }: MappingProps) {
     ? 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
     : '/mapTiles/{z}/{x}/{y}.png';
 
-  // eslint-disable-next-line no-console
-  console.log('Are map tiles cached?: ', state.mapsCached);
-  // TODO: Add conditional rendering to map in offline mode if maps are cached
-
   if (!onlineMode && !state.mapsCached) {
     return (
-      <p style={{ color: 'darkred' }}>
-        The map data was not found and the device appears to be offline.
-        The offline map is unable to be rendered.
-      </p>
+      <MapTilesNotFoundDiv>
+        <p>
+          {mappingContent.offlineMapTilesNotFoundMessage[lang]}
+        </p>
+      </MapTilesNotFoundDiv>
     );
   }
 

@@ -23,6 +23,8 @@ import {
   SettingsContainer,
   ContentContainer,
   ModalWrapper,
+  ModalPopup,
+  AccordionButtonDiv,
 } from './settings.styles';
 import useAppService from '../../services/app/useAppService';
 import MoreInfoButton from '../../components/common/MoreInfoButton/MoreInfoButton';
@@ -227,15 +229,19 @@ export default function Settings() {
    * @summary Clears all mapTile data from browser cache,
    *          sets the mapsCached state to false,
    *          and closes the confirmation modal.
+   *
    * @author  Tyler Maloney, Dallas Richmond
    */
   const handleCacheModalConfirm = () => {
     if ('serviceWorker' in navigator) {
+      // get all cache keys
       caches.keys()
         .then((cacheNames) => {
+          // find cache matching workbox precache
           const precacheName = cacheNames.filter((cacheName) => cacheName.startsWith('workbox-precache-v2'));
           caches.open(precacheName[0])
             .then((cache) => {
+              // get the keys for all assets in cache, check assets, if asset includes /mapTiles it is deleted
               cache.keys()
                 .then((keys) => {
                   keys.forEach((key) => {
@@ -317,7 +323,7 @@ export default function Settings() {
         <Accordion
           content={(
             <div>
-              <div style={{ display: 'flex', gap: '10px' }}>
+              <AccordionButtonDiv>
                 <Button
                   handleClick={handleRefresh}
                   variant="primary"
@@ -325,7 +331,7 @@ export default function Settings() {
                   disabled={!onlineCheck}
                   text={!onlineCheck ? SettingsContent.refreshDataButtonTextOffline[lang] : SettingsContent.refreshDataButtonTextRefresh[lang]}
                 />
-              </div>
+              </AccordionButtonDiv>
             </div>
           )}
           text={SettingsContent.refreshData[lang]}
@@ -334,7 +340,7 @@ export default function Settings() {
         <Accordion
           content={(
             <div>
-              <div style={{ display: 'flex', gap: '10px' }}>
+              <AccordionButtonDiv>
                 {state.mapsCached ? (
                   <Button
                     handleClick={handleClearCacheConfirm}
@@ -349,13 +355,13 @@ export default function Settings() {
                     variant="primary"
                     size="sm"
                     disabled={!onlineCheck}
-                    text={!onlineCheck ? SettingsContent.refreshDataButtonTextOffline[lang] : SettingsContent.refreshDataButtonTextRefresh[lang]}
+                    text={!onlineCheck ? SettingsContent.installMapTilesButtonTextOffline[lang] : SettingsContent.installMapTilesButtonTextOnline[lang]}
                   />
                 )}
                 {isClearCacheModalOpen && (
                   <ModalWrapper>
                     <p>{SettingsContent.clearCacheConfirmText[lang]}</p>
-                    <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+                    <ModalPopup>
                       <Button
                         handleClick={handleCacheModalConfirm}
                         variant="secondary"
@@ -370,10 +376,10 @@ export default function Settings() {
                         text={SettingsContent.clearCacheButtonCancel[lang]}
                         disabled={false}
                       />
-                    </div>
+                    </ModalPopup>
                   </ModalWrapper>
                 )}
-              </div>
+              </AccordionButtonDiv>
             </div>
           )}
           text={SettingsContent.offlineMapTilesTitle[lang]}

@@ -84,6 +84,14 @@ export const SettingsContent: ContentMap = {
     eng: 'To decrease app size, you can delete the saved tiles. This will prevent offline map functionality.',
     fr: 'Pour réduire la taille de l\'application, vous pouvez supprimer les vignettes enregistrées. Cela empêchera la fonctionnalité de carte hors ligne.',
   },
+  installMapTilesButtonTextOffline: {
+    eng: 'Offline',
+    fr: 'Hors ligne',
+  },
+  installMapTilesButtonTextOnline: {
+    eng: 'Download',
+    fr: 'Télécharger',
+  },
   clearCache: {
     eng: 'Delete Data',
     fr: 'Suprimmer les données',
@@ -547,6 +555,10 @@ export const mappingContent: ContentMap = {
   phone: {
     eng: 'Phone Number: ',
     fr: 'Numéro de téléphone: ',
+  },
+  offlineMapTilesNotFoundMessage: {
+    eng: 'The map data was not found and the device appears to be offline. The offline map is unable to be rendered.',
+    fr: 'Les données cartographiques sont introuvables et l\'appareil semble être hors ligne. La carte hors ligne ne peut pas être rendue.',
   },
 };
 

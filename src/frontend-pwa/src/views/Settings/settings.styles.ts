@@ -95,3 +95,14 @@ export const ModalWrapper = styled.div`
   box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.2);
   border: 0.125em solid #003366;
 `;
+
+export const ModalPopup = styled.div`
+  display: flex; 
+  gap: 10px; 
+  margin-top: 20px; 
+`;
+
+export const AccordionButtonDiv = styled.div`
+  display: flex; 
+  gap: 10px; 
+`;

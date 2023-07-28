@@ -44,3 +44,10 @@ export const StyledPopupDiv = styled.div`
     max-height: 10em;
     overflow-y: auto;
 `;
+
+export const MapTilesNotFoundDiv = styled.div`
+    color: darkred;
+    align-items: center;
+    justify-content: center;
+    padding: 3em;
+`;
