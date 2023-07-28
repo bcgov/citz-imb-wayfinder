@@ -106,3 +106,14 @@ export const AccordionButtonDiv = styled.div`
   display: flex; 
   gap: 10px; 
 `;
+
+export const ModalBackground = styled.div`
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100svh;
+  background-color: rgba(128, 128, 128, 0.5);
+  z-index: 9998;
+`;

@@ -25,6 +25,7 @@ import {
   ModalWrapper,
   ModalPopup,
   AccordionButtonDiv,
+  ModalBackground,
 } from './settings.styles';
 import useAppService from '../../services/app/useAppService';
 import MoreInfoButton from '../../components/common/MoreInfoButton/MoreInfoButton';
@@ -353,6 +354,8 @@ export default function Settings() {
                   text={!onlineCheck ? SettingsContent.refreshDataButtonTextOffline[lang] : SettingsContent.refreshDataButtonTextRefresh[lang]}
                 />
                 {refreshDataComplete && (
+                  <>
+                  <ModalBackground />
                   <ModalWrapper>
                     <p>{SettingsContent.refreshDataTextConfirm[lang]}</p>
                     <ModalPopup>
@@ -365,6 +368,7 @@ export default function Settings() {
                       />
                     </ModalPopup>
                   </ModalWrapper>
+                  </>
                 )}
               </AccordionButtonDiv>
             </div>
@@ -394,27 +398,31 @@ export default function Settings() {
                   />
                 )}
                 {isClearCacheModalOpen && (
-                  <ModalWrapper>
-                    <p>{SettingsContent.clearCacheConfirmText[lang]}</p>
-                    <ModalPopup>
-                      <Button
-                        handleClick={handleCacheModalConfirm}
-                        variant="secondary"
-                        size="sm"
-                        text={SettingsContent.clearCacheButtonConfirm[lang]}
-                        disabled={false}
-                      />
-                      <Button
-                        handleClick={handleCacheModalCancel}
-                        variant="primary"
-                        size="sm"
-                        text={SettingsContent.clearCacheButtonCancel[lang]}
-                        disabled={false}
-                      />
-                    </ModalPopup>
-                  </ModalWrapper>
+                  <>
+                    <ModalWrapper>
+                      <p>{SettingsContent.clearCacheConfirmText[lang]}</p>
+                      <ModalPopup>
+                        <Button
+                          handleClick={handleCacheModalConfirm}
+                          variant="secondary"
+                          size="sm"
+                          text={SettingsContent.clearCacheButtonConfirm[lang]}
+                          disabled={false}
+                        />
+                        <Button
+                          handleClick={handleCacheModalCancel}
+                          variant="primary"
+                          size="sm"
+                          text={SettingsContent.clearCacheButtonCancel[lang]}
+                          disabled={false}
+                        />
+                      </ModalPopup>
+                    </ModalWrapper>
+                  <ModalBackground />
+                  </>
                 )}
                 {isInstallMapTilesModalOpen && (
+                <ModalBackground>
                   <ModalWrapper>
                     <p>{SettingsContent.installMapTilesModalWarning[lang]}</p>
                     <ModalPopup>
@@ -434,6 +442,7 @@ export default function Settings() {
                       />
                     </ModalPopup>
                   </ModalWrapper>
+                </ModalBackground>
                 )}
               </AccordionButtonDiv>
             </div>
