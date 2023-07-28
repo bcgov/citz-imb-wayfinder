@@ -25,7 +25,8 @@ const StyledButton = styled.button<ButtonProps>`
   font-weight: 500;
   letter-spacing: 1px;
   cursor: pointer;
-  background-color: ${(props) => (props.variant === 'primary' ? '#003366' : props.variant === 'secondary' ? '#FFFFFF' : '#000000')};
+  background-color: ${(props) => (props.variant === 'primary' ? '#003366' : props.variant === 'secondary' ? '#DC3545' : '#000000')};
+  background-color: ${(props) => (props.variant === 'primary' ? '#003366' : props.variant === 'secondary' ? '#DC3545' : props.variant === 'tertiary' ? '#198754' : '#000000')};
   color: #FFFFFF;
   &:hover {
     transform: scale(0.98);

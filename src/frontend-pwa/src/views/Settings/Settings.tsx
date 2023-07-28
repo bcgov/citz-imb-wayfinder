@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-indent */
 /* eslint-disable max-len */
 /**
@@ -21,6 +22,10 @@ import {
   SliderWrapper,
   SettingsContainer,
   ContentContainer,
+  ModalWrapper,
+  ModalPopup,
+  AccordionButtonDiv,
+  ModalBackground,
 } from './settings.styles';
 import useAppService from '../../services/app/useAppService';
 import MoreInfoButton from '../../components/common/MoreInfoButton/MoreInfoButton';
@@ -36,12 +41,16 @@ export default function Settings() {
     setSettings,
     updateSettings,
     setAnalytics,
+    setMapsCache,
     state,
   } = useAppService();
   const [locationRangeValue, setLocationRangeValue] = useState(state.settings.location_range);
   const [offlineToggleValue, setOfflineToggleValue] = useState(state.settings.offline_mode);
   const [analyticsToggleValue, setAnalyticsToggleValue] = useState(state.settings.analytics_opt_in);
   const [lang, setLang] = useState(state.settings.lang || 'eng');
+  const [isClearCacheModalOpen, setIsClearCacheModalOpen] = useState(false);
+  const [isInstallMapTilesModalOpen, setIsInstallMapTilesModalOpen] = useState(false);
+  const [refreshDataComplete, setRefreshDataComplete] = useState(false);
   const onlineCheck = state.isOnline && !state.settings.offline_mode;
   const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
   const latitude = state.currentLocation ? state.currentLocation.lat : 49.2827;
@@ -164,12 +173,11 @@ export default function Settings() {
   };
 
   /**
-   * @summary Pulls in new app data if user hit the refresh button
+   * @summary Refreshes app data, builds analytics for usage of "refresh data button"
    * @author  Dallas Richmond
    */
   const handleRefresh = () => {
     setAppData(onlineCheck);
-
     if (state.settings.analytics_opt_in && geolocationKnown) {
       const analytics = {
         latitude,
@@ -183,28 +191,118 @@ export default function Settings() {
       };
       sendAnalytics(analytics);
     }
+    setRefreshDataComplete(true);
+  };
+
+  /**
+   * @summary Opens the map tile confirmation modal.
+   * @author  Tyler Maloney
+   */
+  const handleInstallMapTilesConfirm = () => {
+    setIsInstallMapTilesModalOpen(true);
+  };
+
+  /**
+   * @summary Pulls in new map tile data if user hits the refresh button.
+   *          Forces the page to unregister the service-worker and reload
+   *          the window. This forces an updated service-worker to initialize
+   *          and download, triggering assets to be downloaded anew.
+   *
+   *
+   * @author  Dallas Richmond, Tyler Maloney
+   */
+  const handleInstallMapTilesModalConfirm = () => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        registrations.forEach((registration) => {
+          registration.unregister();
+        });
+      });
+      navigator.serviceWorker.register('/sw.js')
+        .then(() => {
+          setMapsCache(true);
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error('Error registering service worker:', error);
+        });
+    }
+    setIsInstallMapTilesModalOpen(false);
+  };
+
+  /**
+   * @summary Closes the map tile confirmation modal.
+   * @author  Tyler Maloney
+   */
+  const handleInstallMapTilesModalCancel = () => {
+    setIsInstallMapTilesModalOpen(false);
+  };
+
+  /**
+   * @summary Show the map tile confirmation modal to the user.
+   * @author  Tyler Maloney
+   */
+  const handleClearCacheConfirm = () => {
+    setIsClearCacheModalOpen(true);
+  };
+
+  /**
+   * @summary Clears all mapTile data from browser cache,
+   *          sets the mapsCached state to false,
+   *          and closes the confirmation modal.
+   *
+   * @author  Tyler Maloney, Dallas Richmond
+   */
+  const handleCacheModalConfirm = () => {
+    if ('serviceWorker' in navigator) {
+      // get all cache keys
+      caches.keys()
+        .then((cacheNames) => {
+          // find cache matching workbox precache
+          const precacheName = cacheNames.filter((cacheName) => cacheName.startsWith('workbox-precache-v2'));
+          caches.open(precacheName[0])
+            .then((cache) => {
+              // get the keys for all assets in cache, check assets, if asset includes /mapTiles it is deleted
+              cache.keys()
+                .then((keys) => {
+                  keys.forEach((key) => {
+                    if (key.url.includes('/mapTiles')) {
+                      cache.delete(key.url);
+                    }
+                  });
+                });
+            });
+        });
+    }
+    setMapsCache(false);
+    setIsClearCacheModalOpen(false);
+  };
+
+  /**
+   * @summary Closes all modals.
+   * @author  Tyler Maloney
+   */
+  const handleCacheModalCancel = () => {
+    setIsClearCacheModalOpen(false);
+    setRefreshDataComplete(false);
   };
 
   return (
     <SettingsContainer>
-      <Header>
-        {SettingsContent.settingsTitle[lang]}
-      </Header>
+      <Header>{SettingsContent.settingsTitle[lang]}</Header>
       <ContentContainer>
         <Accordion
           content={(
             <StyledSelect onChange={handleLang} value={lang}>
               {SettingsContent.languages[lang].map((data: string, index: number) => (
-              <option value={SettingsContent.languages.keys[index]} key={data}>{data}</option>
+                <option value={SettingsContent.languages.keys[index]} key={data}>
+                  {data}
+                </option>
               ))}
             </StyledSelect>
           )}
           text={SettingsContent.language[lang]}
-          tooltip={(
-            <MoreInfoButton
-              tip={SettingsContent.languageToolTip[lang]}
-            />
-          )}
+          tooltip={<MoreInfoButton tip={SettingsContent.languageToolTip[lang]} />}
         />
         <Accordion
           content={(
@@ -219,19 +317,13 @@ export default function Settings() {
             </SliderWrapper>
           )}
           text={SettingsContent.locationRange[lang]}
-          tooltip={(
-            <MoreInfoButton
-              tip={SettingsContent.locationRange[lang]}
-            />
-          )}
+          tooltip={<MoreInfoButton tip={SettingsContent.locationRange[lang]} />}
           handleClick={handleLocationRangeAnalytics}
         />
         <Section>
           <TitleWrapper>
             <Title>{SettingsContent.offlineMode[lang]}</Title>
-            <MoreInfoButton
-              tip={SettingsContent.offlineModeToolTip[lang]}
-            />
+            <MoreInfoButton tip={SettingsContent.offlineModeToolTip[lang]} />
           </TitleWrapper>
           <Toggle
             ariaLabel={SettingsContent.offlineMode[lang]}
@@ -242,9 +334,7 @@ export default function Settings() {
         <Section>
           <TitleWrapper>
             <Title>{SettingsContent.analytics[lang]}</Title>
-            <MoreInfoButton
-              tip={SettingsContent.analyticsToolTip[lang]}
-            />
+            <MoreInfoButton tip={SettingsContent.analyticsToolTip[lang]} />
           </TitleWrapper>
           <Toggle
             ariaLabel={SettingsContent.analytics[lang]}
@@ -254,38 +344,120 @@ export default function Settings() {
         </Section>
         <Accordion
           content={(
-            <Button
-              handleClick={handleRefresh}
-              variant="primary"
-              size="sm"
-              disabled={!onlineCheck}
-              text={!onlineCheck ? 'Offline' : 'Refresh'}
-            />
+            <div>
+              <AccordionButtonDiv>
+                <Button
+                  handleClick={handleRefresh}
+                  variant="primary"
+                  size="sm"
+                  disabled={!onlineCheck}
+                  text={!onlineCheck ? SettingsContent.refreshDataButtonTextOffline[lang] : SettingsContent.refreshDataButtonTextRefresh[lang]}
+                />
+                {refreshDataComplete && (
+                  <>
+                  <ModalBackground />
+                  <ModalWrapper>
+                    <p>{SettingsContent.refreshDataTextConfirm[lang]}</p>
+                    <ModalPopup>
+                      <Button
+                        handleClick={handleCacheModalCancel}
+                        variant="primary"
+                        size="sm"
+                        text={SettingsContent.refreshDataModalButton[lang]}
+                        disabled={false}
+                      />
+                    </ModalPopup>
+                  </ModalWrapper>
+                  </>
+                )}
+              </AccordionButtonDiv>
+            </div>
           )}
-          text={(SettingsContent.refreshData[lang])}
-          tooltip={(
-            <MoreInfoButton
-              tip={SettingsContent.refreshDataToolTip[lang]}
-            />
+          text={SettingsContent.refreshData[lang]}
+          tooltip={<MoreInfoButton tip={SettingsContent.refreshDataToolTip[lang]} />}
+        />
+        <Accordion
+          content={(
+            <div>
+              <AccordionButtonDiv>
+                {state.mapsCached ? (
+                  <Button
+                    handleClick={handleClearCacheConfirm}
+                    variant="secondary"
+                    size="sm"
+                    disabled={!state.mapsCached}
+                    text={SettingsContent.clearCache[lang]}
+                  />
+                ) : (
+                  <Button
+                    handleClick={handleInstallMapTilesConfirm}
+                    variant="primary"
+                    size="sm"
+                    disabled={!onlineCheck}
+                    text={!onlineCheck ? SettingsContent.installMapTilesButtonTextOffline[lang] : SettingsContent.installMapTilesButtonTextOnline[lang]}
+                  />
+                )}
+                {isClearCacheModalOpen && (
+                  <>
+                    <ModalWrapper>
+                      <p>{SettingsContent.clearCacheConfirmText[lang]}</p>
+                      <ModalPopup>
+                        <Button
+                          handleClick={handleCacheModalConfirm}
+                          variant="secondary"
+                          size="sm"
+                          text={SettingsContent.clearCacheButtonConfirm[lang]}
+                          disabled={false}
+                        />
+                        <Button
+                          handleClick={handleCacheModalCancel}
+                          variant="primary"
+                          size="sm"
+                          text={SettingsContent.clearCacheButtonCancel[lang]}
+                          disabled={false}
+                        />
+                      </ModalPopup>
+                    </ModalWrapper>
+                  <ModalBackground />
+                  </>
+                )}
+                {isInstallMapTilesModalOpen && (
+                <ModalBackground>
+                  <ModalWrapper>
+                    <p>{SettingsContent.installMapTilesModalWarning[lang]}</p>
+                    <ModalPopup>
+                      <Button
+                        handleClick={handleInstallMapTilesModalConfirm}
+                        variant="tertiary"
+                        size="sm"
+                        text={SettingsContent.clearCacheButtonConfirm[lang]}
+                        disabled={false}
+                      />
+                      <Button
+                        handleClick={handleInstallMapTilesModalCancel}
+                        variant="primary"
+                        size="sm"
+                        text={SettingsContent.clearCacheButtonCancel[lang]}
+                        disabled={false}
+                      />
+                    </ModalPopup>
+                  </ModalWrapper>
+                </ModalBackground>
+                )}
+              </AccordionButtonDiv>
+            </div>
           )}
+          text={SettingsContent.offlineMapTilesTitle[lang]}
+          tooltip={<MoreInfoButton tip={SettingsContent.offlineMapTilesToolTip[lang]} />}
         />
         <Section>
-          <SettingsRowButton
-            path="/settings/about"
-            text={SettingsContent.aboutContact[lang]}
-          />
+          <SettingsRowButton path="/settings/about" text={SettingsContent.aboutContact[lang]} />
         </Section>
         <Section>
-          <SettingsRowButton
-            path="/eula"
-            text={SettingsContent.license[lang]}
-          />
+          <SettingsRowButton path="/eula" text={SettingsContent.license[lang]} />
         </Section>
         <Section>
-          <SettingsRowButton
-            path="/settings/changelog"
-            text={SettingsContent.changeLog[lang]}
-          />
+          <SettingsRowButton path="/settings/changelog" text={SettingsContent.changeLog[lang]} />
         </Section>
       </ContentContainer>
     </SettingsContainer>

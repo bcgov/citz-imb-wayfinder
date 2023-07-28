@@ -9,6 +9,7 @@ const {
   SET_REPORTS,
   SET_TOOL_TIP_TEXT,
   SET_ONLINE,
+  SET_MAP_CACHED,
 } = AppActionType;
 
 export type AppAction = {
@@ -26,6 +27,7 @@ export const initialState = {
   reports: {},
   toolTipText: '',
   isOnline: false,
+  mapsCached: true,
 };
 
 /**
@@ -53,6 +55,8 @@ export const reducer = (state: object, action: AppAction): object => {
       return { ...state, toolTipText: action.payload };
     case SET_ONLINE:
       return { ...state, isOnline: action.payload };
+    case SET_MAP_CACHED:
+      return { ...state, mapsCached: action.payload };
     default:
       throw new Error();
   }

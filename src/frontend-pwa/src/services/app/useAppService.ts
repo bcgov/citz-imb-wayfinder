@@ -20,6 +20,7 @@ const {
   SET_REPORTS,
   SET_TOOL_TIP_TEXT,
   SET_ONLINE,
+  SET_MAP_CACHED,
 } = AppActionType;
 
 /**
@@ -288,6 +289,17 @@ const useAppService = () => {
       });
     };
 
+    /**
+     * @summary Sets the state for determining whether the map tiles are present or not
+     * @param   cached is a boolean that indicates whether the app has cached map tiles or not
+     * @type    {( cached: boolean )}
+     * @author  Dallas Richmond
+     */
+    const setMapsCache = (cached: boolean) => {
+      saveDataToLocalStorage(constants.MAPS_CACHED_KEY, cached);
+      dispatch({ type: SET_MAP_CACHED, payload: cached });
+    };
+
     return {
       setAppData,
       setCurrentLocation,
@@ -302,6 +314,7 @@ const useAppService = () => {
       setOfflineReports,
       setOnline,
       setAppInstall,
+      setMapsCache,
       state,
     };
   }, [state, dispatch]);

@@ -16,7 +16,12 @@ import OnlineCheck from '../../utils/OnlineCheck';
 
 export default function Eula() {
   const [termAgreement, setTermAgreement] = useState(false);
-  const { state, setEulaState, setAnalytics } = useAppService();
+  const {
+    state,
+    setEulaState,
+    setAnalytics,
+    setMapsCache,
+  } = useAppService();
   const { lang } = state.settings;
   const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
   const latitude = state.currentLocation ? state.currentLocation.lat : 49.2827;
@@ -27,6 +32,7 @@ export default function Eula() {
   };
 
   const handleButtonClick = () => {
+    setMapsCache(true);
     setEulaState();
     if (geolocationKnown) {
       const analytics = {

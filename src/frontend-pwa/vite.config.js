@@ -4,11 +4,13 @@ import { VitePWA } from "vite-plugin-pwa";
 export default defineConfig({
   plugins: [
     VitePWA({
+      strategies: "generateSW",
       registerType: "autoUpdate",
       injectRegister: 'auto',
       includeAssets: ["**/*"],
       workbox: {
         globPatterns: ["**/*"],
+        globFollow: true,
         cleanupOutdatedCaches: true,
         sourcemap: true,
       },

@@ -68,6 +68,62 @@ export const SettingsContent: ContentMap = {
     eng: 'Pull in new location data from the server',
     fr: 'Récupérer de nouvelles données de localisation à partir du serveur',
   },
+  refreshDataButtonTextRefresh: {
+    eng: 'Refresh',
+    fr: 'Rafraîchir',
+  },
+  refreshDataButtonTextOffline: {
+    eng: 'Offline',
+    fr: 'Hors ligne',
+  },
+  refreshDataTextConfirm: {
+    eng: 'App data updated',
+    fr: 'Données d\'application mises à jour',
+  },
+  refreshDataModalButton: {
+    eng: 'OK',
+    fr: 'D\'ACCORD',
+  },
+  offlineMapTilesTitle: {
+    eng: 'Offline Map Tiles',
+    fr: 'Tuiles de carte hors ligne',
+  },
+  offlineMapTilesToolTip: {
+    eng: 'To decrease app size, you can delete the saved tiles. This will prevent offline map functionality.',
+    fr: 'Pour réduire la taille de l\'application, vous pouvez supprimer les vignettes enregistrées. Cela empêchera la fonctionnalité de carte hors ligne.',
+  },
+  installMapTilesButtonTextOffline: {
+    eng: 'Offline',
+    fr: 'Hors ligne',
+  },
+  installMapTilesButtonTextOnline: {
+    eng: 'Download',
+    fr: 'Télécharger',
+  },
+  installMapTilesModalWarning: {
+    eng: 'The size of the mapTile package is ~35MB. do you wish to proceed with the download?',
+    fr: 'La taille du package mapTile est d\'environ 35 Mo. Souhaitez-vous poursuivre le téléchargement ?',
+  },
+  clearCache: {
+    eng: 'Delete Data',
+    fr: 'Suprimmer les données',
+  },
+  clearCacheToolTip: {
+    eng: 'Deletes the cached map data.',
+    fr: 'Supprime les données de site mises en cache.',
+  },
+  clearCacheConfirmText: {
+    eng: 'Are you sure you want to clear the cache data? Offline map will be unavailable.',
+    fr: 'Voulez-vous vraiment effacer les données du cache ? La carte hors ligne ne sera pas disponible.',
+  },
+  clearCacheButtonConfirm: {
+    eng: 'Confirm',
+    fr: 'Confirmer',
+  },
+  clearCacheButtonCancel: {
+    eng: 'Cancel',
+    fr: 'Annuler',
+  },
   languages: {
     eng: [
       'English',
@@ -511,6 +567,10 @@ export const mappingContent: ContentMap = {
   phone: {
     eng: 'Phone Number: ',
     fr: 'Numéro de téléphone: ',
+  },
+  offlineMapTilesNotFoundMessage: {
+    eng: 'The map data was not found and the device appears to be offline. The offline map is unable to be rendered.',
+    fr: 'Les données cartographiques sont introuvables et l\'appareil semble être hors ligne. La carte hors ligne ne peut pas être rendue.',
   },
 };
 

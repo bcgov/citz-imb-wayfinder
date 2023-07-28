@@ -82,3 +82,38 @@ export const StyledSelect = styled.select`
     background-color: #F5F5F5;
     border: 1px solid #DCDCDC;
 `;
+
+export const ModalWrapper = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  background-color: #FFF;
+  padding: 1.25em;
+  border-radius: 0.313em;
+  box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.2);
+  border: 0.125em solid #003366;
+`;
+
+export const ModalPopup = styled.div`
+  display: flex; 
+  gap: 10px; 
+  margin-top: 20px; 
+`;
+
+export const AccordionButtonDiv = styled.div`
+  display: flex; 
+  gap: 10px; 
+`;
+
+export const ModalBackground = styled.div`
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100svh;
+  background-color: rgba(128, 128, 128, 0.5);
+  z-index: 9998;
+`;

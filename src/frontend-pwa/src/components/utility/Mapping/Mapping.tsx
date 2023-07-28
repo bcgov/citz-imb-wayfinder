@@ -34,6 +34,7 @@ import {
   StyledPopup,
   StyledMapContainer,
   PopupInfo,
+  MapTilesNotFoundDiv,
 } from './mapping.styles';
 import SingleLocation from '../../../Type/SingleLocation';
 import LocationsArray from '../../../Type/LocationsArray';
@@ -85,6 +86,16 @@ export default function Mapping({ locations, currentLocation }: MappingProps) {
   const tileLayerUrl = onlineMode
     ? 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
     : '/mapTiles/{z}/{x}/{y}.png';
+
+  if (!onlineMode && !state.mapsCached) {
+    return (
+      <MapTilesNotFoundDiv>
+        <p>
+          {mappingContent.offlineMapTilesNotFoundMessage[lang]}
+        </p>
+      </MapTilesNotFoundDiv>
+    );
+  }
 
   return (
     <MapWrapperDiv>

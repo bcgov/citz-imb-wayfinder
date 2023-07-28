@@ -12,7 +12,7 @@
 
 import StyledButton from './button.styles';
 
-export type ButtonVariants = 'default' | 'primary' | 'secondary';
+export type ButtonVariants = 'default' | 'primary' | 'secondary' | 'tertiary';
 export type ButtonSizes = 'sm' | 'md' | 'lg';
 
 export type ButtonProps = {
