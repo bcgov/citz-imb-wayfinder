@@ -9,12 +9,12 @@ export interface ContentMap {
 const ChangeLog: ContentMap = {
   '1.0.0': {
     eng: [
-      'Added ability to delete and recache map tiles at will',
-      'Changed the secondary button color to a softer shade of red',
+      'Added ability to delete and recache map tiles',
+      'Changed the secondary button color',
     ],
     fr: [
-      'Ajout de la possibilité de supprimer et de remettre en cache des tuiles de carte à volonté',
-      'Modification de la couleur du bouton secondaire en une nuance de rouge plus douce',
+      'Ajout de la possibilité de supprimer et de remettre en cache des tuiles de carte',
+      'Modification de la couleur du bouton secondaire',
     ],
   },
   '0.9.0': {
@@ -53,14 +53,14 @@ const ChangeLog: ContentMap = {
   },
   '0.0.5': {
     eng: [
-      'Initial functionality for gathering user Reports has added',
+      'Initial functionality for Reports added',
       'Initial functionality for Mapping added',
       'Initial functionality for Offline Mode added',
     ],
     fr: [
-      'La fonctionnalité initiale de collecte des rapports utilisateur a été ajoutée',
-      'La fonctionnalité initiale de cartographie a été ajoutée',
-      'La fonctionnalité initiale du mode hors ligne a été ajoutée',
+      'Fonctionnalité initiale pour les rapports ajoutée',
+      'Fonctionnalité de cartographie initiale ajoutée',
+      'Fonctionnalité initiale du mode hors ligne ajoutée',
     ],
   },
   '0.0.1': {
