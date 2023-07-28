@@ -76,6 +76,14 @@ export const SettingsContent: ContentMap = {
     eng: 'Offline',
     fr: 'Hors ligne',
   },
+  refreshDataTextConfirm: {
+    eng: 'App data updated',
+    fr: 'Données d\'application mises à jour',
+  },
+  refreshDataModalButton: {
+    eng: 'OK',
+    fr: 'D\'ACCORD',
+  },
   offlineMapTilesTitle: {
     eng: 'Offline Map Tiles',
     fr: 'Tuiles de carte hors ligne',

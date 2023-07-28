@@ -49,6 +49,7 @@ export default function Settings() {
   const [lang, setLang] = useState(state.settings.lang || 'eng');
   const [isClearCacheModalOpen, setIsClearCacheModalOpen] = useState(false);
   const [isInstallMapTilesModalOpen, setIsInstallMapTilesModalOpen] = useState(false);
+  const [refreshDataComplete, setRefreshDataComplete] = useState(false);
   const onlineCheck = state.isOnline && !state.settings.offline_mode;
   const geolocationKnown = localStorageKeyExists(constants.CURRENT_LOCATION_KEY);
   const latitude = state.currentLocation ? state.currentLocation.lat : 49.2827;
@@ -189,6 +190,7 @@ export default function Settings() {
       };
       sendAnalytics(analytics);
     }
+    setRefreshDataComplete(true);
   };
 
   /**
@@ -276,11 +278,12 @@ export default function Settings() {
   };
 
   /**
-   * @summary Closes the map tile confirmation modal.
+   * @summary Closes all modals.
    * @author  Tyler Maloney
    */
   const handleCacheModalCancel = () => {
     setIsClearCacheModalOpen(false);
+    setRefreshDataComplete(false);
   };
 
   return (
@@ -349,6 +352,20 @@ export default function Settings() {
                   disabled={!onlineCheck}
                   text={!onlineCheck ? SettingsContent.refreshDataButtonTextOffline[lang] : SettingsContent.refreshDataButtonTextRefresh[lang]}
                 />
+                {refreshDataComplete && (
+                  <ModalWrapper>
+                    <p>{SettingsContent.refreshDataTextConfirm[lang]}</p>
+                    <ModalPopup>
+                      <Button
+                        handleClick={handleCacheModalCancel}
+                        variant="primary"
+                        size="sm"
+                        text={SettingsContent.refreshDataModalButton[lang]}
+                        disabled={false}
+                      />
+                    </ModalPopup>
+                  </ModalWrapper>
+                )}
               </AccordionButtonDiv>
             </div>
           )}
